@@ -1,0 +1,3142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پیام نور من - جعبه ابزار دانشجویان پیام نور</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Montserrat:wght@800;900&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('fonts/m-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('fonts/m-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('fonts/m-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('fonts/m-ExtraBold.ttf') format('truetype');
+      font-weight: 800;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('fonts/m-Black.ttf') format('truetype');
+      font-weight: 950;
+      font-style: normal;
+    }
+
+    :root {
+      --gold-primary: #d4af37;
+      --gold-primary-hover: #e5c158;
+      --gold-neon-bright: #ffe066;
+      --gold-light-accent: #fff2a3;
+      --gold-glow: rgba(212, 175, 55, 0.45);
+      --gold-neon-glow: rgba(255, 224, 102, 0.5);
+      --xbox-green: #107c10;
+      --theme-black: #121212;
+      --theme-dark-1: #161616;
+      --theme-dark-2: #1e1e1e;
+      --theme-dark-card: #181818;
+      --theme-border: #2c2c2c;
+      --theme-gray-text: #a6a6a6;
+      --theme-light-text: #f2f2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'CustomFont', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img {
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      pointer-events: none;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--theme-black);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .top-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 38px;
+      background: linear-gradient(135deg, #d4af37 0%, #ecd077 50%, #c59b27 100%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 14px;
+      z-index: 1000;
+      border-bottom: 1.2px solid #fff2a3;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-credit-text {
+      color: #1a1a1a;
+      font-size: 11.5px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .brand-credit-text .author-sport {
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 13.5px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #000000;
+    }
+
+    .top-left-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 72px;
+      height: 25px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 800;
+      background: #181818;
+      color: #ffe066;
+      border: 1px solid #111111;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .nav-btn-icon {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+
+    .nav-btn:hover {
+      background: #000000;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .main-container {
+      width: 94%;
+      max-width: 820px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 25px;
+    }
+
+    .hero-logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .main-brand-logo {
+      width: 100%;
+      max-width: 260px;
+      height: auto;
+      max-height: 105px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.7));
+    }
+
+    .subtitle-capsule {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #222222 0%, #151515 100%);
+      border: 1.2px solid rgba(212, 175, 55, 0.85);
+      border-radius: 9px;
+      padding: 6px 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.65);
+    }
+
+    .hero-subtitle-text {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #fff2a3;
+      letter-spacing: 0.2px;
+    }
+
+    /* سربرگ نئونی طلایی بالای باکس‌های ۳تایی */
+    .section-divider-title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 8px;
+      margin-bottom: 14px;
+    }
+
+    .section-divider-title span {
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 800;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .section-divider-title::before,
+    .section-divider-title::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, #d4af37 35%, #ffe066 50%, #d4af37 65%, transparent 100%);
+      box-shadow: 0 0 8px rgba(255, 224, 102, 0.65), 0 0 14px rgba(212, 175, 55, 0.35);
+    }
+
+    .banner-static-card {
+      width: 100%;
+      aspect-ratio: 24 / 7;
+      position: relative;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #181818;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      display: block;
+      cursor: default;
+    }
+
+    .banner-static-card.slide-border-1 { border: 2px solid #ff7700; }
+    .banner-static-card.slide-border-2 { border: 2px solid #107c10; }
+    .banner-static-card.slide-border-3 { border: 2px solid #0088cc; }
+    .banner-static-card.slide-border-4 { border: 2px solid #ef4444; }
+
+    .banner-static-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .slide-action-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 124px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      z-index: 20;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+      padding: 0 8px;
+      white-space: nowrap;
+      transition: transform 0.2s ease;
+    }
+
+    .slide-action-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .slide-action-btn.btn-orange { background-color: #ff7700; }
+    .slide-action-btn.btn-green  { background-color: #107c10; }
+    .slide-action-btn.btn-blue   { background-color: #0088cc; }
+    .slide-action-btn.btn-red    { background-color: #ef4444; }
+
+    .chevron-tri-left {
+      display: inline-flex;
+      direction: ltr;
+      align-items: center;
+      gap: 2.5px;
+    }
+
+    .chevron-tri-left i {
+      font-size: 9.5px;
+      opacity: 0.9;
+      color: #ffffff;
+    }
+
+    .tools-row-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .square-tool-card {
+      position: relative;
+      background: var(--theme-dark-card);
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 14px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .square-tool-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-neon-bright);
+    }
+
+    .tool-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-floating-gold-chevrons {
+      position: absolute;
+      bottom: 8px;
+      left: 10px;
+      z-index: 6;
+      display: inline-flex;
+      direction: ltr;
+      align-items: center;
+      gap: 3.5px;
+      padding: 4px 8px;
+      background: rgba(14, 14, 14, 0.85);
+      border: 1px solid rgba(255, 224, 102, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+      pointer-events: none;
+    }
+
+    .card-floating-gold-chevrons i {
+      color: var(--gold-neon-bright);
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    .dynamic-progress-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      background: #141414;
+      border: 1px solid var(--theme-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      animation: fadeInProgress 0.25s ease;
+    }
+
+    @keyframes fadeInProgress {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .progress-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gold-light-accent);
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 7px;
+      background: #252525;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #d4af37, #ffe066);
+      border-radius: 6px;
+      transition: width 0.25s ease;
+    }
+
+    /* دکمه شناور بازگشت به بالا در سمت راست */
+    .fab-scroll-top {
+      position: fixed;
+      bottom: 22px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #181818;
+      border: 1.5px solid var(--gold-primary);
+      color: var(--gold-neon-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 1500;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8), 0 0 12px rgba(212, 175, 55, 0.35);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px) scale(0.9);
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .fab-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .fab-scroll-top:hover {
+      background: var(--gold-primary);
+      color: #0b0b0b;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9), 0 0 16px var(--gold-neon-glow);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .seamless-curved-footer {
+      width: 100%;
+      margin-top: auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 105px;
+      padding-bottom: 24px;
+    }
+
+    .footer-curve-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .footer-curve-bg svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .footer-text-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 0 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .single-line-copyright {
+      font-size: clamp(11.5px, 3.2vw, 15px);
+      font-weight: 800;
+      color: #111111;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .single-line-copyright .brand-mark {
+      color: #000000;
+      font-weight: 950;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      padding: 16px;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.result-level {
+      z-index: 2200;
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .tool-modal-window {
+      position: relative;
+      background: #181818;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 680px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border: 1.5px solid var(--theme-border);
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.95);
+      margin: auto;
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--theme-border);
+      padding-bottom: 12px;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .modal-head-title {
+      font-size: 17px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    .modal-head-title i {
+      color: var(--gold-neon-bright);
+      flex-shrink: 0;
+    }
+
+    .modal-head-title i.red-accent {
+      color: #ef4444 !important;
+    }
+
+    .modal-close-corner {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: #252525;
+      border: 1px solid var(--theme-border);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .modal-close-corner:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
+
+    .segmented-control {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 8px;
+      background: #0d0d0d;
+      padding: 4px;
+      border-radius: 6px;
+      border: 1px solid #282828;
+    }
+
+    .segmented-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 800;
+      background: transparent;
+      border: none;
+      color: var(--theme-gray-text);
+      border-radius: 5px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+
+    .segmented-btn.active {
+      background: var(--gold-primary);
+      color: #0b0b0b;
+      box-shadow: 0 2px 10px var(--gold-glow);
+    }
+
+    .dropzone-box {
+      width: 100%;
+      box-sizing: border-box;
+      border: 2px dashed #3a3a3a;
+      border-radius: 8px;
+      padding: 26px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #141414;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .dropzone-box:hover {
+      border-color: var(--gold-neon-bright);
+    }
+
+    .dropzone-box i {
+      font-size: 38px;
+      color: var(--gold-neon-bright);
+    }
+
+    .dropzone-text {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dropzone-subtext {
+      font-size: 12px;
+      color: var(--theme-gray-text);
+      font-weight: 400;
+    }
+
+    .file-input-hidden { display: none; }
+
+    .settings-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: right;
+      background: #141414;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--theme-border);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .settings-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #cccccc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .settings-title i {
+      color: var(--gold-neon-bright);
+    }
+
+    .selected-files-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-height: 150px;
+      overflow-y: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .preview-chip {
+      background: #242424;
+      border: 1px solid #383838;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 100%;
+    }
+
+    .preview-chip span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .action-btn-main {
+      width: 100%;
+      box-sizing: border-box;
+      height: 48px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gold-primary);
+      color: #0b0b0b;
+      box-shadow: 0 4px 16px var(--gold-glow);
+    }
+
+    .action-btn-main:hover {
+      background: var(--gold-primary-hover);
+    }
+
+    .action-btn-main:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .courses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .course-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .course-input, .calc-field-input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 44px;
+      background: #141414;
+      border: 1.5px solid var(--theme-border);
+      border-radius: 6px;
+      padding: 0 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      outline: none;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .course-input:focus, .calc-field-input:focus {
+      border-color: var(--gold-neon-bright);
+      background: #1e1e1e;
+    }
+
+    .course-input.input-error, .calc-field-input.input-error {
+      border-color: #ef4444 !important;
+      background: #2b1114 !important;
+    }
+
+    .input-name { flex: 5; }
+    .input-unit, .input-grade {
+      flex: 2.2;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gold-light-accent);
+    }
+
+    .btn-delete-course {
+      flex-shrink: 0;
+      width: 42px;
+      height: 44px;
+      background: #221616;
+      border: 1.5px solid #4a2024;
+      border-radius: 6px;
+      color: #ff5264;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .btn-delete-course:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .validation-alert-box {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #2a1114;
+      border: 1.5px solid #ef4444;
+      border-radius: 6px;
+      padding: 9px 12px;
+      color: #ff8591;
+      font-size: 13px;
+      font-weight: 700;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .validation-alert-box.show { display: flex; }
+
+    .actions-panel {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .panel-btn {
+      flex: 1;
+      height: 46px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-add {
+      background: #252525;
+      border: 1.5px solid #383838;
+      color: #ffffff;
+    }
+
+    .btn-calc {
+      background: var(--gold-primary);
+      color: #0b0b0b;
+    }
+
+    .liquid-modal-card {
+      position: relative;
+      background: #181818;
+      border-radius: 14px;
+      width: 90vw;
+      max-width: 360px;
+      padding: 32px 20px 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+      border: 1.5px solid var(--gold-primary);
+    }
+
+    .liquid-modal-card.gold-frame {
+      border-color: var(--gold-neon-bright) !important;
+    }
+    .liquid-modal-card.status-excellent { border-color: #107c10 !important; }
+    .liquid-modal-card.status-normal { border-color: #ffd166 !important; }
+    .liquid-modal-card.status-probation { border-color: #ef4444 !important; }
+
+    .unit-display-badge {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+      margin: 6px 0;
+      color: #ffffff;
+    }
+
+    .modal-gpa-badge {
+      font-size: 64px;
+      font-weight: 950;
+      line-height: 1;
+      direction: rtl;
+    }
+
+    .unit-suffix-text {
+      font-size: 24px;
+      font-weight: 800;
+      color: #a6a6a6;
+    }
+
+    .modal-status-badge {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      padding: 5px 20px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .modal-status-badge.status-excellent-text { background: var(--xbox-green); color: #ffffff; }
+    .modal-status-badge.status-normal-text { background: #ffd166; color: #000000; }
+    .modal-status-badge.status-probation-text { background: #ef4444; color: #ffffff; }
+
+    .modal-result-box {
+      width: 100%;
+      background: #121212;
+      border: 1px solid var(--theme-border);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .result-row-top { font-size: 12.5px; color: var(--theme-gray-text); font-weight: 600; }
+    .result-row-bottom { font-size: 14px; font-weight: 800; color: #ffffff; line-height: 1.5; }
+    .result-row-bottom-line2 { font-size: 13px; font-weight: 800; margin-top: 4px; display: block; }
+
+    .colored-units.status-excellent-text { color: #39ff14; font-weight: 900; }
+    .colored-units.status-normal-text { color: #ffd166; font-weight: 900; }
+    .colored-units.status-probation-text { color: #ff6b7b; font-weight: 900; }
+
+    .dual-result-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .dual-card-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 5px;
+    }
+
+    .dual-result-val {
+      font-weight: 950;
+      line-height: 1;
+      direction: rtl;
+      font-size: 52px;
+      color: #ffe066;
+    }
+
+    .dual-badge-tag {
+      font-size: 13px;
+      font-weight: 800;
+      padding: 5px 18px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .dual-badge-tag.blue-tag { background: #1976d2; }
+    .dual-badge-tag.pink-tag { background: #e91e63; }
+
+    .exam-input-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      width: 100%;
+      text-align: right;
+    }
+
+    .exam-input-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .exam-input-col label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #cccccc;
+    }
+
+    .exam-input-col label i {
+      color: var(--gold-neon-bright);
+    }
+
+    .video-modal-window {
+      max-width: 760px;
+    }
+
+    .video-tutorials-list, .links-directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 65vh;
+      overflow-y: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .video-lesson-item, .directory-item-card {
+      background: #141414;
+      border: 1px solid var(--theme-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .directory-item-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .directory-item-card:hover {
+      border-color: rgba(255, 224, 102, 0.5);
+    }
+
+    .lesson-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .lesson-title-text, .directory-item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lesson-title-text i { color: #ef4444; }
+    .directory-item-title i { color: var(--gold-neon-bright); }
+
+    .btn-play-trigger, .directory-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1f1d16;
+      border: 1.2px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-neon-bright);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-play-trigger {
+      background: #242424;
+      border-color: var(--theme-border);
+      color: #ef4444;
+    }
+
+    .btn-play-trigger:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .directory-action-btn:hover {
+      background: var(--gold-primary);
+      color: #0b0b0b;
+    }
+
+    .custom-clean-player-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border-radius: 8px;
+      overflow: hidden;
+      display: none;
+      border: 1.5px solid #2f2f2f;
+      position: relative;
+    }
+
+    .custom-clean-player-box.show { display: block; }
+    .custom-clean-player-box iframe { width: 100%; height: 100%; border: none; }
+    .player-clean-mask { position: absolute; top: 0; right: 0; width: 120px; height: 50px; background: transparent; z-index: 10; }
+
+    .info-header-notice {
+      background: #1b1912;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--gold-light-accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ai-tabs-wrap {
+      display: flex;
+      gap: 8px;
+      background: #0d0d0d;
+      padding: 4px;
+      border-radius: 6px;
+      border: 1px solid #282828;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ai-tab-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      background: transparent;
+      border: none;
+      color: var(--theme-gray-text);
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .ai-tab-btn.active {
+      background: var(--gold-primary);
+      color: #0b0b0b;
+      font-weight: 800;
+    }
+
+    .ai-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 60vh;
+      overflow-y: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ai-card-item {
+      background: #141414;
+      border: 1px solid var(--theme-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ai-card-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-avatar-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #222222;
+      border: 1px solid #333333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-neon-bright);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .ai-name-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .ai-card-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .ai-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .ai-link-pill.app-btn {
+      background: #222222;
+      border: 1px solid #383838;
+      color: #ffffff;
+    }
+
+    .ai-link-pill.web-btn {
+      background: #1f1d16;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-neon-bright);
+    }
+
+    #mergeSection, #splitSection {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 600px) {
+      body { padding-top: 44px; }
+      .top-nav { height: 32px; padding: 0 10px; }
+      .brand-credit-text { font-size: 10px; gap: 3.5px; }
+      .brand-credit-text .author-sport { font-size: 11.5px; }
+      .nav-btn { width: 62px; height: 22px; font-size: 9px; gap: 3.5px; }
+      .nav-btn-icon { width: 12px; height: 12px; }
+      .main-brand-logo { max-width: 190px; max-height: 80px; }
+      .hero-subtitle-text { font-size: 11px; }
+      .subtitle-capsule { padding: 4px 14px; margin-bottom: 14px; border-radius: 7px; }
+      .section-divider-title { gap: 10px; margin-top: 4px; margin-bottom: 12px; }
+      .section-divider-title span { font-size: 12px; }
+      .banner-static-card { margin-bottom: 14px; border-radius: 10px; }
+      .banner-static-img { border-radius: 8px; }
+      .slide-action-btn { width: 105px; height: 28px; font-size: 10.5px; bottom: 7px; left: 7px; }
+      .tools-row-grid { gap: 10px; margin-bottom: 14px; }
+      .square-tool-card { border-radius: 10px; }
+      .card-floating-gold-chevrons { bottom: 6px; left: 6px; padding: 3px 6px; }
+      .card-floating-gold-chevrons i { font-size: 9px; }
+      .modal-head-title { font-size: 14.5px; }
+      .lesson-header, .directory-item-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .btn-play-trigger, .directory-action-btn { width: 100%; justify-content: center; }
+      .dual-result-val { font-size: 44px; }
+      .dual-badge-tag { font-size: 11.5px; padding: 4px 12px; }
+      .seamless-curved-footer { min-height: 85px; padding-bottom: 16px; }
+      .single-line-copyright { font-size: 11px; }
+      .ai-tab-btn { font-size: 11.5px; padding: 8px 4px; gap: 4px; }
+      .tool-modal-window { padding: 18px 14px; }
+      .fab-scroll-top { bottom: 18px; right: 16px; width: 40px; height: 40px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="brand-credit-text">
+      <span>ایده و طراحی توسط</span> <span class="author-sport">ARMOON</span>
+    </div>
+    
+    <div class="top-left-actions">
+      <a href="https://eitaa.com/arm00n" target="_blank" class="nav-btn eitaa">
+        <img src="images/eitaa.png" alt="ایتا" class="nav-btn-icon" draggable="false"> ایتا
+      </a>
+      <a href="https://t.me/iamarmoon" target="_blank" class="nav-btn telegram">
+        <img src="images/tel.png" alt="تلگرام" class="nav-btn-icon" draggable="false"> تلگرام
+      </a>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div class="hero-logo-wrapper">
+      <img src="images/logo.png" alt="لوگوی پیام نور من" class="main-brand-logo" draggable="false">
+    </div>
+
+    <div class="subtitle-capsule">
+      <span class="hero-subtitle-text">جعبه ابزار دانشجویان دانشگاه پیام نور</span>
+    </div>
+
+    <!-- اسلاید ۱ -->
+    <div class="banner-static-card slide-border-1">
+      <img src="images/slide1.jpg" alt="گروه ایتا پیام نور" class="banner-static-img" draggable="false">
+      <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="slide-action-btn btn-orange">
+        <span>عضویت</span>
+        <div class="chevron-tri-left">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- سربرگ دسته‌بندی ردیف اول -->
+    <div class="section-divider-title">
+      <span>محاسبه‌گرهای آموزشی</span>
+    </div>
+
+    <!-- ردیف اول: ۳ باکس با فریم طلایی -->
+    <div class="tools-row-grid" id="firstToolsRow">
+      <div class="square-tool-card" id="openUnitLimitCard" title="سقف مجاز انتخاب واحد">
+        <img src="images/saghf.jpg" alt="سقف مجاز انتخاب واحد" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+
+      <div class="square-tool-card" id="openExamCard" title="محاسبه حداقل نمره قبولی">
+        <img src="images/had.jpg" alt="محاسبه حداقل نمره قبولی" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+
+      <div class="square-tool-card" id="openGpaCard" title="محاسبه هوشمند معدل">
+        <img src="images/moad.jpg" alt="محاسبه هوشمند معدل" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- اسلاید ۲ -->
+    <div class="banner-static-card slide-border-2">
+      <img src="images/slide2.jpg" alt="سامانه استادیاب" class="banner-static-img" draggable="false">
+      <a href="https://ostadyab.github.io" target="_blank" class="slide-action-btn btn-green">
+        <span>جستجو</span>
+        <div class="chevron-tri-left">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- سربرگ دسته‌بندی ردیف دوم -->
+    <div class="section-divider-title">
+      <span>جعبه ابزار فایل‌های PDF</span>
+    </div>
+
+    <!-- ردیف دوم: ۳ باکس ابزارهای PDF -->
+    <div class="tools-row-grid">
+      <div class="square-tool-card" id="openPdfCompressCard" title="کاهش حجم PDF">
+        <img src="images/kah.jpg" alt="کاهش حجم" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+
+      <div class="square-tool-card" id="openImgToPdfCard" title="تبدیل عکس به PDF">
+        <img src="images/tab.jpg" alt="تبدیل عکس" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+
+      <div class="square-tool-card" id="openPdfToolboxCard" title="ترکیب و جداسازی فایل پی دی اف">
+        <img src="images/tarkib.jpg" alt="ترکیب و جداسازی فایل پی دی اف" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- اسلاید ۳ -->
+    <div class="banner-static-card slide-border-3">
+      <img src="images/slide3.jpg" alt="منابع و برنامه دروس پیام نور" class="banner-static-img" draggable="false">
+      <a href="https://pnu.ac.ir/fa-IR/sp150.pnu.ac/13356/page/%D9%85%D9%86%D8%A7%D8%A8%D8%B9-%D9%88-%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-%D8%AF%D8%B1%D9%88%D8%B3" target="_blank" class="slide-action-btn btn-blue">
+        <span>مشاهده</span>
+        <div class="chevron-tri-left">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- سربرگ دسته‌بندی ردیف سوم -->
+    <div class="section-divider-title">
+      <span>خدمات و منابع دانشجویی</span>
+    </div>
+
+    <!-- ردیف سوم -->
+    <div class="tools-row-grid">
+      <div class="square-tool-card" id="openStudentSitesCard" title="سایت های دانشجویی">
+        <img src="images/site.jpg" alt="سایت های دانشجویی" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+
+      <div class="square-tool-card" id="openAiCard" title="سرویس‌های هوش مصنوعی">
+        <img src="images/hoosh.jpg" alt="سرویس‌های هوش مصنوعی" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+
+      <div class="square-tool-card" id="openResourcesCard" title="دانلود منابع پیام نور">
+        <img src="images/manabe.jpg" alt="دانلود منابع پیام نور" class="tool-card-img" draggable="false">
+        <div class="card-floating-gold-chevrons">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- اسلاید ۴ -->
+    <div class="banner-static-card slide-border-4">
+      <img src="images/slide4.jpg" alt="آموزش ویدیویی سامانه گلستان و ریلاین" class="banner-static-img" draggable="false">
+      <button type="button" class="slide-action-btn btn-red" id="openTutorialsBtn">
+        <span>مشاهده</span>
+        <div class="chevron-tri-left">
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </button>
+    </div>
+  </main>
+
+  <!-- دکمه شناور بازگشت به بالا در سمت راست -->
+  <button type="button" class="fab-scroll-top" id="fabScrollTop" title="بازگشت به ابتدای ابزارها">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <footer class="seamless-curved-footer">
+    <div class="footer-curve-bg">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,40 C360,95 1080,-15 1440,40 L1440,120 L0,120 Z" fill="#c59b27"></path>
+      </svg>
+    </div>
+    <div class="footer-text-content">
+      <div class="single-line-copyright">
+        تمامی حقوق مادی و معنوی برای <span class="brand-mark">پیام نور من</span> محفوظ است © ۱۴۰۵
+      </div>
+    </div>
+  </footer>
+
+  <!-- مودال ترکیب و جداسازی PDF -->
+  <div id="modalPdfToolbox" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>ترکیب و جداسازی فایل پی دی اف</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalPdfToolbox')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="segmented-control" id="pdfToolModeSegment">
+        <button type="button" class="segmented-btn active" data-tool="merge">ترکیب و ادغام فایل‌ها</button>
+        <button type="button" class="segmented-btn" data-tool="split">جداسازی و استخراج صفحات</button>
+      </div>
+
+      <div id="mergeSection">
+        <div class="dropzone-box" id="dropzoneMergePdf">
+          <i class="fa-solid fa-file-circle-plus"></i>
+          <div class="dropzone-text" id="mergePdfCountText">انتخاب یا کشیدن دو یا چند فایل PDF برای ترکیب</div>
+          <div class="dropzone-subtext">فایل‌ها به ترتیب انتخاب ترکیب خواهند شد</div>
+        </div>
+        <input type="file" id="mergeFileInput" class="file-input-hidden" accept="application/pdf" multiple>
+        <div class="selected-files-preview" id="mergeFilesPreview"></div>
+
+        <div class="dynamic-progress-wrap" id="mergeProgressWrap">
+          <div class="progress-info-row">
+            <span id="mergeProgressStatus">در حال پردازش صفحات...</span>
+            <span id="mergeProgressPercent">۰٪</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="mergeProgressBarFill"></div>
+          </div>
+        </div>
+
+        <button type="button" class="action-btn-main" id="startMergeBtn" disabled>
+          <i class="fa-solid fa-object-group"></i> ادغام فایل‌ها و دانلود PDF نهایی
+        </button>
+      </div>
+
+      <div id="splitSection" style="display: none;">
+        <div class="dropzone-box" id="dropzoneSplitPdf">
+          <i class="fa-solid fa-scissors"></i>
+          <div class="dropzone-text" id="splitPdfNameText">انتخاب فایل PDF برای جداسازی صفحات</div>
+          <div class="dropzone-subtext" id="splitPdfPageCountText">یک فایل انتخاب کنید</div>
+        </div>
+        <input type="file" id="splitFileInput" class="file-input-hidden" accept="application/pdf">
+        
+        <div class="settings-group" id="splitConfigGroup" style="display: none;">
+          <label class="settings-title"><i class="fa-solid fa-list-check"></i> بازه صفحات مورد نظر برای استخراج:</label>
+          <input type="text" class="calc-field-input" id="splitRangeInput" placeholder="مثال: 1-3, 5, 8-10">
+          <div style="font-size: 11.5px; color: var(--theme-gray-text); line-height: 1.5;">برای استخراج صفحات جداگانه از کاما و برای بازه‌ها از خط تیره استفاده کنید.</div>
+        </div>
+
+        <div class="dynamic-progress-wrap" id="splitProgressWrap">
+          <div class="progress-info-row">
+            <span id="splitProgressStatus">در حال استخراج صفحات...</span>
+            <span id="splitProgressPercent">۰٪</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="splitProgressBarFill"></div>
+          </div>
+        </div>
+
+        <button type="button" class="action-btn-main" id="startSplitBtn" disabled>
+          <i class="fa-solid fa-file-export"></i> استخراج صفحات و دانلود
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال آموزش ویدیویی -->
+  <div id="modalTutorials" class="modal-overlay">
+    <div class="tool-modal-window video-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-circle-play red-accent"></i>
+          <span>آموزش ویدیویی سامانه‌های دانشگاه پیام نور</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalTutorials')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="tutorials-tabs-wrap" style="display: flex; gap: 8px; width: 100%;">
+        <button type="button" class="segmented-btn active" data-target="golestanTab" style="background: #ef4444; color: #fff;">
+          <i class="fa-solid fa-graduation-cap"></i> سامانه گلستان
+        </button>
+        <button type="button" class="segmented-btn" data-target="relineTab">
+          <i class="fa-solid fa-chalkboard-user"></i> سامانه ریلاین (LMS)
+        </button>
+      </div>
+
+      <div class="video-tutorials-list" id="golestanTab"></div>
+      <div class="video-tutorials-list" id="relineTab" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- مودال ۱: محاسبه معدل ترم -->
+  <div id="modalGpa" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-calculator"></i>
+          <span>محاسبه هوشمند معدل ترم</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalGpa')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="courses-list" id="coursesList"></div>
+
+      <div class="validation-alert-box" id="validationAlert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="validationAlertText">نمره و تعداد واحد دروس حتما باید وارد شوند</span>
+      </div>
+
+      <div class="actions-panel">
+        <button type="button" class="panel-btn btn-add" id="addCourseBtn">
+          <i class="fa-solid fa-plus"></i> افزودن درس
+        </button>
+        <button type="button" class="panel-btn btn-calc" id="calculateBtn">
+          <i class="fa-solid fa-calculator"></i> محاسبه معدل
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="resultModal" class="modal-overlay result-level">
+    <div class="liquid-modal-card" id="liquidModalCard">
+      <button class="modal-close-corner" style="position:absolute; top:12px; right:12px;" onclick="closeModal('resultModal')">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-gpa-badge" id="modalGpaValue">۰۰.۰۰</div>
+      <div class="modal-status-badge" id="modalStatusBadge">معدل الف</div>
+      
+      <div class="modal-result-box">
+        <div class="result-row-top" id="modalResultTop">سقف مجاز انتخاب واحد ترم آینده</div>
+        <div class="result-row-bottom" id="modalResultBottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال ۲: حداقل قبولی پایانترم -->
+  <div id="modalExam" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-award"></i>
+          <span>محاسبه حداقل نمره قبولی پایان‌ترم</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalExam')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="segmented-control" id="examModeSegment">
+        <button type="button" class="segmented-btn active" data-mode="with">با میانترم</button>
+        <button type="button" class="segmented-btn" data-mode="without">بدون میانترم</button>
+      </div>
+
+      <div class="exam-input-grid">
+        <div class="exam-input-col" id="midtermGroup">
+          <label><i class="fa-solid fa-pen-nib"></i> نمره میانترم شما (از ۶ نمره):</label>
+          <input type="text" inputmode="decimal" class="calc-field-input" id="midtermScore" placeholder="مثال: ۴.۵">
+        </div>
+
+        <div class="exam-input-col" id="colTotalQuestions">
+          <label><i class="fa-solid fa-list-ol"></i> تعداد کل سوالات برگه آزمون:</label>
+          <input type="text" inputmode="numeric" class="calc-field-input" id="examTotalQuestions" placeholder="مثال: ۳۰">
+        </div>
+      </div>
+
+      <div class="validation-alert-box" id="examAlert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="examAlertText">لطفاً مقادیر را به درستی وارد کنید</span>
+      </div>
+
+      <button type="button" class="action-btn-main" id="calculatePassScoreBtn">
+        <i class="fa-solid fa-calculator"></i> محاسبه حداقل نیاز برای قبولی
+      </button>
+    </div>
+  </div>
+
+  <div id="examPassResultModal" class="modal-overlay result-level">
+    <div class="liquid-modal-card gold-frame" id="liquidExamPassCard">
+      <button class="modal-close-corner" style="position:absolute; top:12px; right:12px;" onclick="closeModal('examPassResultModal')">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="dual-result-container">
+        <div class="dual-card-section">
+          <span class="dual-result-val" id="examPassScoreVal">۰۰.۰۰</span>
+          <div class="dual-badge-tag blue-tag" id="examPassScoreTag">حداقل نمره برگه از ۱۴ نمره</div>
+        </div>
+
+        <div class="dual-card-section">
+          <span class="dual-result-val" id="examPassCorrectVal">۰</span>
+          <div class="dual-badge-tag pink-tag" id="examPassCorrectTag">حداقل پاسخ صحیح از ۰ سوال</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال ۳: سقف انتخاب واحد -->
+  <div id="modalUnitLimit" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>محاسبه سقف مجاز انتخاب واحد</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalUnitLimit')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="exam-input-col">
+        <label><i class="fa-solid fa-pen-fancy"></i> معدل کل یا معدل ترم قبل خود را وارد کنید (۰ تا ۲۰):</label>
+        <input type="text" inputmode="decimal" class="calc-field-input" id="unitGpaInput" placeholder="مثال: ۱۶.۷۵">
+      </div>
+
+      <div class="validation-alert-box" id="unitLimitAlert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="unitLimitAlertText">لطفاً معدل معتبر بین ۰ تا ۲۰ وارد کنید.</span>
+      </div>
+
+      <button type="button" class="action-btn-main" id="checkUnitLimitBtn">
+        <i class="fa-solid fa-check"></i> بررسی سقف انتخاب واحد
+      </button>
+    </div>
+  </div>
+
+  <div id="unitLimitResultModal" class="modal-overlay result-level">
+    <div class="liquid-modal-card" id="liquidUnitLimitCard">
+      <button class="modal-close-corner" style="position:absolute; top:12px; right:12px;" onclick="closeModal('unitLimitResultModal')">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="unit-display-badge">
+        <span class="modal-gpa-badge" id="unitLimitNumberBadge">۰۰</span>
+        <span class="unit-suffix-text">واحد</span>
+      </div>
+      <div class="modal-status-badge" id="unitLimitStatusBadge">معدل الف</div>
+      
+      <div class="modal-result-box">
+        <div class="result-row-top">سقف مجاز انتخاب واحد شما</div>
+        <div class="result-row-bottom" id="unitLimitResultBottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال ۴: کاهش حجم PDF -->
+  <div id="modalPdfCompress" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-file-zipper"></i>
+          <span>کاهش حجم فایل PDF</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalPdfCompress')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="dropzone-box" id="dropzonePdf">
+        <i class="fa-solid fa-file-pdf"></i>
+        <div class="dropzone-text" id="pdfFileName">کلیک کنید یا فایل PDF را اینجا رها کنید</div>
+        <div class="dropzone-subtext">حداکثر حجم مجاز: ۱۵۰ مگابایت</div>
+      </div>
+      <input type="file" id="pdfFileInput" class="file-input-hidden" accept="application/pdf">
+
+      <div class="dynamic-progress-wrap" id="compressProgressWrap">
+        <div class="progress-info-row">
+          <span id="compressProgressStatus">در حال آماده‌سازی فشرده‌سازی...</span>
+          <span id="compressProgressPercent">۰٪</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="compressProgressBarFill"></div>
+        </div>
+      </div>
+
+      <button type="button" class="action-btn-main" id="startCompressBtn" disabled>
+        <i class="fa-solid fa-bolt"></i> شروع فشرده‌سازی و دانلود
+      </button>
+    </div>
+  </div>
+
+  <!-- مودال ۵: تبدیل عکس به PDF -->
+  <div id="modalImgToPdf" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-images"></i>
+          <span>تبدیل عکس به PDF</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalImgToPdf')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="dropzone-box" id="dropzoneImages">
+        <i class="fa-regular fa-image"></i>
+        <div class="dropzone-text" id="imgCountText">انتخاب یا رها کردن عکس‌ها (یک یا چند تصویر)</div>
+        <div class="dropzone-subtext">پشتیبانی از JPG, PNG, WEBP, BMP</div>
+      </div>
+      <input type="file" id="imgFileInput" class="file-input-hidden" accept="image/*" multiple>
+
+      <div class="selected-files-preview" id="imagePreviews"></div>
+
+      <div class="settings-group">
+        <label class="settings-title"><i class="fa-solid fa-ruler-combined"></i> اندازه و ابعاد صفحات PDF:</label>
+        <div class="segmented-control" id="pageSizeOptions">
+          <button type="button" class="segmented-btn active" data-page="a4">صفحه استاندارد A4</button>
+          <button type="button" class="segmented-btn" data-page="original">ابعاد اصلی هر تصویر</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label class="settings-title"><i class="fa-solid fa-gauge-high"></i> کیفیت تصاویر خروجی:</label>
+        <div class="segmented-control" id="qualityOptions">
+          <button type="button" class="segmented-btn" data-quality="0.65">فشرده (حجم پایین)</button>
+          <button type="button" class="segmented-btn active" data-quality="1.0">کیفیت اصلی</button>
+        </div>
+      </div>
+
+      <div class="dynamic-progress-wrap" id="convertImgProgressWrap">
+        <div class="progress-info-row">
+          <span id="convertImgProgressStatus">در حال درج تصاویر...</span>
+          <span id="convertImgProgressPercent">۰٪</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="convertImgProgressBarFill"></div>
+        </div>
+      </div>
+
+      <button type="button" class="action-btn-main" id="convertImgToPdfBtn" disabled>
+        <i class="fa-solid fa-file-arrow-down"></i> ساخت و دانلود فایل PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- مودال ۷: سرویس‌های هوش مصنوعی -->
+  <div id="modalAi" class="modal-overlay">
+    <div class="tool-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-robot"></i>
+          <span>سرویس‌های هوش مصنوعی</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalAi')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="ai-tabs-wrap">
+        <button type="button" class="ai-tab-btn active" data-target="iranian">
+          <i class="fa-solid fa-flag"></i> <span>سرویس‌های ایرانی</span>
+        </button>
+        <button type="button" class="ai-tab-btn" data-target="global">
+          <i class="fa-solid fa-globe"></i> <span>سرویس‌های خارجی</span>
+        </button>
+      </div>
+
+      <div class="ai-list-container" id="iranianAiList">
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-brain"></i></div>
+            <span class="ai-name-text">گپ جی پی تی</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="http://cafebazaar.ir/app/?id=app.gapgpt.twa&ref=share" target="_blank" class="ai-link-pill app-btn"><i class="fa-solid fa-bag-shopping"></i> بازار</a>
+            <a href="https://gapgpt.app/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-brain"></i></div>
+            <span class="ai-name-text">زیگپ</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="http://cafebazaar.ir/app/?id=com.smilinno.zigap&ref=share" target="_blank" class="ai-link-pill app-btn"><i class="fa-solid fa-bag-shopping"></i> بازار</a>
+            <a href="https://app.zigap.ir/user/auth" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-brain"></i></div>
+            <span class="ai-name-text">ویرا</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="http://cafebazaar.ir/app/?id=ai.ivira.app&ref=share" target="_blank" class="ai-link-pill app-btn"><i class="fa-solid fa-bag-shopping"></i> بازار</a>
+            <a href="https://web.ivira.ai/#/c" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-brain"></i></div>
+            <span class="ai-name-text">روبو</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="http://cafebazaar.ir/app/?id=ir.roboo.pwa&ref=share" target="_blank" class="ai-link-pill app-btn"><i class="fa-solid fa-bag-shopping"></i> بازار</a>
+            <a href="https://panel.roboo.ir/login" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-brain"></i></div>
+            <span class="ai-name-text">آتنا</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="http://cafebazaar.ir/app/?id=com.tapsage.athena.domestic&ref=share" target="_blank" class="ai-link-pill app-btn"><i class="fa-solid fa-bag-shopping"></i> بازار</a>
+            <a href="https://chat.athenai.app/c/new" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-brain"></i></div>
+            <span class="ai-name-text">دونا</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="http://cafebazaar.ir/app/?id=ai.doona.app&ref=share" target="_blank" class="ai-link-pill app-btn"><i class="fa-solid fa-bag-shopping"></i> بازار</a>
+            <a href="https://app.doona.ai/login?redirect=%2Fapp" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-list-container" id="globalAiList" style="display: none;">
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-microchip"></i></div>
+            <span class="ai-name-text">چت جی پی تی</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="https://play.google.com/store/apps/details?id=com.openai.chatgpt" target="_blank" class="ai-link-pill app-btn"><i class="fa-brands fa-google-play"></i> گوگل پلی</a>
+            <a href="https://chatgpt.com/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-microchip"></i></div>
+            <span class="ai-name-text">دیپ سیک</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="https://play.google.com/store/apps/details?id=com.deepseek.chat" target="_blank" class="ai-link-pill app-btn"><i class="fa-brands fa-google-play"></i> گوگل پلی</a>
+            <a href="https://chat.deepseek.com/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-microchip"></i></div>
+            <span class="ai-name-text">جمنای</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.bard" target="_blank" class="ai-link-pill app-btn"><i class="fa-brands fa-google-play"></i> گوگل پلی</a>
+            <a href="https://gemini.google.com/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-microchip"></i></div>
+            <span class="ai-name-text">کلود</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank" class="ai-link-pill app-btn"><i class="fa-brands fa-google-play"></i> گوگل پلی</a>
+            <a href="https://claude.com/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-microchip"></i></div>
+            <span class="ai-name-text">کوپایلت</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="https://play.google.com/store/apps/details?id=com.microsoft.copilot" target="_blank" class="ai-link-pill app-btn"><i class="fa-brands fa-google-play"></i> گوگل پلی</a>
+            <a href="https://copilot.microsoft.com/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+
+        <div class="ai-card-item">
+          <div class="ai-card-info">
+            <div class="ai-avatar-icon"><i class="fa-solid fa-microchip"></i></div>
+            <span class="ai-name-text">گروک</span>
+          </div>
+          <div class="ai-card-links">
+            <a href="https://play.google.com/store/apps/details?id=ai.x.grok" target="_blank" class="ai-link-pill app-btn"><i class="fa-brands fa-google-play"></i> گوگل پلی</a>
+            <a href="https://grok.com/" target="_blank" class="ai-link-pill web-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> سایت</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مودال ۸: سایت‌های دانشجویی -->
+  <div id="modalStudentSites" class="modal-overlay">
+    <div class="tool-modal-window video-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-globe"></i>
+          <span>سایت‌های دانشجویی</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalStudentSites')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="links-directory-list" id="studentSitesList"></div>
+    </div>
+  </div>
+
+  <!-- مودال ۹: دانلود منابع پیام نور -->
+  <div id="modalResources" class="modal-overlay">
+    <div class="tool-modal-window video-modal-window">
+      <div class="modal-head">
+        <div class="modal-head-title">
+          <i class="fa-solid fa-book-open"></i>
+          <span>دانلود منابع پیام نور</span>
+        </div>
+        <button class="modal-close-corner" onclick="closeModal('modalResources')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="info-header-notice">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span>جهت دانلود رایگان کتب و جزوات، وارد کانال‌های زیر در پیام‌رسان ایتا شوید:</span>
+      </div>
+
+      <div class="links-directory-list" id="resourcesChannelsList"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.tagName === 'IMG' || e.target.closest('.square-tool-card') || e.target.closest('.banner-static-card')) {
+        e.preventDefault();
+      }
+    });
+
+    const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    function toFarsiNumber(n) {
+      if (n === null || n === undefined) return '';
+      return n.toString().replace(/[0-9]/g, x => farsiDigits[x]);
+    }
+
+    function toEnglishNumber(str) {
+      if (!str) return '';
+      return str
+        .replace(/[۰-۹]/g, d => d.charCodeAt(0) - 1776)
+        .replace(/[٠-٩]/g, d => d.charCodeAt(0) - 1632)
+        .replace(/[\/،]/g, '.');
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('active');
+        modal.querySelectorAll('.custom-clean-player-box').forEach(player => {
+          player.innerHTML = '';
+          player.classList.remove('show');
+        });
+        modal.querySelectorAll('.btn-play-trigger').forEach(btn => {
+          btn.innerHTML = '<i class="fa-solid fa-play"></i> پخش ویدیو';
+        });
+        modal.querySelectorAll('.dynamic-progress-wrap').forEach(w => w.style.display = 'none');
+      }
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(modal.id);
+      });
+    });
+
+    // مدیریت دکمه بازگشت به بالا در سمت راست
+    const fabScrollTop = document.getElementById('fabScrollTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 260) {
+        fabScrollTop.classList.add('visible');
+      } else {
+        fabScrollTop.classList.remove('visible');
+      }
+    });
+
+    fabScrollTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    const golestanLessons = [
+      { title: 'پرداخت شهریه و انتخاب واحد', hash: 'tzib4u9' },
+      { title: 'آشنایی با منوی اطلاعات جامع دانشجو', hash: 'uY8AE' },
+      { title: 'اخذ گزارش ۱۰۱ «مشاهده گزارش انتخاب واحد و برنامه کلاسی»', hash: 'urts496' },
+      { title: 'اخذ گزارش ۴۲۳ «مشاهده برنامه امتحانات»', hash: 'fmiasly' },
+      { title: 'اخذ گزارش ۲۷۲ «مشاهده واحدهای پاس شده و باقیمانده»', hash: 'myr719f' },
+      { title: 'اخذ گزارش ۴۲۸ «کارت ورود به جلسه امتحانات»', hash: 'qrpt4ln' },
+      { title: 'مشاهده ریزنمرات میانترم و پایانترم', hash: 'j75gyuc' },
+      { title: 'ثبت درخواست درس معرفی به استاد', hash: 'srjLJ' },
+      { title: 'ثبت درخواست ثبت دروس معادل سازی «تطبیق واحد»', hash: 'h2541t4' },
+      { title: 'ثبت درخواست مهمان', hash: 'ozz5ild' },
+      { title: 'ثبت درخواست تغییر محل آزمون', hash: 'ilts46q' },
+      { title: 'ثبت مرخصی و حذف ترم', hash: 'xdct68s' },
+      { title: 'ثبت درخواست تغییر رشته', hash: 'u49n7q2' },
+      { title: 'ثبت درخواست فارغ التحصیلی', hash: 'o31cj77' },
+      { title: 'تغییر رمز ورود به سامانه گلستان', hash: 't50v7ff' }
+    ];
+
+    const relineLessons = [
+      { title: 'نحوه شرکت در کلاس آنلاین', hash: 'gnze2w7' },
+      { title: 'شرکت در آزمون و تکالیف', hash: 'xha403c' },
+      { title: 'مشاهده کارنامه و نمرات کلاسی', hash: 'klz056y' }
+    ];
+
+    function renderCustomVideoList(containerId, list) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      list.forEach((item, index) => {
+        const itemBox = document.createElement('div');
+        itemBox.className = 'video-lesson-item';
+        itemBox.innerHTML = `
+          <div class="lesson-header">
+            <span class="lesson-title-text"><i class="fa-solid fa-circle-play"></i> ${item.title}</span>
+            <button type="button" class="btn-play-trigger" data-hash="${item.hash}">
+              <i class="fa-solid fa-play"></i> پخش ویدیو
+            </button>
+          </div>
+          <div class="custom-clean-player-box" id="player_${containerId}_${index}"></div>
+        `;
+
+        const playBtn = itemBox.querySelector('.btn-play-trigger');
+        const playerBox = itemBox.querySelector('.custom-clean-player-box');
+
+        playBtn.addEventListener('click', () => {
+          const isPlaying = playerBox.classList.contains('show');
+          if (isPlaying) {
+            playerBox.innerHTML = '';
+            playerBox.classList.remove('show');
+            playBtn.innerHTML = '<i class="fa-solid fa-play"></i> پخش ویدیو';
+          } else {
+            document.querySelectorAll('.custom-clean-player-box').forEach(p => {
+              p.innerHTML = '';
+              p.classList.remove('show');
+            });
+            document.querySelectorAll('.btn-play-trigger').forEach(b => {
+              b.innerHTML = '<i class="fa-solid fa-play"></i> پخش ویدیو';
+            });
+            playerBox.innerHTML = `
+              <div class="player-clean-mask"></div>
+              <iframe src="https://www.aparat.com/video/video/embed/videohash/${item.hash}/vt/frame?autoplay=true" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+            `;
+            playerBox.classList.add('show');
+            playBtn.innerHTML = '<i class="fa-solid fa-stop"></i> بستن پخش';
+          }
+        });
+        container.appendChild(itemBox);
+      });
+    }
+
+    renderCustomVideoList('golestanTab', golestanLessons);
+    renderCustomVideoList('relineTab', relineLessons);
+
+    document.querySelectorAll('.tutorials-tabs-wrap .segmented-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tutorials-tabs-wrap .segmented-btn').forEach(b => {
+          b.classList.remove('active');
+          b.style.background = 'transparent';
+          b.style.color = 'var(--theme-gray-text)';
+        });
+        this.classList.add('active');
+        const targetId = this.getAttribute('data-target');
+        if (targetId === 'golestanTab') {
+          this.style.background = '#ef4444';
+          this.style.color = '#fff';
+          document.getElementById('golestanTab').style.display = 'flex';
+          document.getElementById('relineTab').style.display = 'none';
+        } else {
+          this.style.background = '#ef4444';
+          this.style.color = '#fff';
+          document.getElementById('golestanTab').style.display = 'none';
+          document.getElementById('relineTab').style.display = 'flex';
+        }
+      });
+    });
+
+    document.getElementById('openUnitLimitCard').addEventListener('click', () => openModal('modalUnitLimit'));
+    document.getElementById('openExamCard').addEventListener('click', () => openModal('modalExam'));
+    document.getElementById('openGpaCard').addEventListener('click', () => openModal('modalGpa'));
+    document.getElementById('openPdfCompressCard').addEventListener('click', () => openModal('modalPdfCompress'));
+    document.getElementById('openImgToPdfCard').addEventListener('click', () => openModal('modalImgToPdf'));
+    document.getElementById('openPdfToolboxCard').addEventListener('click', () => openModal('modalPdfToolbox'));
+    document.getElementById('openAiCard').addEventListener('click', () => openModal('modalAi'));
+    document.getElementById('openStudentSitesCard').addEventListener('click', () => openModal('modalStudentSites'));
+    document.getElementById('openResourcesCard').addEventListener('click', () => openModal('modalResources'));
+    document.getElementById('openTutorialsBtn').addEventListener('click', () => openModal('modalTutorials'));
+
+    function animateValue(targetVal, element, decimals = 2, duration = 600) {
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentVal = easeOut * targetVal;
+        element.textContent = toFarsiNumber(currentVal.toFixed(decimals));
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = toFarsiNumber(targetVal.toFixed(decimals));
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // ۱. محاسبه معدل
+    const coursesList = document.getElementById('coursesList');
+    const addCourseBtn = document.getElementById('addCourseBtn');
+    const calculateBtn = document.getElementById('calculateBtn');
+    const validationAlert = document.getElementById('validationAlert');
+    const validationAlertText = document.getElementById('validationAlertText');
+    const resultModal = document.getElementById('resultModal');
+    const liquidModalCard = document.getElementById('liquidModalCard');
+    const modalStatusBadge = document.getElementById('modalStatusBadge');
+    const modalGpaValue = document.getElementById('modalGpaValue');
+    const modalResultBottom = document.getElementById('modalResultBottom');
+
+    function createCourseRow() {
+      const row = document.createElement('div');
+      row.className = 'course-row';
+      row.innerHTML = `
+        <input type="text" class="course-input input-name" placeholder="نام درس">
+        <input type="text" inputmode="numeric" class="course-input input-unit" placeholder="واحد">
+        <input type="text" inputmode="decimal" class="course-input input-grade" placeholder="نمره">
+        <button type="button" class="btn-delete-course" title="حذف درس">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      `;
+
+      const unitInput = row.querySelector('.input-unit');
+      const gradeInput = row.querySelector('.input-grade');
+
+      unitInput.addEventListener('input', function() {
+        let val = toEnglishNumber(this.value).replace(/[^0-9]/g, '');
+        this.value = toFarsiNumber(val);
+      });
+
+      gradeInput.addEventListener('input', function() {
+        let converted = toEnglishNumber(this.value).replace(/[^0-9.]/g, '');
+        const parts = converted.split('.');
+        if (parts.length > 2) converted = parts[0] + '.' + parts.slice(1).join('');
+        let farsiFormatted = '';
+        for (let char of converted) {
+          farsiFormatted += (char >= '0' && char <= '9') ? farsiDigits[char] : char;
+        }
+        this.value = farsiFormatted;
+      });
+
+      row.querySelectorAll('.course-input').forEach(input => {
+        input.addEventListener('input', () => {
+          input.classList.remove('input-error');
+          if (!coursesList.querySelector('.input-error')) validationAlert.classList.remove('show');
+        });
+      });
+
+      row.querySelector('.btn-delete-course').addEventListener('click', () => {
+        row.remove();
+        if (!coursesList.querySelector('.input-error')) validationAlert.classList.remove('show');
+      });
+
+      coursesList.appendChild(row);
+    }
+
+    for (let i = 0; i < 5; i++) createCourseRow();
+    addCourseBtn.addEventListener('click', createCourseRow);
+
+    calculateBtn.addEventListener('click', () => {
+      coursesList.querySelectorAll('.course-input').forEach(inp => inp.classList.remove('input-error'));
+      validationAlert.classList.remove('show');
+
+      const rows = coursesList.querySelectorAll('.course-row');
+      let totalWeightedGrade = 0;
+      let totalUnits = 0;
+      let validFilledRowsCount = 0;
+      let hasIncompleteRow = false;
+      let hasInvalidUnit = false;
+      let hasInvalidGrade = false;
+
+      rows.forEach(row => {
+        const unitInput = row.querySelector('.input-unit');
+        const gradeInput = row.querySelector('.input-grade');
+        const unitRaw = toEnglishNumber(unitInput.value.trim());
+        const gradeRaw = toEnglishNumber(gradeInput.value.trim());
+
+        const unitHasVal = unitRaw !== '';
+        const gradeHasVal = gradeRaw !== '';
+
+        if ((unitHasVal && !gradeHasVal) || (!unitHasVal && gradeHasVal)) {
+          hasIncompleteRow = true;
+          if (!unitHasVal) unitInput.classList.add('input-error');
+          if (!gradeHasVal) gradeInput.classList.add('input-error');
+          return;
+        }
+
+        if (unitHasVal && gradeHasVal) {
+          const unitVal = parseFloat(unitRaw);
+          const gradeVal = parseFloat(gradeRaw);
+          let rowHasErr = false;
+
+          if (isNaN(unitVal) || unitVal < 1 || unitVal > 4) {
+            unitInput.classList.add('input-error');
+            hasInvalidUnit = true;
+            rowHasErr = true;
+          }
+
+          if (isNaN(gradeVal) || gradeVal < 0 || gradeVal > 20) {
+            gradeInput.classList.add('input-error');
+            hasInvalidGrade = true;
+            rowHasErr = true;
+          }
+
+          if (!rowHasErr) {
+            totalWeightedGrade += gradeVal * unitVal;
+            totalUnits += unitVal;
+            validFilledRowsCount++;
+          }
+        }
+      });
+
+      if (hasIncompleteRow) {
+        validationAlertText.textContent = 'نمره و تعداد واحد دروس حتما باید وارد شوند';
+        validationAlert.classList.add('show');
+        return;
+      }
+
+      if (hasInvalidUnit || hasInvalidGrade) {
+        validationAlertText.textContent = hasInvalidUnit && hasInvalidGrade 
+          ? 'خطا: تعداد واحد بین ۱ تا ۴ و نمره بین ۰ تا ۲۰ باشد!'
+          : (hasInvalidUnit ? 'خطا: تعداد واحد بین ۱ تا ۴ باشد!' : 'خطا: نمره بین ۰ تا ۲۰ باشد!');
+        validationAlert.classList.add('show');
+        return;
+      }
+
+      if (validFilledRowsCount === 0 || totalUnits === 0) {
+        const firstRow = coursesList.querySelector('.course-row');
+        if (firstRow) {
+          firstRow.querySelector('.input-unit').classList.add('input-error');
+          firstRow.querySelector('.input-grade').classList.add('input-error');
+        }
+        validationAlertText.textContent = 'نمره و تعداد واحد دروس حتما باید وارد شوند';
+        validationAlert.classList.add('show');
+        return;
+      }
+
+      const gpa = totalWeightedGrade / totalUnits;
+      let maxUnits = 14;
+      let statusText = '';
+      let statusClass = '';
+      let textClass = '';
+
+      if (gpa >= 17) {
+        maxUnits = 24;
+        statusText = 'معدل الف';
+        statusClass = 'status-excellent';
+        textClass = 'status-excellent-text';
+      } else if (gpa >= 12) {
+        maxUnits = 20;
+        statusText = 'معدل عادی';
+        statusClass = 'status-normal';
+        textClass = 'status-normal-text';
+      } else {
+        maxUnits = 14;
+        statusText = 'معدل مشروط';
+        statusClass = 'status-probation';
+        textClass = 'status-probation-text';
+      }
+
+      liquidModalCard.classList.remove('status-excellent', 'status-normal', 'status-probation');
+      liquidModalCard.classList.add(statusClass);
+
+      modalStatusBadge.className = `modal-status-badge ${textClass}`;
+      modalStatusBadge.textContent = statusText;
+
+      modalResultBottom.innerHTML = `
+        <div class="result-row-bottom-line2">
+          شما مجاز به انتخاب واحد تا حداکثر <span class="colored-units ${textClass}">${toFarsiNumber(maxUnits)} واحد درسی</span> در ترم مهر/بهمن می باشید.
+        </div>
+      `;
+
+      resultModal.classList.add('active');
+      animateValue(gpa, modalGpaValue, 2, 700);
+    });
+
+    // ۲. حداقل نمره قبولی
+    let examMode = 'with';
+    const examModeBtns = document.querySelectorAll('#examModeSegment .segmented-btn');
+    const midtermGroup = document.getElementById('midtermGroup');
+    const midtermScoreInput = document.getElementById('midtermScore');
+    const examTotalInput = document.getElementById('examTotalQuestions');
+    const calculatePassScoreBtn = document.getElementById('calculatePassScoreBtn');
+    const examAlert = document.getElementById('examAlert');
+    const examAlertText = document.getElementById('examAlertText');
+
+    const examPassResultModal = document.getElementById('examPassResultModal');
+    const examPassScoreVal = document.getElementById('examPassScoreVal');
+    const examPassCorrectVal = document.getElementById('examPassCorrectVal');
+    const examPassScoreTag = document.getElementById('examPassScoreTag');
+    const examPassCorrectTag = document.getElementById('examPassCorrectTag');
+
+    examModeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        examModeBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        examMode = this.getAttribute('data-mode');
+        midtermGroup.style.display = examMode === 'with' ? 'flex' : 'none';
+        examAlert.classList.remove('show');
+      });
+    });
+
+    [midtermScoreInput, examTotalInput].forEach(inp => {
+      inp.addEventListener('input', function() {
+        this.classList.remove('input-error');
+        examAlert.classList.remove('show');
+        let val = toEnglishNumber(this.value);
+        if (this === midtermScoreInput) {
+          val = val.replace(/[^0-9.]/g, '');
+          const p = val.split('.');
+          if (p.length > 2) val = p[0] + '.' + p.slice(1).join('');
+        } else {
+          val = val.replace(/[^0-9]/g, '');
+        }
+        let farsiFormatted = '';
+        for (let char of val) {
+          farsiFormatted += (char >= '0' && char <= '9') ? farsiDigits[char] : char;
+        }
+        this.value = farsiFormatted;
+      });
+    });
+
+    calculatePassScoreBtn.addEventListener('click', () => {
+      examAlert.classList.remove('show');
+      [midtermScoreInput, examTotalInput].forEach(i => i.classList.remove('input-error'));
+
+      const totalQ = parseInt(toEnglishNumber(examTotalInput.value.trim()), 10);
+      if (isNaN(totalQ) || totalQ <= 0) {
+        examTotalInput.classList.add('input-error');
+        examAlertText.textContent = 'تعداد کل سوالات برگه آزمون را وارد کنید.';
+        examAlert.classList.add('show');
+        return;
+      }
+
+      if (examMode === 'with') {
+        const midtermRaw = toEnglishNumber(midtermScoreInput.value.trim());
+        if (midtermRaw === '') {
+          midtermScoreInput.classList.add('input-error');
+          examAlertText.textContent = 'لطفاً نمره میانترم خود را از ۶ نمره وارد نمایید.';
+          examAlert.classList.add('show');
+          return;
+        }
+
+        const midterm = parseFloat(midtermRaw);
+        if (isNaN(midterm) || midterm < 0 || midterm > 6) {
+          midtermScoreInput.classList.add('input-error');
+          examAlertText.textContent = 'نمره میانترم باید بین ۰ تا ۶ نمره باشد!';
+          examAlert.classList.add('show');
+          return;
+        }
+
+        const neededOutOf14 = Math.max(0, 9.5 - midterm);
+        let neededCorrect = Math.ceil((neededOutOf14 / 14) * totalQ);
+        if (neededCorrect > totalQ) neededCorrect = totalQ;
+        const directPassCorrect = Math.ceil((9.5 / 20) * totalQ);
+        if (directPassCorrect < neededCorrect) neededCorrect = directPassCorrect;
+
+        examPassScoreTag.textContent = 'حداقل نمره برگه از ۱۴ نمره';
+        examPassCorrectTag.textContent = `حداقل پاسخ صحیح از ${toFarsiNumber(totalQ)} سوال`;
+
+        examPassResultModal.classList.add('active');
+        animateValue(neededOutOf14, examPassScoreVal, 2, 600);
+        animateValue(neededCorrect, examPassCorrectVal, 0, 600);
+      } else {
+        const minPassCorrect = Math.ceil((9.5 / 20) * totalQ);
+
+        examPassScoreTag.textContent = 'حداقل نمره قبولی از ۲۰ نمره';
+        examPassCorrectTag.textContent = `حداقل پاسخ صحیح از ${toFarsiNumber(totalQ)} سوال`;
+
+        examPassResultModal.classList.add('active');
+        animateValue(9.5, examPassScoreVal, 2, 600);
+        animateValue(minPassCorrect, examPassCorrectVal, 0, 600);
+      }
+    });
+
+    // ۳. سقف انتخاب واحد
+    const unitGpaInput = document.getElementById('unitGpaInput');
+    const checkUnitLimitBtn = document.getElementById('checkUnitLimitBtn');
+    const unitLimitAlert = document.getElementById('unitLimitAlert');
+    const unitLimitResultModal = document.getElementById('unitLimitResultModal');
+    const liquidUnitLimitCard = document.getElementById('liquidUnitLimitCard');
+    const unitLimitNumberBadge = document.getElementById('unitLimitNumberBadge');
+    const unitLimitStatusBadge = document.getElementById('unitLimitStatusBadge');
+    const unitLimitResultBottom = document.getElementById('unitLimitResultBottom');
+
+    unitGpaInput.addEventListener('input', function() {
+      this.classList.remove('input-error');
+      unitLimitAlert.classList.remove('show');
+      let val = toEnglishNumber(this.value).replace(/[^0-9.]/g, '');
+      const p = val.split('.');
+      if (p.length > 2) val = p[0] + '.' + p.slice(1).join('');
+      let f = '';
+      for (let c of val) f += (c >= '0' && c <= '9') ? farsiDigits[c] : c;
+      this.value = f;
+    });
+
+    checkUnitLimitBtn.addEventListener('click', () => {
+      unitLimitAlert.classList.remove('show');
+      unitGpaInput.classList.remove('input-error');
+
+      const raw = toEnglishNumber(unitGpaInput.value.trim());
+      if (raw === '') {
+        unitGpaInput.classList.add('input-error');
+        unitLimitAlert.classList.add('show');
+        return;
+      }
+
+      const gpa = parseFloat(raw);
+      if (isNaN(gpa) || gpa < 0 || gpa > 20) {
+        unitGpaInput.classList.add('input-error');
+        unitLimitAlert.classList.add('show');
+        return;
+      }
+
+      let maxUnits = 14;
+      let statusText = '';
+      let statusClass = '';
+      let textClass = '';
+
+      if (gpa >= 17) {
+        maxUnits = 24;
+        statusText = 'معدل الف';
+        statusClass = 'status-excellent';
+        textClass = 'status-excellent-text';
+      } else if (gpa >= 12) {
+        maxUnits = 20;
+        statusText = 'معدل عادی';
+        statusClass = 'status-normal';
+        textClass = 'status-normal-text';
+      } else {
+        maxUnits = 14;
+        statusText = 'معدل مشروط';
+        statusClass = 'status-probation';
+        textClass = 'status-probation-text';
+      }
+
+      liquidUnitLimitCard.classList.remove('status-excellent', 'status-normal', 'status-probation');
+      liquidUnitLimitCard.classList.add(statusClass);
+
+      unitLimitStatusBadge.className = `modal-status-badge ${textClass}`;
+      unitLimitStatusBadge.textContent = statusText;
+
+      unitLimitResultBottom.innerHTML = `
+        <div class="result-row-bottom-line2">
+          شما مجاز به انتخاب واحد تا حداکثر <span class="colored-units ${textClass}">${toFarsiNumber(maxUnits)} واحد درسی</span> در ترم مهر/بهمن می باشید.
+        </div>
+      `;
+
+      unitLimitResultModal.classList.add('active');
+      animateValue(maxUnits, unitLimitNumberBadge, 0, 600);
+    });
+
+    // لیست سایت‌ها و منابع
+    const studentSitesData = [
+      { title: 'سامانه گلستان', url: 'https://reg.pnu.ac.ir' },
+      { title: 'سامانه ریلاین «LMS»', url: 'https://edu.qazvin.pnu.ac.ir' },
+      { title: 'استادیاب «سامانه اساتید استان قزوین»', url: 'https://ostadyab.github.io' },
+      { title: 'پورتال رسمی دانشگاه پیام نور', url: 'https://pnu.ac.ir' },
+      { title: 'سامانه امور دانشجویان «سجاد»', url: 'https://portal.saorg.ir' },
+      { title: 'صندوق رفاه دانشجویان', url: 'https://www.swf.ir' },
+      { title: 'سازمان سنجش', url: 'https://sanjesh.org' },
+      { title: 'دیجی بوک «سفارش کتاب‌های پیام نور»', url: 'https://digibook.pnu.ac.ir' },
+      { title: 'سامانه دولت من', url: 'https://sso.my.gov.ir' }
+    ];
+
+    const studentSitesContainer = document.getElementById('studentSitesList');
+    studentSitesData.forEach(site => {
+      const card = document.createElement('div');
+      card.className = 'directory-item-card';
+      card.innerHTML = `
+        <span class="directory-item-title"><i class="fa-solid fa-link"></i> ${site.title}</span>
+        <a href="${site.url}" target="_blank" class="directory-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> ورود به سامانه</a>
+      `;
+      studentSitesContainer.appendChild(card);
+    });
+
+    const resourcesChannelsData = [
+      { name: 'کانال جامع کتب پیام نور (@pnu100)', url: 'https://eitaa.com/pnu100' },
+      { name: 'کانال جزوات لوتوس پیام نور (@LOTUS_PNU)', url: 'https://eitaa.com/LOTUS_PNU' },
+      { name: 'کتابخانه پیام نور (@kermanpnupnu)', url: 'https://eitaa.com/kermanpnupnu' },
+      { name: 'کانال بانک کتابخانه پیام نور (@Librarypayamenoor)', url: 'https://eitaa.com/Librarypayamenoor' },
+      { name: 'کانال بوک دانشجو (@bookdanesh)', url: 'https://eitaa.com/bookdanesh' },
+      { name: 'کانال منابع و نمونه سوالات (@puanmnh)', url: 'https://eitaa.com/puanmnh' },
+      { name: 'کانال VIP جزوات پیام نور (@jozvevip1)', url: 'https://eitaa.com/jozvevip1' }
+    ];
+
+    const resourcesContainer = document.getElementById('resourcesChannelsList');
+    resourcesChannelsData.forEach(ch => {
+      const card = document.createElement('div');
+      card.className = 'directory-item-card';
+      card.innerHTML = `
+        <span class="directory-item-title"><i class="fa-solid fa-paper-plane"></i> ${ch.name}</span>
+        <a href="${ch.url}" target="_blank" class="directory-action-btn"><i class="fa-solid fa-arrow-left"></i> ورود به کانال ایتا</a>
+      `;
+      resourcesContainer.appendChild(card);
+    });
+
+    // تب‌های ترکیب و جداسازی
+    const pdfToolModeBtns = document.querySelectorAll('#pdfToolModeSegment .segmented-btn');
+    const mergeSection = document.getElementById('mergeSection');
+    const splitSection = document.getElementById('splitSection');
+
+    pdfToolModeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        pdfToolModeBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        if (this.getAttribute('data-tool') === 'merge') {
+          mergeSection.style.display = 'flex';
+          splitSection.style.display = 'none';
+        } else {
+          mergeSection.style.display = 'none';
+          splitSection.style.display = 'flex';
+        }
+      });
+    });
+
+    // ادغام PDF
+    const dropzoneMergePdf = document.getElementById('dropzoneMergePdf');
+    const mergeFileInput = document.getElementById('mergeFileInput');
+    const mergePdfCountText = document.getElementById('mergePdfCountText');
+    const mergeFilesPreview = document.getElementById('mergeFilesPreview');
+    const startMergeBtn = document.getElementById('startMergeBtn');
+    const mergeProgressWrap = document.getElementById('mergeProgressWrap');
+    const mergeProgressStatus = document.getElementById('mergeProgressStatus');
+    const mergeProgressPercent = document.getElementById('mergeProgressPercent');
+    const mergeProgressBarFill = document.getElementById('mergeProgressBarFill');
+    let mergeFilesList = [];
+
+    dropzoneMergePdf.addEventListener('click', () => mergeFileInput.click());
+    mergeFileInput.addEventListener('change', (e) => {
+      Array.from(e.target.files).forEach(f => mergeFilesList.push(f));
+      renderMergeList();
+    });
+
+    function renderMergeList() {
+      mergeFilesPreview.innerHTML = '';
+      if (mergeFilesList.length > 0) {
+        mergePdfCountText.textContent = `${toFarsiNumber(mergeFilesList.length)} فایل انتخاب شده است`;
+        startMergeBtn.disabled = mergeFilesList.length < 2;
+      } else {
+        mergePdfCountText.textContent = 'انتخاب یا کشیدن دو یا چند فایل PDF برای ترکیب';
+        startMergeBtn.disabled = true;
+      }
+
+      mergeFilesList.forEach((file, index) => {
+        const chip = document.createElement('div');
+        chip.className = 'preview-chip';
+        chip.innerHTML = `
+          <span>${index + 1}. ${file.name.substring(0, 16)}...</span>
+          <i class="fa-solid fa-circle-xmark" style="cursor:pointer;" onclick="removeMergeFile(${index})"></i>
+        `;
+        mergeFilesPreview.appendChild(chip);
+      });
+    }
+
+    window.removeMergeFile = function(index) {
+      mergeFilesList.splice(index, 1);
+      renderMergeList();
+    };
+
+    startMergeBtn.addEventListener('click', async () => {
+      if (mergeFilesList.length < 2) return;
+      startMergeBtn.disabled = true;
+      startMergeBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> در حال ادغام...';
+      mergeProgressWrap.style.display = 'flex';
+      mergeProgressBarFill.style.width = '0%';
+
+      try {
+        const { PDFDocument } = PDFLib;
+        const mergedPdf = await PDFDocument.create();
+
+        for (let i = 0; i < mergeFilesList.length; i++) {
+          const file = mergeFilesList[i];
+          const pct = Math.round(((i + 1) / mergeFilesList.length) * 100);
+          mergeProgressStatus.textContent = `در حال ادغام فایل ${toFarsiNumber(i + 1)} از ${toFarsiNumber(mergeFilesList.length)}...`;
+          mergeProgressPercent.textContent = `${toFarsiNumber(pct)}٪`;
+          mergeProgressBarFill.style.width = `${pct}%`;
+
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+          const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+          copiedPages.forEach(page => mergedPdf.addPage(page));
+        }
+
+        const mergedPdfBytes = await mergedPdf.save();
+        const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Merged_${Date.now()}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        startMergeBtn.innerHTML = '<i class="fa-solid fa-check"></i> ادغام با موفقیت انجام شد';
+        setTimeout(() => {
+          mergeProgressWrap.style.display = 'none';
+          startMergeBtn.disabled = false;
+          startMergeBtn.innerHTML = '<i class="fa-solid fa-object-group"></i> ادغام فایل‌ها و دانلود PDF نهایی';
+        }, 2200);
+      } catch (err) {
+        alert('خطا در پردازش یا ادغام فایل‌ها.');
+        mergeProgressWrap.style.display = 'none';
+        startMergeBtn.disabled = false;
+        startMergeBtn.innerHTML = '<i class="fa-solid fa-object-group"></i> ادغام فایل‌ها و دانلود PDF نهایی';
+      }
+    });
+
+    // جداسازی PDF
+    const dropzoneSplitPdf = document.getElementById('dropzoneSplitPdf');
+    const splitFileInput = document.getElementById('splitFileInput');
+    const splitPdfNameText = document.getElementById('splitPdfNameText');
+    const splitPdfPageCountText = document.getElementById('splitPdfPageCountText');
+    const splitConfigGroup = document.getElementById('splitConfigGroup');
+    const splitRangeInput = document.getElementById('splitRangeInput');
+    const startSplitBtn = document.getElementById('startSplitBtn');
+    const splitProgressWrap = document.getElementById('splitProgressWrap');
+    const splitProgressStatus = document.getElementById('splitProgressStatus');
+    const splitProgressPercent = document.getElementById('splitProgressPercent');
+    const splitProgressBarFill = document.getElementById('splitProgressBarFill');
+
+    let loadedSplitPdfBytes = null;
+    let splitTotalPages = 0;
+    let splitFileName = '';
+
+    dropzoneSplitPdf.addEventListener('click', () => splitFileInput.click());
+    splitFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      splitFileName = file.name;
+      splitPdfNameText.textContent = file.name;
+      splitPdfPageCountText.textContent = 'در حال خواندن تعداد صفحات...';
+
+      try {
+        loadedSplitPdfBytes = await file.arrayBuffer();
+        const { PDFDocument } = PDFLib;
+        const pdf = await PDFDocument.load(loadedSplitPdfBytes, { ignoreEncryption: true });
+        splitTotalPages = pdf.getPageCount();
+        splitPdfPageCountText.textContent = `کل صفحات سند: ${toFarsiNumber(splitTotalPages)} صفحه`;
+        splitConfigGroup.style.display = 'flex';
+        splitRangeInput.placeholder = `مثال: 1-${splitTotalPages > 3 ? 3 : splitTotalPages}`;
+        startSplitBtn.disabled = false;
+      } catch (err) {
+        alert('خطا در بارگذاری فایل PDF.');
+        splitPdfPageCountText.textContent = 'فایل نامعتبر است';
+        startSplitBtn.disabled = true;
+      }
+    });
+
+    function parsePageRange(rangeStr, maxPages) {
+      const pages = new Set();
+      const parts = rangeStr.split(/[,،]/);
+      for (let part of parts) {
+        part = toEnglishNumber(part.trim());
+        if (!part) continue;
+        if (part.includes('-')) {
+          const [startStr, endStr] = part.split('-');
+          const start = parseInt(startStr, 10);
+          const end = parseInt(endStr, 10);
+          if (!isNaN(start) && !isNaN(end)) {
+            const min = Math.max(1, Math.min(start, end));
+            const max = Math.min(maxPages, Math.max(start, end));
+            for (let i = min; i <= max; i++) pages.add(i - 1);
+          }
+        } else {
+          const p = parseInt(part, 10);
+          if (!isNaN(p) && p >= 1 && p <= maxPages) {
+            pages.add(p - 1);
+          }
+        }
+      }
+      return Array.from(pages).sort((a, b) => a - b);
+    }
+
+    startSplitBtn.addEventListener('click', async () => {
+      if (!loadedSplitPdfBytes || splitTotalPages === 0) return;
+      const rangeText = splitRangeInput.value.trim();
+      const selectedIndices = parsePageRange(rangeText, splitTotalPages);
+
+      if (selectedIndices.length === 0) {
+        alert(`لطفاً بازه معتبر از بین ۱ تا ${toFarsiNumber(splitTotalPages)} وارد کنید.`);
+        return;
+      }
+
+      startSplitBtn.disabled = true;
+      startSplitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> در حال جداسازی...';
+      splitProgressWrap.style.display = 'flex';
+      splitProgressBarFill.style.width = '30%';
+      splitProgressPercent.textContent = '۳۰٪';
+      splitProgressStatus.textContent = 'در حال استخراج برگه صفحات...';
+
+      try {
+        const { PDFDocument } = PDFLib;
+        const sourcePdf = await PDFDocument.load(loadedSplitPdfBytes, { ignoreEncryption: true });
+        const newPdf = await PDFDocument.create();
+
+        splitProgressBarFill.style.width = '70%';
+        splitProgressPercent.textContent = '۷۰٪';
+
+        const copiedPages = await newPdf.copyPages(sourcePdf, selectedIndices);
+        copiedPages.forEach(page => newPdf.addPage(page));
+
+        const newPdfBytes = await newPdf.save();
+        const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Extracted_${splitFileName}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        splitProgressBarFill.style.width = '100%';
+        splitProgressPercent.textContent = '۱۰۰٪';
+        startSplitBtn.innerHTML = '<i class="fa-solid fa-check"></i> استخراج با موفقیت انجام شد';
+
+        setTimeout(() => {
+          splitProgressWrap.style.display = 'none';
+          startSplitBtn.disabled = false;
+          startSplitBtn.innerHTML = '<i class="fa-solid fa-file-export"></i> استخراج صفحات و دانلود';
+        }, 2200);
+      } catch (err) {
+        alert('خطا در جداسازی صفحات.');
+        splitProgressWrap.style.display = 'none';
+        startSplitBtn.disabled = false;
+        startSplitBtn.innerHTML = '<i class="fa-solid fa-file-export"></i> استخراج صفحات و دانلود';
+      }
+    });
+
+    // تب‌های هوش مصنوعی
+    document.querySelectorAll('.ai-tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.ai-tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const target = this.getAttribute('data-target');
+        if (target === 'iranian') {
+          document.getElementById('iranianAiList').style.display = 'flex';
+          document.getElementById('globalAiList').style.display = 'none';
+        } else {
+          document.getElementById('iranianAiList').style.display = 'none';
+          document.getElementById('globalAiList').style.display = 'flex';
+        }
+      });
+    });
+
+    // فشرده‌سازی PDF
+    const dropzonePdf = document.getElementById('dropzonePdf');
+    const pdfFileInput = document.getElementById('pdfFileInput');
+    const pdfFileName = document.getElementById('pdfFileName');
+    const startCompressBtn = document.getElementById('startCompressBtn');
+    const compressProgressWrap = document.getElementById('compressProgressWrap');
+    const compressProgressStatus = document.getElementById('compressProgressStatus');
+    const compressProgressPercent = document.getElementById('compressProgressPercent');
+    const compressProgressBarFill = document.getElementById('compressProgressBarFill');
+    let loadedPdfBytes = null;
+    let originalPdfName = 'document.pdf';
+
+    dropzonePdf.addEventListener('click', () => pdfFileInput.click());
+
+    pdfFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const maxLimitMB = 150;
+      const fileSizeMB = file.size / (1024 * 1024);
+
+      if (fileSizeMB > maxLimitMB) {
+        alert(`حجم فایل (${toFarsiNumber(fileSizeMB.toFixed(1))} مگابایت) بیشتر از سقف مجاز است.`);
+        pdfFileInput.value = '';
+        return;
+      }
+
+      originalPdfName = file.name;
+      pdfFileName.textContent = `${file.name} (${toFarsiNumber(fileSizeMB.toFixed(2))} مگابایت)`;
+      
+      try {
+        startCompressBtn.disabled = true;
+        startCompressBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> بارگذاری در حافظه...';
+        loadedPdfBytes = await file.arrayBuffer();
+        startCompressBtn.disabled = false;
+        startCompressBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> شروع فشرده‌سازی و دانلود';
+      } catch (err) {
+        alert('حافظه کافی برای بارگذاری فایل وجود ندارد.');
+        pdfFileInput.value = '';
+        startCompressBtn.disabled = true;
+      }
+    });
+
+    startCompressBtn.addEventListener('click', async () => {
+      if (!loadedPdfBytes) return;
+      startCompressBtn.disabled = true;
+      startCompressBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> در حال پردازش...';
+      compressProgressWrap.style.display = 'flex';
+      compressProgressBarFill.style.width = '0%';
+
+      try {
+        const loadingTask = pdfjsLib.getDocument({ data: loadedPdfBytes.slice(0) });
+        const pdfDoc = await loadingTask.promise;
+        const numPages = pdfDoc.numPages;
+
+        const { jsPDF } = window.jspdf;
+        let compressedPdf = null;
+
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+          const currentPct = Math.round((pageNum / numPages) * 100);
+          compressProgressStatus.textContent = `پردازش و فشرده‌سازی صفحه ${toFarsiNumber(pageNum)} از ${toFarsiNumber(numPages)}...`;
+          compressProgressPercent.textContent = `${toFarsiNumber(currentPct)}٪`;
+          compressProgressBarFill.style.width = `${currentPct}%`;
+          
+          const page = await pdfDoc.getPage(pageNum);
+          const initialViewport = page.getViewport({ scale: 1.0 });
+
+          const targetWidth = 1100;
+          const scale = Math.min(1.5, targetWidth / initialViewport.width);
+          const viewport = page.getViewport({ scale: Math.max(scale, 1.0) });
+
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d', { alpha: false });
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+
+          context.fillStyle = '#ffffff';
+          context.fillRect(0, 0, canvas.width, canvas.height);
+
+          await page.render({
+            canvasContext: context,
+            viewport: viewport
+          }).promise;
+
+          const imgData = canvas.toDataURL('image/jpeg', 0.52);
+          const orientation = initialViewport.width > initialViewport.height ? 'l' : 'p';
+          const format = [initialViewport.width * 0.75, initialViewport.height * 0.75];
+
+          if (pageNum === 1) {
+            compressedPdf = new jsPDF({
+              orientation: orientation,
+              unit: 'pt',
+              format: format,
+              compress: true
+            });
+          } else {
+            compressedPdf.addPage(format, orientation);
+          }
+
+          compressedPdf.addImage(
+            imgData,
+            'JPEG',
+            0,
+            0,
+            initialViewport.width * 0.75,
+            initialViewport.height * 0.75,
+            undefined,
+            'FAST'
+          );
+        }
+
+        const outBlob = compressedPdf.output('blob');
+        const downloadUrl = URL.createObjectURL(outBlob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = `compressed_${originalPdfName}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        startCompressBtn.innerHTML = '<i class="fa-solid fa-check"></i> با موفقیت فشرده شد';
+        setTimeout(() => {
+          compressProgressWrap.style.display = 'none';
+          startCompressBtn.disabled = false;
+          startCompressBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> شروع فشرده‌سازی و دانلود';
+        }, 2200);
+      } catch (err) {
+        alert('خطا در پردازش یا فشرده‌سازی فایل.');
+        compressProgressWrap.style.display = 'none';
+        startCompressBtn.disabled = false;
+        startCompressBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> شروع فشرده‌سازی و دانلود';
+      }
+    });
+
+    // تبدیل عکس به PDF
+    const dropzoneImages = document.getElementById('dropzoneImages');
+    const imgFileInput = document.getElementById('imgFileInput');
+    const imgCountText = document.getElementById('imgCountText');
+    const imagePreviews = document.getElementById('imagePreviews');
+    const convertImgToPdfBtn = document.getElementById('convertImgToPdfBtn');
+    const convertImgProgressWrap = document.getElementById('convertImgProgressWrap');
+    const convertImgProgressStatus = document.getElementById('convertImgProgressStatus');
+    const convertImgProgressPercent = document.getElementById('convertImgProgressPercent');
+    const convertImgProgressBarFill = document.getElementById('convertImgProgressBarFill');
+
+    let loadedImages = [];
+    let selectedPageSize = 'a4';
+    let selectedQuality = 1.0;
+
+    dropzoneImages.addEventListener('click', () => imgFileInput.click());
+
+    imgFileInput.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      if (!files.length) return;
+
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            loadedImages.push({ name: file.name, src: event.target.result, width: img.width, height: img.height });
+            renderPreviews();
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    function renderPreviews() {
+      imagePreviews.innerHTML = '';
+      if (loadedImages.length > 0) {
+        imgCountText.textContent = `${toFarsiNumber(loadedImages.length)} تصویر انتخاب شده است`;
+        convertImgToPdfBtn.disabled = false;
+      } else {
+        imgCountText.textContent = 'انتخاب یا رها کردن عکس‌ها (یک یا چند تصویر)';
+        convertImgToPdfBtn.disabled = true;
+      }
+
+      loadedImages.forEach((item, index) => {
+        const chip = document.createElement('div');
+        chip.className = 'preview-chip';
+        chip.innerHTML = `
+          <span>${item.name.substring(0, 12)}...</span>
+          <i class="fa-solid fa-circle-xmark" style="cursor:pointer;" onclick="removeImage(${index})"></i>
+        `;
+        imagePreviews.appendChild(chip);
+      });
+    }
+
+    window.removeImage = function(index) {
+      loadedImages.splice(index, 1);
+      renderPreviews();
+    };
+
+    document.querySelectorAll('#pageSizeOptions .segmented-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('#pageSizeOptions .segmented-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        selectedPageSize = this.getAttribute('data-page');
+      });
+    });
+
+    document.querySelectorAll('#qualityOptions .segmented-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('#qualityOptions .segmented-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        selectedQuality = parseFloat(this.getAttribute('data-quality'));
+      });
+    });
+
+    convertImgToPdfBtn.addEventListener('click', async () => {
+      if (!loadedImages.length) return;
+
+      convertImgToPdfBtn.disabled = true;
+      convertImgToPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> در حال ساخت PDF...';
+      convertImgProgressWrap.style.display = 'flex';
+      convertImgProgressBarFill.style.width = '0%';
+
+      const { jsPDF } = window.jspdf;
+      let doc = null;
+
+      for (let i = 0; i < loadedImages.length; i++) {
+        const item = loadedImages[i];
+        const pct = Math.round(((i + 1) / loadedImages.length) * 100);
+        convertImgProgressStatus.textContent = `در حال تبدیل تصویر ${toFarsiNumber(i + 1)} از ${toFarsiNumber(loadedImages.length)}...`;
+        convertImgProgressPercent.textContent = `${toFarsiNumber(pct)}٪`;
+        convertImgProgressBarFill.style.width = `${pct}%`;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = item.width;
+        canvas.height = item.height;
+        const ctx = canvas.getContext('2d');
+        const imgObj = new Image();
+        imgObj.src = item.src;
+        await new Promise(r => imgObj.onload = r);
+        ctx.drawImage(imgObj, 0, 0);
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', selectedQuality);
+
+        if (selectedPageSize === 'a4') {
+          const orientation = item.width > item.height ? 'l' : 'p';
+          if (i === 0) {
+            doc = new jsPDF({ orientation: orientation, unit: 'mm', format: 'a4' });
+          } else {
+            doc.addPage('a4', orientation);
+          }
+
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const pageHeight = doc.internal.pageSize.getHeight();
+          const ratio = Math.min(pageWidth / item.width, pageHeight / item.height);
+          const drawW = item.width * ratio;
+          const drawH = item.height * ratio;
+          const posX = (pageWidth - drawW) / 2;
+          const posY = (pageHeight - drawH) / 2;
+
+          doc.addImage(compressedDataUrl, 'JPEG', posX, posY, drawW, drawH);
+        } else {
+          const ptW = item.width * 0.75;
+          const ptH = item.height * 0.75;
+          if (i === 0) {
+            doc = new jsPDF({ orientation: ptW > ptH ? 'l' : 'p', unit: 'pt', format: [ptW, ptH] });
+          } else {
+            doc.addPage([ptW, ptH], ptW > ptH ? 'l' : 'p');
+          }
+          doc.addImage(compressedDataUrl, 'JPEG', 0, 0, ptW, ptH);
+        }
+      }
+
+      doc.save('Converted_Images.pdf');
+      convertImgToPdfBtn.innerHTML = '<i class="fa-solid fa-check"></i> با موفقیت دانلود شد';
+      setTimeout(() => {
+        convertImgProgressWrap.style.display = 'none';
+        convertImgToPdfBtn.disabled = false;
+        convertImgToPdfBtn.innerHTML = '<i class="fa-solid fa-file-arrow-down"></i> ساخت و دانلود فایل PDF';
+      }, 2200);
+    });
+  </script>
+</body>
+</html>

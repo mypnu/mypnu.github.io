@@ -529,79 +529,6 @@
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 255, 255, 0.45);
     }
 
-    /* اسلایدشوهای کشویی جعبه ابزار */
-    .toolbox-slider-block {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .toolbox-slider-viewport {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 48 / 7;
-      border-radius: 16px;
-      overflow: hidden;
-      touch-action: pan-y;
-    }
-
-    .toolbox-slider-track {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      height: 100%;
-      direction: rtl;
-      will-change: transform;
-      transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .toolbox-slider-track.is-dragging {
-      transition: none !important;
-    }
-
-    .toolbox-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      cursor: pointer;
-      transition: transform 0.25s ease;
-    }
-
-    .toolbox-slide:active {
-      transform: scale(0.985);
-    }
-
-    .slider-dots-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      direction: rtl;
-    }
-
-    .slider-dot {
-      width: 7.5px;
-      height: 7.5px;
-      border-radius: 50%;
-      background: transparent;
-      border: 1.4px solid rgba(255, 255, 255, 0.65);
-      cursor: pointer;
-      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-      padding: 0;
-    }
-
-    .slider-dot.active {
-      background: #ffffff;
-      border-color: #ffffff;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
-      transform: scale(1.2);
-    }
-
     .results-container {
       width: 100%;
       display: flex;
@@ -999,11 +926,10 @@
       .home-actions-wrapper { gap: 12px; }
       .quick-actions-row-three { gap: 8px; }
       .ratio-1-1-card { border-radius: 16px; }
-      .ratio-48-7-card, .toolbox-slider-viewport { border-radius: 13px; }
+      .ratio-48-7-card { border-radius: 13px; }
 
       .toolbox-divider { gap: 10px; margin: 6px 0 2px 0; }
       .toolbox-divider-text { font-size: 14.5px; }
-      .slider-dot { width: 6.5px; height: 6.5px; }
 
       .action-btn { padding: 9px 4px; font-size: 12px; gap: 4px; border-radius: 10px; }
       .action-btn.btn-group-join { padding: 9px 8px !important; font-size: 11.5px !important; gap: 5px !important; }
@@ -1071,36 +997,16 @@
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
 
-      <!-- اسلایدشو کشویی اول: s5 تا s7 -->
-      <div class="toolbox-slider-block" id="toolboxSlider1">
-        <div class="toolbox-slider-viewport">
-          <div class="toolbox-slider-track">
-            <div class="toolbox-slide card-s5" onclick="window.location.href='#'"></div>
-            <div class="toolbox-slide card-s6" onclick="window.location.href='#'"></div>
-            <div class="toolbox-slide card-s7" onclick="window.location.href='#'"></div>
-          </div>
-        </div>
-        <div class="slider-dots-row">
-          <button type="button" class="slider-dot active" aria-label="اسلاید ۱"></button>
-          <button type="button" class="slider-dot" aria-label="اسلاید ۲"></button>
-          <button type="button" class="slider-dot" aria-label="اسلاید ۳"></button>
-        </div>
+      <div class="quick-actions-row-three">
+        <div class="ratio-1-1-card card-s5" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s6" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s7" onclick="window.location.href='#'"></div>
       </div>
 
-      <!-- اسلایدشو کشویی دوم: s8 تا s10 -->
-      <div class="toolbox-slider-block" id="toolboxSlider2">
-        <div class="toolbox-slider-viewport">
-          <div class="toolbox-slider-track">
-            <div class="toolbox-slide card-s8" onclick="window.location.href='#'"></div>
-            <div class="toolbox-slide card-s9" onclick="window.location.href='#'"></div>
-            <div class="toolbox-slide card-s10" onclick="window.location.href='#'"></div>
-          </div>
-        </div>
-        <div class="slider-dots-row">
-          <button type="button" class="slider-dot active" aria-label="اسلاید ۱"></button>
-          <button type="button" class="slider-dot" aria-label="اسلاید ۲"></button>
-          <button type="button" class="slider-dot" aria-label="اسلاید ۳"></button>
-        </div>
+      <div class="quick-actions-row-three">
+        <div class="ratio-1-1-card card-s8" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s9" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s10" onclick="window.location.href='#'"></div>
       </div>
     </div>
 
@@ -1114,92 +1020,6 @@
   </footer>
 
   <script>
-    function initToolboxSlider(sliderId) {
-      const container = document.getElementById(sliderId);
-      if (!container) return;
-      const viewport = container.querySelector('.toolbox-slider-viewport');
-      const track = container.querySelector('.toolbox-slider-track');
-      const slides = container.querySelectorAll('.toolbox-slide');
-      const dots = container.querySelectorAll('.slider-dot');
-      let currentIndex = 0;
-      let timer = null;
-      let startX = 0;
-      let deltaX = 0;
-      let isSwiping = false;
-
-      function updateTrackPosition(extraOffsetPx = 0) {
-        // در چیدمان RTL حرکت اسلایدهای بعدی به سمت مثبت محور X است
-        track.style.transform = `translateX(calc(${currentIndex * 100}% + ${extraOffsetPx}px))`;
-      }
-
-      function goToSlide(index) {
-        dots[currentIndex].classList.remove('active');
-        currentIndex = (index + slides.length) % slides.length;
-        dots[currentIndex].classList.add('active');
-        track.classList.remove('is-dragging');
-        updateTrackPosition(0);
-      }
-
-      function resetAutoPlay() {
-        if (timer) clearInterval(timer);
-        timer = setInterval(() => {
-          goToSlide(currentIndex + 1);
-        }, 4000);
-      }
-
-      dots.forEach((dot, idx) => {
-        dot.addEventListener('click', (e) => {
-          e.stopPropagation();
-          goToSlide(idx);
-          resetAutoPlay();
-        });
-      });
-
-      viewport.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        deltaX = 0;
-        isSwiping = false;
-        track.classList.add('is-dragging');
-        if (timer) clearInterval(timer);
-      }, { passive: true });
-
-      viewport.addEventListener('touchmove', (e) => {
-        deltaX = e.touches[0].clientX - startX;
-        if (Math.abs(deltaX) > 8) {
-          isSwiping = true;
-          updateTrackPosition(deltaX);
-        }
-      }, { passive: true });
-
-      viewport.addEventListener('touchend', () => {
-        track.classList.remove('is-dragging');
-        if (Math.abs(deltaX) > 40) {
-          if (deltaX > 0) {
-            goToSlide(currentIndex + 1);
-          } else {
-            goToSlide(currentIndex - 1);
-          }
-        } else {
-          updateTrackPosition(0);
-        }
-        resetAutoPlay();
-      }, { passive: true });
-
-      viewport.addEventListener('click', (e) => {
-        if (isSwiping) {
-          e.preventDefault();
-          e.stopPropagation();
-          isSwiping = false;
-        }
-      }, true);
-
-      updateTrackPosition(0);
-      resetAutoPlay();
-    }
-
-    initToolboxSlider('toolboxSlider1');
-    initToolboxSlider('toolboxSlider2');
-
     const rawData = [
       "مهدی صداقت: 09127015548"
     ];

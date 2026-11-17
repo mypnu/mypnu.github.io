@@ -408,7 +408,7 @@
       max-width: 600px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 15px;
       margin-bottom: 30px;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
@@ -426,8 +426,6 @@
 
     .ratio-1-1-card, .ratio-48-7-card {
       position: relative;
-      border: none;
-      box-shadow: none;
       border-radius: 22px;
       overflow: hidden;
       display: block;
@@ -435,7 +433,7 @@
       background-position: center;
       background-repeat: no-repeat;
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
     .ratio-1-1-card:active, .ratio-48-7-card:active {
@@ -447,10 +445,40 @@
       aspect-ratio: 1 / 1;
     }
 
+    /* فریم نئونی ظریف و جذاب برای سه باکس مربعی */
+    .neon-green-frame {
+      border: 1.5px solid rgba(6, 214, 160, 0.85);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(6, 214, 160, 0.42), inset 0 0 8px rgba(6, 214, 160, 0.16);
+    }
+    .neon-green-frame:hover {
+      border-color: #06d6a0;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(6, 214, 160, 0.68), inset 0 0 10px rgba(6, 214, 160, 0.25);
+    }
+
+    .neon-red-frame {
+      border: 1.5px solid rgba(255, 42, 81, 0.85);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(255, 42, 81, 0.42), inset 0 0 8px rgba(255, 42, 81, 0.16);
+    }
+    .neon-red-frame:hover {
+      border-color: #ff2a51;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 42, 81, 0.68), inset 0 0 10px rgba(255, 42, 81, 0.25);
+    }
+
+    .neon-blue-frame {
+      border: 1.5px solid rgba(0, 240, 255, 0.85);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(0, 240, 255, 0.42), inset 0 0 8px rgba(0, 240, 255, 0.16);
+    }
+    .neon-blue-frame:hover {
+      border-color: #00f0ff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(0, 240, 255, 0.68), inset 0 0 10px rgba(0, 240, 255, 0.25);
+    }
+
     .ratio-48-7-card {
       width: 100%;
       aspect-ratio: 48 / 7;
       border-radius: 16px;
+      border: none;
+      box-shadow: none;
     }
 
     .card-ozviat { background-image: url('images/s1.gif'); }
@@ -464,40 +492,105 @@
     .card-s9 { background-image: url('images/s9.webp'); }
     .card-s10 { background-image: url('images/s10.webp'); }
 
+    /* جداکننده عنوانی جعبه ابزار دانشجویی بزرگتر و سفید */
     .toolbox-divider {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 14px;
-      margin: 6px 0 2px 0;
+      margin: 8px 0 4px 0;
     }
 
     .toolbox-divider::before,
     .toolbox-divider::after {
       content: '';
       flex: 1;
-      height: 1.5px;
+      height: 1.6px;
       border-radius: 2px;
     }
 
     .toolbox-divider::before {
-      background: linear-gradient(90deg, rgba(255, 209, 102, 0.95) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
-      box-shadow: 0 0 10px rgba(255, 209, 102, 0.45);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
     .toolbox-divider::after {
-      background: linear-gradient(270deg, rgba(255, 209, 102, 0.95) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
-      box-shadow: 0 0 10px rgba(255, 209, 102, 0.45);
+      background: linear-gradient(270deg, rgba(255, 255, 255, 0.9) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
     .toolbox-divider-text {
-      font-size: 13.5px;
+      font-size: 16.5px;
       font-weight: 800;
-      color: #ffd166;
+      color: #ffffff;
       letter-spacing: 0.3px;
       white-space: nowrap;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55), 0 0 12px rgba(255, 209, 102, 0.5);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 255, 255, 0.45);
+    }
+
+    /* اسلایدشوهای جعبه ابزار */
+    .toolbox-slider-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .toolbox-slider-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 48 / 7;
+      border-radius: 16px;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+
+    .toolbox-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      cursor: pointer;
+    }
+
+    .toolbox-slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+    }
+
+    .slider-dots-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      direction: rtl;
+    }
+
+    .slider-dot {
+      width: 7.5px;
+      height: 7.5px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.4px solid rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      padding: 0;
+    }
+
+    .slider-dot.active {
+      background: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+      transform: scale(1.18);
     }
 
     .results-container {
@@ -894,13 +987,14 @@
 
       .clear-search-btn { width: 25px; height: 25px; font-size: 12px; left: 13px; }
 
-      .home-actions-wrapper { gap: 11px; }
+      .home-actions-wrapper { gap: 12px; }
       .quick-actions-row-three { gap: 8px; }
       .ratio-1-1-card { border-radius: 16px; }
-      .ratio-48-7-card { border-radius: 13px; }
+      .ratio-48-7-card, .toolbox-slider-viewport { border-radius: 13px; }
 
-      .toolbox-divider { gap: 10px; margin: 4px 0 0 0; }
-      .toolbox-divider-text { font-size: 12px; }
+      .toolbox-divider { gap: 10px; margin: 6px 0 2px 0; }
+      .toolbox-divider-text { font-size: 14.5px; }
+      .slider-dot { width: 6.5px; height: 6.5px; }
 
       .action-btn { padding: 9px 4px; font-size: 12px; gap: 4px; border-radius: 10px; }
       .action-btn.btn-group-join { padding: 9px 8px !important; font-size: 11.5px !important; gap: 5px !important; }
@@ -959,21 +1053,42 @@
       <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
 
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-marakez" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
-        <div class="ratio-1-1-card card-poshtibanan" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'"></div>
-        <div class="ratio-1-1-card card-ertebat" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
+        <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
+        <div class="ratio-1-1-card card-poshtibanan neon-red-frame" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'"></div>
+        <div class="ratio-1-1-card card-ertebat neon-blue-frame" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
       </div>
 
       <div class="toolbox-divider">
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
 
-      <div class="ratio-48-7-card card-s5" onclick="window.location.href='#'"></div>
-      <div class="ratio-48-7-card card-s6" onclick="window.location.href='#'"></div>
-      <div class="ratio-48-7-card card-s7" onclick="window.location.href='#'"></div>
-      <div class="ratio-48-7-card card-s8" onclick="window.location.href='#'"></div>
-      <div class="ratio-48-7-card card-s9" onclick="window.location.href='#'"></div>
-      <div class="ratio-48-7-card card-s10" onclick="window.location.href='#'"></div>
+      <!-- اسلایدشو اول: s5 تا s7 -->
+      <div class="toolbox-slider-block" id="toolboxSlider1">
+        <div class="toolbox-slider-viewport">
+          <div class="toolbox-slide card-s5 active" onclick="window.location.href='#'"></div>
+          <div class="toolbox-slide card-s6" onclick="window.location.href='#'"></div>
+          <div class="toolbox-slide card-s7" onclick="window.location.href='#'"></div>
+        </div>
+        <div class="slider-dots-row">
+          <button type="button" class="slider-dot active" aria-label="اسلاید ۱"></button>
+          <button type="button" class="slider-dot" aria-label="اسلاید ۲"></button>
+          <button type="button" class="slider-dot" aria-label="اسلاید ۳"></button>
+        </div>
+      </div>
+
+      <!-- اسلایدشو دوم: s8 تا s10 -->
+      <div class="toolbox-slider-block" id="toolboxSlider2">
+        <div class="toolbox-slider-viewport">
+          <div class="toolbox-slide card-s8 active" onclick="window.location.href='#'"></div>
+          <div class="toolbox-slide card-s9" onclick="window.location.href='#'"></div>
+          <div class="toolbox-slide card-s10" onclick="window.location.href='#'"></div>
+        </div>
+        <div class="slider-dots-row">
+          <button type="button" class="slider-dot active" aria-label="اسلاید ۱"></button>
+          <button type="button" class="slider-dot" aria-label="اسلاید ۲"></button>
+          <button type="button" class="slider-dot" aria-label="اسلاید ۳"></button>
+        </div>
+      </div>
     </div>
 
     <div id="resultsList" class="results-container"></div>
@@ -986,6 +1101,78 @@
   </footer>
 
   <script>
+    function initToolboxSlider(sliderId) {
+      const container = document.getElementById(sliderId);
+      if (!container) return;
+      const viewport = container.querySelector('.toolbox-slider-viewport');
+      const slides = container.querySelectorAll('.toolbox-slide');
+      const dots = container.querySelectorAll('.slider-dot');
+      let currentIndex = 0;
+      let timer = null;
+      let startX = 0;
+      let isSwiping = false;
+
+      function goToSlide(index) {
+        slides[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+        currentIndex = (index + slides.length) % slides.length;
+        slides[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+      }
+
+      function resetAutoPlay() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(() => {
+          goToSlide(currentIndex + 1);
+        }, 4000);
+      }
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          goToSlide(idx);
+          resetAutoPlay();
+        });
+      });
+
+      viewport.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isSwiping = false;
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (Math.abs(e.touches[0].clientX - startX) > 12) {
+          isSwiping = true;
+        }
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diffX = endX - startX;
+        if (Math.abs(diffX) > 35) {
+          if (diffX > 0) {
+            goToSlide(currentIndex + 1);
+          } else {
+            goToSlide(currentIndex - 1);
+          }
+          resetAutoPlay();
+        }
+      }, { passive: true });
+
+      viewport.addEventListener('click', (e) => {
+        if (isSwiping) {
+          e.preventDefault();
+          e.stopPropagation();
+          isSwiping = false;
+        }
+      }, true);
+
+      resetAutoPlay();
+    }
+
+    initToolboxSlider('toolboxSlider1');
+    initToolboxSlider('toolboxSlider2');
+
     const rawData = [
       "مهدی صداقت: 09127015548"
     ];

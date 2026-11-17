@@ -426,9 +426,8 @@
 
     .ratio-1-1-card, .ratio-48-7-card {
       position: relative;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      border: none;
+      box-shadow: none;
       border-radius: 22px;
       overflow: hidden;
       display: block;
@@ -436,7 +435,7 @@
       background-position: center;
       background-repeat: no-repeat;
       cursor: pointer;
-      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     .ratio-1-1-card:active, .ratio-48-7-card:active {
@@ -454,55 +453,10 @@
       border-radius: 16px;
     }
 
-    .card-ozviat {
-      background-image: url('images/s1.gif');
-      border: 1.5px solid rgba(255, 133, 0, 0.85);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(255, 109, 0, 0.3), inset 0 0 10px rgba(255, 109, 0, 0.15);
-    }
-    .card-ozviat:hover {
-      border-color: #ff8500;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 26px rgba(255, 133, 0, 0.65), inset 0 0 14px rgba(255, 133, 0, 0.3);
-    }
-
-    .card-marakez {
-      background-image: url('images/s4.webp');
-      border: 1.5px solid rgba(255, 42, 81, 0.85);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 15px rgba(255, 0, 85, 0.3), inset 0 0 10px rgba(255, 0, 85, 0.15);
-    }
-    .card-marakez:hover {
-      border-color: #ff2a51;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 42, 81, 0.6), inset 0 0 14px rgba(255, 42, 81, 0.25);
-    }
-
-    .card-poshtibanan {
-      background-image: url('images/s3.webp');
-      border: 1.5px solid rgba(6, 214, 160, 0.85);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(6, 214, 160, 0.3), inset 0 0 10px rgba(6, 214, 160, 0.15);
-    }
-    .card-poshtibanan:hover {
-      border-color: #06d6a0;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 26px rgba(6, 214, 160, 0.65), inset 0 0 14px rgba(6, 214, 160, 0.3);
-    }
-
-    .card-ertebat {
-      background-image: url('images/s2.webp');
-      border: 1.5px solid rgba(0, 240, 255, 0.85);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 15px rgba(0, 240, 255, 0.3);
-    }
-    .card-ertebat:hover {
-      border-color: #00f0ff;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 26px rgba(0, 240, 255, 0.65);
-    }
-
-    .card-tool {
-      border: 1.5px solid rgba(216, 180, 254, 0.55);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 14px rgba(199, 125, 255, 0.22);
-    }
-    .card-tool:hover {
-      border-color: #ffd166;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 22px rgba(255, 209, 102, 0.5);
-    }
-
+    .card-ozviat { background-image: url('images/s1.gif'); }
+    .card-marakez { background-image: url('images/s4.webp'); }
+    .card-poshtibanan { background-image: url('images/s3.webp'); }
+    .card-ertebat { background-image: url('images/s2.webp'); }
     .card-s5 { background-image: url('images/s5.webp'); }
     .card-s6 { background-image: url('images/s6.webp'); }
     .card-s7 { background-image: url('images/s7.webp'); }
@@ -545,70 +499,6 @@
       white-space: nowrap;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55), 0 0 12px rgba(255, 209, 102, 0.5);
     }
-
-    .card-corner-btn {
-      position: absolute;
-      bottom: 10px;
-      left: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5px 14px;
-      border-radius: 9px;
-      border: none;
-      font-size: 12px;
-      font-weight: 900;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
-      transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.2s ease, filter 0.2s ease;
-      z-index: 5;
-      text-decoration: none;
-      cursor: pointer;
-      user-select: none;
-      outline: none;
-    }
-
-    .ratio-48-7-card .card-corner-btn {
-      top: 50%;
-      bottom: auto;
-      transform: translateY(-50%);
-      left: 12px;
-      padding: 4px 12px;
-      font-size: 11.5px;
-      border-radius: 8px;
-    }
-
-    .ratio-48-7-card .card-corner-btn:hover {
-      transform: translateY(calc(-50% - 2px)) scale(1.03);
-    }
-
-    .ratio-48-7-card .card-corner-btn:active {
-      transform: translateY(calc(-50% + 1px)) scale(0.95);
-    }
-
-    .ratio-1-1-card .card-corner-btn {
-      bottom: 9px;
-      left: 9px;
-      padding: 4px 10px;
-      font-size: 11px;
-      border-radius: 8px;
-    }
-
-    .card-corner-btn:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
-      filter: brightness(1.06);
-    }
-
-    .card-corner-btn:active {
-      transform: translateY(1px) scale(0.95);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      filter: brightness(0.96);
-    }
-
-    .btn-marakez { background: #e63956; color: #ffffff; }
-    .btn-ertebat { background: #0099b8; color: #ffffff; }
-    .btn-poshtibanan { background: #059669; color: #ffffff; }
-    .btn-tool { background: linear-gradient(135deg, #7209b7, #9d4edd); color: #ffffff; }
 
     .results-container {
       width: 100%;
@@ -1012,9 +902,6 @@
       .toolbox-divider { gap: 10px; margin: 4px 0 0 0; }
       .toolbox-divider-text { font-size: 12px; }
 
-      .ratio-48-7-card .card-corner-btn { left: 8px; padding: 3px 9px; font-size: 10px; border-radius: 6px; }
-      .ratio-1-1-card .card-corner-btn { bottom: 6px; left: 6px; padding: 3px 7px; font-size: 9.5px; border-radius: 6px; }
-
       .action-btn { padding: 9px 4px; font-size: 12px; gap: 4px; border-radius: 10px; }
       .action-btn.btn-group-join { padding: 9px 8px !important; font-size: 11.5px !important; gap: 5px !important; }
       .action-btn.btn-copy-compact { padding: 9px 3px !important; font-size: 11px !important; gap: 3px !important; }
@@ -1072,64 +959,21 @@
       <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
 
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-marakez" id="cardMarakez" onclick="window.location.href='marakez/'">
-          <a href="marakez/" class="card-corner-btn btn-marakez home-card-btn" id="openCampusBtn">
-            <span>مشاهده</span>
-          </a>
-        </div>
-
-        <div class="ratio-1-1-card card-poshtibanan" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'">
-          <a href="poshtiban/" class="card-corner-btn btn-poshtibanan home-card-btn" id="openSupportBtn">
-            <span>مشاهده</span>
-          </a>
-        </div>
-
-        <div class="ratio-1-1-card card-ertebat" id="cardErtebat" onclick="window.location.href='karshenas/'">
-          <a href="karshenas/" class="card-corner-btn btn-ertebat home-card-btn" id="openExpertsBtn">
-            <span>مشاهده</span>
-          </a>
-        </div>
+        <div class="ratio-1-1-card card-marakez" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
+        <div class="ratio-1-1-card card-poshtibanan" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'"></div>
+        <div class="ratio-1-1-card card-ertebat" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
       </div>
 
       <div class="toolbox-divider">
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
 
-      <div class="ratio-48-7-card card-tool card-s5" onclick="window.location.href='#'">
-        <a href="#" class="card-corner-btn btn-tool home-card-btn">
-          <span>مشاهده</span>
-        </a>
-      </div>
-
-      <div class="ratio-48-7-card card-tool card-s6" onclick="window.location.href='#'">
-        <a href="#" class="card-corner-btn btn-tool home-card-btn">
-          <span>مشاهده</span>
-        </a>
-      </div>
-
-      <div class="ratio-48-7-card card-tool card-s7" onclick="window.location.href='#'">
-        <a href="#" class="card-corner-btn btn-tool home-card-btn">
-          <span>مشاهده</span>
-        </a>
-      </div>
-
-      <div class="ratio-48-7-card card-tool card-s8" onclick="window.location.href='#'">
-        <a href="#" class="card-corner-btn btn-tool home-card-btn">
-          <span>مشاهده</span>
-        </a>
-      </div>
-
-      <div class="ratio-48-7-card card-tool card-s9" onclick="window.location.href='#'">
-        <a href="#" class="card-corner-btn btn-tool home-card-btn">
-          <span>مشاهده</span>
-        </a>
-      </div>
-
-      <div class="ratio-48-7-card card-tool card-s10" onclick="window.location.href='#'">
-        <a href="#" class="card-corner-btn btn-tool home-card-btn">
-          <span>مشاهده</span>
-        </a>
-      </div>
+      <div class="ratio-48-7-card card-s5" onclick="window.location.href='#'"></div>
+      <div class="ratio-48-7-card card-s6" onclick="window.location.href='#'"></div>
+      <div class="ratio-48-7-card card-s7" onclick="window.location.href='#'"></div>
+      <div class="ratio-48-7-card card-s8" onclick="window.location.href='#'"></div>
+      <div class="ratio-48-7-card card-s9" onclick="window.location.href='#'"></div>
+      <div class="ratio-48-7-card card-s10" onclick="window.location.href='#'"></div>
     </div>
 
     <div id="resultsList" class="results-container"></div>

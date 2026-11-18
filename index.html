@@ -21,6 +21,9 @@
   <link rel="preload" as="image" href="images/s8.webp">
   <link rel="preload" as="image" href="images/s9.webp">
   <link rel="preload" as="image" href="images/s10.webp">
+  <link rel="preload" as="image" href="images/s11.webp">
+  <link rel="preload" as="image" href="images/s12.webp">
+  <link rel="preload" as="image" href="images/s13.webp">
   <link rel="preload" as="image" href="images/cat1.webp">
   <link rel="preload" as="image" href="images/cat2.webp">
   <link rel="preload" as="image" href="images/cat00.webp">
@@ -445,7 +448,7 @@
       aspect-ratio: 1 / 1;
     }
 
-    /* فریم نئونی ظریف و جذاب برای سه باکس مربعی */
+    /* فریم نئونی ظریف و جذاب برای باکس‌های مربعی */
     .neon-green-frame {
       border: 1.5px solid rgba(6, 214, 160, 0.85);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(6, 214, 160, 0.42), inset 0 0 8px rgba(6, 214, 160, 0.16);
@@ -491,6 +494,9 @@
     .card-s8 { background-image: url('images/s8.webp'); }
     .card-s9 { background-image: url('images/s9.webp'); }
     .card-s10 { background-image: url('images/s10.webp'); }
+    .card-s11 { background-image: url('images/s11.webp'); }
+    .card-s12 { background-image: url('images/s12.webp'); }
+    .card-s13 { background-image: url('images/s13.webp'); }
 
     /* جداکننده عنوانی جعبه ابزار دانشجویی بزرگتر و سفید */
     .toolbox-divider {
@@ -997,16 +1003,25 @@
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
 
+      <!-- ردیف اول جعبه ابزار: فریم نئونی آبی -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s5" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s6" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s7" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s5 neon-blue-frame" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s6 neon-blue-frame" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s7 neon-blue-frame" onclick="window.location.href='#'"></div>
       </div>
 
+      <!-- ردیف دوم جعبه ابزار: فریم نئونی قرمز -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s8" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s9" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s10" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s8 neon-red-frame" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s9 neon-red-frame" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s10 neon-red-frame" onclick="window.location.href='#'"></div>
+      </div>
+
+      <!-- ردیف سوم جعبه ابزار: فریم نئونی سبز -->
+      <div class="quick-actions-row-three">
+        <div class="ratio-1-1-card card-s11 neon-green-frame" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s12 neon-green-frame" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s13 neon-green-frame" onclick="window.location.href='#'"></div>
       </div>
     </div>
 

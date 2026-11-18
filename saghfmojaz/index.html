@@ -3,30 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>استادیاب | جستجوی شماره تماس اساتید</title>
-  
-  <link rel="preload" href="fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="fonts/ch.ttf" as="font" type="font/ttf" crossorigin>
+  <title>استادیاب | محاسبه سقف مجاز انتخاب واحد</title>
 
-  <link rel="preload" as="image" href="images/logo.webp">
-  <link rel="preload" as="image" href="images/s1.gif">
-  <link rel="preload" as="image" href="images/s2.webp">
-  <link rel="preload" as="image" href="images/s3.webp">
-  <link rel="preload" as="image" href="images/s4.webp">
-  <link rel="preload" as="image" href="images/s5.webp">
-  <link rel="preload" as="image" href="images/s6.webp">
-  <link rel="preload" as="image" href="images/s7.webp">
-  <link rel="preload" as="image" href="images/s8.webp">
-  <link rel="preload" as="image" href="images/s9.webp">
-  <link rel="preload" as="image" href="images/s10.webp">
-  <link rel="preload" as="image" href="images/s11.webp">
-  <link rel="preload" as="image" href="images/s12.webp">
-  <link rel="preload" as="image" href="images/s13.webp">
-  <link rel="preload" as="image" href="images/cat1.webp">
-  <link rel="preload" as="image" href="images/cat2.webp">
-  <link rel="preload" as="image" href="images/cat00.webp">
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,58 +16,38 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    html {
-      scroll-behavior: smooth;
-      touch-action: pan-x pan-y;
-    }
-
     @font-face {
       font-family: 'AppFont';
-      src: url('fonts/m-Regular.ttf') format('truetype');
+      src: url('../fonts/m-Regular.ttf') format('truetype');
       font-weight: 400;
       font-style: normal;
       font-display: block;
     }
     @font-face {
       font-family: 'AppFont';
-      src: url('fonts/m-SemiBold.ttf') format('truetype');
+      src: url('../fonts/m-SemiBold.ttf') format('truetype');
       font-weight: 600;
       font-style: normal;
       font-display: block;
     }
     @font-face {
       font-family: 'AppFont';
-      src: url('fonts/m-Bold.ttf') format('truetype');
+      src: url('../fonts/m-Bold.ttf') format('truetype');
       font-weight: 700;
       font-style: normal;
       font-display: block;
     }
     @font-face {
       font-family: 'AppFont';
-      src: url('fonts/m-ExtraBold.ttf') format('truetype');
+      src: url('../fonts/m-ExtraBold.ttf') format('truetype');
       font-weight: 800;
       font-style: normal;
       font-display: block;
     }
     @font-face {
       font-family: 'AppFont';
-      src: url('fonts/m-Black.ttf') format('truetype');
+      src: url('../fonts/m-Black.ttf') format('truetype');
       font-weight: 900;
-      font-style: normal;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'AppFont';
-      src: url('fonts/m-ExtraBlack.ttf') format('truetype');
-      font-weight: 950;
-      font-style: normal;
-      font-display: block;
-    }
-
-    @font-face {
-      font-family: 'CustomChFont';
-      src: url('fonts/ch.ttf') format('truetype');
-      font-weight: normal;
       font-style: normal;
       font-display: block;
     }
@@ -96,7 +58,7 @@
       --bg-dark-3: #4a157a;
       --bg-dark-4: #22033d;
       --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-border: rgba(255, 255, 255, 0.2);
     }
 
     * {
@@ -106,21 +68,16 @@
       font-family: 'AppFont', sans-serif;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
-      touch-action: pan-x pan-y;
     }
 
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
-      background-size: 240% 240%;
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 0px;
-      padding-bottom: 0px;
       overflow-x: hidden;
-      font-weight: 400;
     }
 
     .top-nav {
@@ -147,7 +104,6 @@
       align-items: center;
       gap: 5px;
       white-space: nowrap;
-      flex-shrink: 0;
     }
 
     .brand-title span.author {
@@ -156,14 +112,12 @@
       letter-spacing: 1.2px;
       color: #5a189a;
       font-size: 14.5px;
-      white-space: nowrap;
     }
 
     .top-links {
       display: flex;
       gap: 6px;
       align-items: center;
-      flex-shrink: 0;
     }
 
     .nav-btn {
@@ -177,680 +131,327 @@
       text-decoration: none;
       font-size: 11px;
       font-weight: 700;
-      transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      flex-shrink: 0;
+      transition: transform 0.2s ease;
     }
 
-    .nav-btn:active {
-      transform: scale(0.94);
-    }
-
-    .nav-btn.eitaa {
-      background: linear-gradient(135deg, #e65100, #f57c00);
-      color: #fff;
-    }
-
-    .nav-btn.telegram {
-      background: linear-gradient(135deg, #0088cc, #00c6ff);
-      color: #fff;
-    }
-
-    .custom-nav-icon {
-      width: 14px;
-      height: 14px;
-      object-fit: contain;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    .nav-btn:active { transform: scale(0.94); }
+    .nav-btn.eitaa { background: linear-gradient(135deg, #e65100, #f57c00); color: #fff; }
+    .nav-btn.telegram { background: linear-gradient(135deg, #0088cc, #00c6ff); color: #fff; }
+    .custom-nav-icon { width: 14px; height: 14px; object-fit: contain; }
 
     .main-container {
       width: 92%;
-      max-width: 850px;
+      max-width: 540px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       flex: 1 0 auto;
-      padding-top: 36px;
+      padding-top: 18px;
       padding-bottom: 35px;
+      gap: 16px;
     }
 
-    .brand-hero {
+    .page-header-row {
       width: 100%;
-      max-width: 550px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-      margin-bottom: 2px;
+      justify-content: flex-start;
     }
 
-    .hero-logo-img {
-      width: 46%;
-      max-width: 240px;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 24px rgba(216, 180, 254, 0.45));
-      transition: transform 0.3s ease;
-    }
-
-    .hero-logo-img:hover {
-      transform: scale(1.02);
-    }
-
-    .subtitle-glass-capsule {
-      position: relative;
+    .back-home-btn {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(46, 8, 84, 0.65);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1.2px solid #ffd166;
-      border-radius: 8px;
-      padding: 3px 14px;
-      margin-top: 12px;
-      margin-bottom: 22px;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 209, 102, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-      overflow: hidden;
-    }
-
-    .subtitle-glass-capsule::after {
-      content: '';
-      position: absolute;
-      top: -60%;
-      right: -90%;
-      width: 50%;
-      height: 220%;
-      background: linear-gradient(
-        -115deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.08) 25%,
-        rgba(255, 235, 179, 0.55) 50%,
-        rgba(255, 255, 255, 0.08) 75%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: rotate(-24deg);
-      pointer-events: none;
-      animation: capsuleShineGlowRtl 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-
-    @keyframes capsuleShineGlowRtl {
-      0% {
-        right: -90%;
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.95;
-      }
-      38% {
-        right: 140%;
-        opacity: 0.95;
-      }
-      45%, 100% {
-        right: 140%;
-        opacity: 0;
-      }
-    }
-
-    .hero-subtitle-text {
-      font-size: 10.5px;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: 0.1px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-      position: relative;
-      z-index: 1;
-    }
-
-    .search-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin-bottom: 25px;
-    }
-
-    .search-input-box {
-      width: 100%;
-      height: 56px;
-      background: #ffffff;
-      border: 2.5px solid transparent;
-      border-radius: 36px;
-      padding: 0 56px 0 52px;
-      font-size: 17px;
-      font-weight: 600;
-      color: #2b004a;
-      outline: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.32);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: text;
-    }
-
-    .search-input-box::placeholder {
-      font-family: 'AppFont', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      color: #8f7f9f;
-    }
-
-    .search-input-box:focus {
-      border-color: #d8b4fe;
-      box-shadow: 0 8px 28px rgba(199, 125, 255, 0.5);
-    }
-
-    .search-sticker-box {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 36px;
-      height: 36px;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 3;
-      perspective: 600px;
-      overflow: hidden;
-    }
-
-    .sticker-cat {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
-      will-change: transform, opacity;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
-    }
-
-    .sticker-cat.cat-1 {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-
-    .sticker-cat.cat-2 {
-      opacity: 0;
-      transform: scale(0.6) rotate(-20deg) translateY(10px);
-    }
-
-    .search-wrapper.is-focused .sticker-cat.cat-1 {
-      opacity: 0;
-      transform: scale(0.6) rotate(20deg) translateY(-10px);
-    }
-
-    .search-wrapper.is-focused .sticker-cat.cat-2 {
-      opacity: 1;
-      transform: scale(1) rotate(0deg) translateY(0);
-    }
-
-    .clear-search-btn {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 28px;
-      height: 28px;
-      background: #ff4d6d;
-      border-radius: 50%;
-      color: #fff;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 13.5px;
-      z-index: 2;
-    }
-
-    .home-actions-wrapper {
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 30px;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .home-actions-wrapper.hidden-searching {
-      display: none !important;
-    }
-
-    .quick-actions-row-three {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      width: 100%;
-    }
-
-    .ratio-1-1-card, .ratio-48-7-card {
-      position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-      display: block;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-
-    .ratio-1-1-card:active, .ratio-48-7-card:active {
-      transform: scale(0.975);
-    }
-
-    .ratio-1-1-card {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-    }
-
-    .neon-green-frame {
-      border: 1.5px solid rgba(6, 214, 160, 0.85);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(6, 214, 160, 0.42), inset 0 0 8px rgba(6, 214, 160, 0.16);
-    }
-    .neon-green-frame:hover {
-      border-color: #06d6a0;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(6, 214, 160, 0.68), inset 0 0 10px rgba(6, 214, 160, 0.25);
-    }
-
-    .neon-red-frame {
-      border: 1.5px solid rgba(255, 42, 81, 0.85);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(255, 42, 81, 0.42), inset 0 0 8px rgba(255, 42, 81, 0.16);
-    }
-    .neon-red-frame:hover {
-      border-color: #ff2a51;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 42, 81, 0.68), inset 0 0 10px rgba(255, 42, 81, 0.25);
-    }
-
-    .neon-blue-frame {
-      border: 1.5px solid rgba(0, 240, 255, 0.85);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(0, 240, 255, 0.42), inset 0 0 8px rgba(0, 240, 255, 0.16);
-    }
-    .neon-blue-frame:hover {
-      border-color: #00f0ff;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(0, 240, 255, 0.68), inset 0 0 10px rgba(0, 240, 255, 0.25);
-    }
-
-    .ratio-48-7-card {
-      width: 100%;
-      aspect-ratio: 48 / 7;
-      border-radius: 16px;
-      border: none;
-      box-shadow: none;
-    }
-
-    .card-ozviat { background-image: url('images/s1.gif'); }
-    .card-marakez { background-image: url('images/s4.webp'); }
-    .card-poshtibanan { background-image: url('images/s3.webp'); }
-    .card-ertebat { background-image: url('images/s2.webp'); }
-    .card-s5 { background-image: url('images/s5.webp'); }
-    .card-s6 { background-image: url('images/s6.webp'); }
-    .card-s7 { background-image: url('images/s7.webp'); }
-    .card-s8 { background-image: url('images/s8.webp'); }
-    .card-s9 { background-image: url('images/s9.webp'); }
-    .card-s10 { background-image: url('images/s10.webp'); }
-    .card-s11 { background-image: url('images/s11.webp'); }
-    .card-s12 { background-image: url('images/s12.webp'); }
-    .card-s13 { background-image: url('images/s13.webp'); }
-
-    .toolbox-divider {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin: 8px 0 4px 0;
-    }
-
-    .toolbox-divider::before,
-    .toolbox-divider::after {
-      content: '';
-      flex: 1;
-      height: 1.6px;
-      border-radius: 2px;
-    }
-
-    .toolbox-divider::before {
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-    }
-
-    .toolbox-divider::after {
-      background: linear-gradient(270deg, rgba(255, 255, 255, 0.9) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-    }
-
-    .toolbox-divider-text {
-      font-size: 16.5px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 255, 255, 0.45);
-    }
-
-    .results-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .result-card {
-      position: relative;
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 2px solid var(--glass-border);
-      border-radius: 26px;
-      padding: 24px 20px 22px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
-      animation: fadeIn 0.3s ease forwards;
-    }
-
-    .result-card.glow-green {
-      border-color: #06d6a0 !important;
-      box-shadow: 0 0 24px rgba(6, 214, 160, 0.7) !important;
-    }
-
-    .card-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      text-align: center;
-      margin-bottom: 20px;
-      width: 100%;
-    }
-
-    .prof-name {
-      font-size: 21px;
-      font-weight: 800;
-      color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .prof-name.glow-text-green {
-      color: #06d6a0 !important;
-      text-shadow: 0 0 10px rgba(6, 214, 160, 0.8) !important;
-    }
-
-    .contact-glass-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), 0 4px 18px rgba(157, 78, 221, 0.2);
-      border-radius: 14px;
-      padding: 8px 20px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      direction: ltr;
-      max-width: 95%;
-      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .contact-glass-pill.glow-pill-green {
-      border-color: #06d6a0 !important;
-      box-shadow: 0 0 14px rgba(6, 214, 160, 0.5), inset 0 0 6px rgba(6, 214, 160, 0.2) !important;
-      background: rgba(6, 214, 160, 0.08) !important;
-    }
-
-    .contact-glass-pill i {
-      font-size: 19px;
-      color: #e0aaff;
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .contact-glass-pill.glow-pill-green i {
-      color: #06d6a0 !important;
-      transition: none !important;
-    }
-
-    .pill-eitaa-icon {
-      width: 19px;
-      height: 19px;
-      object-fit: contain;
-      display: inline-block;
-      vertical-align: middle;
-      flex-shrink: 0;
-    }
-
-    .contact-digits {
-      font-size: 19.5px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      color: #00f0ff;
-      line-height: 1;
-      text-shadow: 0 0 6px rgba(0, 240, 255, 0.35);
-      display: flex;
-      align-items: center;
-    }
-
-    .contact-digits.copied-glow {
-      color: #06d6a0 !important;
-      text-shadow: 0 0 10px rgba(6, 214, 160, 0.8) !important;
-      transition: none !important;
-    }
-
-    .contact-eitaa-id {
-      font-family: 'Montserrat', sans-serif !important;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.8px;
-      color: #ffd166;
-      text-shadow: 0 0 8px rgba(255, 209, 102, 0.35);
-      white-space: nowrap !important;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 250px;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 1.2;
-    }
-
-    .contact-eitaa-id.group-label-text {
-      font-family: 'AppFont', sans-serif !important;
-      font-size: 13.5px;
-      letter-spacing: 0.2px;
-      color: #ffd166;
-      direction: rtl;
-    }
-
-    .contact-eitaa-id.copied-glow {
-      color: #06d6a0 !important;
-      text-shadow: 0 0 12px rgba(6, 214, 160, 0.85) !important;
-      transition: none !important;
-    }
-
-    .card-actions {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 520px;
-    }
-
-    .prof-presence-badge {
-      display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      width: 100%;
-      max-width: 520px;
-      margin-top: 12px;
-      padding: 8px 14px;
-      background: #0f766e;
-      border: 1.5px solid #14b8a6;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(20, 184, 166, 0.2);
-    }
-
-    .prof-presence-badge .presence-icon {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
       color: #ffffff;
-      font-size: 14px;
-      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
-      flex-shrink: 0;
-    }
-
-    .prof-presence-badge .presence-text {
-      font-size: 13px;
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.5;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-    }
-
-    .prof-presence-badge .presence-highlight {
-      display: inline-block;
-      color: #ffd166 !important;
-      font-weight: 900;
-      font-size: 14.5px;
-      letter-spacing: 0.5px;
-      padding: 0 4px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 209, 102, 0.85);
-    }
-
-    .action-btn {
-      position: relative;
-      flex: 1 1 0;
-      min-width: 0;
-      padding: 11px 8px;
-      border: none;
+      padding: 7px 15px;
       border-radius: 12px;
-      color: #fff;
-      font-size: 13.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
-      white-space: nowrap;
-      overflow: hidden;
-      transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.2s ease, filter 0.2s ease;
-    }
-
-    .action-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
-    }
-
-    .action-btn:active {
-      transform: translateY(1px) scale(0.96);
-    }
-
-    .action-btn.btn-group-join {
-      flex: 3.2 1 0 !important;
-      padding: 11px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      gap: 7px;
-    }
-
-    .action-btn.btn-copy-compact {
-      flex: 1.1 1 0 !important;
-      padding: 11px 6px;
       font-size: 12.5px;
-      gap: 4px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
     }
 
-    .btn-call { background: linear-gradient(135deg, #1e90ff, #0056b3); }
-    .btn-sms { background: linear-gradient(135deg, #ffea00, #ffd600, #ffc400); color: #111111 !important; }
-    .btn-sms i { color: #111111 !important; font-size: 15px; }
-    .btn-eitaa { background: linear-gradient(135deg, #e65100, #f57c00); }
-    .btn-telegram { background: linear-gradient(135deg, #0088cc, #00a8ea); color: #fff !important; }
-    .btn-insta { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4); color: #fff !important; }
-    .btn-insta i { font-size: 15px; }
-
-    .btn-copy { background: linear-gradient(135deg, #e63946, #b5179e); overflow: hidden; }
-    .btn-copy i { font-size: 14px; }
-    .btn-copy::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      z-index: 1;
-      border-radius: inherit;
-      pointer-events: none;
+    .back-home-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
     }
-    .btn-copy span, .btn-copy i { position: relative; z-index: 2; }
-    .btn-copy.copied::before { opacity: 1; }
 
-    .multi-phone-wrapper {
+    .hero-title-glass {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(0, 240, 255, 0.65);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(0, 240, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      border-radius: 22px;
+      padding: 18px 16px;
+    }
+
+    .hero-title-glass h1 {
+      font-size: 17px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.6;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-glass-card {
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 20px 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 14px;
-      width: 100%;
     }
 
-    .phone-sub-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+    .field-label {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffd166;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+
+    .gpa-input {
       width: 100%;
-      background: rgba(0, 0, 0, 0.24);
-      padding: 12px 8px;
+      max-width: 280px;
+      height: 56px;
+      background: #ffffff;
+      border: 2.5px solid transparent;
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: #2b004a;
+      outline: none;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+      transition: all 0.25s ease;
+      user-select: text;
+      direction: ltr;
     }
 
-    .phone-sub-item.glow-green {
-      border-color: #06d6a0 !important;
-      box-shadow: 0 0 24px rgba(6, 214, 160, 0.7) !important;
+    .gpa-input::placeholder {
+      font-size: 14px;
+      font-weight: 600;
+      color: #9c89b8;
     }
 
-    .no-results-box {
+    .gpa-input:focus {
+      border-color: #ff8500;
+      box-shadow: 0 0 18px rgba(255, 133, 0, 0.5);
+    }
+
+    .degree-options-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .degree-btn {
+      padding: 13px 10px;
+      border-radius: 14px;
+      border: 1.8px solid rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.3);
+      color: #e0aaff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* رنگ باکس انتخاب شده نارنجی */
+    .degree-btn.active {
+      background: linear-gradient(135deg, #ea580c, #f97316, #ff8500);
+      border-color: #ffffff;
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(249, 115, 22, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .error-msg {
+      color: #ff6b8b;
+      font-size: 13px;
+      font-weight: 700;
+      display: none;
+    }
+
+    .calc-green-btn {
+      width: 100%;
+      max-width: 340px;
+      height: 52px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(6, 214, 160, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      margin-top: 4px;
+    }
+
+    .calc-green-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 28px rgba(6, 214, 160, 0.65);
+    }
+
+    .calc-green-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* پاپ‌آپ نتیجه */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 2, 26, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 10px;
+      padding: 20px;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-card {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(145deg, #2b0750, #1a0333);
+      border: 2.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 28px;
+      padding: 28px 22px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 18px;
-      animation: fadeIn 0.35s ease forwards;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      transform: scale(0.86) translateY(16px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .cat-sad-img {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5));
+    /* فریم پاپ‌آپ هماهنگ با رنگ باکس وضعیت */
+    .popup-card.frame-alef {
+      border-color: #10b981;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 32px rgba(16, 185, 129, 0.55);
+    }
+    .popup-card.frame-adi {
+      border-color: #f97316;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 32px rgba(249, 115, 22, 0.55);
+    }
+    .popup-card.frame-mashroot {
+      border-color: #ef4444;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 32px rgba(239, 68, 68, 0.55);
     }
 
-    .no-results-text {
-      font-family: 'CustomChFont', sans-serif !important;
-      color: #ffd166;
-      font-size: 17px;
-      font-weight: normal;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
-      letter-spacing: 0.3px;
+    .popup-overlay.show .popup-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .unit-counter-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+      direction: rtl;
+    }
+
+    .unit-big-number {
+      font-size: 84px;
+      font-weight: 950;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 4px 22px rgba(255, 255, 255, 0.45);
+    }
+
+    .unit-small-label {
+      font-size: 20px;
+      font-weight: 800;
+      color: #e0aaff;
+    }
+
+    .status-badge-box {
+      padding: 10px 28px;
+      border-radius: 14px;
+      font-size: 16.5px;
+      font-weight: 900;
+      color: #ffffff !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      letter-spacing: 0.2px;
+    }
+
+    .status-alef {
+      background: linear-gradient(135deg, #059669, #10b981);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+    }
+
+    .status-adi {
+      background: linear-gradient(135deg, #ea580c, #f97316);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
+    }
+
+    .status-mashroot {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
+    }
+
+    /* باکس سفید با متن بنفش */
+    .popup-desc-text {
+      width: 100%;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #4a157a;
+      line-height: 1.85;
+      background: #ffffff;
+      padding: 14px 16px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .popup-desc-text .purple-hl {
+      color: #6a0dad;
+      font-weight: 950;
+      font-size: 16.5px;
+    }
+
+    .popup-close-btn {
+      width: 100%;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .popup-close-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
     }
 
     .site-footer {
@@ -860,95 +461,21 @@
       align-items: center;
       justify-content: center;
       background: rgba(22, 5, 45, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-top: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
       margin-top: auto;
     }
 
-    .footer-text {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #d8b4fe;
-      letter-spacing: 0.2px;
-      text-align: center;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .footer-text span.brand-hl {
-      color: #ffd166;
-      font-weight: 800;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
 
     @media (max-width: 600px) {
-      .top-nav {
-        height: 38px;
-        padding: 0 12px;
-      }
-      .brand-title {
-        font-size: 10.5px;
-        gap: 3px;
-      }
-      .brand-title span.author {
-        font-size: 12px;
-        letter-spacing: 0.8px;
-      }
-      .nav-btn {
-        width: 62px;
-        height: 23px;
-        font-size: 10px;
-        border-radius: 5px;
-      }
-      .custom-nav-icon {
-        width: 12px;
-        height: 12px;
-      }
-      
-      .main-container { padding-top: 24px; }
-      .brand-hero { margin-top: 4px; margin-bottom: 0px; }
-      .hero-logo-img { width: 58%; max-width: 190px; }
-      .subtitle-glass-capsule { padding: 2.5px 11px; border-radius: 7px; margin-top: 8px; margin-bottom: 18px; }
-      .hero-subtitle-text { font-size: 9px; }
-      
-      .search-input-box { height: 50px; font-size: 15.5px; padding: 0 48px 0 44px; }
-      .search-input-box::placeholder { font-size: 14.5px; }
-
-      .search-sticker-box {
-        right: 12px;
-        width: 32px;
-        height: 32px;
-      }
-
-      .clear-search-btn { width: 25px; height: 25px; font-size: 12px; left: 13px; }
-
-      .home-actions-wrapper { gap: 12px; }
-      .quick-actions-row-three { gap: 8px; }
-      .ratio-1-1-card { border-radius: 16px; }
-      .ratio-48-7-card { border-radius: 13px; }
-
-      .toolbox-divider { gap: 10px; margin: 6px 0 2px 0; }
-      .toolbox-divider-text { font-size: 14.5px; }
-
-      .action-btn { padding: 9px 4px; font-size: 12px; gap: 4px; border-radius: 10px; }
-      .action-btn.btn-group-join { padding: 9px 8px !important; font-size: 11.5px !important; gap: 5px !important; }
-      .action-btn.btn-copy-compact { padding: 9px 3px !important; font-size: 11px !important; gap: 3px !important; }
-
-      .contact-glass-pill i { font-size: 17px; }
-      .pill-eitaa-icon { width: 17px; height: 17px; }
-      .contact-digits { font-size: 18px; letter-spacing: 1px; }
-      .contact-eitaa-id { font-size: 14px; max-width: 190px; }
-      .prof-presence-badge { padding: 7px 10px; margin-top: 10px; gap: 6px; }
-      .prof-presence-badge .presence-text { font-size: 11.5px; }
-      .prof-presence-badge .presence-highlight { font-size: 12.5px; }
-      .footer-text { font-size: 11.2px; }
-      .cat-sad-img { width: 115px; height: 115px; }
-      .no-results-text { font-size: 15.5px; }
+      .top-nav { height: 38px; padding: 0 12px; }
+      .brand-title { font-size: 10.5px; gap: 3px; }
+      .brand-title span.author { font-size: 12px; letter-spacing: 0.8px; }
+      .nav-btn { width: 62px; height: 23px; font-size: 10px; border-radius: 5px; }
+      .custom-nav-icon { width: 12px; height: 12px; }
+      .hero-title-glass h1 { font-size: 15px; }
+      .unit-big-number { font-size: 74px; }
     }
   </style>
 </head>
@@ -960,71 +487,56 @@
     </div>
     <div class="top-links">
       <a href="https://eitaa.com/arm00n" target="_blank" class="nav-btn eitaa">
-        <img src="images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا"> ایتا
+        <img src="../images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا"> ایتا
       </a>
       <a href="https://t.me/iarmoon" target="_blank" class="nav-btn telegram">
-        <img src="images/tel.webp" class="custom-nav-icon" alt="تلگرام"> تلگرام
+        <img src="../images/tel.webp" class="custom-nav-icon" alt="تلگرام"> تلگرام
       </a>
     </div>
   </header>
 
   <main class="main-container">
-    <div class="brand-hero">
-      <img src="images/logo.webp" alt="استادیاب" class="hero-logo-img">
+    <div class="page-header-row">
+      <a href="../" class="back-home-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>بازگشت به صفحه اصلی</span>
+      </a>
     </div>
 
-    <div class="subtitle-glass-capsule">
-      <span class="hero-subtitle-text">جستجوی شماره تماس اساتید دانشگاه پیام نور استان قزوین</span>
+    <div class="hero-title-glass">
+      <h1>محاسبه سقف مجاز انتخاب واحد بر اساس معدل</h1>
     </div>
 
-    <div class="search-wrapper" id="searchWrapper">
-      <input type="text" id="searchInput" class="search-input-box" placeholder="نام استاد مدنظر را تایپ کنید..." autocomplete="off">
-      <div class="search-sticker-box">
-        <img src="images/cat1.webp" alt="گربه جستجو" class="sticker-cat cat-1">
-        <img src="images/cat2.webp" alt="گربه با ذره‌بین" class="sticker-cat cat-2">
+    <div class="form-glass-card">
+      <label for="gpaInput" class="field-label">معدل ترمی که گذروندی را وارد کن</label>
+      <input type="text" id="gpaInput" class="gpa-input" inputmode="decimal" placeholder="مثلاً ۱۶.۵۰">
+
+      <div class="field-label" style="margin-top: 6px;">مقطع تحصیلی خودت رو انتخاب کن</div>
+      <div class="degree-options-row">
+        <button type="button" class="degree-btn active" data-degree="bachelor" onclick="selectDegree('bachelor', this)">کارشناسی</button>
+        <button type="button" class="degree-btn" data-degree="master" onclick="selectDegree('master', this)">ارشد</button>
       </div>
-      <div id="clearSearch" class="clear-search-btn" title="پاک کردن متن">
-        <i class="fa-solid fa-xmark"></i>
-      </div>
+
+      <div id="errorMsg" class="error-msg">لطفاً یک معدل معتبر بین ۰ تا ۲۰ وارد کنید.</div>
+
+      <button type="button" class="calc-green-btn" onclick="calculateMaxUnits()">محاسبه</button>
     </div>
-
-    <div class="home-actions-wrapper" id="homeActionsWrapper">
-      <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
-
-      <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
-        <div class="ratio-1-1-card card-poshtibanan neon-red-frame" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'"></div>
-        <div class="ratio-1-1-card card-ertebat neon-blue-frame" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
-      </div>
-
-      <div class="toolbox-divider">
-        <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
-      </div>
-
-      <!-- ردیف اول جعبه ابزار: فریم نئونی آبی -->
-      <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s5 neon-blue-frame" onclick="window.location.href='saghfmojaz/'"></div>
-        <div class="ratio-1-1-card card-s6 neon-blue-frame" onclick="window.location.href='testdorost/'"></div>
-        <div class="ratio-1-1-card card-s7 neon-blue-frame" onclick="window.location.href='#'"></div>
-      </div>
-
-      <!-- ردیف دوم جعبه ابزار: فریم نئونی قرمز -->
-      <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s8 neon-red-frame" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s9 neon-red-frame" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s10 neon-red-frame" onclick="window.location.href='#'"></div>
-      </div>
-
-      <!-- ردیف سوم جعبه ابزار: فریم نئونی سبز -->
-      <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s11 neon-green-frame" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s12 neon-green-frame" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s13 neon-green-frame" onclick="window.location.href='#'"></div>
-      </div>
-    </div>
-
-    <div id="resultsList" class="results-container"></div>
   </main>
+
+  <div class="popup-overlay" id="resultPopup" onclick="closePopup(event)">
+    <div class="popup-card" id="popupCard" onclick="event.stopPropagation()">
+      <div class="unit-counter-row">
+        <span class="unit-big-number" id="animatedUnitNumber">۰</span>
+        <span class="unit-small-label">واحد</span>
+      </div>
+
+      <div class="status-badge-box" id="statusBadgeBox">معدل الف</div>
+
+      <p class="popup-desc-text" id="popupDescText"></p>
+
+      <button type="button" class="popup-close-btn" onclick="hidePopup()">بستن</button>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="footer-text">
@@ -1033,398 +545,139 @@
   </footer>
 
   <script>
-    const rawData = [
-      "مهدی صداقت: 09127015548"
-    ];
-
-    const instructorGroupProfiles = {};
+    let selectedDegree = 'bachelor';
+    let countAnimationFrame = null;
 
     function toPersianDigits(num) {
-      if (num === null || num === undefined) return '';
       const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return num.toString().replace(/\d/g, x => persianDigits[x]);
     }
 
-    function cleanPersianString(str) {
-      if (!str) return '';
+    function normalizeNumberInput(str) {
       return str
-        .toLowerCase()
-        .replace(/[يىئ]/g, 'ی')
-        .replace(/ك/g, 'ک')
-        .replace(/[آأإء]/g, 'ا')
-        .replace(/ة/g, 'ه')
-        .replace(/[\u200c\u200b\u200e\u200f]/g, '')
-        .replace(/[\u064B-\u0652]/g, '')
         .replace(/[۰٠]/g, '0').replace(/[۱١]/g, '1').replace(/[۲٢]/g, '2')
         .replace(/[۳٣]/g, '3').replace(/[۴٤]/g, '4').replace(/[۵٥]/g, '5')
         .replace(/[۶٦]/g, '6').replace(/[۷٧]/g, '7').replace(/[۸٨]/g, '8')
         .replace(/[۹٩]/g, '9')
-        .replace(/["'«»()]/g, ' ')
+        .replace(/[/٫،]/g, '.')
         .trim();
     }
 
-    function removeAllSpaces(str) {
-      return cleanPersianString(str).replace(/\s+/g, '');
+    // تبدیل لحظه‌ای ارقام تایپ‌شده به فارسی
+    const gpaInputEl = document.getElementById('gpaInput');
+    gpaInputEl.addEventListener('input', function() {
+      const pos = this.selectionStart;
+      this.value = toPersianDigits(this.value);
+      this.setSelectionRange(pos, pos);
+    });
+
+    function selectDegree(degree, btn) {
+      selectedDegree = degree;
+      document.querySelectorAll('.degree-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     }
 
-    const stopWordsList = new Set(['استاد', 'دکتر', 'اقای', 'اقا', 'خانم', 'سید', 'سیده', 'مهندس']);
+    function animateCounter(targetValue, element) {
+      if (countAnimationFrame) cancelAnimationFrame(countAnimationFrame);
+      const duration = 750;
+      const startTime = performance.now();
 
-    function getCleanTokens(str) {
-      const cleaned = cleanPersianString(str);
-      return cleaned.split(/\s+/).filter(token => token.length > 0 && !stopWordsList.has(token));
-    }
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 4);
+        const currentVal = Math.round(easeOut * targetValue);
+        element.textContent = toPersianDigits(currentVal);
 
-    const professors = rawData.map(item => {
-      const parts = item.split(': ');
-      const rawName = parts[0].trim();
-      const rawContact = parts.slice(1).join(': ').trim();
-      const isInstagram = rawContact.includes('instagram.com');
-      const isTelegram = rawContact.includes('t.me/');
-      const isEitaaGroup = rawContact.includes('eitaa.com/joinchat/');
-      const isEitaa = !isInstagram && !isTelegram && !isEitaaGroup && rawContact.startsWith('http');
-      
-      let displayId = rawContact;
-      if (isInstagram) {
-        try {
-          const cleanPath = rawContact.split('?')[0].split('/').filter(Boolean).pop();
-          displayId = '@' + cleanPath;
-        } catch(e) {
-          displayId = rawContact;
+        if (progress < 1) {
+          countAnimationFrame = requestAnimationFrame(update);
+        } else {
+          element.textContent = toPersianDigits(targetValue);
         }
-      } else if (isTelegram) {
-        displayId = '@' + rawContact.split('/').filter(Boolean).pop();
-      } else if (isEitaa) {
-        displayId = '@' + rawContact.split('/').filter(Boolean).pop();
-      } else if (isEitaaGroup) {
-        displayId = 'گروه کلاسی استاد در ایتا';
       }
-
-      const phoneList = (!isEitaa && !isInstagram && !isTelegram && !isEitaaGroup && rawContact.includes(',')) 
-        ? rawContact.split(',').map(s => s.trim()).filter(Boolean) 
-        : [];
-
-      return {
-        name: rawName,
-        contact: rawContact,
-        displayId: displayId,
-        isEitaa: isEitaa,
-        isTelegram: isTelegram,
-        isEitaaGroup: isEitaaGroup,
-        instructorProfile: instructorGroupProfiles[rawName] || null,
-        isInstagram: isInstagram,
-        phoneList: phoneList,
-        compactName: removeAllSpaces(rawName),
-        tokens: getCleanTokens(rawName),
-        contactNumbersOnly: rawContact.replace(/\D/g, '')
-      };
-    });
-
-    function robustCopyToClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        return navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
-      }
-      return fallbackCopy(text);
+      countAnimationFrame = requestAnimationFrame(update);
     }
 
-    function fallbackCopy(text) {
-      return new Promise((resolve, reject) => {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-9999px";
-        textArea.style.top = "0";
-        textArea.setAttribute("readonly", "");
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        textArea.setSelectionRange(0, 99999);
-        try {
-          const successful = document.execCommand('copy');
-          document.body.removeChild(textArea);
-          if (successful) resolve();
-          else reject();
-        } catch (err) {
-          document.body.removeChild(textArea);
-          reject(err);
+    function calculateMaxUnits() {
+      const rawVal = gpaInputEl.value;
+      const errorMsg = document.getElementById('errorMsg');
+      const cleaned = normalizeNumberInput(rawVal);
+      const gpa = parseFloat(cleaned);
+
+      if (cleaned === '' || isNaN(gpa) || gpa < 0 || gpa > 20) {
+        errorMsg.style.display = 'block';
+        return;
+      }
+      errorMsg.style.display = 'none';
+
+      let maxUnits = 0;
+      let statusText = '';
+      let statusClass = '';
+      let frameClass = '';
+
+      if (selectedDegree === 'bachelor') {
+        if (gpa >= 17) {
+          maxUnits = 24;
+          statusText = 'معدل الف';
+          statusClass = 'status-alef';
+          frameClass = 'frame-alef';
+        } else if (gpa >= 12) {
+          maxUnits = 20;
+          statusText = 'معدل عادی';
+          statusClass = 'status-adi';
+          frameClass = 'frame-adi';
+        } else {
+          maxUnits = 14;
+          statusText = 'معدل مشروط';
+          statusClass = 'status-mashroot';
+          frameClass = 'frame-mashroot';
         }
-      });
-    }
-
-    const searchInput = document.getElementById('searchInput');
-    const searchWrapper = document.getElementById('searchWrapper');
-    const clearSearch = document.getElementById('clearSearch');
-    const resultsList = document.getElementById('resultsList');
-    const homeActionsWrapper = document.getElementById('homeActionsWrapper');
-
-    searchInput.addEventListener('focus', function() {
-      searchWrapper.classList.add('is-focused');
-    });
-
-    searchInput.addEventListener('blur', function() {
-      if (this.value.trim().length === 0) {
-        searchWrapper.classList.remove('is-focused');
-      }
-    });
-
-    searchInput.addEventListener('input', function() {
-      const q = this.value;
-      if (q.trim().length > 0) {
-        clearSearch.style.display = 'flex';
-        homeActionsWrapper.classList.add('hidden-searching');
-        searchWrapper.classList.add('is-focused');
-        renderResults(q);
       } else {
-        clearSearch.style.display = 'none';
-        homeActionsWrapper.classList.remove('hidden-searching');
-        resultsList.innerHTML = '';
-      }
-    });
-
-    clearSearch.addEventListener('click', function() {
-      searchInput.value = '';
-      clearSearch.style.display = 'none';
-      homeActionsWrapper.classList.remove('hidden-searching');
-      resultsList.innerHTML = '';
-      searchInput.focus();
-    });
-
-    function renderResults(rawQuery) {
-      resultsList.innerHTML = '';
-      const queryDigitsOnly = rawQuery.replace(/\D/g, '');
-      const queryTokens = getCleanTokens(rawQuery);
-      const queryCompact = removeAllSpaces(rawQuery);
-
-      if (queryTokens.length === 0 && queryDigitsOnly.length === 0) {
-        resultsList.innerHTML = `
-          <div class="no-results-box">
-            <span class="no-results-text">نام استاد مدنظر را تایپ کنید...</span>
-          </div>
-        `;
-        return;
-      }
-
-      const filtered = professors.filter(p => {
-        if (queryDigitsOnly.length >= 3 && p.contactNumbersOnly.includes(queryDigitsOnly)) {
-          return true;
-        }
-
-        if (queryTokens.length > 0) {
-          let tokenIndex = 0;
-          for (let i = 0; i < p.tokens.length; i++) {
-            const currentToken = queryTokens[tokenIndex];
-            if (p.tokens[i].startsWith(currentToken) || (currentToken.length > 2 && p.tokens[i].includes(currentToken))) {
-              tokenIndex++;
-              if (tokenIndex === queryTokens.length) {
-                return true;
-              }
-            }
-          }
-        }
-
-        if (queryCompact.length > 3 && p.compactName.includes(queryCompact)) {
-          return true;
-        }
-
-        return false;
-      });
-
-      if (filtered.length === 0) {
-        resultsList.innerHTML = `
-          <div class="no-results-box">
-            <img src="images/cat00.webp" alt="یافت نشد" class="cat-sad-img">
-            <span class="no-results-text">استادی با این مشخصات یافت نشد!</span>
-          </div>
-        `;
-        return;
-      }
-
-      filtered.forEach((prof) => {
-        const card = document.createElement('div');
-        card.className = 'result-card';
-
-        let contactContent = '';
-        if (prof.isInstagram) {
-          contactContent = `
-            <div class="contact-glass-pill">
-              <i class="fa-brands fa-instagram" style="color: #ff5483;"></i>
-              <span class="contact-eitaa-id">${prof.displayId}</span>
-            </div>
-          `;
-        } else if (prof.isTelegram) {
-          contactContent = `
-            <div class="contact-glass-pill">
-              <i class="fa-brands fa-telegram" style="color: #00c6ff;"></i>
-              <span class="contact-eitaa-id">${prof.displayId}</span>
-            </div>
-          `;
-        } else if (prof.isEitaaGroup) {
-          contactContent = `
-            <div class="contact-glass-pill">
-              <img src="images/eitaa-orange.webp" class="pill-eitaa-icon" alt="ایتا">
-              <span class="contact-eitaa-id group-label-text">${prof.displayId}</span>
-            </div>
-          `;
-        } else if (prof.isEitaa) {
-          contactContent = `
-            <div class="contact-glass-pill">
-              <img src="images/eitaa-orange.webp" class="pill-eitaa-icon" alt="ایتا">
-              <span class="contact-eitaa-id">${prof.displayId}</span>
-            </div>
-          `;
-        } else if (prof.phoneList.length > 1) {
-          contactContent = '';
+        if (gpa >= 17) {
+          maxUnits = 14;
+          statusText = 'معدل الف';
+          statusClass = 'status-alef';
+          frameClass = 'frame-alef';
+        } else if (gpa >= 14) {
+          maxUnits = 12;
+          statusText = 'معدل عادی';
+          statusClass = 'status-adi';
+          frameClass = 'frame-adi';
         } else {
-          contactContent = `
-            <div class="contact-glass-pill">
-              <i class="fa-solid fa-phone-flip"></i>
-              <span class="contact-digits">${toPersianDigits(prof.contact)}</span>
-            </div>
-          `;
+          maxUnits = 8;
+          statusText = 'معدل مشروط';
+          statusClass = 'status-mashroot';
+          frameClass = 'frame-mashroot';
         }
+      }
 
-        const info = document.createElement('div');
-        info.className = 'card-info';
-        info.innerHTML = `
-          <div class="prof-name">${prof.name}</div>
-          ${contactContent}
-        `;
+      const popupCard = document.getElementById('popupCard');
+      popupCard.className = 'popup-card ' + frameClass;
 
-        const actions = document.createElement('div');
-        actions.className = 'card-actions';
+      const badgeBox = document.getElementById('statusBadgeBox');
+      badgeBox.textContent = statusText;
+      badgeBox.className = 'status-badge-box ' + statusClass;
 
-        let badgeContent = '';
+      const persianUnits = toPersianDigits(maxUnits);
+      document.getElementById('popupDescText').innerHTML =
+        `مجاز به انتخاب واحد تا حداکثر <span class="purple-hl">${persianUnits}</span> واحد درسی در <span class="purple-hl">ترم مهر/بهمن</span> آینده هستی`;
 
-        if (prof.isInstagram) {
-          actions.innerHTML = `
-            <a href="${prof.contact}" target="_blank" class="action-btn btn-insta">
-              <i class="fa-brands fa-instagram"></i> ارسال پیام در اینستاگرام
-            </a>
-            <button class="action-btn btn-copy" onclick="handleCopyAction('${prof.displayId}', this)">
-              <i class="fa-regular fa-copy"></i> <span>کپی کردن</span>
-            </button>
-          `;
-        } else if (prof.isTelegram) {
-          actions.innerHTML = `
-            <a href="${prof.contact}" target="_blank" class="action-btn btn-telegram">
-              <i class="fa-brands fa-telegram"></i> ارسال پیام در تلگرام
-            </a>
-            <button class="action-btn btn-copy" onclick="handleCopyAction('${prof.displayId}', this)">
-              <i class="fa-regular fa-copy"></i> <span>کپی کردن</span>
-            </button>
-          `;
-        } else if (prof.isEitaaGroup) {
-          actions.innerHTML = `
-            <a href="${prof.contact}" target="_blank" class="action-btn btn-eitaa btn-group-join">
-              <img src="images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا"> عضویت در گروه و ارتباط با استاد
-            </a>
-            <button class="action-btn btn-copy btn-copy-compact" onclick="handleCopyAction('${prof.contact}', this)">
-              <i class="fa-regular fa-copy"></i> <span>کپی کردن</span>
-            </button>
-          `;
-          if (prof.instructorProfile) {
-            badgeContent = `
-              <div class="prof-presence-badge">
-                <i class="fa-solid fa-circle-check presence-icon"></i>
-                <span class="presence-text">استاد با پروفایل <span class="presence-highlight">${prof.instructorProfile}</span> داخل گروه حضور دارند</span>
-              </div>
-            `;
-          }
-        } else if (prof.isEitaa) {
-          actions.innerHTML = `
-            <a href="${prof.contact}" target="_blank" class="action-btn btn-eitaa">
-              <img src="images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا"> ارسال پیام در ایتا
-            </a>
-            <button class="action-btn btn-copy" onclick="handleCopyAction('${prof.displayId}', this)">
-              <i class="fa-regular fa-copy"></i> <span>کپی کردن</span>
-            </button>
-          `;
-        } else if (prof.phoneList.length > 1) {
-          actions.className = 'multi-phone-wrapper';
-          actions.innerHTML = prof.phoneList.map((ph) => `
-            <div class="phone-sub-item">
-              <div class="contact-glass-pill">
-                <i class="fa-solid fa-phone-flip"></i>
-                <span class="contact-digits">${toPersianDigits(ph)}</span>
-              </div>
-              <div class="card-actions" style="max-width: 480px; width: 100%;">
-                <a href="tel:${ph}" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-                <button class="action-btn btn-copy" onclick="handleCopyAction('${ph}', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-                <a href="sms:${ph}" class="action-btn btn-sms"><i class="fa-solid fa-comment-sms"></i> پیامک</a>
-              </div>
-            </div>
-          `).join('');
-        } else {
-          actions.innerHTML = `
-            <a href="tel:${prof.contact}" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-            <button class="action-btn btn-copy" onclick="handleCopyAction('${prof.contact}', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            <a href="sms:${prof.contact}" class="action-btn btn-sms"><i class="fa-solid fa-comment-sms"></i> پیامک</a>
-          `;
-        }
+      const numEl = document.getElementById('animatedUnitNumber');
+      numEl.textContent = '۰';
 
-        card.appendChild(info);
-        card.appendChild(actions);
-        if (badgeContent) {
-          card.insertAdjacentHTML('beforeend', badgeContent);
-        }
-        resultsList.appendChild(card);
-      });
+      document.getElementById('resultPopup').classList.add('show');
+      animateCounter(maxUnits, numEl);
     }
 
-    window.handleCopyAction = function(text, btnElement) {
-      robustCopyToClipboard(text).then(() => {
-        let pillElement = null;
-        const cardParent = btnElement.closest('.result-card, .phone-sub-item');
-        
-        if (cardParent) {
-          pillElement = cardParent.querySelector('.contact-glass-pill');
-        }
+    function hidePopup() {
+      document.getElementById('resultPopup').classList.remove('show');
+    }
 
-        const titleElement = cardParent ? cardParent.querySelector('.prof-name') : null;
-        const digitsElement = pillElement ? pillElement.querySelector('.contact-digits, .contact-eitaa-id') : null;
-        const eitaaIconImg = pillElement ? pillElement.querySelector('.pill-eitaa-icon') : null;
-
-        const span = btnElement.querySelector('span');
-        const icon = btnElement.querySelector('i');
-        const originalText = span ? span.getAttribute('data-origin') || span.innerText : 'کپی کردن';
-
-        if (span && !span.getAttribute('data-origin')) {
-          span.setAttribute('data-origin', originalText);
-        }
-
-        if (btnElement._timer) {
-          clearTimeout(btnElement._timer);
-        }
-
-        const searchCard = btnElement.closest('.result-card, .phone-sub-item');
-        if (searchCard) {
-          searchCard.classList.add('glow-green');
-        }
-
-        if (pillElement) pillElement.classList.add('glow-pill-green');
-        if (titleElement) titleElement.classList.add('glow-text-green');
-        if (digitsElement) digitsElement.classList.add('copied-glow');
-        if (eitaaIconImg) eitaaIconImg.src = 'images/eitaa-green.webp';
-
-        btnElement.classList.add('copied');
-        if (span) span.innerText = 'کپی شد';
-        if (icon) icon.className = 'fa-solid fa-check';
-
-        btnElement._timer = setTimeout(() => {
-          if (searchCard) {
-            searchCard.classList.remove('glow-green');
-          }
-          if (pillElement) pillElement.classList.remove('glow-pill-green');
-          if (titleElement) titleElement.classList.remove('glow-text-green');
-          if (digitsElement) digitsElement.classList.remove('copied-glow');
-          if (eitaaIconImg) eitaaIconImg.src = 'images/eitaa-orange.webp';
-
-          btnElement.classList.remove('copied');
-          if (span) span.innerText = originalText;
-          if (icon) icon.className = 'fa-regular fa-copy';
-          btnElement._timer = null;
-        }, 1800);
-      });
-    };
+    function closePopup(e) {
+      if (e.target.id === 'resultPopup') {
+        hidePopup();
+      }
+    }
   </script>
 </body>
 </html>

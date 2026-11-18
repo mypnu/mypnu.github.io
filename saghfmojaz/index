@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>استادیاب | محاسبه سقف مجاز انتخاب واحد</title>
+
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-ExtraBold.ttf') format('truetype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-Black.ttf') format('truetype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: block;
+    }
+
+    :root {
+      --bg-dark-1: #1e053a;
+      --bg-dark-2: #2e0854;
+      --bg-dark-3: #4a157a;
+      --bg-dark-4: #22033d;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'AppFont', sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      background: #ffffff;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 100;
+      flex-shrink: 0;
+      border-bottom: 2.2px solid transparent;
+      border-image: linear-gradient(90deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%) 1;
+    }
+
+    .brand-title {
+      color: #1a1a2e;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .brand-title span.author {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      color: #5a189a;
+      font-size: 14.5px;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 76px;
+      height: 25px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .nav-btn:active { transform: scale(0.94); }
+    .nav-btn.eitaa { background: linear-gradient(135deg, #e65100, #f57c00); color: #fff; }
+    .nav-btn.telegram { background: linear-gradient(135deg, #0088cc, #00c6ff); color: #fff; }
+    .custom-nav-icon { width: 14px; height: 14px; object-fit: contain; }
+
+    .main-container {
+      width: 92%;
+      max-width: 540px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1 0 auto;
+      padding-top: 18px;
+      padding-bottom: 35px;
+      gap: 16px;
+    }
+
+    .page-header-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 7px 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    .back-home-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .hero-title-glass {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(0, 240, 255, 0.65);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(0, 240, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      border-radius: 22px;
+      padding: 18px 16px;
+    }
+
+    .hero-title-glass h1 {
+      font-size: 17px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.6;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-glass-card {
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 20px 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .field-label {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffd166;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+
+    .gpa-input {
+      width: 100%;
+      max-width: 280px;
+      height: 56px;
+      background: #ffffff;
+      border: 2.5px solid transparent;
+      border-radius: 16px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: #2b004a;
+      outline: none;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+      transition: all 0.25s ease;
+      user-select: text;
+      direction: ltr;
+    }
+
+    .gpa-input::placeholder {
+      font-size: 14px;
+      font-weight: 600;
+      color: #9c89b8;
+    }
+
+    .gpa-input:focus {
+      border-color: #ff8500;
+      box-shadow: 0 0 18px rgba(255, 133, 0, 0.5);
+    }
+
+    .degree-options-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .degree-btn {
+      padding: 13px 10px;
+      border-radius: 14px;
+      border: 1.8px solid rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.3);
+      color: #e0aaff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* رنگ باکس انتخاب شده نارنجی */
+    .degree-btn.active {
+      background: linear-gradient(135deg, #ea580c, #f97316, #ff8500);
+      border-color: #ffffff;
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(249, 115, 22, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .error-msg {
+      color: #ff6b8b;
+      font-size: 13px;
+      font-weight: 700;
+      display: none;
+    }
+
+    .calc-green-btn {
+      width: 100%;
+      max-width: 340px;
+      height: 52px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(6, 214, 160, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      margin-top: 4px;
+    }
+
+    .calc-green-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 28px rgba(6, 214, 160, 0.65);
+    }
+
+    .calc-green-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* پاپ‌آپ نتیجه */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 2, 26, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-card {
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(145deg, #2b0750, #1a0333);
+      border: 2.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 28px;
+      padding: 28px 22px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      transform: scale(0.86) translateY(16px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* فریم پاپ‌آپ هماهنگ با رنگ باکس وضعیت */
+    .popup-card.frame-alef {
+      border-color: #10b981;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 32px rgba(16, 185, 129, 0.55);
+    }
+    .popup-card.frame-adi {
+      border-color: #f97316;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 32px rgba(249, 115, 22, 0.55);
+    }
+    .popup-card.frame-mashroot {
+      border-color: #ef4444;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 32px rgba(239, 68, 68, 0.55);
+    }
+
+    .popup-overlay.show .popup-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .unit-counter-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 8px;
+      direction: rtl;
+    }
+
+    .unit-big-number {
+      font-size: 84px;
+      font-weight: 950;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 4px 22px rgba(255, 255, 255, 0.45);
+    }
+
+    .unit-small-label {
+      font-size: 20px;
+      font-weight: 800;
+      color: #e0aaff;
+    }
+
+    .status-badge-box {
+      padding: 10px 28px;
+      border-radius: 14px;
+      font-size: 16.5px;
+      font-weight: 900;
+      color: #ffffff !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      letter-spacing: 0.2px;
+    }
+
+    .status-alef {
+      background: linear-gradient(135deg, #059669, #10b981);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+    }
+
+    .status-adi {
+      background: linear-gradient(135deg, #ea580c, #f97316);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
+    }
+
+    .status-mashroot {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
+    }
+
+    /* باکس سفید با متن بنفش */
+    .popup-desc-text {
+      width: 100%;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #4a157a;
+      line-height: 1.85;
+      background: #ffffff;
+      padding: 14px 16px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .popup-desc-text .purple-hl {
+      color: #6a0dad;
+      font-weight: 950;
+      font-size: 16.5px;
+    }
+
+    .popup-close-btn {
+      width: 100%;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .popup-close-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .site-footer {
+      width: 100%;
+      padding: 16px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 5, 45, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin-top: auto;
+    }
+
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
+
+    @media (max-width: 600px) {
+      .top-nav { height: 38px; padding: 0 12px; }
+      .brand-title { font-size: 10.5px; gap: 3px; }
+      .brand-title span.author { font-size: 12px; letter-spacing: 0.8px; }
+      .nav-btn { width: 62px; height: 23px; font-size: 10px; border-radius: 5px; }
+      .custom-nav-icon { width: 12px; height: 12px; }
+      .hero-title-glass h1 { font-size: 15px; }
+      .unit-big-number { font-size: 74px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="brand-title">
+      ایده و طراحی توسط <span class="author">ARMOON</span>
+    </div>
+    <div class="top-links">
+      <a href="https://eitaa.com/arm00n" target="_blank" class="nav-btn eitaa">
+        <img src="../images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا"> ایتا
+      </a>
+      <a href="https://t.me/iarmoon" target="_blank" class="nav-btn telegram">
+        <img src="../images/tel.webp" class="custom-nav-icon" alt="تلگرام"> تلگرام
+      </a>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div class="page-header-row">
+      <a href="../" class="back-home-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>بازگشت به صفحه اصلی</span>
+      </a>
+    </div>
+
+    <div class="hero-title-glass">
+      <h1>محاسبه سقف مجاز انتخاب واحد بر اساس معدل</h1>
+    </div>
+
+    <div class="form-glass-card">
+      <label for="gpaInput" class="field-label">معدل ترمی که گذروندی را وارد کن</label>
+      <input type="text" id="gpaInput" class="gpa-input" inputmode="decimal" placeholder="مثلاً ۱۶.۵۰">
+
+      <div class="field-label" style="margin-top: 6px;">مقطع تحصیلی خودت رو انتخاب کن</div>
+      <div class="degree-options-row">
+        <button type="button" class="degree-btn active" data-degree="bachelor" onclick="selectDegree('bachelor', this)">کارشناسی</button>
+        <button type="button" class="degree-btn" data-degree="master" onclick="selectDegree('master', this)">ارشد</button>
+      </div>
+
+      <div id="errorMsg" class="error-msg">لطفاً یک معدل معتبر بین ۰ تا ۲۰ وارد کنید.</div>
+
+      <button type="button" class="calc-green-btn" onclick="calculateMaxUnits()">محاسبه</button>
+    </div>
+  </main>
+
+  <div class="popup-overlay" id="resultPopup" onclick="closePopup(event)">
+    <div class="popup-card" id="popupCard" onclick="event.stopPropagation()">
+      <div class="unit-counter-row">
+        <span class="unit-big-number" id="animatedUnitNumber">۰</span>
+        <span class="unit-small-label">واحد</span>
+      </div>
+
+      <div class="status-badge-box" id="statusBadgeBox">معدل الف</div>
+
+      <p class="popup-desc-text" id="popupDescText"></p>
+
+      <button type="button" class="popup-close-btn" onclick="hidePopup()">بستن</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-text">
+      تمامی حقوق مادی و معنوی این سامانه متعلق به <span class="brand-hl">استادیاب</span> می‌باشد.
+    </div>
+  </footer>
+
+  <script>
+    let selectedDegree = 'bachelor';
+    let countAnimationFrame = null;
+
+    function toPersianDigits(num) {
+      const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+      return num.toString().replace(/\d/g, x => persianDigits[x]);
+    }
+
+    function normalizeNumberInput(str) {
+      return str
+        .replace(/[۰٠]/g, '0').replace(/[۱١]/g, '1').replace(/[۲٢]/g, '2')
+        .replace(/[۳٣]/g, '3').replace(/[۴٤]/g, '4').replace(/[۵٥]/g, '5')
+        .replace(/[۶٦]/g, '6').replace(/[۷٧]/g, '7').replace(/[۸٨]/g, '8')
+        .replace(/[۹٩]/g, '9')
+        .replace(/[/٫،]/g, '.')
+        .trim();
+    }
+
+    // تبدیل لحظه‌ای ارقام تایپ‌شده به فارسی
+    const gpaInputEl = document.getElementById('gpaInput');
+    gpaInputEl.addEventListener('input', function() {
+      const pos = this.selectionStart;
+      this.value = toPersianDigits(this.value);
+      this.setSelectionRange(pos, pos);
+    });
+
+    function selectDegree(degree, btn) {
+      selectedDegree = degree;
+      document.querySelectorAll('.degree-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function animateCounter(targetValue, element) {
+      if (countAnimationFrame) cancelAnimationFrame(countAnimationFrame);
+      const duration = 750;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 4);
+        const currentVal = Math.round(easeOut * targetValue);
+        element.textContent = toPersianDigits(currentVal);
+
+        if (progress < 1) {
+          countAnimationFrame = requestAnimationFrame(update);
+        } else {
+          element.textContent = toPersianDigits(targetValue);
+        }
+      }
+      countAnimationFrame = requestAnimationFrame(update);
+    }
+
+    function calculateMaxUnits() {
+      const rawVal = gpaInputEl.value;
+      const errorMsg = document.getElementById('errorMsg');
+      const cleaned = normalizeNumberInput(rawVal);
+      const gpa = parseFloat(cleaned);
+
+      if (cleaned === '' || isNaN(gpa) || gpa < 0 || gpa > 20) {
+        errorMsg.style.display = 'block';
+        return;
+      }
+      errorMsg.style.display = 'none';
+
+      let maxUnits = 0;
+      let statusText = '';
+      let statusClass = '';
+      let frameClass = '';
+
+      if (selectedDegree === 'bachelor') {
+        if (gpa >= 17) {
+          maxUnits = 24;
+          statusText = 'معدل الف';
+          statusClass = 'status-alef';
+          frameClass = 'frame-alef';
+        } else if (gpa >= 12) {
+          maxUnits = 20;
+          statusText = 'معدل عادی';
+          statusClass = 'status-adi';
+          frameClass = 'frame-adi';
+        } else {
+          maxUnits = 14;
+          statusText = 'معدل مشروط';
+          statusClass = 'status-mashroot';
+          frameClass = 'frame-mashroot';
+        }
+      } else {
+        if (gpa >= 17) {
+          maxUnits = 14;
+          statusText = 'معدل الف';
+          statusClass = 'status-alef';
+          frameClass = 'frame-alef';
+        } else if (gpa >= 14) {
+          maxUnits = 12;
+          statusText = 'معدل عادی';
+          statusClass = 'status-adi';
+          frameClass = 'frame-adi';
+        } else {
+          maxUnits = 8;
+          statusText = 'معدل مشروط';
+          statusClass = 'status-mashroot';
+          frameClass = 'frame-mashroot';
+        }
+      }
+
+      const popupCard = document.getElementById('popupCard');
+      popupCard.className = 'popup-card ' + frameClass;
+
+      const badgeBox = document.getElementById('statusBadgeBox');
+      badgeBox.textContent = statusText;
+      badgeBox.className = 'status-badge-box ' + statusClass;
+
+      const persianUnits = toPersianDigits(maxUnits);
+      document.getElementById('popupDescText').innerHTML =
+        `مجاز به انتخاب واحد تا حداکثر <span class="purple-hl">${persianUnits}</span> واحد درسی در <span class="purple-hl">ترم مهر/بهمن</span> آینده هستی`;
+
+      const numEl = document.getElementById('animatedUnitNumber');
+      numEl.textContent = '۰';
+
+      document.getElementById('resultPopup').classList.add('show');
+      animateCounter(maxUnits, numEl);
+    }
+
+    function hidePopup() {
+      document.getElementById('resultPopup').classList.remove('show');
+    }
+
+    function closePopup(e) {
+      if (e.target.id === 'resultPopup') {
+        hidePopup();
+      }
+    }
+  </script>
+</body>
+</html>

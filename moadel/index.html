@@ -376,25 +376,33 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
     }
 
-    /* هدر ستون‌های درس - هم‌تراز با ردیف‌ها و دکمه مربعی 42x42 */
+    /* باکس‌های طلایی جداگانه با متن مشکی برای هدر ستون‌ها */
     .courses-header-row {
       width: 100%;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 72px 76px 42px;
+      grid-template-columns: minmax(0, 1fr) 74px 76px 42px;
       gap: 8px;
       align-items: center;
-      padding: 0 2px 4px;
-      font-size: 12px;
-      font-weight: 800;
-      color: #ffd166;
     }
 
-    .courses-header-row span:first-child {
-      text-align: right;
-      padding-right: 6px;
+    .header-gold-box {
+      height: 36px;
+      background: linear-gradient(135deg, #ffe066 0%, #ffd166 50%, #f5b700 100%);
+      border: 1.5px solid #fff3b0;
+      border-radius: 10px;
+      color: #160426;
+      font-size: 11.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 4px;
+      box-shadow: 0 4px 12px rgba(245, 183, 0, 0.32);
+      white-space: nowrap;
     }
 
     .courses-list {
@@ -408,7 +416,7 @@
     .course-row {
       width: 100%;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 72px 76px 42px;
+      grid-template-columns: minmax(0, 1fr) 74px 76px 42px;
       gap: 8px;
       align-items: center;
       animation: rowSlideIn 0.28s ease forwards;
@@ -605,7 +613,7 @@
       transform: scale(0.96);
     }
 
-    /* پاپ‌آپ لیکوئید گلس نتیجه معدل (بدون افکت برق‌زدگی متحرک) */
+    /* پاپ‌آپ لیکوئید گلس نتیجه معدل */
     .popup-overlay {
       position: fixed;
       inset: 0;
@@ -793,8 +801,13 @@
 
       .hero-title-glass h1 { font-size: 15.5px; }
       .courses-header-row, .course-row {
-        grid-template-columns: minmax(0, 1fr) 62px 66px 40px;
+        grid-template-columns: minmax(0, 1fr) 68px 66px 40px;
         gap: 6px;
+      }
+      .header-gold-box {
+        height: 34px;
+        font-size: 10.5px;
+        border-radius: 9px;
       }
       .course-input { height: 40px; font-size: 13.5px; padding: 0 8px; }
       .course-input.num-center { font-size: 15px; }
@@ -879,10 +892,10 @@
 
     <div class="gpa-glass-card">
       <div class="courses-header-row">
-        <span>نام درس</span>
-        <span>تعداد واحد</span>
-        <span>نمره</span>
-        <span>حذف</span>
+        <div class="header-gold-box">نام درس</div>
+        <div class="header-gold-box">تعداد واحد</div>
+        <div class="header-gold-box">نمره</div>
+        <div class="header-gold-box">حذف</div>
       </div>
 
       <div class="courses-list" id="coursesList"></div>
@@ -1056,6 +1069,11 @@
     }
 
     function calculateTermGpa() {
+      // بستن کیبورد گوشی در صورت باز بودن
+      if (document.activeElement && typeof document.activeElement.blur === 'function') {
+        document.activeElement.blur();
+      }
+
       const rows = document.querySelectorAll('#coursesList .course-row');
       hideFancyAlert();
 
@@ -1085,14 +1103,12 @@
 
         if (unitRaw === '' || isNaN(unit) || !Number.isInteger(unit) || unit < 1 || unit > 4) {
           unitInp.classList.add('input-error');
-          unitInp.focus();
           showFancyAlert(`تعداد واحد در ${rowLabel} نامعتبر است! تعداد واحد باید عددی بین ۱ تا ۴ باشد.`);
           return;
         }
 
         if (gradeRaw === '' || isNaN(grade) || grade < 0 || grade > 20) {
           gradeInp.classList.add('input-error');
-          gradeInp.focus();
           showFancyAlert(`نمره وارد شده در ${rowLabel} مجاز نیست! نمره باید عددی بین ۰ تا ۲۰ باشد.`);
           return;
         }

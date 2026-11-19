@@ -125,12 +125,12 @@
       font-weight: 400;
     }
 
-    /* نوار طلایی یکدست و کاملاً بدون سایه و هاله */
+    /* نوار سفید یکدست بالای صفحه */
     .gold-top-nav {
       position: relative;
       width: 100%;
       height: 46px;
-      background-color: #ffd166;
+      background-color: #ffffff;
       box-shadow: none;
       border: none;
       display: flex;
@@ -147,7 +147,7 @@
       gap: 12px;
     }
 
-    /* آیکون همبرگری سه‌خطی مشکی ساده و جذاب بدون باکس */
+    /* آیکون همبرگری سه‌خطی بنفش بدون باکس */
     .hamburger-btn {
       display: inline-flex;
       flex-direction: column;
@@ -171,7 +171,7 @@
     .hb-line {
       display: block;
       height: 2.6px;
-      background-color: #000000;
+      background-color: #5a189a;
       border-radius: 3px;
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s ease, opacity 0.25s ease;
     }
@@ -211,7 +211,7 @@
       filter: none;
     }
 
-    /* نوشته Designed by ARMOON ساده و بدون باکس و سایه روی نوار */
+    /* نوشته Designed by ARMOON به رنگ بنفش */
     .nav-designed-text {
       display: inline-flex;
       align-items: baseline;
@@ -225,7 +225,7 @@
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 0.4px;
-      color: #111111;
+      color: #5a189a;
     }
 
     .nav-designed-author {
@@ -233,7 +233,7 @@
       font-size: 12.5px;
       font-weight: 900;
       letter-spacing: 1.1px;
-      color: #000000;
+      color: #5a189a;
     }
 
     /* منوی کشویی از راست به چپ */
@@ -668,7 +668,7 @@
     .card-s12 { background-image: url('images/s12.webp'); }
     .card-s13 { background-image: url('images/s13.webp'); }
 
-    /* باکس روزشمار هم‌اندازه s1 با عکس timer.webp */
+    /* باکس روزشمار هم‌اندازه s1 بدون فریم */
     .countdown-banner-card {
       position: relative;
       width: 100%;
@@ -680,8 +680,8 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border: 1.5px solid rgba(255, 209, 102, 0.55);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+      border: none;
+      box-shadow: none;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -1230,7 +1230,7 @@
 </head>
 <body>
 
-  <!-- نوار طلایی یکدست و بدون سایه بالای صفحه -->
+  <!-- نوار سفید یکدست بالای صفحه -->
   <header class="gold-top-nav">
     <div class="nav-right-group">
       <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
@@ -1313,13 +1313,7 @@
     <div class="home-actions-wrapper" id="homeActionsWrapper">
       <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
 
-      <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
-        <div class="ratio-1-1-card card-poshtibanan neon-red-frame" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'"></div>
-        <div class="ratio-1-1-card card-ertebat neon-blue-frame" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
-      </div>
-
-      <!-- باکس روزشمار تا ۲۱ دی ۱۴۰۵ شمسی -->
+      <!-- باکس روزشمار تا ۲۱ دی ۱۴۰۵ شمسی (بدون فریم و زیر s1) -->
       <div class="countdown-banner-card" id="countdownBanner">
         <div class="countdown-units-group">
           <div class="countdown-box-item">
@@ -1339,6 +1333,12 @@
             <span class="countdown-label">روز</span>
           </div>
         </div>
+      </div>
+
+      <div class="quick-actions-row-three">
+        <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
+        <div class="ratio-1-1-card card-poshtibanan neon-red-frame" id="cardPoshtibanan" onclick="window.location.href='poshtiban/'"></div>
+        <div class="ratio-1-1-card card-ertebat neon-blue-frame" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
       </div>
 
       <div class="toolbox-divider">

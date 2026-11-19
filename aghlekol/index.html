@@ -1,23 +1,972 @@
-[
-  {
-    "category": "فوتبال",
-    "difficulty": "easy",
-    "question": "کدام کشور بیشترین قهرمانی در جام جهانی فوتبال را دارد؟",
-    "options": ["آلمان", "برزیل", "آرژانتین", "ایتالیا"],
-    "answer": 1
-  },
-  {
-    "category": "تاریخ",
-    "difficulty": "medium",
-    "question": "پایتخت سلسله هخامنشیان در زمان داریوش بزرگ کدام شهر بود؟",
-    "options": ["شوش", "تخت جمشید", "هگمتانه", "پاسارگاد"],
-    "answer": 1
-  },
-  {
-    "category": "علمی",
-    "difficulty": "hard",
-    "question": "عدد اتمی عنصر طلا در جدول تناوبی چیست؟",
-    "options": ["۷۸", "۷۹", "۸۰", "۴۷"],
-    "answer": 1
-  }
-]
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>استادیاب | چالش عقل کل</title>
+
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="../images/logo-black.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Bold.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Black.ttf') format('truetype'); font-weight: 900; font-display: block; }
+
+    :root {
+      --gold: #ffd166;
+      --cyan: #00f0ff;
+      --green: #06d6a0;
+      --red: #ff2a5f;
+      --orange: #ff9f1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'AppFont', sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #4b1282 0%, #1d0438 55%, #0e011c 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .gold-top-nav {
+      position: relative; width: 100%; height: 46px; background-color: #ffffff;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 14px; z-index: 100; flex-shrink: 0;
+    }
+    .nav-right-group { display: inline-flex; align-items: center; gap: 12px; }
+    .hamburger-btn {
+      display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4.5px;
+      width: 28px; height: 28px; padding: 2px; border: none; background: transparent; cursor: pointer;
+    }
+    .hb-line { display: block; height: 2.6px; background-color: #5a189a; border-radius: 3px; transition: 0.3s ease; }
+    .hb-line.line-1, .hb-line.line-3 { width: 22px; }
+    .hb-line.line-2 { width: 16px; }
+    .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(7.1px) rotate(45deg); }
+    .hamburger-btn.is-active .hb-line.line-2 { opacity: 0; width: 0; }
+    .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-7.1px) rotate(-45deg); }
+    .nav-mini-logo { height: 25px; width: auto; object-fit: contain; display: block; }
+    .nav-designed-text { display: inline-flex; align-items: baseline; gap: 4px; direction: ltr; white-space: nowrap; }
+    .nav-designed-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; color: #5a189a; }
+    .nav-designed-author { font-family: 'Montserrat', sans-serif; font-size: 12.5px; font-weight: 900; letter-spacing: 1.1px; color: #5a189a; }
+
+    .drawer-backdrop {
+      position: fixed; inset: 0; background: rgba(10, 2, 22, 0.72); backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden; transition: 0.35s ease; z-index: 998;
+    }
+    .drawer-backdrop.open { opacity: 1; visibility: visible; }
+    .side-drawer {
+      position: fixed; top: 0; right: 0; width: 285px; max-width: 82vw; height: 100vh;
+      background: linear-gradient(165deg, #2b0750 0%, #190330 60%, #110122 100%);
+      visibility: hidden; transform: translateX(100%); transition: 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 999; display: flex; flex-direction: column; overflow-y: auto;
+    }
+    .side-drawer.open { visibility: visible; border-left: 1.8px solid rgba(255, 209, 102, 0.45); box-shadow: -10px 0 36px rgba(0,0,0,0.65); transform: translateX(0); }
+    .drawer-top-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .drawer-title-text { font-size: 13.5px; font-weight: 800; color: #ffd166; }
+    .drawer-close-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; cursor: pointer; }
+    .drawer-image-slot img { width: 100%; height: auto; display: block; }
+    .drawer-nav-list { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+    .drawer-nav-link {
+      display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 700;
+    }
+    .drawer-nav-link i { width: 20px; text-align: center; color: #ffd166; font-size: 15px; }
+
+    .main-container {
+      width: 94%; max-width: 620px; display: flex; flex-direction: column; align-items: center;
+      text-align: center; flex: 1 0 auto; padding-top: 16px; padding-bottom: 35px; gap: 15px;
+    }
+
+    .top-bar-controls {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+
+    .back-home-btn, .rules-pill-btn {
+      display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.22); color: #fff; padding: 7px 13px; border-radius: 12px;
+      text-decoration: none; font-size: 12px; font-weight: 800; backdrop-filter: blur(10px); cursor: pointer; transition: 0.2s ease;
+    }
+    .rules-pill-btn { border-color: rgba(255, 209, 102, 0.55); color: #ffd166; }
+    .rules-pill-btn:hover, .back-home-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+
+    .arena-hero-banner {
+      width: 100%; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.16), rgba(0, 240, 255, 0.1), rgba(157, 78, 221, 0.2));
+      backdrop-filter: blur(18px); border: 1.8px solid rgba(255, 209, 102, 0.65);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.45), 0 0 22px rgba(255, 209, 102, 0.22);
+      border-radius: 24px; padding: 18px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .arena-badge {
+      background: linear-gradient(135deg, #ffe066, #f5b700); color: #160426;
+      padding: 3px 12px; border-radius: 99px; font-size: 11px; font-weight: 900; letter-spacing: 0.3px;
+    }
+    .arena-hero-banner h1 {
+      font-size: 21px; font-weight: 900; color: #ffffff;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.6);
+    }
+    .arena-sub { font-size: 12px; font-weight: 600; color: #e0aaff; }
+
+    /* انتخاب سبک بازی */
+    .game-modes-switch {
+      width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      background: rgba(0, 0, 0, 0.32); padding: 6px; border-radius: 18px;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+    }
+    .mode-select-btn {
+      padding: 12px 10px; border-radius: 13px; border: 1.5px solid transparent;
+      background: transparent; color: #d8b4fe; font-size: 13.5px; font-weight: 800;
+      display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; transition: 0.25s ease;
+    }
+    .mode-select-btn span.mode-desc { font-size: 10.5px; font-weight: 600; opacity: 0.85; }
+    .mode-select-btn.active.normal-mode {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      border-color: #90e0ef; color: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 180, 216, 0.45);
+    }
+    .mode-select-btn.active.record-mode {
+      background: linear-gradient(135deg, #f72585, #b5179e);
+      border-color: #ff85a1; color: #ffffff;
+      box-shadow: 0 4px 16px rgba(247, 37, 133, 0.45);
+    }
+
+    /* کارت قوانین */
+    .rules-accordion {
+      width: 100%; display: none; flex-direction: column; gap: 8px; text-align: right;
+      background: rgba(18, 4, 36, 0.82); border: 1.5px solid rgba(255, 209, 102, 0.45);
+      border-radius: 18px; padding: 14px; font-size: 12.2px; line-height: 1.75; color: #f3e8ff;
+      animation: slideDown 0.25s ease;
+    }
+    .rules-accordion.show { display: flex; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+    .rule-item { display: flex; align-items: flex-start; gap: 8px; }
+    .rule-item i { color: #ffd166; margin-top: 4px; flex-shrink: 0; }
+
+    /* هشدار نبود فایل JSON */
+    .empty-json-alert {
+      width: 100%; display: none; align-items: center; gap: 11px; text-align: right;
+      padding: 12px 14px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.28), rgba(153, 27, 27, 0.38));
+      border: 1.5px solid rgba(255, 107, 139, 0.8); color: #ffe4e8;
+      font-size: 12.8px; font-weight: 800; line-height: 1.65;
+    }
+    .empty-json-alert.show { display: flex; }
+    .alert-sq-ic {
+      width: 36px; height: 36px; border-radius: 10px; background: #ef4444; color: #fff;
+      display: inline-flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+    }
+
+    /* شبکه دسته‌بندی‌ها */
+    .categories-wrapper {
+      width: 100%; display: flex; flex-direction: column; gap: 12px;
+    }
+    .categories-grid {
+      width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+    }
+    .cat-card {
+      position: relative; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 255, 255, 0.16); border-radius: 16px;
+      padding: 13px 10px; display: flex; align-items: center; gap: 10px;
+      color: #ffffff; cursor: pointer; transition: 0.22s ease; text-align: right;
+    }
+    .cat-card:hover {
+      background: rgba(255, 255, 255, 0.15); border-color: #00f0ff;
+      transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0, 240, 255, 0.22);
+    }
+    .cat-card:active { transform: scale(0.97); }
+    .cat-icon-box {
+      width: 38px; height: 38px; border-radius: 11px;
+      background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4);
+      display: flex; align-items: center; justify-content: center; font-size: 16px; color: #00f0ff; flex-shrink: 0;
+    }
+    .cat-title { font-size: 12.8px; font-weight: 800; line-height: 1.4; }
+
+    .cat-card.aghlekol-special {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.22), rgba(245, 183, 0, 0.12));
+      border: 1.8px solid #ffd166;
+      box-shadow: 0 6px 22px rgba(245, 183, 0, 0.25);
+      justify-content: center;
+      padding: 15px 14px;
+    }
+    .cat-card.aghlekol-special .cat-icon-box {
+      background: linear-gradient(135deg, #ffe066, #f5b700);
+      border-color: #fff; color: #160426; font-size: 18px;
+    }
+    .cat-card.aghlekol-special .cat-title {
+      font-size: 15px; font-weight: 900; color: #ffd166;
+    }
+
+    /* بخش شروع حالت رکوردی */
+    .record-lobby-box {
+      width: 100%; display: none; flex-direction: column; align-items: center; gap: 14px;
+      background: linear-gradient(145deg, rgba(247, 37, 133, 0.16), rgba(58, 12, 163, 0.28));
+      border: 1.8px solid rgba(255, 117, 143, 0.65); border-radius: 22px; padding: 22px 16px;
+    }
+    .record-lobby-box.show { display: flex; }
+    .hearts-preview { display: flex; gap: 10px; font-size: 28px; color: #ff2a5f; filter: drop-shadow(0 0 10px rgba(255,42,95,0.6)); }
+    .best-record-pill {
+      background: rgba(0,0,0,0.4); border: 1px solid #ffd166; color: #ffd166;
+      padding: 6px 16px; border-radius: 12px; font-size: 13px; font-weight: 800;
+    }
+    .start-record-btn {
+      width: 100%; height: 52px; border: none; border-radius: 15px;
+      background: linear-gradient(135deg, #f72585, #b5179e); color: #fff;
+      font-size: 15.5px; font-weight: 900; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(247, 37, 133, 0.45); display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+
+    /* صفحه بازی فعال */
+    .quiz-arena {
+      width: 100%; display: none; flex-direction: column; gap: 13px;
+      animation: fadeIn 0.3s ease;
+    }
+    .quiz-arena.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+    .quiz-hud {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      background: rgba(15, 3, 30, 0.72); border: 1.5px solid rgba(255,255,255,0.16);
+      border-radius: 16px; padding: 10px 14px;
+    }
+    .hud-chip {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 800;
+      background: rgba(255,255,255,0.09); padding: 5px 11px; border-radius: 10px;
+    }
+    .hud-chip.score-chip { color: #06d6a0; border: 1px solid rgba(6, 214, 160, 0.4); }
+    .hud-chip.qcount-chip { color: #ffd166; border: 1px solid rgba(255, 209, 102, 0.4); }
+
+    .hearts-hud { display: flex; align-items: center; gap: 6px; font-size: 18px; }
+    .heart-ic { color: #ff2a5f; transition: 0.3s ease; filter: drop-shadow(0 0 6px rgba(255,42,95,0.6)); }
+    .heart-ic.lost { color: rgba(255,255,255,0.2); filter: none; transform: scale(0.82); }
+
+    /* نوار اعلام وضعیت فشار و سختی */
+    .pressure-bar-box {
+      width: 100%; background: rgba(15, 3, 30, 0.75); border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 15px; padding: 10px 14px; display: flex; flex-direction: column; gap: 7px;
+    }
+    .pressure-header {
+      display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 800;
+    }
+    .pressure-stage-label { display: inline-flex; align-items: center; gap: 6px; }
+    .pressure-track {
+      width: 100%; height: 10px; background: rgba(255,255,255,0.12); border-radius: 99px; overflow: hidden;
+    }
+    .pressure-fill {
+      height: 100%; width: 3.33%; border-radius: 99px; transition: width 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+    }
+    .stage-easy .pressure-stage-label { color: #06d6a0; }
+    .stage-easy .pressure-fill { background: linear-gradient(90deg, #059669, #06d6a0); box-shadow: 0 0 12px rgba(6, 214, 160, 0.7); }
+
+    .stage-medium .pressure-stage-label { color: #ff9f1c; }
+    .stage-medium .pressure-fill { background: linear-gradient(90deg, #f59e0b, #ff9f1c); box-shadow: 0 0 12px rgba(255, 159, 28, 0.75); }
+
+    .stage-hard .pressure-stage-label { color: #ff2a5f; }
+    .stage-hard .pressure-fill { background: linear-gradient(90deg, #dc2626, #ff2a5f); box-shadow: 0 0 14px rgba(255, 42, 95, 0.85); }
+
+    /* تایمر ۵ ثانیه‌ای */
+    .timer-container {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+      background: rgba(0,0,0,0.35); border-radius: 14px; padding: 8px 12px;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    .timer-track {
+      flex: 1; height: 10px; background: rgba(255,255,255,0.12); border-radius: 99px; overflow: hidden;
+    }
+    .timer-fill {
+      height: 100%; width: 100%; background: linear-gradient(90deg, #ff2a5f, #ffd166, #00f0ff);
+      border-radius: 99px; transition: width 0.08s linear;
+    }
+    .timer-sec-badge {
+      min-width: 44px; text-align: center; font-size: 14px; font-weight: 900;
+      color: #00f0ff; direction: ltr;
+    }
+    .timer-sec-badge.urgent { color: #ff2a5f; animation: pulseUrgent 0.45s infinite alternate; }
+    @keyframes pulseUrgent { from { transform: scale(1); } to { transform: scale(1.16); } }
+
+    .question-card {
+      width: 100%; background: linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.05));
+      backdrop-filter: blur(16px); border: 1.8px solid rgba(0, 240, 255, 0.5);
+      border-radius: 22px; padding: 22px 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.4);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .q-cat-tag {
+      font-size: 11px; font-weight: 800; color: #ffd166;
+      background: rgba(255, 209, 102, 0.15); border: 1px solid rgba(255, 209, 102, 0.4);
+      padding: 3px 11px; border-radius: 99px;
+    }
+    .question-text {
+      font-size: 16.5px; font-weight: 800; color: #ffffff; line-height: 1.75;
+    }
+
+    .options-grid {
+      width: 100%; display: flex; flex-direction: column; gap: 10px;
+    }
+    .option-btn {
+      width: 100%; min-height: 52px; padding: 12px 14px; border-radius: 15px;
+      background: rgba(255, 255, 255, 0.09); border: 1.6px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff; font-size: 14px; font-weight: 800; text-align: right;
+      display: flex; align-items: center; gap: 11px; cursor: pointer; transition: 0.2s ease;
+    }
+    .option-btn:hover:not(:disabled) {
+      background: rgba(0, 240, 255, 0.16); border-color: #00f0ff; transform: translateX(-3px);
+    }
+    .option-btn:disabled { cursor: default; }
+    .opt-letter {
+      width: 30px; height: 30px; border-radius: 9px; background: rgba(255,255,255,0.14);
+      display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #ffd166; flex-shrink: 0;
+    }
+    .option-btn.correct {
+      background: linear-gradient(135deg, #059669, #10b981) !important;
+      border-color: #a7f3d0 !important; box-shadow: 0 0 20px rgba(16, 185, 129, 0.65);
+    }
+    .option-btn.correct .opt-letter { background: #ffffff; color: #059669; }
+    .option-btn.wrong {
+      background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+      border-color: #fecaca !important; box-shadow: 0 0 20px rgba(239, 68, 68, 0.65);
+    }
+    .option-btn.wrong .opt-letter { background: #ffffff; color: #dc2626; }
+
+    /* پاپ‌آپ فان پایان بازی */
+    .fun-popup-overlay {
+      position: fixed; inset: 0; background: rgba(8, 1, 18, 0.82); backdrop-filter: blur(14px);
+      display: flex; align-items: center; justify-content: center; padding: 18px;
+      z-index: 999; opacity: 0; visibility: hidden; transition: 0.35s ease;
+    }
+    .fun-popup-overlay.show { opacity: 1; visibility: visible; }
+
+    .fun-popup-card {
+      width: 100%; max-width: 410px;
+      background: linear-gradient(160deg, #32095e 0%, #1c0436 100%);
+      border: 2.5px solid #ffd166; border-radius: 30px;
+      padding: 26px 20px 22px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.75), 0 0 38px rgba(255, 209, 102, 0.35);
+      transform: scale(0.65) rotate(-4deg);
+      transition: transform 0.48s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fun-popup-overlay.show .fun-popup-card {
+      transform: scale(1) rotate(0deg);
+    }
+
+    .fun-emoji-stage {
+      width: 84px; height: 84px; border-radius: 24px;
+      background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 209, 102, 0.6);
+      display: flex; align-items: center; justify-content: center; font-size: 46px;
+      animation: bounceTrophy 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes bounceTrophy {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(-7px) scale(1.07); }
+    }
+
+    .fun-rank-title {
+      font-size: 20px; font-weight: 900; color: #ffd166;
+      text-shadow: 0 2px 12px rgba(255, 209, 102, 0.45);
+    }
+    .fun-score-pill {
+      background: rgba(0, 240, 255, 0.15); border: 1.5px solid #00f0ff;
+      color: #ffffff; padding: 7px 20px; border-radius: 14px; font-size: 16px; font-weight: 900;
+    }
+    .fun-roast-msg {
+      background: #ffffff; color: #2b004a; padding: 13px 15px; border-radius: 16px;
+      font-size: 13.5px; font-weight: 800; line-height: 1.75; width: 100%;
+    }
+    .popup-btns-row {
+      width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;
+    }
+    .popup-btn-retry {
+      height: 46px; border: none; border-radius: 13px;
+      background: linear-gradient(135deg, #059669, #10b981); color: #fff;
+      font-size: 14px; font-weight: 900; cursor: pointer;
+    }
+    .popup-btn-menu {
+      height: 46px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 13px;
+      background: rgba(255,255,255,0.12); color: #fff;
+      font-size: 14px; font-weight: 800; cursor: pointer;
+    }
+
+    .site-footer {
+      width: 100%; padding: 16px 15px; display: flex; align-items: center; justify-content: center;
+      background: rgba(22, 5, 45, 0.85); border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: auto;
+    }
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
+
+    @media (max-width: 480px) {
+      .categories-grid { grid-template-columns: 1fr; }
+      .arena-hero-banner h1 { font-size: 18.5px; }
+      .question-text { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="gold-top-nav">
+    <div class="nav-right-group">
+      <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
+        <span class="hb-line line-1"></span>
+        <span class="hb-line line-2"></span>
+        <span class="hb-line line-3"></span>
+      </button>
+      <img src="../images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
+    </div>
+    <div class="nav-designed-text">
+      <span class="nav-designed-label">Designed by</span>
+      <span class="nav-designed-author">ARMOON</span>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
+    <div class="drawer-top-bar">
+      <span class="drawer-title-text">منوی دسترسی سریع</span>
+      <button type="button" class="drawer-close-btn" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-image-slot">
+      <img src="../images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+    </div>
+    <nav class="drawer-nav-list">
+      <a href="../" class="drawer-nav-link"><i class="fa-solid fa-house"></i><span>صفحه اصلی استادیاب</span></a>
+      <a href="../saghfmojaz/" class="drawer-nav-link"><i class="fa-solid fa-calculator"></i><span>محاسبه سقف مجاز واحد</span></a>
+      <a href="../testdorost/" class="drawer-nav-link"><i class="fa-solid fa-check-double"></i><span>محاسبه حداقل تست صحیح</span></a>
+      <a href="../moadel/" class="drawer-nav-link"><i class="fa-solid fa-graduation-cap"></i><span>محاسبه هوشمند معدل ترمی</span></a>
+    </nav>
+  </aside>
+
+  <main class="main-container">
+    <div class="top-bar-controls">
+      <a href="../" class="back-home-btn"><i class="fa-solid fa-house"></i><span>صفحه اصلی</span></a>
+      <button type="button" class="rules-pill-btn" onclick="toggleRules()"><i class="fa-solid fa-scroll"></i><span>قوانین مسابقه</span></button>
+    </div>
+
+    <div id="rulesBox" class="rules-accordion">
+      <div class="rule-item"><i class="fa-solid fa-stopwatch"></i><span><b>فرصت طلایی ۵ ثانیه‌ای:</b> برای پاسخ به هر سوال فقط ۵ ثانیه زمان دارید؛ اتمام زمان به منزله پاسخ غلط است.</span></div>
+      <div class="rule-item"><i class="fa-solid fa-layer-group"></i><span><b>سبک نرمال (۳۰ سوالی):</b> ۱۰ سوال اول ساده، ۱۰ سوال دوم متوسط و ۱۰ سوال پایانی سخت هستند. بالای ۲۰ پاسخ صحیح لقب ویژه می‌گیرد!</span></div>
+      <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> ترکیبی از همه دسته‌بندی‌ها با ۳ جان (❤️). با هر اشتباه یک قلب کم می‌شود و بازی تا آخرین جان ادامه دارد!</span></div>
+    </div>
+
+    <!-- هشدار در صورت نبود سوال در questions.json -->
+    <div id="emptyJsonAlert" class="empty-json-alert">
+      <div class="alert-sq-ic"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div id="emptyJsonText">فایل questions.json یافت نشد یا سوالی در این بخش ثبت نشده است.</div>
+    </div>
+
+    <div id="lobbySection" style="width: 100%; display: flex; flex-direction: column; gap: 14px;">
+      <div class="arena-hero-banner">
+        <span class="arena-badge">چالش سرعت و هوش</span>
+        <h1>مسابقه بزرگ عقل کل</h1>
+        <p class="arena-sub">۵ ثانیه فرصت برای هر سوال • دانش خودت رو به چالش بکش!</p>
+      </div>
+
+      <div class="game-modes-switch">
+        <button type="button" class="mode-select-btn active normal-mode" id="btnModeNormal" onclick="selectGameStyle('normal')">
+          <span><i class="fa-solid fa-trophy"></i> سبک نرمال</span>
+          <span class="mode-desc">۳۰ سوال مرحله‌ای + دسته‌بندی</span>
+        </button>
+        <button type="button" class="mode-select-btn record-mode" id="btnModeRecord" onclick="selectGameStyle('record')">
+          <span><i class="fa-solid fa-fire"></i> سبک رکوردی</span>
+          <span class="mode-desc">بی‌نهایت سوال + ۳ جان ❤️</span>
+        </button>
+      </div>
+
+      <div id="normalCategoriesSection" class="categories-wrapper">
+        <div class="categories-grid" id="categoriesGrid"></div>
+      </div>
+
+      <div id="recordLobbyBox" class="record-lobby-box">
+        <div class="hearts-preview">
+          <i class="fa-solid fa-heart"></i>
+          <i class="fa-solid fa-heart"></i>
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <h2 style="font-size: 17px; font-weight: 900;">حالت بقا و رکوردزنی بی‌نهایت</h2>
+        <p style="font-size: 12.5px; color: #f3e8ff; line-height: 1.7;">سوالات از تمام موضوعات به صورت تصادفی پرسیده می‌شوند. فقط ۳ فرصت اشتباه دارید!</p>
+        <div class="best-record-pill" id="bestRecordDisplay">بهترین رکورد شما: ۰ امتیاز</div>
+        <button type="button" class="start-record-btn" onclick="startGame('عقل کل')">
+          <i class="fa-solid fa-play"></i>
+          <span>شروع چالش رکوردی</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="quizArena" class="quiz-arena">
+      <div class="quiz-hud">
+        <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۳۰</div>
+        <div id="heartsHud" class="hearts-hud" style="display: none;">
+          <i class="fa-solid fa-heart heart-ic" id="heart1"></i>
+          <i class="fa-solid fa-heart heart-ic" id="heart2"></i>
+          <i class="fa-solid fa-heart heart-ic" id="heart3"></i>
+        </div>
+        <div class="hud-chip score-chip" id="hudScoreCounter">صحیح: ۰</div>
+      </div>
+
+      <div id="pressureBarBox" class="pressure-bar-box stage-easy">
+        <div class="pressure-header">
+          <span class="pressure-stage-label" id="pressureStageText">
+            <i class="fa-solid fa-feather"></i> سطح فشار: ملایم (سوالات ساده)
+          </span>
+          <span style="color: #d8b4fe;" id="pressureStepText">۱ / ۳۰</span>
+        </div>
+        <div class="pressure-track">
+          <div class="pressure-fill" id="pressureFill"></div>
+        </div>
+      </div>
+
+      <div class="timer-container">
+        <i class="fa-solid fa-stopwatch" style="color: #ffd166;"></i>
+        <div class="timer-track">
+          <div class="timer-fill" id="timerFill"></div>
+        </div>
+        <div class="timer-sec-badge" id="timerSecText">5.0s</div>
+      </div>
+
+      <div class="question-card">
+        <span class="q-cat-tag" id="qCategoryTag">دسته‌بندی</span>
+        <div class="question-text" id="questionText">در حال بارگذاری سوال...</div>
+      </div>
+
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+  </main>
+
+  <div class="fun-popup-overlay" id="funPopupOverlay">
+    <div class="fun-popup-card">
+      <div class="fun-emoji-stage" id="funEmoji">🧠</div>
+      <div class="fun-rank-title" id="funRankTitle">عقل کل واقعی!</div>
+      <div class="fun-score-pill" id="funScorePill">۲۵ پاسخ صحیح از ۳۰</div>
+      <p class="fun-roast-msg" id="funRoastMsg"></p>
+      <div class="popup-btns-row">
+        <button type="button" class="popup-btn-retry" onclick="restartCurrentGame()">بازی مجدد</button>
+        <button type="button" class="popup-btn-menu" onclick="returnToLobby()">تغییر بخش</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-text">
+      تمامی حقوق مادی و معنوی این سامانه متعلق به <span class="brand-hl">استادیاب</span> می‌باشد.
+    </div>
+  </footer>
+
+  <script>
+    (function initSideDrawer() {
+      const openBtn = document.getElementById('openDrawerBtn');
+      const closeBtn = document.getElementById('closeDrawerBtn');
+      const drawer = document.getElementById('sideDrawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      openBtn.addEventListener('click', () => { drawer.classList.add('open'); backdrop.classList.add('open'); openBtn.classList.add('is-active'); });
+      const closeMenu = () => { drawer.classList.remove('open'); backdrop.classList.remove('open'); openBtn.classList.remove('is-active'); };
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
+    })();
+
+    const toFa = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+    const CATEGORIES = [
+      { name: 'فیلم و سریال ایرانی', icon: 'fa-film' },
+      { name: 'فیلم و سریال خارجی', icon: 'fa-clapperboard' },
+      { name: 'ورزشی', icon: 'fa-medal' },
+      { name: 'فوتبال', icon: 'fa-futbol' },
+      { name: 'جغرافیا', icon: 'fa-earth-asia' },
+      { name: 'تاریخ', icon: 'fa-landmark' },
+      { name: 'مذهبی', icon: 'fa-mosque' },
+      { name: 'علمی', icon: 'fa-atom' },
+      { name: 'زبان انگلیسی', icon: 'fa-language' },
+      { name: 'گیم و تکنولوژی', icon: 'fa-gamepad' },
+      { name: 'عقل کل', icon: 'fa-brain', special: true }
+    ];
+
+    let allQuestions = [];
+    let gameStyle = 'normal';
+    let activeCategory = 'عقل کل';
+    let sessionQuestions = [];
+    let currentIndex = 0;
+    let correctCount = 0;
+    let lives = 3;
+    let timerInterval = null;
+    let isAnswered = false;
+
+    async function loadQuestionsJson() {
+      try {
+        const res = await fetch('questions.json?v=' + Date.now());
+        if (!res.ok) throw new Error('not found');
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          allQuestions = data;
+        }
+      } catch (e) {
+        allQuestions = [];
+      }
+    }
+
+    function renderCategories() {
+      const grid = document.getElementById('categoriesGrid');
+      grid.innerHTML = '';
+      CATEGORIES.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'cat-card' + (cat.special ? ' aghlekol-special' : '');
+        btn.innerHTML = `
+          <div class="cat-icon-box"><i class="fa-solid ${cat.icon}"></i></div>
+          <div class="cat-title">${cat.name}</div>
+        `;
+        btn.onclick = () => startGame(cat.name);
+        grid.appendChild(btn);
+      });
+    }
+
+    function toggleRules() {
+      document.getElementById('rulesBox').classList.toggle('show');
+    }
+
+    function updateBestRecordUI() {
+      const best = localStorage.getItem('ostadyab_aghlekol_best') || 0;
+      document.getElementById('bestRecordDisplay').textContent = `بهترین رکورد شما: ${toFa(best)} امتیاز`;
+    }
+
+    function selectGameStyle(style) {
+      gameStyle = style;
+      document.getElementById('emptyJsonAlert').classList.remove('show');
+      document.getElementById('btnModeNormal').classList.toggle('active', style === 'normal');
+      document.getElementById('btnModeRecord').classList.toggle('active', style === 'record');
+      document.getElementById('normalCategoriesSection').style.display = style === 'normal' ? 'flex' : 'none';
+      document.getElementById('recordLobbyBox').classList.toggle('show', style === 'record');
+      if (style === 'record') updateBestRecordUI();
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function buildQuestionPool(categoryName) {
+      const pool = categoryName === 'عقل کل'
+        ? [...allQuestions]
+        : allQuestions.filter(q => q.category === categoryName);
+
+      if (pool.length === 0) return [];
+
+      if (gameStyle === 'record') {
+        return shuffleArray(pool);
+      }
+
+      const easy = shuffleArray(pool.filter(q => q.difficulty === 'easy'));
+      const medium = shuffleArray(pool.filter(q => q.difficulty === 'medium'));
+      const hard = shuffleArray(pool.filter(q => q.difficulty === 'hard'));
+
+      const pickWithFallback = (primary, count) => {
+        const res = [];
+        const usedSet = new Set();
+        for (const item of primary) {
+          if (res.length < count) {
+            res.push(item);
+            usedSet.add(item);
+          }
+        }
+        if (res.length < count) {
+          const rest = shuffleArray(pool.filter(q => !usedSet.has(q)));
+          for (const item of rest) {
+            if (res.length < count) res.push(item);
+          }
+        }
+        let idx = 0;
+        while (res.length < count && pool.length > 0) {
+          res.push(pool[idx % pool.length]);
+          idx++;
+        }
+        return res;
+      };
+
+      return [
+        ...pickWithFallback(easy, 10),
+        ...pickWithFallback(medium, 10),
+        ...pickWithFallback(hard, 10)
+      ];
+    }
+
+    function showJsonAlert(msg) {
+      const box = document.getElementById('emptyJsonAlert');
+      document.getElementById('emptyJsonText').textContent = msg;
+      box.classList.add('show');
+    }
+
+    function startGame(categoryName) {
+      document.getElementById('emptyJsonAlert').classList.remove('show');
+
+      if (!allQuestions || allQuestions.length === 0) {
+        showJsonAlert('فایل questions.json در پوشه aghlekol قرار نگرفته یا خالی است!');
+        return;
+      }
+
+      const builtPool = buildQuestionPool(categoryName);
+      if (builtPool.length === 0) {
+        showJsonAlert(`هنوز سوالی برای دسته‌بندی «${categoryName}» در فایل questions.json ثبت نشده است.`);
+        return;
+      }
+
+      activeCategory = categoryName;
+      sessionQuestions = builtPool;
+      currentIndex = 0;
+      correctCount = 0;
+      lives = 3;
+
+      document.getElementById('lobbySection').style.display = 'none';
+      document.getElementById('rulesBox').classList.remove('show');
+      document.getElementById('funPopupOverlay').classList.remove('show');
+      document.getElementById('quizArena').classList.add('active');
+
+      const isRecord = gameStyle === 'record';
+      document.getElementById('heartsHud').style.display = isRecord ? 'flex' : 'none';
+      document.getElementById('pressureBarBox').style.display = isRecord ? 'none' : 'flex';
+
+      if (isRecord) {
+        [1, 2, 3].forEach(n => document.getElementById('heart' + n).classList.remove('lost'));
+      }
+
+      renderNextQuestion();
+    }
+
+    function updatePressureBar(qNumber) {
+      const box = document.getElementById('pressureBarBox');
+      const label = document.getElementById('pressureStageText');
+      const step = document.getElementById('pressureStepText');
+      const fill = document.getElementById('pressureFill');
+
+      const pct = Math.min(100, (qNumber / 30) * 100);
+      fill.style.width = pct + '%';
+      step.textContent = `${toFa(qNumber)} / ۳۰`;
+
+      box.classList.remove('stage-easy', 'stage-medium', 'stage-hard');
+      if (qNumber <= 10) {
+        box.classList.add('stage-easy');
+        label.innerHTML = '<i class="fa-solid fa-feather"></i> سطح فشار: ملایم (سوالات ساده)';
+      } else if (qNumber <= 20) {
+        box.classList.add('stage-medium');
+        label.innerHTML = '<i class="fa-solid fa-bolt"></i> سطح فشار: داغ شد! (سوالات متوسط)';
+      } else {
+        box.classList.add('stage-hard');
+        label.innerHTML = '<i class="fa-solid fa-fire-flame-curved"></i> سطح فشار: بحرانی! (سوالات سخت)';
+      }
+    }
+
+    function renderNextQuestion() {
+      clearInterval(timerInterval);
+      isAnswered = false;
+
+      if (gameStyle === 'normal' && currentIndex >= 30) {
+        finishGame();
+        return;
+      }
+
+      if (gameStyle === 'record' && lives <= 0) {
+        finishGame();
+        return;
+      }
+
+      if (gameStyle === 'record' && currentIndex >= sessionQuestions.length) {
+        sessionQuestions = sessionQuestions.concat(shuffleArray(allQuestions));
+      }
+
+      const qObj = sessionQuestions[currentIndex];
+      const qNum = currentIndex + 1;
+
+      if (gameStyle === 'normal') {
+        document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)} از ۳۰`;
+        updatePressureBar(qNum);
+      } else {
+        document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)}`;
+      }
+
+      document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
+      document.getElementById('qCategoryTag').textContent = qObj.category || activeCategory;
+      document.getElementById('questionText').textContent = qObj.question;
+
+      const letters = ['الف', 'ب', 'ج', 'د'];
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML = '';
+
+      qObj.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-btn';
+        btn.innerHTML = `
+          <span class="opt-letter">${letters[idx]}</span>
+          <span>${optText}</span>
+        `;
+        btn.onclick = () => handleAnswer(idx, btn);
+        grid.appendChild(btn);
+      });
+
+      startQuestionTimer();
+    }
+
+    function startQuestionTimer() {
+      const duration = 5000;
+      const start = performance.now();
+      const fill = document.getElementById('timerFill');
+      const secText = document.getElementById('timerSecText');
+      secText.classList.remove('urgent');
+
+      timerInterval = setInterval(() => {
+        const elapsed = performance.now() - start;
+        const remaining = Math.max(0, duration - elapsed);
+        const pct = (remaining / duration) * 100;
+
+        fill.style.width = pct + '%';
+        secText.textContent = (remaining / 1000).toFixed(1) + 's';
+
+        if (remaining <= 1800) {
+          secText.classList.add('urgent');
+        }
+
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          handleTimeout();
+        }
+      }, 50);
+    }
+
+    function handleTimeout() {
+      if (isAnswered) return;
+      isAnswered = true;
+
+      const qObj = sessionQuestions[currentIndex];
+      const buttons = document.querySelectorAll('#optionsGrid .option-btn');
+      buttons.forEach((b, idx) => {
+        b.disabled = true;
+        if (idx === qObj.answer) b.classList.add('correct');
+      });
+
+      if (gameStyle === 'record') {
+        loseOneHeart();
+      }
+
+      setTimeout(() => {
+        currentIndex++;
+        renderNextQuestion();
+      }, 950);
+    }
+
+    function handleAnswer(selectedIdx, clickedBtn) {
+      if (isAnswered) return;
+      isAnswered = true;
+      clearInterval(timerInterval);
+
+      const qObj = sessionQuestions[currentIndex];
+      const buttons = document.querySelectorAll('#optionsGrid .option-btn');
+      buttons.forEach(b => b.disabled = true);
+
+      if (selectedIdx === qObj.answer) {
+        clickedBtn.classList.add('correct');
+        correctCount++;
+        document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
+      } else {
+        clickedBtn.classList.add('wrong');
+        if (buttons[qObj.answer]) buttons[qObj.answer].classList.add('correct');
+        if (gameStyle === 'record') {
+          loseOneHeart();
+        }
+      }
+
+      setTimeout(() => {
+        currentIndex++;
+        renderNextQuestion();
+      }, 850);
+    }
+
+    function loseOneHeart() {
+      const heartEl = document.getElementById('heart' + lives);
+      if (heartEl) heartEl.classList.add('lost');
+      lives--;
+    }
+
+    function finishGame() {
+      clearInterval(timerInterval);
+      const emojiEl = document.getElementById('funEmoji');
+      const rankEl = document.getElementById('funRankTitle');
+      const scoreEl = document.getElementById('funScorePill');
+      const msgEl = document.getElementById('funRoastMsg');
+
+      if (gameStyle === 'record') {
+        const prevBest = Number(localStorage.getItem('ostadyab_aghlekol_best') || 0);
+        const isNewRecord = correctCount > prevBest;
+        if (isNewRecord) {
+          localStorage.setItem('ostadyab_aghlekol_best', correctCount);
+        }
+        emojiEl.textContent = isNewRecord ? '🔥' : '❤️‍🩹';
+        rankEl.textContent = isNewRecord ? 'رکورد جدید ثبت شد!' : 'پایان جان‌های شما!';
+        scoreEl.textContent = `رکورد این دست: ${toFa(correctCount)} پاسخ صحیح`;
+        msgEl.textContent = isNewRecord
+          ? `ایول! رکورد قبلی رو شکستی و نشون دادی تو شرایط سخت هم کم نمیاری!`
+          : `تا سوال ${toFa(currentIndex)} دووم آوردی! بهترین رکوردت تا الان ${toFa(Math.max(prevBest, correctCount))} بوده.`;
+      } else {
+        scoreEl.textContent = `${toFa(correctCount)} پاسخ صحیح از ۳۰ سوال`;
+
+        if (correctCount < 10) {
+          emojiEl.textContent = '🫠';
+          rankEl.textContent = 'لقب: رهگذر کنجکاو!';
+          msgEl.textContent = 'مثل اینکه دکمه‌ها رو شانسی می‌زدی! یه دور دیگه با تمرکز بیشتر بیا ببینیم چند مرده حلاجی.';
+        } else if (correctCount <= 20) {
+          emojiEl.textContent = '😎';
+          rankEl.textContent = 'لقب: دانشجوی همه‌فن‌حریف!';
+          msgEl.textContent = 'دمت گرم! اطلاعات عمومی‌ات از میانگین خیلی بالاتره، ولی برای رسیدن به قله هنوز جا داری.';
+        } else {
+          if (activeCategory === 'عقل کل') {
+            emojiEl.textContent = '👑';
+            rankEl.textContent = 'لقب: عقل کل!';
+            msgEl.textContent = 'تبریک! تو تمام زمینه‌ها استادی و رسماً تاج «عقل کل» استادیاب برازنده خودته!';
+          } else {
+            emojiEl.textContent = '🏆';
+            rankEl.textContent = `لقب: استادِ ${activeCategory}!`;
+            msgEl.textContent = `فوق‌العاده بود! تو بخش «${activeCategory}» بی‌رقیبی؛ حالا وقتشه خودتو تو بخش «عقل کل» محک بزنی!`;
+          }
+        }
+      }
+
+      document.getElementById('funPopupOverlay').classList.add('show');
+    }
+
+    function restartCurrentGame() {
+      startGame(activeCategory);
+    }
+
+    function returnToLobby() {
+      clearInterval(timerInterval);
+      document.getElementById('funPopupOverlay').classList.remove('show');
+      document.getElementById('quizArena').classList.remove('active');
+      document.getElementById('lobbySection').style.display = 'flex';
+      if (gameStyle === 'record') updateBestRecordUI();
+    }
+
+    renderCategories();
+    loadQuestionsJson();
+  </script>
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>استادیاب | ترکیب و جداسازی فایل PDF</title>
+
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="../images/logo-black.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <style>
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Bold.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Black.ttf') format('truetype'); font-weight: 900; font-display: block; }
+
+    :root {
+      --bg-dark-1: #1e053a;
+      --bg-dark-2: #2e0854;
+      --bg-dark-3: #4a157a;
+      --bg-dark-4: #22033d;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'AppFont', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* نوار سفید بالای صفحه */
+    .gold-top-nav {
+      position: relative; width: 100%; height: 46px; background-color: #ffffff;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 14px; z-index: 100; flex-shrink: 0;
+    }
+    .nav-right-group { display: inline-flex; align-items: center; gap: 12px; }
+    .hamburger-btn {
+      display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4.5px;
+      width: 28px; height: 28px; padding: 2px; border: none; background: transparent; cursor: pointer;
+    }
+    .hb-line { display: block; height: 2.6px; background-color: #5a189a; border-radius: 3px; transition: 0.3s ease; }
+    .hb-line.line-1, .hb-line.line-3 { width: 22px; }
+    .hb-line.line-2 { width: 16px; }
+    .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(7.1px) rotate(45deg); }
+    .hamburger-btn.is-active .hb-line.line-2 { opacity: 0; width: 0; }
+    .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-7.1px) rotate(-45deg); }
+    .nav-mini-logo { height: 25px; width: auto; object-fit: contain; display: block; }
+    .nav-designed-text { display: inline-flex; align-items: baseline; gap: 4px; direction: ltr; white-space: nowrap; }
+    .nav-designed-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; color: #5a189a; }
+    .nav-designed-author { font-family: 'Montserrat', sans-serif; font-size: 12.5px; font-weight: 900; letter-spacing: 1.1px; color: #5a189a; }
+
+    /* منوی کشویی */
+    .drawer-backdrop {
+      position: fixed; inset: 0; background: rgba(10, 2, 22, 0.72); backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden; transition: 0.35s ease; z-index: 998;
+    }
+    .drawer-backdrop.open { opacity: 1; visibility: visible; }
+    .side-drawer {
+      position: fixed; top: 0; right: 0; width: 285px; max-width: 82vw; height: 100vh;
+      background: linear-gradient(165deg, #2b0750 0%, #190330 60%, #110122 100%);
+      visibility: hidden; transform: translateX(100%); transition: 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 999; display: flex; flex-direction: column; overflow-y: auto;
+    }
+    .side-drawer.open { visibility: visible; border-left: 1.8px solid rgba(255, 209, 102, 0.45); box-shadow: -10px 0 36px rgba(0,0,0,0.65); transform: translateX(0); }
+    .drawer-top-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .drawer-title-text { font-size: 13.5px; font-weight: 800; color: #ffd166; }
+    .drawer-close-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; cursor: pointer; }
+    .drawer-image-slot img { width: 100%; height: auto; display: block; }
+    .drawer-nav-list { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+    .drawer-nav-link {
+      display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 700;
+    }
+    .drawer-nav-link i { width: 20px; text-align: center; color: #ffd166; font-size: 15px; }
+
+    /* بدنه اصلی */
+    .main-container {
+      width: 94%; max-width: 600px; display: flex; flex-direction: column; align-items: center;
+      text-align: center; flex: 1 0 auto; padding-top: 18px; padding-bottom: 35px; gap: 16px;
+    }
+    .page-header-row { width: 100%; display: flex; align-items: center; justify-content: flex-start; }
+    .back-home-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25); color: #fff; padding: 7px 15px; border-radius: 12px;
+      text-decoration: none; font-size: 12.5px; font-weight: 700; backdrop-filter: blur(10px);
+    }
+
+    .hero-title-glass {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 240, 255, 0.65);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 18px rgba(0, 240, 255, 0.25);
+      border-radius: 22px; padding: 18px 16px;
+    }
+    .hero-title-glass h1 { font-size: 18px; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+    /* باکس اصلی شیشه‌ای */
+    .tool-glass-card {
+      width: 100%; background: var(--glass-bg); backdrop-filter: blur(16px);
+      border: 1.5px solid var(--glass-border); border-radius: 22px; padding: 18px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 14px;
+    }
+
+    /* تب‌های دوگانه طلایی/نئونی */
+    .mode-tabs-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%;
+    }
+    .mode-tab-btn {
+      height: 46px; border-radius: 14px; border: 1.6px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.28); color: #e0aaff; font-size: 13.5px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.25s ease;
+    }
+    .mode-tab-btn.active {
+      background: linear-gradient(135deg, #ffe066 0%, #ffd166 50%, #f5b700 100%);
+      border-color: #fff3b0; color: #160426; font-weight: 900;
+      box-shadow: 0 5px 18px rgba(245, 183, 0, 0.42);
+    }
+
+    .tab-panel { display: none; flex-direction: column; gap: 13px; width: 100%; animation: fadeIn 0.25s ease; }
+    .tab-panel.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ناحیه آپلود فایل */
+    .upload-dropzone {
+      width: 100%; padding: 24px 14px; border-radius: 18px;
+      border: 2px dashed rgba(0, 240, 255, 0.65);
+      background: rgba(0, 240, 255, 0.07);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; transition: 0.25s ease;
+    }
+    .upload-dropzone:hover, .upload-dropzone.dragover {
+      background: rgba(0, 240, 255, 0.16); border-color: #ffd166;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+    .upload-icon-circle {
+      width: 52px; height: 52px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(255, 209, 102, 0.25));
+      border: 1.5px solid rgba(0, 240, 255, 0.7);
+      display: flex; align-items: center; justify-content: center; font-size: 22px; color: #ffd166;
+    }
+    .upload-main-title { font-size: 14.5px; font-weight: 900; color: #ffffff; }
+    .upload-sub-hint { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+
+    /* لیست فایل‌های انتخاب شده */
+    .selected-files-list {
+      display: flex; flex-direction: column; gap: 8px; width: 100%;
+    }
+    .file-item-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 13px; padding: 9px 12px; text-align: right;
+    }
+    .file-item-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .file-item-info i { color: #ff6b8b; font-size: 18px; flex-shrink: 0; }
+    .file-name-wrap { display: flex; flex-direction: column; min-width: 0; }
+    .file-name-txt { font-size: 13px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .file-meta-txt { font-size: 11px; font-weight: 600; color: #ffd166; }
+
+    .file-item-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .mini-order-btn, .mini-del-btn {
+      width: 32px; height: 32px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;
+    }
+    .mini-del-btn { border-color: rgba(239, 68, 68, 0.55); background: rgba(239, 68, 68, 0.2); color: #ff8fa3; }
+
+    /* تنظیمات جداسازی */
+    .split-options-box {
+      display: none; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.14); border-radius: 15px; padding: 12px; text-align: right;
+    }
+    .split-options-box.show { display: flex; }
+    .split-mode-radios { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .split-radio-btn {
+      padding: 9px 8px; border-radius: 11px; border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06); color: #e0aaff; font-size: 12.5px; font-weight: 800; cursor: pointer;
+    }
+    .split-radio-btn.active {
+      border-color: #00f0ff; background: rgba(0, 240, 255, 0.18); color: #fff;
+    }
+    .range-input-field {
+      width: 100%; height: 42px; border-radius: 11px; border: 2px solid transparent;
+      background: #ffffff; color: #2b004a; padding: 0 12px; font-size: 13.5px; font-weight: 800;
+      outline: none; direction: ltr; text-align: center; user-select: text;
+    }
+    .range-input-field:focus { border-color: #00f0ff; }
+
+    /* نوار درصدی شیک و جذاب */
+    .progress-wrapper {
+      display: none; flex-direction: column; gap: 8px; width: 100%;
+      background: rgba(14, 3, 28, 0.65); border: 1.5px solid rgba(0, 240, 255, 0.45);
+      border-radius: 15px; padding: 12px 14px;
+    }
+    .progress-wrapper.show { display: flex; }
+    .progress-top-info { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; font-weight: 800; }
+    .progress-status-lbl { color: #e0aaff; }
+    .progress-percent-badge {
+      background: linear-gradient(135deg, #ffe066, #f5b700); color: #160426;
+      padding: 2px 10px; border-radius: 8px; font-weight: 900; font-size: 12.5px;
+    }
+    .progress-track {
+      width: 100%; height: 12px; background: rgba(255,255,255,0.12); border-radius: 99px; overflow: hidden; padding: 2px;
+    }
+    .progress-fill {
+      height: 100%; width: 0%; border-radius: 99px;
+      background: linear-gradient(90deg, #00f0ff, #06d6a0, #ffd166);
+      box-shadow: 0 0 12px rgba(6, 214, 160, 0.7);
+      transition: width 0.25s ease;
+    }
+
+    /* باکس هشدار / موفقیت */
+    .status-alert-box {
+      display: none; align-items: center; gap: 11px; text-align: right; padding: 11px 13px;
+      border-radius: 15px; font-size: 12.8px; font-weight: 800; line-height: 1.65;
+    }
+    .status-alert-box.show { display: flex; }
+    .status-alert-box.error {
+      background: linear-gradient(135deg, rgba(239,68,68,0.26), rgba(153,27,27,0.36));
+      border: 1.5px solid rgba(255, 107, 139, 0.8); color: #ffe4e8;
+    }
+    .status-alert-box.success {
+      background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(5,150,105,0.35));
+      border: 1.5px solid rgba(52, 211, 153, 0.8); color: #d1fae5;
+    }
+    .alert-icon-sq {
+      width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center;
+      justify-content: center; font-size: 16px; flex-shrink: 0; color: #fff;
+    }
+    .status-alert-box.error .alert-icon-sq { background: #ef4444; }
+    .status-alert-box.success .alert-icon-sq { background: #10b981; }
+
+    /* دکمه اجرای عملیات */
+    .primary-action-btn {
+      width: 100%; height: 50px; border: none; border-radius: 15px;
+      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
+      color: #ffffff; font-size: 15px; font-weight: 900;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      cursor: pointer; box-shadow: 0 8px 24px rgba(6, 214, 160, 0.42); transition: 0.2s ease;
+    }
+    .primary-action-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .primary-action-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .site-footer {
+      width: 100%; padding: 16px 15px; display: flex; align-items: center; justify-content: center;
+      background: rgba(22, 5, 45, 0.85); border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: auto;
+    }
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
+  </style>
+</head>
+<body>
+
+  <header class="gold-top-nav">
+    <div class="nav-right-group">
+      <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
+        <span class="hb-line line-1"></span>
+        <span class="hb-line line-2"></span>
+        <span class="hb-line line-3"></span>
+      </button>
+      <img src="../images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
+    </div>
+    <div class="nav-designed-text">
+      <span class="nav-designed-label">Designed by</span>
+      <span class="nav-designed-author">ARMOON</span>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
+    <div class="drawer-top-bar">
+      <span class="drawer-title-text">منوی دسترسی سریع</span>
+      <button type="button" class="drawer-close-btn" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-image-slot">
+      <img src="../images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+    </div>
+    <nav class="drawer-nav-list">
+      <a href="../" class="drawer-nav-link"><i class="fa-solid fa-house"></i><span>صفحه اصلی استادیاب</span></a>
+      <a href="../moadel/" class="drawer-nav-link"><i class="fa-solid fa-graduation-cap"></i><span>محاسبه معدل ترمی</span></a>
+      <a href="../pdfcompressor/" class="drawer-nav-link"><i class="fa-solid fa-file-zipper"></i><span>کاهش حجم فایل PDF</span></a>
+      <a href="../imagetopdf/" class="drawer-nav-link"><i class="fa-solid fa-images"></i><span>تبدیل عکس و PDF</span></a>
+    </nav>
+  </aside>
+
+  <main class="main-container">
+    <div class="page-header-row">
+      <a href="../" class="back-home-btn"><i class="fa-solid fa-house"></i><span>بازگشت به صفحه اصلی</span></a>
+    </div>
+
+    <div class="hero-title-glass">
+      <h1>ترکیب و جداسازی فایل PDF</h1>
+    </div>
+
+    <div class="tool-glass-card">
+      <div class="mode-tabs-grid">
+        <button type="button" class="mode-tab-btn active" onclick="switchMode('merge', this)">
+          <i class="fa-solid fa-object-group"></i>
+          <span>ترکیب PDF</span>
+        </button>
+        <button type="button" class="mode-tab-btn" onclick="switchMode('split', this)">
+          <i class="fa-solid fa-scissors"></i>
+          <span>جداسازی PDF</span>
+        </button>
+      </div>
+
+      <!-- بخش ترکیب -->
+      <div id="mergePanel" class="tab-panel active">
+        <label class="upload-dropzone" id="mergeDropzone">
+          <input type="file" id="mergeFileInput" accept="application/pdf" multiple hidden>
+          <div class="upload-icon-circle"><i class="fa-solid fa-file-circle-plus"></i></div>
+          <div class="upload-main-title">فایل «یا فایل های» PDF خود را انتخاب کنید</div>
+          <div class="upload-sub-hint">می‌توانید چند فایل PDF را هم‌زمان انتخاب و مرتب کنید</div>
+        </label>
+
+        <div id="mergeFilesList" class="selected-files-list"></div>
+
+        <div id="mergeProgress" class="progress-wrapper">
+          <div class="progress-top-info">
+            <span class="progress-status-lbl" id="mergeStatusText">در حال پردازش...</span>
+            <span class="progress-percent-badge" id="mergePercentText">۰٪</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="mergeProgressFill"></div></div>
+        </div>
+
+        <div id="mergeAlert" class="status-alert-box"></div>
+
+        <button type="button" class="primary-action-btn" id="mergeActionBtn" onclick="executeMerge()">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>ترکیب و دانلود فایل نهایی</span>
+        </button>
+      </div>
+
+      <!-- بخش جداسازی -->
+      <div id="splitPanel" class="tab-panel">
+        <label class="upload-dropzone" id="splitDropzone">
+          <input type="file" id="splitFileInput" accept="application/pdf" hidden>
+          <div class="upload-icon-circle"><i class="fa-solid fa-file-pdf"></i></div>
+          <div class="upload-main-title">فایل PDF خود را انتخاب کنید</div>
+          <div class="upload-sub-hint">استخراج صفحات دلخواه یا جدا کردن تک‌تک صفحات</div>
+        </label>
+
+        <div id="splitFileInfo" class="selected-files-list"></div>
+
+        <div id="splitOptionsBox" class="split-options-box">
+          <div class="split-mode-radios">
+            <button type="button" class="split-radio-btn active" id="optExtractRange" onclick="setSplitMode('range')">استخراج بازه صفحات</button>
+            <button type="button" class="split-radio-btn" id="optExtractAll" onclick="setSplitMode('all')">جداسازی همه صفحات</button>
+          </div>
+          <div id="rangeInputWrap">
+            <input type="text" id="pageRangeInput" class="range-input-field" placeholder="مثلاً: 1-3, 5, 8-10">
+          </div>
+        </div>
+
+        <div id="splitProgress" class="progress-wrapper">
+          <div class="progress-top-info">
+            <span class="progress-status-lbl" id="splitStatusText">در حال جداسازی...</span>
+            <span class="progress-percent-badge" id="splitPercentText">۰٪</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="splitProgressFill"></div></div>
+        </div>
+
+        <div id="splitAlert" class="status-alert-box"></div>
+
+        <button type="button" class="primary-action-btn" id="splitActionBtn" onclick="executeSplit()">
+          <i class="fa-solid fa-scissors"></i>
+          <span>جداسازی و دانلود فایل</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-text">
+      تمامی حقوق مادی و معنوی این سامانه متعلق به <span class="brand-hl">استادیاب</span> می‌باشد.
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>
+    // منوی کشویی
+    (function initSideDrawer() {
+      const openBtn = document.getElementById('openDrawerBtn');
+      const closeBtn = document.getElementById('closeDrawerBtn');
+      const drawer = document.getElementById('sideDrawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      openBtn.addEventListener('click', () => { drawer.classList.add('open'); backdrop.classList.add('open'); openBtn.classList.add('is-active'); });
+      const closeMenu = () => { drawer.classList.remove('open'); backdrop.classList.remove('open'); openBtn.classList.remove('is-active'); };
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
+    })();
+
+    const toFa = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    const formatBytes = b => b < 1024 * 1024 ? `${toFa((b / 1024).toFixed(1))} کیلوبایت` : `${toFa((b / (1024 * 1024)).toFixed(2))} مگابایت`;
+
+    function switchMode(mode, btn) {
+      document.querySelectorAll('.mode-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('mergePanel').classList.toggle('active', mode === 'merge');
+      document.getElementById('splitPanel').classList.toggle('active', mode === 'split');
+    }
+
+    function showAlert(id, type, msg) {
+      const el = document.getElementById(id);
+      el.className = `status-alert-box show ${type}`;
+      el.innerHTML = `<div class="alert-icon-sq"><i class="fa-solid ${type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-check'}"></i></div><div>${msg}</div>`;
+    }
+    function hideAlert(id) { document.getElementById(id).className = 'status-alert-box'; }
+
+    function updateProgress(prefix, percent, status) {
+      const wrap = document.getElementById(prefix + 'Progress');
+      wrap.classList.add('show');
+      document.getElementById(prefix + 'ProgressFill').style.width = percent + '%';
+      document.getElementById(prefix + 'PercentText').textContent = toFa(Math.round(percent)) + '٪';
+      if (status) document.getElementById(prefix + 'StatusText').textContent = status;
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }
+
+    /* ================= بخش ترکیب PDF ================= */
+    let mergeFiles = [];
+    const mergeInput = document.getElementById('mergeFileInput');
+    mergeInput.addEventListener('change', e => {
+      hideAlert('mergeAlert');
+      const incoming = Array.from(e.target.files).filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+      mergeFiles = mergeFiles.concat(incoming);
+      mergeInput.value = '';
+      renderMergeList();
+    });
+
+    function renderMergeList() {
+      const list = document.getElementById('mergeFilesList');
+      list.innerHTML = '';
+      mergeFiles.forEach((file, idx) => {
+        const div = document.createElement('div');
+        div.className = 'file-item-card';
+        div.innerHTML = `
+          <div class="file-item-info">
+            <i class="fa-solid fa-file-pdf"></i>
+            <div class="file-name-wrap">
+              <span class="file-name-txt">${toFa(idx + 1)}. ${file.name}</span>
+              <span class="file-meta-txt">${formatBytes(file.size)}</span>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            ${idx > 0 ? `<button type="button" class="mini-order-btn" onclick="moveMergeFile(${idx}, -1)"><i class="fa-solid fa-arrow-up"></i></button>` : ''}
+            ${idx < mergeFiles.length - 1 ? `<button type="button" class="mini-order-btn" onclick="moveMergeFile(${idx}, 1)"><i class="fa-solid fa-arrow-down"></i></button>` : ''}
+            <button type="button" class="mini-del-btn" onclick="removeMergeFile(${idx})"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function moveMergeFile(idx, dir) {
+      const target = idx + dir;
+      [mergeFiles[idx], mergeFiles[target]] = [mergeFiles[target], mergeFiles[idx]];
+      renderMergeList();
+    }
+    function removeMergeFile(idx) {
+      mergeFiles.splice(idx, 1);
+      renderMergeList();
+    }
+
+    async function executeMerge() {
+      hideAlert('mergeAlert');
+      if (mergeFiles.length < 2) {
+        showAlert('mergeAlert', 'error', 'لطفاً حداقل ۲ فایل PDF را برای ترکیب انتخاب کنید.');
+        return;
+      }
+      const btn = document.getElementById('mergeActionBtn');
+      btn.disabled = true;
+      try {
+        const { PDFDocument } = PDFLib;
+        const mergedPdf = await PDFDocument.create();
+        for (let i = 0; i < mergeFiles.length; i++) {
+          updateProgress('merge', ((i) / mergeFiles.length) * 85, `در حال ترکیب فایل ${toFa(i + 1)} از ${toFa(mergeFiles.length)}...`);
+          const bytes = await mergeFiles[i].arrayBuffer();
+          const pdf = await PDFDocument.load(bytes, { ignoreEncryption: true });
+          const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+          copiedPages.forEach(page => mergedPdf.addPage(page));
+        }
+        updateProgress('merge', 95, 'در حال ساخت خروجی نهایی...');
+        const finalBytes = await mergedPdf.save();
+        updateProgress('merge', 100, 'ترکیب با موفقیت انجام شد!');
+        downloadBlob(new Blob([finalBytes], { type: 'application/pdf' }), 'OstadYab-Merged.pdf');
+        showAlert('mergeAlert', 'success', `${toFa(mergeFiles.length)} فایل PDF با موفقیت ترکیب و دانلود شد.`);
+      } catch (err) {
+        showAlert('mergeAlert', 'error', 'خطا در پردازش یکی از فایل‌های PDF! مطمئن شوید فایل رمزدار یا خراب نباشد.');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    /* ================= بخش جداسازی PDF ================= */
+    let splitFile = null;
+    let splitTotalPages = 0;
+    let splitMode = 'range';
+
+    document.getElementById('splitFileInput').addEventListener('change', async e => {
+      hideAlert('splitAlert');
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const bytes = await file.arrayBuffer();
+        const pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+        splitFile = file;
+        splitTotalPages = pdf.getPageCount();
+        document.getElementById('splitFileInfo').innerHTML = `
+          <div class="file-item-card">
+            <div class="file-item-info">
+              <i class="fa-solid fa-file-pdf"></i>
+              <div class="file-name-wrap">
+                <span class="file-name-txt">${file.name}</span>
+                <span class="file-meta-txt">${toFa(splitTotalPages)} صفحه • ${formatBytes(file.size)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+        document.getElementById('splitOptionsBox').classList.add('show');
+      } catch (err) {
+        showAlert('splitAlert', 'error', 'فایل PDF انتخاب‌شده معتبر نیست یا رمزگذاری شده است.');
+      }
+    });
+
+    function setSplitMode(mode) {
+      splitMode = mode;
+      document.getElementById('optExtractRange').classList.toggle('active', mode === 'range');
+      document.getElementById('optExtractAll').classList.toggle('active', mode === 'all');
+      document.getElementById('rangeInputWrap').style.display = mode === 'range' ? 'block' : 'none';
+    }
+
+    function parsePageRange(str, maxPage) {
+      const normalized = str.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/،/g, ',');
+      const parts = normalized.split(',').map(s => s.trim()).filter(Boolean);
+      const indices = new Set();
+      for (const p of parts) {
+        if (p.includes('-')) {
+          const [a, b] = p.split('-').map(Number);
+          if (!a || !b || a < 1 || b > maxPage || a > b) return null;
+          for (let i = a; i <= b; i++) indices.add(i - 1);
+        } else {
+          const n = Number(p);
+          if (!n || n < 1 || n > maxPage) return null;
+          indices.add(n - 1);
+        }
+      }
+      return Array.from(indices).sort((a, b) => a - b);
+    }
+
+    async function executeSplit() {
+      if (document.activeElement) document.activeElement.blur();
+      hideAlert('splitAlert');
+      if (!splitFile) {
+        showAlert('splitAlert', 'error', 'ابتدا یک فایل PDF انتخاب کنید.');
+        return;
+      }
+      const btn = document.getElementById('splitActionBtn');
+      btn.disabled = true;
+      try {
+        const { PDFDocument } = PDFLib;
+        const srcBytes = await splitFile.arrayBuffer();
+        const srcPdf = await PDFDocument.load(srcBytes, { ignoreEncryption: true });
+
+        if (splitMode === 'range') {
+          const rawRange = document.getElementById('pageRangeInput').value.trim();
+          const pages = parsePageRange(rawRange, splitTotalPages);
+          if (!pages || pages.length === 0) {
+            showAlert('splitAlert', 'error', `بازه صفحات نامعتبر است! عددها باید بین ۱ تا ${toFa(splitTotalPages)} باشند (مثلاً: 1-3, 5).`);
+            btn.disabled = false;
+            return;
+          }
+          updateProgress('split', 45, 'در حال استخراج صفحات انتخابی...');
+          const outPdf = await PDFDocument.create();
+          const copied = await outPdf.copyPages(srcPdf, pages);
+          copied.forEach(p => outPdf.addPage(p));
+          updateProgress('split', 95, 'آماده‌سازی دانلود...');
+          const outBytes = await outPdf.save();
+          updateProgress('split', 100, 'جداسازی کامل شد!');
+          downloadBlob(new Blob([outBytes], { type: 'application/pdf' }), 'OstadYab-Extracted.pdf');
+          showAlert('splitAlert', 'success', `${toFa(pages.length)} صفحه با موفقیت جدا و دانلود شد.`);
+        } else {
+          const zip = new JSZip();
+          for (let i = 0; i < splitTotalPages; i++) {
+            updateProgress('split', ((i + 1) / splitTotalPages) * 90, `در حال جداسازی صفحه ${toFa(i + 1)} از ${toFa(splitTotalPages)}...`);
+            const singlePdf = await PDFDocument.create();
+            const [page] = await singlePdf.copyPages(srcPdf, [i]);
+            singlePdf.addPage(page);
+            const bytes = await singlePdf.save();
+            zip.file(`Page-${i + 1}.pdf`, bytes);
+          }
+          updateProgress('split', 97, 'در حال فشرده‌سازی فایل ZIP...');
+          const zipBlob = await zip.generateAsync({ type: 'blob' });
+          updateProgress('split', 100, 'تمام صفحات جدا شدند!');
+          downloadBlob(zipBlob, 'OstadYab-All-Pages.zip');
+          showAlert('splitAlert', 'success', `همه ${toFa(splitTotalPages)} صفحه به صورت جداگانه در قالب ZIP دانلود شدند.`);
+        }
+      } catch (err) {
+        showAlert('splitAlert', 'error', 'خطا در جداسازی صفحات فایل PDF.');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

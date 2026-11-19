@@ -12,6 +12,7 @@
 
   <link rel="preload" as="image" href="images/logo.webp">
   <link rel="preload" as="image" href="images/logo-black.webp">
+  <link rel="preload" as="image" href="images/timer.webp">
   <link rel="preload" as="image" href="images/s1.gif">
   <link rel="preload" as="image" href="images/s2.webp">
   <link rel="preload" as="image" href="images/s3.webp">
@@ -124,13 +125,14 @@
       font-weight: 400;
     }
 
-    /* نوار طلایی ساده بدون گرادینت */
+    /* نوار طلایی یکدست و کاملاً بدون سایه و هاله */
     .gold-top-nav {
       position: relative;
       width: 100%;
       height: 46px;
       background-color: #ffd166;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+      box-shadow: none;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -142,59 +144,53 @@
     .nav-right-group {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    /* آیکون همبرگری مدرن و جذاب با خطوط نامتقارن گرد */
+    /* آیکون همبرگری سه‌خطی مشکی ساده و جذاب بدون باکس */
     .hamburger-btn {
       display: inline-flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      gap: 4px;
-      width: 36px;
-      height: 34px;
-      padding: 0 8px;
-      border: 1.6px solid rgba(17, 17, 17, 0.25);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.42);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      gap: 4.5px;
+      width: 28px;
+      height: 28px;
+      padding: 2px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .hamburger-btn:hover {
-      background: rgba(255, 255, 255, 0.68);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+      transition: transform 0.2s ease;
     }
 
     .hamburger-btn:active {
-      transform: scale(0.92);
+      transform: scale(0.9);
     }
 
     .hb-line {
       display: block;
-      height: 2.4px;
-      background-color: #111111;
-      border-radius: 4px;
+      height: 2.6px;
+      background-color: #000000;
+      border-radius: 3px;
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s ease, opacity 0.25s ease;
     }
 
     .hb-line.line-1 {
-      width: 18px;
+      width: 22px;
     }
 
     .hb-line.line-2 {
-      width: 13px;
-    }
-
-    .hb-line.line-3 {
       width: 16px;
     }
 
+    .hb-line.line-3 {
+      width: 22px;
+    }
+
     .hamburger-btn.is-active .hb-line.line-1 {
-      width: 18px;
-      transform: translateY(6.4px) rotate(45deg);
+      width: 22px;
+      transform: translateY(7.1px) rotate(45deg);
     }
 
     .hamburger-btn.is-active .hb-line.line-2 {
@@ -203,8 +199,8 @@
     }
 
     .hamburger-btn.is-active .hb-line.line-3 {
-      width: 18px;
-      transform: translateY(-6.4px) rotate(-45deg);
+      width: 22px;
+      transform: translateY(-7.1px) rotate(-45deg);
     }
 
     .nav-mini-logo {
@@ -212,36 +208,32 @@
       width: auto;
       object-fit: contain;
       display: block;
+      filter: none;
     }
 
-    /* بج شیک و مدرن Designed by ARMOON */
-    .nav-designed-badge {
+    /* نوشته Designed by ARMOON ساده و بدون باکس و سایه روی نوار */
+    .nav-designed-text {
       display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #1a0633;
-      padding: 4px 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+      align-items: baseline;
+      gap: 4px;
       direction: ltr;
       white-space: nowrap;
     }
 
     .nav-designed-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.9px;
-      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.4px;
+      color: #111111;
     }
 
     .nav-designed-author {
       font-family: 'Montserrat', sans-serif;
-      font-size: 11.5px;
+      font-size: 12.5px;
       font-weight: 900;
-      letter-spacing: 1.3px;
-      color: #ffd166;
+      letter-spacing: 1.1px;
+      color: #000000;
     }
 
     /* منوی کشویی از راست به چپ */
@@ -317,25 +309,22 @@
       transform: scale(0.92);
     }
 
-    /* جایگاه اختصاصی تصویر در بالای منوی کشویی */
+    /* تصویر بالای منو بدون باکس و گوشه گرد و کاملاً فیت */
     .drawer-image-slot {
-      width: calc(100% - 24px);
-      margin: 12px auto 6px auto;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      background: transparent;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1.5px solid rgba(255, 209, 102, 0.45);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      display: block;
     }
 
     .drawer-image-slot img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
       display: block;
     }
@@ -679,7 +668,7 @@
     .card-s12 { background-image: url('images/s12.webp'); }
     .card-s13 { background-image: url('images/s13.webp'); }
 
-    /* باکس روزشمار هم‌اندازه s1 */
+    /* باکس روزشمار هم‌اندازه s1 با عکس timer.webp */
     .countdown-banner-card {
       position: relative;
       width: 100%;
@@ -687,7 +676,7 @@
       border-radius: 16px;
       overflow: hidden;
       background-color: rgba(255, 255, 255, 0.08);
-      background-image: url('images/countdown.webp');
+      background-image: url('images/timer.webp');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -762,6 +751,7 @@
       line-height: 1;
     }
 
+    /* جداکننده جعبه ابزار دانشجویی با دو خط طلایی در طرفین */
     .toolbox-divider {
       width: 100%;
       display: flex;
@@ -775,18 +765,18 @@
     .toolbox-divider::after {
       content: '';
       flex: 1;
-      height: 1.6px;
+      height: 1.8px;
       border-radius: 2px;
     }
 
     .toolbox-divider::before {
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      background: linear-gradient(90deg, #ffd166 0%, rgba(255, 209, 102, 0.5) 55%, rgba(255, 209, 102, 0) 100%);
+      box-shadow: 0 0 10px rgba(255, 209, 102, 0.55);
     }
 
     .toolbox-divider::after {
-      background: linear-gradient(270deg, rgba(255, 255, 255, 0.9) 0%, rgba(216, 180, 254, 0.45) 55%, rgba(255, 255, 255, 0) 100%);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      background: linear-gradient(270deg, #ffd166 0%, rgba(255, 209, 102, 0.5) 55%, rgba(255, 209, 102, 0) 100%);
+      box-shadow: 0 0 10px rgba(255, 209, 102, 0.55);
     }
 
     .toolbox-divider-text {
@@ -1157,27 +1147,32 @@
         padding: 0 12px;
       }
       .nav-right-group {
-        gap: 8px;
+        gap: 10px;
       }
       .hamburger-btn {
-        width: 33px;
-        height: 30px;
-        padding: 0 7px;
+        width: 26px;
+        height: 26px;
+        gap: 4px;
+      }
+      .hb-line.line-1, .hb-line.line-3 { width: 20px; }
+      .hb-line.line-2 { width: 14px; }
+      .hamburger-btn.is-active .hb-line.line-1 {
+        width: 20px;
+        transform: translateY(6.6px) rotate(45deg);
+      }
+      .hamburger-btn.is-active .hb-line.line-3 {
+        width: 20px;
+        transform: translateY(-6.6px) rotate(-45deg);
       }
       .nav-mini-logo {
         height: 21px;
       }
-      .nav-designed-badge {
-        padding: 3.5px 8px;
-        gap: 4px;
-      }
       .nav-designed-label {
-        font-size: 8px;
-        letter-spacing: 0.6px;
+        font-size: 9px;
       }
       .nav-designed-author {
-        font-size: 10px;
-        letter-spacing: 1px;
+        font-size: 11px;
+        letter-spacing: 0.9px;
       }
       
       .main-container { padding-top: 22px; }
@@ -1235,7 +1230,7 @@
 </head>
 <body>
 
-  <!-- نوار طلایی ساده بالای صفحه -->
+  <!-- نوار طلایی یکدست و بدون سایه بالای صفحه -->
   <header class="gold-top-nav">
     <div class="nav-right-group">
       <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
@@ -1245,7 +1240,7 @@
       </button>
       <img src="images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
     </div>
-    <div class="nav-designed-badge">
+    <div class="nav-designed-text">
       <span class="nav-designed-label">Designed by</span>
       <span class="nav-designed-author">ARMOON</span>
     </div>
@@ -1261,7 +1256,7 @@
       </button>
     </div>
 
-    <!-- جایگاه اختصاصی تصویر در بالای منو -->
+    <!-- تصویر فیت بالای منو بدون باکس و گوشه گرد -->
     <div class="drawer-image-slot">
       <img src="images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
     </div>

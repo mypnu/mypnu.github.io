@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>استادیاب | کاهش حجم فایل PDF</title>
+
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="../images/logo-black.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <style>
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Bold.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Black.ttf') format('truetype'); font-weight: 900; font-display: block; }
+
+    :root {
+      --bg-dark-1: #1e053a;
+      --bg-dark-2: #2e0854;
+      --bg-dark-3: #4a157a;
+      --bg-dark-4: #22033d;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'AppFont', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
+      color: #fff; display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
+    }
+
+    .gold-top-nav {
+      position: relative; width: 100%; height: 46px; background-color: #ffffff;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 14px; z-index: 100; flex-shrink: 0;
+    }
+    .nav-right-group { display: inline-flex; align-items: center; gap: 12px; }
+    .hamburger-btn {
+      display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4.5px;
+      width: 28px; height: 28px; padding: 2px; border: none; background: transparent; cursor: pointer;
+    }
+    .hb-line { display: block; height: 2.6px; background-color: #5a189a; border-radius: 3px; transition: 0.3s ease; }
+    .hb-line.line-1, .hb-line.line-3 { width: 22px; }
+    .hb-line.line-2 { width: 16px; }
+    .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(7.1px) rotate(45deg); }
+    .hamburger-btn.is-active .hb-line.line-2 { opacity: 0; width: 0; }
+    .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-7.1px) rotate(-45deg); }
+    .nav-mini-logo { height: 25px; width: auto; object-fit: contain; display: block; }
+    .nav-designed-text { display: inline-flex; align-items: baseline; gap: 4px; direction: ltr; white-space: nowrap; }
+    .nav-designed-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; color: #5a189a; }
+    .nav-designed-author { font-family: 'Montserrat', sans-serif; font-size: 12.5px; font-weight: 900; letter-spacing: 1.1px; color: #5a189a; }
+
+    .drawer-backdrop {
+      position: fixed; inset: 0; background: rgba(10, 2, 22, 0.72); backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden; transition: 0.35s ease; z-index: 998;
+    }
+    .drawer-backdrop.open { opacity: 1; visibility: visible; }
+    .side-drawer {
+      position: fixed; top: 0; right: 0; width: 285px; max-width: 82vw; height: 100vh;
+      background: linear-gradient(165deg, #2b0750 0%, #190330 60%, #110122 100%);
+      visibility: hidden; transform: translateX(100%); transition: 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 999; display: flex; flex-direction: column; overflow-y: auto;
+    }
+    .side-drawer.open { visibility: visible; border-left: 1.8px solid rgba(255, 209, 102, 0.45); box-shadow: -10px 0 36px rgba(0,0,0,0.65); transform: translateX(0); }
+    .drawer-top-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .drawer-title-text { font-size: 13.5px; font-weight: 800; color: #ffd166; }
+    .drawer-close-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; cursor: pointer; }
+    .drawer-image-slot img { width: 100%; height: auto; display: block; }
+    .drawer-nav-list { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+    .drawer-nav-link {
+      display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 700;
+    }
+    .drawer-nav-link i { width: 20px; text-align: center; color: #ffd166; font-size: 15px; }
+
+    .main-container {
+      width: 94%; max-width: 600px; display: flex; flex-direction: column; align-items: center;
+      text-align: center; flex: 1 0 auto; padding-top: 18px; padding-bottom: 35px; gap: 16px;
+    }
+    .page-header-row { width: 100%; display: flex; align-items: center; justify-content: flex-start; }
+    .back-home-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25); color: #fff; padding: 7px 15px; border-radius: 12px;
+      text-decoration: none; font-size: 12.5px; font-weight: 700; backdrop-filter: blur(10px);
+    }
+
+    .hero-title-glass {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 240, 255, 0.65);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 18px rgba(0, 240, 255, 0.25);
+      border-radius: 22px; padding: 18px 16px;
+    }
+    .hero-title-glass h1 { font-size: 18px; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+    .tool-glass-card {
+      width: 100%; background: var(--glass-bg); backdrop-filter: blur(16px);
+      border: 1.5px solid var(--glass-border); border-radius: 22px; padding: 18px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .upload-dropzone {
+      width: 100%; padding: 26px 14px; border-radius: 18px;
+      border: 2px dashed rgba(0, 240, 255, 0.65);
+      background: rgba(0, 240, 255, 0.07);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; transition: 0.25s ease;
+    }
+    .upload-dropzone:hover {
+      background: rgba(0, 240, 255, 0.16); border-color: #ffd166;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+    .upload-icon-circle {
+      width: 54px; height: 54px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(255, 209, 102, 0.25));
+      border: 1.5px solid rgba(0, 240, 255, 0.7);
+      display: flex; align-items: center; justify-content: center; font-size: 23px; color: #ffd166;
+    }
+    .upload-main-title { font-size: 14.5px; font-weight: 900; color: #ffffff; }
+    .upload-sub-hint { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+
+    .file-item-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 13px; padding: 10px 12px; text-align: right;
+    }
+    .file-item-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .file-item-info i { color: #ff6b8b; font-size: 20px; flex-shrink: 0; }
+    .file-name-wrap { display: flex; flex-direction: column; min-width: 0; }
+    .file-name-txt { font-size: 13px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .file-meta-txt { font-size: 11.5px; font-weight: 700; color: #ffd166; }
+
+    /* انتخاب سطح فشرده‌سازی */
+    .compression-levels {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 9px; width: 100%;
+    }
+    .level-btn {
+      padding: 11px 8px; border-radius: 13px; border: 1.6px solid rgba(255,255,255,0.22);
+      background: rgba(0, 0, 0, 0.28); color: #e0aaff; font-size: 12.5px; font-weight: 800;
+      display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; transition: 0.2s ease;
+    }
+    .level-btn span.sub { font-size: 10.5px; font-weight: 600; opacity: 0.85; }
+    .level-btn.active {
+      background: linear-gradient(135deg, #ffe066 0%, #ffd166 50%, #f5b700 100%);
+      border-color: #fff3b0; color: #160426; font-weight: 900;
+      box-shadow: 0 5px 16px rgba(245, 183, 0, 0.4);
+    }
+
+    /* نوار درصدی */
+    .progress-wrapper {
+      display: none; flex-direction: column; gap: 8px; width: 100%;
+      background: rgba(14, 3, 28, 0.65); border: 1.5px solid rgba(0, 240, 255, 0.45);
+      border-radius: 15px; padding: 12px 14px;
+    }
+    .progress-wrapper.show { display: flex; }
+    .progress-top-info { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; font-weight: 800; }
+    .progress-status-lbl { color: #e0aaff; }
+    .progress-percent-badge {
+      background: linear-gradient(135deg, #ffe066, #f5b700); color: #160426;
+      padding: 2px 10px; border-radius: 8px; font-weight: 900; font-size: 12.5px;
+    }
+    .progress-track { width: 100%; height: 12px; background: rgba(255,255,255,0.12); border-radius: 99px; overflow: hidden; padding: 2px; }
+    .progress-fill {
+      height: 100%; width: 0%; border-radius: 99px;
+      background: linear-gradient(90deg, #00f0ff, #06d6a0, #ffd166);
+      box-shadow: 0 0 12px rgba(6, 214, 160, 0.7); transition: width 0.25s ease;
+    }
+
+    /* کارت مقایسه حجم قبل و بعد */
+    .result-stats-card {
+      display: none; grid-template-columns: 1fr 1fr 1fr; gap: 8px; width: 100%;
+      background: rgba(16, 185, 129, 0.16); border: 1.5px solid rgba(16, 185, 129, 0.65);
+      border-radius: 16px; padding: 12px 8px;
+    }
+    .result-stats-card.show { display: grid; }
+    .stat-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .stat-lbl { font-size: 11px; font-weight: 700; color: #a7f3d0; }
+    .stat-val { font-size: 13.5px; font-weight: 900; color: #ffffff; direction: ltr; }
+    .stat-col.highlight .stat-val { color: #ffd166; font-size: 15px; }
+
+    .status-alert-box {
+      display: none; align-items: center; gap: 11px; text-align: right; padding: 11px 13px;
+      border-radius: 15px; font-size: 12.8px; font-weight: 800; line-height: 1.65;
+    }
+    .status-alert-box.show { display: flex; }
+    .status-alert-box.error {
+      background: linear-gradient(135deg, rgba(239,68,68,0.26), rgba(153,27,27,0.36));
+      border: 1.5px solid rgba(255, 107, 139, 0.8); color: #ffe4e8;
+    }
+    .status-alert-box.success {
+      background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(5,150,105,0.35));
+      border: 1.5px solid rgba(52, 211, 153, 0.8); color: #d1fae5;
+    }
+    .alert-icon-sq {
+      width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center;
+      justify-content: center; font-size: 16px; flex-shrink: 0; color: #fff;
+    }
+    .status-alert-box.error .alert-icon-sq { background: #ef4444; }
+    .status-alert-box.success .alert-icon-sq { background: #10b981; }
+
+    .primary-action-btn {
+      width: 100%; height: 50px; border: none; border-radius: 15px;
+      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
+      color: #ffffff; font-size: 15px; font-weight: 900;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      cursor: pointer; box-shadow: 0 8px 24px rgba(6, 214, 160, 0.42); transition: 0.2s ease;
+    }
+    .primary-action-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .primary-action-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .site-footer {
+      width: 100%; padding: 16px 15px; display: flex; align-items: center; justify-content: center;
+      background: rgba(22, 5, 45, 0.85); border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: auto;
+    }
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
+  </style>
+</head>
+<body>
+
+  <header class="gold-top-nav">
+    <div class="nav-right-group">
+      <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
+        <span class="hb-line line-1"></span>
+        <span class="hb-line line-2"></span>
+        <span class="hb-line line-3"></span>
+      </button>
+      <img src="../images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
+    </div>
+    <div class="nav-designed-text">
+      <span class="nav-designed-label">Designed by</span>
+      <span class="nav-designed-author">ARMOON</span>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
+    <div class="drawer-top-bar">
+      <span class="drawer-title-text">منوی دسترسی سریع</span>
+      <button type="button" class="drawer-close-btn" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-image-slot">
+      <img src="../images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+    </div>
+    <nav class="drawer-nav-list">
+      <a href="../" class="drawer-nav-link"><i class="fa-solid fa-house"></i><span>صفحه اصلی استادیاب</span></a>
+      <a href="../moadel/" class="drawer-nav-link"><i class="fa-solid fa-graduation-cap"></i><span>محاسبه معدل ترمی</span></a>
+      <a href="../pdfm&s/" class="drawer-nav-link"><i class="fa-solid fa-object-group"></i><span>ترکیب و جداسازی PDF</span></a>
+      <a href="../imagetopdf/" class="drawer-nav-link"><i class="fa-solid fa-images"></i><span>تبدیل عکس و PDF</span></a>
+    </nav>
+  </aside>
+
+  <main class="main-container">
+    <div class="page-header-row">
+      <a href="../" class="back-home-btn"><i class="fa-solid fa-house"></i><span>بازگشت به صفحه اصلی</span></a>
+    </div>
+
+    <div class="hero-title-glass">
+      <h1>کاهش حجم فایل PDF</h1>
+    </div>
+
+    <div class="tool-glass-card">
+      <label class="upload-dropzone">
+        <input type="file" id="compressFileInput" accept="application/pdf" hidden>
+        <div class="upload-icon-circle"><i class="fa-solid fa-file-zipper"></i></div>
+        <div class="upload-main-title">فایل PDF خود را انتخاب کنید</div>
+        <div class="upload-sub-hint">فشرده‌سازی عمیق بدون نیاز به اینترنت پرسرعت و آپلود</div>
+      </label>
+
+      <div id="selectedFileBox"></div>
+
+      <div class="compression-levels">
+        <button type="button" class="level-btn active" onclick="setCompressLevel('ultra', this)">
+          <span>نهایت فشرده‌سازی</span>
+          <span class="sub">کمترین حجم ممکن (مناسب ایتا)</span>
+        </button>
+        <button type="button" class="level-btn" onclick="setCompressLevel('balanced', this)">
+          <span>فشرده‌سازی متعادل</span>
+          <span class="sub">کیفیت خوانای بالا + حجم کم</span>
+        </button>
+      </div>
+
+      <div id="compProgress" class="progress-wrapper">
+        <div class="progress-top-info">
+          <span class="progress-status-lbl" id="compStatusText">در حال تحلیل صفحات...</span>
+          <span class="progress-percent-badge" id="compPercentText">۰٪</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="compProgressFill"></div></div>
+      </div>
+
+      <div id="resultStatsCard" class="result-stats-card">
+        <div class="stat-col">
+          <span class="stat-lbl">حجم اولیه</span>
+          <span class="stat-val" id="statBefore">-</span>
+        </div>
+        <div class="stat-col">
+          <span class="stat-lbl">حجم جدید</span>
+          <span class="stat-val" id="statAfter">-</span>
+        </div>
+        <div class="stat-col highlight">
+          <span class="stat-lbl">کاهش حجم</span>
+          <span class="stat-val" id="statSaved">-</span>
+        </div>
+      </div>
+
+      <div id="compAlert" class="status-alert-box"></div>
+
+      <button type="button" class="primary-action-btn" id="compressActionBtn" onclick="executeUltraCompress()">
+        <i class="fa-solid fa-compress"></i>
+        <span>کاهش حجم و دانلود PDF</span>
+      </button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-text">
+      تمامی حقوق مادی و معنوی این سامانه متعلق به <span class="brand-hl">استادیاب</span> می‌باشد.
+    </div>
+  </footer>
+
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    (function initSideDrawer() {
+      const openBtn = document.getElementById('openDrawerBtn');
+      const closeBtn = document.getElementById('closeDrawerBtn');
+      const drawer = document.getElementById('sideDrawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      openBtn.addEventListener('click', () => { drawer.classList.add('open'); backdrop.classList.add('open'); openBtn.classList.add('is-active'); });
+      const closeMenu = () => { drawer.classList.remove('open'); backdrop.classList.remove('open'); openBtn.classList.remove('is-active'); };
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
+    })();
+
+    const toFa = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    const formatBytes = b => b < 1024 * 1024 ? `${toFa((b / 1024).toFixed(1))} KB` : `${toFa((b / (1024 * 1024)).toFixed(2))} MB`;
+
+    let targetPdfFile = null;
+    let compressLevel = 'ultra';
+
+    function setCompressLevel(lvl, btn) {
+      compressLevel = lvl;
+      document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function showAlert(type, msg) {
+      const el = document.getElementById('compAlert');
+      el.className = `status-alert-box show ${type}`;
+      el.innerHTML = `<div class="alert-icon-sq"><i class="fa-solid ${type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-check'}"></i></div><div>${msg}</div>`;
+    }
+    function hideAlert() { document.getElementById('compAlert').className = 'status-alert-box'; }
+
+    function updateProgress(percent, text) {
+      const wrap = document.getElementById('compProgress');
+      wrap.classList.add('show');
+      document.getElementById('compProgressFill').style.width = percent + '%';
+      document.getElementById('compPercentText').textContent = toFa(Math.round(percent)) + '٪';
+      if (text) document.getElementById('compStatusText').textContent = text;
+    }
+
+    document.getElementById('compressFileInput').addEventListener('change', e => {
+      hideAlert();
+      document.getElementById('resultStatsCard').classList.remove('show');
+      const file = e.target.files[0];
+      if (!file) return;
+      targetPdfFile = file;
+      document.getElementById('selectedFileBox').innerHTML = `
+        <div class="file-item-card">
+          <div class="file-item-info">
+            <i class="fa-solid fa-file-pdf"></i>
+            <div class="file-name-wrap">
+              <span class="file-name-txt">${file.name}</span>
+              <span class="file-meta-txt">حجم فعلی: ${formatBytes(file.size)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    async function executeUltraCompress() {
+      hideAlert();
+      if (!targetPdfFile) {
+        showAlert('error', 'ابتدا فایل PDF مورد نظر خود را انتخاب کنید.');
+        return;
+      }
+
+      const btn = document.getElementById('compressActionBtn');
+      btn.disabled = true;
+
+      // پارامترهای نهایت فشرده‌سازی (مقیاس هوشمند و کیفیت JPEG بهینه)
+      const renderScale = compressLevel === 'ultra' ? 1.05 : 1.35;
+      const jpegQuality = compressLevel === 'ultra' ? 0.36 : 0.56;
+
+      try {
+        updateProgress(4, 'در حال بارگذاری ساختار PDF...');
+        const arrayBuffer = await targetPdfFile.arrayBuffer();
+        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        const pdfDoc = await loadingTask.promise;
+        const numPages = pdfDoc.numPages;
+
+        const outPdf = await PDFLib.PDFDocument.create();
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d', { alpha: false });
+
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+          const pct = 5 + ((pageNum - 1) / numPages) * 88;
+          updateProgress(pct, `فشرده‌سازی عمیق صفحه ${toFa(pageNum)} از ${toFa(numPages)}...`);
+
+          const page = await pdfDoc.getPage(pageNum);
+          const origViewport = page.getViewport({ scale: 1 });
+
+          // محدود کردن عرض حداکثر برای جلوگیری از حجم نجومی اسکن‌های بزرگ
+          const maxWidth = compressLevel === 'ultra' ? 920 : 1240;
+          const autoScale = origViewport.width > maxWidth ? (maxWidth / origViewport.width) : renderScale;
+          const viewport = page.getViewport({ scale: autoScale });
+
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+          const dataUrl = canvas.toDataURL('image/jpeg', jpegQuality);
+          const jpgBytes = await fetch(dataUrl).then(res => res.arrayBuffer());
+          const embeddedJpg = await outPdf.embedJpg(jpgBytes);
+
+          const pdfPage = outPdf.addPage([origViewport.width, origViewport.height]);
+          pdfPage.drawImage(embeddedJpg, {
+            x: 0,
+            y: 0,
+            width: origViewport.width,
+            height: origViewport.height
+          });
+        }
+
+        updateProgress(96, 'در حال بسته‌بندی نهایی با حداقل حجم...');
+        const compressedBytes = await outPdf.save({ useObjectStreams: true });
+        updateProgress(100, 'فشرده‌سازی با موفقیت تکمیل شد!');
+
+        const origSize = targetPdfFile.size;
+        const newSize = compressedBytes.byteLength;
+        const savedPct = origSize > newSize ? Math.round(((origSize - newSize) / origSize) * 100) : 0;
+
+        document.getElementById('statBefore').textContent = formatBytes(origSize);
+        document.getElementById('statAfter').textContent = formatBytes(newSize);
+        document.getElementById('statSaved').textContent = savedPct > 0 ? `${toFa(savedPct)}٪ سبک‌تر` : 'بهینه شد';
+        document.getElementById('resultStatsCard').classList.add('show');
+
+        const cleanName = targetPdfFile.name.replace(/\.pdf$/i, '');
+        const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${cleanName}-Compressed.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+
+        showAlert('success', `فایل PDF فشرده شد و حجم آن از ${formatBytes(origSize)} به ${formatBytes(newSize)} کاهش یافت.`);
+      } catch (err) {
+        showAlert('error', 'خطا در فشرده‌سازی فایل! مطمئن شوید فایل PDF رمزدار یا آسیب‌دیده نیست.');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

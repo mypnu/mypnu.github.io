@@ -11,6 +11,7 @@
   <link rel="preload" href="fonts/ch.ttf" as="font" type="font/ttf" crossorigin>
 
   <link rel="preload" as="image" href="images/logo.webp">
+  <link rel="preload" as="image" href="images/logo-black.webp">
   <link rel="preload" as="image" href="images/s1.gif">
   <link rel="preload" as="image" href="images/s2.webp">
   <link rel="preload" as="image" href="images/s3.webp">
@@ -30,7 +31,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -127,9 +128,9 @@
     .gold-top-nav {
       position: relative;
       width: 100%;
-      height: 44px;
+      height: 46px;
       background-color: #ffd166;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -144,54 +145,103 @@
       gap: 10px;
     }
 
+    /* آیکون همبرگری مدرن و جذاب با خطوط نامتقارن گرد */
     .hamburger-btn {
       display: inline-flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
       justify-content: center;
-      width: 34px;
-      height: 32px;
-      border: 1.5px solid rgba(0, 0, 0, 0.25);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.35);
-      color: #000000;
-      font-size: 17px;
+      gap: 4px;
+      width: 36px;
+      height: 34px;
+      padding: 0 8px;
+      border: 1.6px solid rgba(17, 17, 17, 0.25);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.42);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .hamburger-btn i {
-      color: #000000;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .hamburger-btn:hover {
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
     }
 
     .hamburger-btn:active {
       transform: scale(0.92);
     }
 
+    .hb-line {
+      display: block;
+      height: 2.4px;
+      background-color: #111111;
+      border-radius: 4px;
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s ease, opacity 0.25s ease;
+    }
+
+    .hb-line.line-1 {
+      width: 18px;
+    }
+
+    .hb-line.line-2 {
+      width: 13px;
+    }
+
+    .hb-line.line-3 {
+      width: 16px;
+    }
+
+    .hamburger-btn.is-active .hb-line.line-1 {
+      width: 18px;
+      transform: translateY(6.4px) rotate(45deg);
+    }
+
+    .hamburger-btn.is-active .hb-line.line-2 {
+      opacity: 0;
+      width: 0;
+    }
+
+    .hamburger-btn.is-active .hb-line.line-3 {
+      width: 18px;
+      transform: translateY(-6.4px) rotate(-45deg);
+    }
+
     .nav-mini-logo {
-      height: 24px;
+      height: 25px;
       width: auto;
       object-fit: contain;
       display: block;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     }
 
-    .nav-designed-by {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: #111111;
-      letter-spacing: 0.4px;
+    /* بج شیک و مدرن Designed by ARMOON */
+    .nav-designed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #1a0633;
+      padding: 4px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
       direction: ltr;
       white-space: nowrap;
     }
 
-    .nav-designed-by span {
+    .nav-designed-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .nav-designed-author {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
       font-weight: 900;
-      color: #000000;
+      letter-spacing: 1.3px;
+      color: #ffd166;
     }
 
     /* منوی کشویی از راست به چپ */
@@ -1103,22 +1153,31 @@
 
     @media (max-width: 600px) {
       .gold-top-nav {
-        height: 40px;
+        height: 42px;
         padding: 0 12px;
       }
       .nav-right-group {
         gap: 8px;
       }
       .hamburger-btn {
-        width: 31px;
-        height: 28px;
-        font-size: 15px;
+        width: 33px;
+        height: 30px;
+        padding: 0 7px;
       }
       .nav-mini-logo {
-        height: 20px;
+        height: 21px;
       }
-      .nav-designed-by {
-        font-size: 10.5px;
+      .nav-designed-badge {
+        padding: 3.5px 8px;
+        gap: 4px;
+      }
+      .nav-designed-label {
+        font-size: 8px;
+        letter-spacing: 0.6px;
+      }
+      .nav-designed-author {
+        font-size: 10px;
+        letter-spacing: 1px;
       }
       
       .main-container { padding-top: 22px; }
@@ -1180,11 +1239,16 @@
   <header class="gold-top-nav">
     <div class="nav-right-group">
       <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
-        <i class="fa-solid fa-bars"></i>
+        <span class="hb-line line-1"></span>
+        <span class="hb-line line-2"></span>
+        <span class="hb-line line-3"></span>
       </button>
-      <img src="images/logo.webp" alt="استادیاب" class="nav-mini-logo">
+      <img src="images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
     </div>
-    <div class="nav-designed-by">Designed by <span>ARMOON</span></div>
+    <div class="nav-designed-badge">
+      <span class="nav-designed-label">Designed by</span>
+      <span class="nav-designed-author">ARMOON</span>
+    </div>
   </header>
 
   <!-- منوی کشویی راست به چپ -->
@@ -1326,12 +1390,14 @@
       function openMenu() {
         drawer.classList.add('open');
         backdrop.classList.add('open');
+        openBtn.classList.add('is-active');
         drawer.setAttribute('aria-hidden', 'false');
       }
 
       function closeMenu() {
         drawer.classList.remove('open');
         backdrop.classList.remove('open');
+        openBtn.classList.remove('is-active');
         drawer.setAttribute('aria-hidden', 'true');
       }
 

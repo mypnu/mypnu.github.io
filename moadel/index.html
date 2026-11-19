@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>استادیاب | محاسبه هوشمند معدل ترمی</title>
+
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="../images/logo-black.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-ExtraBold.ttf') format('truetype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AppFont';
+      src: url('../fonts/m-Black.ttf') format('truetype');
+      font-weight: 900;
+      font-style: normal;
+      font-display: block;
+    }
+
+    :root {
+      --bg-dark-1: #1e053a;
+      --bg-dark-2: #2e0854;
+      --bg-dark-3: #4a157a;
+      --bg-dark-4: #22033d;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'AppFont', sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* نوار سفید یکدست بالای صفحه هماهنگ با صفحه اصلی */
+    .gold-top-nav {
+      position: relative;
+      width: 100%;
+      height: 46px;
+      background-color: #ffffff;
+      box-shadow: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .nav-right-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hamburger-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 4.5px;
+      width: 28px;
+      height: 28px;
+      padding: 2px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .hamburger-btn:active {
+      transform: scale(0.9);
+    }
+
+    .hb-line {
+      display: block;
+      height: 2.6px;
+      background-color: #5a189a;
+      border-radius: 3px;
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s ease, opacity 0.25s ease;
+    }
+
+    .hb-line.line-1 { width: 22px; }
+    .hb-line.line-2 { width: 16px; }
+    .hb-line.line-3 { width: 22px; }
+
+    .hamburger-btn.is-active .hb-line.line-1 {
+      width: 22px;
+      transform: translateY(7.1px) rotate(45deg);
+    }
+    .hamburger-btn.is-active .hb-line.line-2 {
+      opacity: 0;
+      width: 0;
+    }
+    .hamburger-btn.is-active .hb-line.line-3 {
+      width: 22px;
+      transform: translateY(-7.1px) rotate(-45deg);
+    }
+
+    .nav-mini-logo {
+      height: 25px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nav-designed-text {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      direction: ltr;
+      white-space: nowrap;
+    }
+
+    .nav-designed-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: #5a189a;
+    }
+
+    .nav-designed-author {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      color: #5a189a;
+    }
+
+    /* منوی کشویی راست به چپ */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 2, 22, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 998;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .side-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 285px;
+      max-width: 82vw;
+      height: 100vh;
+      background: linear-gradient(165deg, #2b0750 0%, #190330 60%, #110122 100%);
+      border-left: none;
+      box-shadow: none;
+      visibility: hidden;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.38s ease, box-shadow 0.38s ease;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .side-drawer.open {
+      visibility: visible;
+      border-left: 1.8px solid rgba(255, 209, 102, 0.45);
+      box-shadow: -10px 0 36px rgba(0, 0, 0, 0.65);
+      transform: translateX(0);
+    }
+
+    .drawer-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .drawer-title-text {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffd166;
+    }
+
+    .drawer-close-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .drawer-image-slot {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: block;
+    }
+
+    .drawer-image-slot img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .drawer-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .drawer-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .drawer-nav-link i {
+      width: 20px;
+      text-align: center;
+      color: #ffd166;
+      font-size: 15px;
+    }
+
+    .drawer-nav-link:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 209, 102, 0.45);
+    }
+
+    /* محتوای اصلی */
+    .main-container {
+      width: 94%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1 0 auto;
+      padding-top: 18px;
+      padding-bottom: 35px;
+      gap: 16px;
+    }
+
+    .page-header-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 7px 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    .back-home-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    /* باکس عنوان شیشه‌ای */
+    .hero-title-glass {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(0, 240, 255, 0.65);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(0, 240, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      border-radius: 22px;
+      padding: 18px 16px;
+    }
+
+    .hero-title-glass h1 {
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.6;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* باکس معدل‌سنج */
+    .gpa-glass-card {
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 18px 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .degree-selector-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .degree-label {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffd166;
+    }
+
+    .degree-options-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .degree-btn {
+      padding: 10px 8px;
+      border-radius: 12px;
+      border: 1.6px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.28);
+      color: #e0aaff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .degree-btn.active {
+      background: linear-gradient(135deg, #ea580c, #f97316, #ff8500);
+      border-color: #ffffff;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5);
+    }
+
+    /* هدر ستون‌های درس */
+    .courses-header-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72px 78px 36px;
+      gap: 8px;
+      align-items: center;
+      padding: 0 2px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffd166;
+    }
+
+    .courses-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* هر ردیف درس در یک خط و کاملاً فیت درون کادر */
+    .course-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72px 78px 36px;
+      gap: 8px;
+      align-items: center;
+      animation: rowSlideIn 0.28s ease forwards;
+    }
+
+    @keyframes rowSlideIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .course-input {
+      width: 100%;
+      min-width: 0;
+      height: 44px;
+      background: #ffffff;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 0 10px;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #2b004a;
+      outline: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      user-select: text;
+    }
+
+    .course-input::placeholder {
+      font-size: 12px;
+      font-weight: 600;
+      color: #9c89b8;
+    }
+
+    .course-input:focus {
+      border-color: #00f0ff;
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.45);
+    }
+
+    .course-input.num-center {
+      text-align: center;
+      padding: 0 4px;
+      font-size: 16px;
+      font-weight: 900;
+      direction: ltr;
+    }
+
+    .delete-course-btn {
+      width: 36px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(239, 68, 68, 0.55);
+      background: rgba(239, 68, 68, 0.18);
+      color: #ff8fa3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .delete-course-btn:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    .delete-course-btn:active {
+      transform: scale(0.92);
+    }
+
+    .error-msg {
+      color: #ff6b8b;
+      font-size: 13px;
+      font-weight: 700;
+      display: none;
+    }
+
+    /* ردیف دکمه‌های افزودن درس و محاسبه معدل کنار هم */
+    .actions-buttons-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .add-course-btn {
+      height: 50px;
+      border-radius: 15px;
+      border: 1.8px solid rgba(0, 240, 255, 0.7);
+      background: rgba(0, 240, 255, 0.14);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .add-course-btn:hover {
+      background: rgba(0, 240, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .add-course-btn:active {
+      transform: scale(0.96);
+    }
+
+    .calc-green-btn {
+      height: 50px;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
+      color: #ffffff;
+      font-size: 15.5px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(6, 214, 160, 0.42);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .calc-green-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 28px rgba(6, 214, 160, 0.62);
+    }
+
+    .calc-green-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* پاپ‌آپ لیکوئید گلس با انیمیشن جذاب */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 2, 26, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .liquid-glass-popup {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 55%, rgba(255, 255, 255, 0.12) 100%);
+      backdrop-filter: blur(26px) saturate(165%);
+      -webkit-backdrop-filter: blur(26px) saturate(165%);
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 32px;
+      padding: 28px 22px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 18px;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.6),
+        inset 0 2px 3px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.25);
+      transform: scale(0.82) translateY(22px);
+      transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+      overflow: hidden;
+    }
+
+    /* انعکاس نور شیشه مایع (Liquid Glass Specular Sheen) */
+    .liquid-glass-popup::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 75%;
+      height: 200%;
+      background: linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(22deg);
+      pointer-events: none;
+      animation: liquidGlassSweep 4.5s ease-in-out infinite;
+    }
+
+    @keyframes liquidGlassSweep {
+      0% { left: -75%; opacity: 0; }
+      20% { opacity: 0.9; }
+      55% { left: 135%; opacity: 0.9; }
+      65%, 100% { left: 135%; opacity: 0; }
+    }
+
+    .liquid-glass-popup.frame-alef {
+      border-color: #10b981;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.65),
+        0 0 36px rgba(16, 185, 129, 0.55),
+        inset 0 2px 3px rgba(255, 255, 255, 0.45);
+    }
+
+    .liquid-glass-popup.frame-adi {
+      border-color: #f97316;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.65),
+        0 0 36px rgba(249, 115, 22, 0.55),
+        inset 0 2px 3px rgba(255, 255, 255, 0.45);
+    }
+
+    .liquid-glass-popup.frame-mashroot {
+      border-color: #ef4444;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.65),
+        0 0 36px rgba(239, 68, 68, 0.55),
+        inset 0 2px 3px rgba(255, 255, 255, 0.45);
+    }
+
+    .popup-overlay.show .liquid-glass-popup {
+      transform: scale(1) translateY(0);
+    }
+
+    .gpa-result-top-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: #f3e8ff;
+      letter-spacing: 0.2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gpa-big-number {
+      font-size: 74px;
+      font-weight: 950;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 4px 24px rgba(255, 255, 255, 0.45);
+      direction: ltr;
+      position: relative;
+      z-index: 2;
+    }
+
+    .status-badge-box {
+      padding: 10px 28px;
+      border-radius: 14px;
+      font-size: 16.5px;
+      font-weight: 900;
+      color: #ffffff !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      letter-spacing: 0.2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .status-alef {
+      background: linear-gradient(135deg, #059669, #10b981);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+    }
+
+    .status-adi {
+      background: linear-gradient(135deg, #ea580c, #f97316);
+      box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
+    }
+
+    .status-mashroot {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
+    }
+
+    .popup-desc-text {
+      width: 100%;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #4a157a;
+      line-height: 1.85;
+      background: #ffffff;
+      padding: 14px 16px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      position: relative;
+      z-index: 2;
+    }
+
+    .popup-desc-text .purple-hl {
+      color: #6a0dad;
+      font-weight: 950;
+      font-size: 16.5px;
+    }
+
+    .popup-close-btn {
+      width: 100%;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .popup-close-btn:hover {
+      background: rgba(255, 255, 255, 0.26);
+    }
+
+    .site-footer {
+      width: 100%;
+      padding: 16px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 5, 45, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin-top: auto;
+    }
+
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
+
+    @media (max-width: 600px) {
+      .gold-top-nav { height: 42px; padding: 0 12px; }
+      .nav-right-group { gap: 10px; }
+      .hamburger-btn { width: 26px; height: 26px; gap: 4px; }
+      .hb-line.line-1, .hb-line.line-3 { width: 20px; }
+      .hb-line.line-2 { width: 14px; }
+      .hamburger-btn.is-active .hb-line.line-1 { width: 20px; transform: translateY(6.6px) rotate(45deg); }
+      .hamburger-btn.is-active .hb-line.line-3 { width: 20px; transform: translateY(-6.6px) rotate(-45deg); }
+      .nav-mini-logo { height: 21px; }
+      .nav-designed-label { font-size: 9px; }
+      .nav-designed-author { font-size: 11px; letter-spacing: 0.9px; }
+
+      .hero-title-glass h1 { font-size: 15.5px; }
+      .courses-header-row, .course-row {
+        grid-template-columns: minmax(0, 1fr) 62px 68px 34px;
+        gap: 6px;
+      }
+      .course-input { height: 42px; font-size: 13.5px; padding: 0 8px; }
+      .course-input.num-center { font-size: 15px; }
+      .delete-course-btn { width: 34px; height: 42px; font-size: 13px; }
+      .add-course-btn { font-size: 13px; height: 48px; }
+      .calc-green-btn { font-size: 14.5px; height: 48px; }
+      .gpa-big-number { font-size: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- نوار سفید یکدست بالای صفحه -->
+  <header class="gold-top-nav">
+    <div class="nav-right-group">
+      <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
+        <span class="hb-line line-1"></span>
+        <span class="hb-line line-2"></span>
+        <span class="hb-line line-3"></span>
+      </button>
+      <img src="../images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
+    </div>
+    <div class="nav-designed-text">
+      <span class="nav-designed-label">Designed by</span>
+      <span class="nav-designed-author">ARMOON</span>
+    </div>
+  </header>
+
+  <!-- منوی کشویی راست به چپ -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
+    <div class="drawer-top-bar">
+      <span class="drawer-title-text">منوی دسترسی سریع</span>
+      <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="drawer-image-slot">
+      <img src="../images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+    </div>
+
+    <nav class="drawer-nav-list">
+      <a href="../" class="drawer-nav-link">
+        <i class="fa-solid fa-house"></i>
+        <span>صفحه اصلی استادیاب</span>
+      </a>
+      <a href="../marakez/" class="drawer-nav-link">
+        <i class="fa-solid fa-building-columns"></i>
+        <span>مراکز دانشگاهی استان</span>
+      </a>
+      <a href="../poshtiban/" class="drawer-nav-link">
+        <i class="fa-solid fa-headset"></i>
+        <span>پشتیبانان مراکز</span>
+      </a>
+      <a href="../karshenas/" class="drawer-nav-link">
+        <i class="fa-solid fa-user-tie"></i>
+        <span>کارشناسان رشته‌ها</span>
+      </a>
+      <a href="../saghfmojaz/" class="drawer-nav-link">
+        <i class="fa-solid fa-calculator"></i>
+        <span>محاسبه سقف مجاز واحد</span>
+      </a>
+      <a href="../testdorost/" class="drawer-nav-link">
+        <i class="fa-solid fa-check-double"></i>
+        <span>محاسبه حداقل تست صحیح</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-container">
+    <div class="page-header-row">
+      <a href="../" class="back-home-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>بازگشت به صفحه اصلی</span>
+      </a>
+    </div>
+
+    <div class="hero-title-glass">
+      <h1>محاسبه هوشمند معدل ترمی</h1>
+    </div>
+
+    <div class="gpa-glass-card">
+      <div class="degree-selector-wrapper">
+        <span class="degree-label">مقطع تحصیلی</span>
+        <div class="degree-options-row">
+          <button type="button" class="degree-btn active" onclick="selectDegree('bachelor', this)">کارشناسی</button>
+          <button type="button" class="degree-btn" onclick="selectDegree('master', this)">ارشد</button>
+        </div>
+      </div>
+
+      <div class="courses-header-row">
+        <span>نام درس</span>
+        <span>تعداد واحد</span>
+        <span>نمره</span>
+        <span>حذف</span>
+      </div>
+
+      <div class="courses-list" id="coursesList"></div>
+
+      <div id="errorMsg" class="error-msg">لطفاً تعداد واحد و نمره معتبر (۰ تا ۲۰) را برای حداقل یک درس وارد کنید.</div>
+
+      <div class="actions-buttons-row">
+        <button type="button" class="add-course-btn" onclick="addCourseRow()">
+          <i class="fa-solid fa-plus"></i>
+          <span>افزودن درس</span>
+        </button>
+        <button type="button" class="calc-green-btn" onclick="calculateTermGpa()">
+          <i class="fa-solid fa-calculator"></i>
+          <span>محاسبه معدل</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- پاپ‌آپ شیشه‌ای لیکوئید گلس -->
+  <div class="popup-overlay" id="resultPopup" onclick="closePopup(event)">
+    <div class="liquid-glass-popup" id="popupCard" onclick="event.stopPropagation()">
+      <span class="gpa-result-top-label">معدل ترمی شما</span>
+
+      <div class="gpa-big-number" id="animatedGpaNumber">۰۰.۰۰</div>
+
+      <div class="status-badge-box" id="statusBadgeBox">معدل الف</div>
+
+      <p class="popup-desc-text" id="popupDescText"></p>
+
+      <button type="button" class="popup-close-btn" onclick="hidePopup()">بستن</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-text">
+      تمامی حقوق مادی و معنوی این سامانه متعلق به <span class="brand-hl">استادیاب</span> می‌باشد.
+    </div>
+  </footer>
+
+  <script>
+    // کنترل منوی کشویی
+    (function initSideDrawer() {
+      const openBtn = document.getElementById('openDrawerBtn');
+      const closeBtn = document.getElementById('closeDrawerBtn');
+      const drawer = document.getElementById('sideDrawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+
+      function openMenu() {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        openBtn.classList.add('is-active');
+        drawer.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeMenu() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        openBtn.classList.remove('is-active');
+        drawer.setAttribute('aria-hidden', 'true');
+      }
+
+      openBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
+    })();
+
+    let selectedDegree = 'bachelor';
+    let countAnimationFrame = null;
+
+    function toPersianDigits(num) {
+      if (num === null || num === undefined) return '';
+      const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+      return num.toString().replace(/\d/g, x => persianDigits[x]);
+    }
+
+    function normalizeNumberInput(str) {
+      return str
+        .replace(/[۰٠]/g, '0').replace(/[۱١]/g, '1').replace(/[۲٢]/g, '2')
+        .replace(/[۳٣]/g, '3').replace(/[۴٤]/g, '4').replace(/[۵٥]/g, '5')
+        .replace(/[۶٦]/g, '6').replace(/[۷٧]/g, '7').replace(/[۸٨]/g, '8')
+        .replace(/[۹٩]/g, '9')
+        .replace(/[/٫،]/g, '.')
+        .trim();
+    }
+
+    function selectDegree(degree, btn) {
+      selectedDegree = degree;
+      document.querySelectorAll('.degree-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function addCourseRow() {
+      const list = document.getElementById('coursesList');
+      const row = document.createElement('div');
+      row.className = 'course-row';
+
+      row.innerHTML = `
+        <input type="text" class="course-input" placeholder="نام درس (اختیاری)">
+        <input type="text" class="course-input num-center unit-input" inputmode="decimal" placeholder="واحد">
+        <input type="text" class="course-input num-center grade-input" inputmode="decimal" placeholder="نمره">
+        <button type="button" class="delete-course-btn" title="حذف درس" onclick="removeCourseRow(this)">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      `;
+
+      row.querySelectorAll('.num-center').forEach(inp => {
+        inp.addEventListener('input', function() {
+          const pos = this.selectionStart;
+          this.value = toPersianDigits(this.value);
+          this.setSelectionRange(pos, pos);
+        });
+      });
+
+      list.appendChild(row);
+    }
+
+    function removeCourseRow(btn) {
+      const list = document.getElementById('coursesList');
+      const rows = list.querySelectorAll('.course-row');
+      if (rows.length > 1) {
+        btn.closest('.course-row').remove();
+      } else {
+        const row = btn.closest('.course-row');
+        row.querySelectorAll('input').forEach(i => i.value = '');
+      }
+    }
+
+    // ایجاد ۵ ردیف درس در ابتدای بارگذاری صفحه
+    for (let i = 0; i < 5; i++) {
+      addCourseRow();
+    }
+
+    function animateGpaCounter(targetGpa, element) {
+      if (countAnimationFrame) cancelAnimationFrame(countAnimationFrame);
+      const duration = 850;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 4);
+        const currentVal = (easeOut * targetGpa).toFixed(2);
+        element.textContent = toPersianDigits(currentVal);
+
+        if (progress < 1) {
+          countAnimationFrame = requestAnimationFrame(update);
+        } else {
+          element.textContent = toPersianDigits(targetGpa.toFixed(2));
+        }
+      }
+      countAnimationFrame = requestAnimationFrame(update);
+    }
+
+    function calculateTermGpa() {
+      const rows = document.querySelectorAll('#coursesList .course-row');
+      const errorMsg = document.getElementById('errorMsg');
+
+      let totalWeightedScore = 0;
+      let totalUnits = 0;
+      let hasInvalid = false;
+
+      rows.forEach(row => {
+        const unitRaw = normalizeNumberInput(row.querySelector('.unit-input').value);
+        const gradeRaw = normalizeNumberInput(row.querySelector('.grade-input').value);
+
+        if (unitRaw === '' && gradeRaw === '') {
+          return;
+        }
+
+        const unit = parseFloat(unitRaw);
+        const grade = parseFloat(gradeRaw);
+
+        if (isNaN(unit) || unit <= 0 || isNaN(grade) || grade < 0 || grade > 20) {
+          hasInvalid = true;
+          return;
+        }
+
+        totalWeightedScore += grade * unit;
+        totalUnits += unit;
+      });
+
+      if (hasInvalid || totalUnits <= 0) {
+        errorMsg.style.display = 'block';
+        return;
+      }
+      errorMsg.style.display = 'none';
+
+      const gpa = Math.round((totalWeightedScore / totalUnits) * 100) / 100;
+
+      let maxUnits = 0;
+      let statusText = '';
+      let statusClass = '';
+      let frameClass = '';
+
+      if (selectedDegree === 'bachelor') {
+        if (gpa >= 17) {
+          maxUnits = 24;
+          statusText = 'معدل الف';
+          statusClass = 'status-alef';
+          frameClass = 'frame-alef';
+        } else if (gpa >= 12) {
+          maxUnits = 20;
+          statusText = 'معدل عادی';
+          statusClass = 'status-adi';
+          frameClass = 'frame-adi';
+        } else {
+          maxUnits = 14;
+          statusText = 'معدل مشروط';
+          statusClass = 'status-mashroot';
+          frameClass = 'frame-mashroot';
+        }
+      } else {
+        if (gpa >= 17) {
+          maxUnits = 14;
+          statusText = 'معدل الف';
+          statusClass = 'status-alef';
+          frameClass = 'frame-alef';
+        } else if (gpa >= 14) {
+          maxUnits = 12;
+          statusText = 'معدل عادی';
+          statusClass = 'status-adi';
+          frameClass = 'frame-adi';
+        } else {
+          maxUnits = 8;
+          statusText = 'معدل مشروط';
+          statusClass = 'status-mashroot';
+          frameClass = 'frame-mashroot';
+        }
+      }
+
+      const popupCard = document.getElementById('popupCard');
+      popupCard.className = 'liquid-glass-popup ' + frameClass;
+
+      const badgeBox = document.getElementById('statusBadgeBox');
+      badgeBox.textContent = statusText;
+      badgeBox.className = 'status-badge-box ' + statusClass;
+
+      const persianUnits = toPersianDigits(maxUnits);
+      document.getElementById('popupDescText').innerHTML =
+        `مجاز به انتخاب واحد تا حداکثر <span class="purple-hl">${persianUnits}</span> واحد درسی در <span class="purple-hl">ترم مهر/بهمن</span> آینده هستی`;
+
+      const numEl = document.getElementById('animatedGpaNumber');
+      numEl.textContent = '۰۰.۰۰';
+
+      document.getElementById('resultPopup').classList.add('show');
+      animateGpaCounter(gpa, numEl);
+    }
+
+    function hidePopup() {
+      document.getElementById('resultPopup').classList.remove('show');
+    }
+
+    function closePopup(e) {
+      if (e.target.id === 'resultPopup') {
+        hidePopup();
+      }
+    }
+  </script>
+</body>
+</html>

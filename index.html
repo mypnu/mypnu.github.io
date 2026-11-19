@@ -497,6 +497,89 @@
     .card-s12 { background-image: url('images/s12.webp'); }
     .card-s13 { background-image: url('images/s13.webp'); }
 
+    /* باکس روزشمار هم‌اندازه s1 */
+    .countdown-banner-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 48 / 7;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.08);
+      background-image: url('images/countdown.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 1.5px solid rgba(255, 209, 102, 0.55);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 14px;
+      cursor: default;
+    }
+
+    .countdown-units-group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+      direction: rtl;
+      z-index: 2;
+    }
+
+    .countdown-box-item {
+      background: #ffffff;
+      border-radius: 10px;
+      min-width: 44px;
+      height: 54px;
+      padding: 3px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32), inset 0 -2px 4px rgba(90, 24, 154, 0.14);
+      overflow: hidden;
+    }
+
+    .countdown-num {
+      font-size: 20px;
+      font-weight: 950;
+      line-height: 1.1;
+      background: linear-gradient(180deg, #1a0336 0%, #3c096c 52%, #6b1fb1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #2b004a;
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    .countdown-num.digit-pop {
+      animation: digitFlipPop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes digitFlipPop {
+      0% {
+        opacity: 0.25;
+        transform: translateY(-9px) scale(0.84);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(1.5px) scale(1.07);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .countdown-label {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #4a157a;
+      line-height: 1;
+    }
+
     .toolbox-divider {
       width: 100%;
       display: flex;
@@ -930,7 +1013,18 @@
       .home-actions-wrapper { gap: 12px; }
       .quick-actions-row-three { gap: 8px; }
       .ratio-1-1-card { border-radius: 16px; }
-      .ratio-48-7-card { border-radius: 13px; }
+      .ratio-48-7-card, .countdown-banner-card { border-radius: 13px; }
+
+      .countdown-banner-card { padding: 0 8px; }
+      .countdown-units-group { gap: 4px; }
+      .countdown-box-item {
+        min-width: 32px;
+        height: 37px;
+        border-radius: 7px;
+        padding: 2px 4px;
+      }
+      .countdown-num { font-size: 13.5px; }
+      .countdown-label { font-size: 7.5px; }
 
       .toolbox-divider { gap: 10px; margin: 6px 0 2px 0; }
       .toolbox-divider-text { font-size: 14.5px; }
@@ -997,6 +1091,28 @@
         <div class="ratio-1-1-card card-ertebat neon-blue-frame" id="cardErtebat" onclick="window.location.href='karshenas/'"></div>
       </div>
 
+      <!-- باکس روزشمار تا ۲۱ دی ۱۴۰۵ شمسی -->
+      <div class="countdown-banner-card" id="countdownBanner">
+        <div class="countdown-units-group">
+          <div class="countdown-box-item">
+            <span class="countdown-num" id="cdSeconds">۰۰</span>
+            <span class="countdown-label">ثانیه</span>
+          </div>
+          <div class="countdown-box-item">
+            <span class="countdown-num" id="cdMinutes">۰۰</span>
+            <span class="countdown-label">دقیقه</span>
+          </div>
+          <div class="countdown-box-item">
+            <span class="countdown-num" id="cdHours">۰۰</span>
+            <span class="countdown-label">ساعت</span>
+          </div>
+          <div class="countdown-box-item">
+            <span class="countdown-num" id="cdDays">۰۰</span>
+            <span class="countdown-label">روز</span>
+          </div>
+        </div>
+      </div>
+
       <div class="toolbox-divider">
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
@@ -1033,17 +1149,61 @@
   </footer>
 
   <script>
-    const rawData = [
-      "مهدی صداقت: 09127015548"
-    ];
-
-    const instructorGroupProfiles = {};
-
     function toPersianDigits(num) {
       if (num === null || num === undefined) return '';
       const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
       return num.toString().replace(/\d/g, x => persianDigits[x]);
     }
+
+    // روزشمار تا ۲۱ دی ۱۴۰۵ شمسی (معادل ۱۱ ژانویه ۲۰۲۷ ساعت ۰۰:۰۰ به وقت ایران +03:30)
+    (function initCountdown() {
+      const targetTime = new Date('2027-01-11T00:00:00+03:30').getTime();
+      const elDays = document.getElementById('cdDays');
+      const elHours = document.getElementById('cdHours');
+      const elMinutes = document.getElementById('cdMinutes');
+      const elSeconds = document.getElementById('cdSeconds');
+
+      let prev = { d: '', h: '', m: '', s: '' };
+
+      function applyAnimatedValue(el, newVal, key) {
+        if (prev[key] !== newVal) {
+          el.textContent = newVal;
+          el.classList.remove('digit-pop');
+          void el.offsetWidth;
+          el.classList.add('digit-pop');
+          prev[key] = newVal;
+        }
+      }
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = Math.max(0, targetTime - now);
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        const dStr = toPersianDigits(String(days).padStart(2, '0'));
+        const hStr = toPersianDigits(String(hours).padStart(2, '0'));
+        const mStr = toPersianDigits(String(minutes).padStart(2, '0'));
+        const sStr = toPersianDigits(String(seconds).padStart(2, '0'));
+
+        applyAnimatedValue(elDays, dStr, 'd');
+        applyAnimatedValue(elHours, hStr, 'h');
+        applyAnimatedValue(elMinutes, mStr, 'm');
+        applyAnimatedValue(elSeconds, sStr, 's');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+
+    const rawData = [
+      "مهدی صداقت: 09127015548"
+    ];
+
+    const instructorGroupProfiles = {};
 
     function cleanPersianString(str) {
       if (!str) return '';

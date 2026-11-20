@@ -266,7 +266,6 @@
     }
     .categories-stage.show { display: flex; }
 
-    /* کارت طلایی براق عقل کل با متن مشکی و کپسول مشکی زیرش */
     .aghlekol-top-banner-card {
       position: relative;
       overflow: hidden;
@@ -287,7 +286,6 @@
       transition: transform 0.22s ease;
     }
 
-    /* افکت درخشش و برق زدن روی کارت عقل کل */
     .aghlekol-top-banner-card::after {
       content: '';
       position: absolute;
@@ -339,7 +337,6 @@
       z-index: 1;
     }
 
-    /* شبکه ۳ تایی مربعی سفید خالص بدون لوگو و متن اضافی */
     .categories-grid-three {
       width: 100%;
       display: grid;
@@ -991,24 +988,49 @@
     let timerInterval = null;
     let isAnswered = false;
 
-    // بارگذاری هم‌زمان تمام ۵ فایل q1.json تا q5.json
+    // بارگذاری و ترمیم هوشمند فایل‌های q1.json تا q5.json
     async function loadAllJsonFiles() {
       const merged = [];
+      const seenQuestions = new Set();
       const ts = Date.now();
+
       await Promise.all(
         JSON_FILES.map(async fileName => {
           try {
             const res = await fetch(`${fileName}?v=${ts}`);
             if (!res.ok) return;
-            const data = await res.json();
+            let rawText = await res.text();
+
+            // حذف کروشه‌های اضافی وسط فایل مثل }, [
+            rawText = rawText.replace(/\}\s*,\s*\[/g, '},');
+            // حذف کامای اضافی قبل از بسته شدن آرایه یا آبجکت
+            rawText = rawText.replace(/,\s*([\]\}])/g, '$1');
+
+            let data;
+            try {
+              data = JSON.parse(rawText);
+            } catch (parseErr) {
+              // استخراج تمام آبجکت‌های سالم در صورت ناقص بودن انتهای فایل
+              const matches = rawText.match(/\{[^{}]*"question"[^{}]*\}/g);
+              data = matches ? matches.map(m => {
+                try { return JSON.parse(m); } catch (e) { return null; }
+              }).filter(Boolean) : [];
+            }
+
             if (Array.isArray(data)) {
-              merged.push(...data);
+              data.forEach(item => {
+                if (item && item.question && Array.isArray(item.options) && !seenQuestions.has(item.question)) {
+                  seenQuestions.add(item.question);
+                  merged.push(item);
+                }
+              });
             }
           } catch (e) {
-            // اگر یکی از فایل‌ها نبود بقیه لود شوند
+            console.warn(`خطا در خواندن ${fileName}:`, e);
           }
         })
       );
+
       allQuestions = merged;
     }
 
@@ -1317,7 +1339,6 @@
       }
     }
 
-    // تایمر نواری دور باکس سوال (سبز -> زرد -> قرمز) بدون عدد
     function startBorderTimer() {
       const duration = 5000;
       const start = performance.now();
@@ -1328,14 +1349,14 @@
         const ratio = Math.max(0, 1 - elapsed / duration);
         const deg = ratio * 360;
 
-        let color = '#06d6a0'; // سبز
+        let color = '#06d6a0';
         let glow = 'rgba(6, 214, 160, 0.45)';
 
         if (ratio <= 0.32) {
-          color = '#ff2a5f'; // قرمز
+          color = '#ff2a5f';
           glow = 'rgba(255, 42, 95, 0.65)';
         } else if (ratio <= 0.65) {
-          color = '#ffd166'; // زرد
+          color = '#ffd166';
           glow = 'rgba(255, 209, 102, 0.52)';
         }
 

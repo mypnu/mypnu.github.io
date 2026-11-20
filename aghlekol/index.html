@@ -28,7 +28,6 @@
       --cyan: #00f0ff;
       --green: #06d6a0;
       --red: #ff2a5f;
-      --orange: #ff9f1c;
     }
 
     * {
@@ -42,7 +41,7 @@
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at 50% 0%, #4c1185 0%, #1c0436 52%, #0d011a 100%);
+      background: linear-gradient(155deg, #130226 0%, #260747 45%, #16032b 100%);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -95,9 +94,9 @@
     }
     .drawer-nav-link i { width: 20px; text-align: center; color: #ffd166; font-size: 15px; }
 
-    /* بدنه اصلی */
+    /* کانتینر اصلی */
     .main-container {
-      width: 94%; max-width: 600px; display: flex; flex-direction: column; align-items: center;
+      width: 94%; max-width: 610px; display: flex; flex-direction: column; align-items: center;
       text-align: center; flex: 1 0 auto; padding-top: 16px; padding-bottom: 35px; gap: 15px;
     }
 
@@ -106,8 +105,8 @@
     }
 
     .back-btn {
-      display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.1);
-      border: 1.5px solid rgba(255,255,255,0.22); color: #fff; padding: 7px 14px; border-radius: 12px;
+      display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.09);
+      border: 1.5px solid rgba(255,255,255,0.2); color: #fff; padding: 7px 14px; border-radius: 12px;
       text-decoration: none; font-size: 12.5px; font-weight: 800; backdrop-filter: blur(10px); cursor: pointer; transition: 0.2s ease;
     }
     .back-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
@@ -139,10 +138,10 @@
 
     .welcome-hero-box {
       width: 100%;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+      background: linear-gradient(145deg, rgba(255, 209, 102, 0.16), rgba(0, 240, 255, 0.08));
       backdrop-filter: blur(18px);
-      border: 1.8px solid rgba(255, 209, 102, 0.7);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 209, 102, 0.22);
+      border: 1.8px solid rgba(255, 209, 102, 0.72);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 209, 102, 0.2);
       border-radius: 26px;
       padding: 24px 18px;
       display: flex;
@@ -153,7 +152,7 @@
 
     .welcome-hi {
       font-size: 22px;
-      font-weight: 900;
+      font-weight: 950;
       color: #ffd166;
       text-shadow: 0 2px 12px rgba(255, 209, 102, 0.4);
     }
@@ -164,7 +163,6 @@
       color: #ffffff;
     }
 
-    /* دو کارت بزرگ و جذاب نرمال و رکوردی */
     .big-modes-grid {
       width: 100%;
       display: grid;
@@ -195,12 +193,8 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .big-mode-card:hover {
-      transform: translateY(-5px) scale(1.02);
-    }
-    .big-mode-card:active {
-      transform: scale(0.96);
-    }
+    .big-mode-card:hover { transform: translateY(-5px) scale(1.02); }
+    .big-mode-card:active { transform: scale(0.96); }
 
     .big-mode-card.normal-card {
       background: linear-gradient(155deg, rgba(0, 180, 216, 0.28), rgba(0, 119, 182, 0.16));
@@ -241,20 +235,9 @@
       box-shadow: 0 6px 18px rgba(255, 42, 95, 0.45);
     }
 
-    .big-mode-title {
-      font-size: 19px;
-      font-weight: 900;
-      color: #ffffff;
-    }
+    .big-mode-title { font-size: 19px; font-weight: 900; color: #ffffff; }
+    .big-mode-sub { font-size: 11.8px; font-weight: 700; color: #e0aaff; line-height: 1.5; }
 
-    .big-mode-sub {
-      font-size: 11.8px;
-      font-weight: 700;
-      color: #e0aaff;
-      line-height: 1.5;
-    }
-
-    /* باکس کشیده راهنمای بازی پایین دوتا کارت */
     .wide-guide-btn {
       width: 100%;
       height: 52px;
@@ -272,10 +255,7 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       transition: 0.22s ease;
     }
-    .wide-guide-btn:hover {
-      background: rgba(255, 209, 102, 0.24);
-      transform: translateY(-2px);
-    }
+    .wide-guide-btn:hover { background: rgba(255, 209, 102, 0.24); transform: translateY(-2px); }
 
     .rules-accordion {
       width: 100%; display: none; flex-direction: column; gap: 9px; text-align: right;
@@ -287,118 +267,114 @@
     .rule-item { display: flex; align-items: flex-start; gap: 9px; }
     .rule-item i { color: #ffd166; margin-top: 4px; flex-shrink: 0; }
 
-    /* ================= مرحله ۲: دسته‌بندی‌های نرمال ================= */
+    /* ================= مرحله ۲: دسته‌بندی‌های مربعی ۳ تایی ================= */
     .categories-stage {
       width: 100%; display: none; flex-direction: column; gap: 13px;
     }
     .categories-stage.show { display: flex; }
 
-    /* کارت ویژه و کشیده عقل کل در بالای همه */
     .aghlekol-top-banner-card {
       width: 100%;
       background: linear-gradient(135deg, #ffe066 0%, #ffd166 50%, #f5b700 100%);
       border: 2px solid #ffffff;
       border-radius: 22px;
-      padding: 18px 16px;
+      padding: 16px 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       text-align: right;
       color: #1a0333;
       cursor: pointer;
-      box-shadow: 0 10px 28px rgba(245, 183, 0, 0.45);
+      box-shadow: 0 10px 28px rgba(245, 183, 0, 0.42);
       animation: catItemReveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
       transition: transform 0.22s ease;
     }
-    .aghlekol-top-banner-card:hover {
-      transform: translateY(-3px) scale(1.01);
-    }
-    .aghlekol-top-banner-card:active {
-      transform: scale(0.98);
-    }
+    .aghlekol-top-banner-card:hover { transform: translateY(-3px) scale(1.01); }
+    .aghlekol-top-banner-card:active { transform: scale(0.98); }
 
     .aghlekol-crown-box {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
       background: #1a0333;
       color: #ffd166;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 25px;
+      font-size: 24px;
       flex-shrink: 0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .aghlekol-texts {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      flex: 1;
-    }
-    .aghlekol-main-lbl {
-      font-size: 18px;
-      font-weight: 950;
-      color: #160426;
-    }
-    .aghlekol-sub-lbl {
-      font-size: 12px;
-      font-weight: 800;
-      color: #4a157a;
-    }
+    .aghlekol-texts { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .aghlekol-main-lbl { font-size: 17px; font-weight: 950; color: #160426; }
+    .aghlekol-sub-lbl { font-size: 11.8px; font-weight: 800; color: #4a157a; }
 
-    .categories-grid {
+    /* شبکه ۳ تایی مربعی کنار هم */
+    .categories-grid-three {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
     }
 
-    .cat-card {
-      background: rgba(255, 255, 255, 0.09);
+    .square-cat-card {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
       backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(255, 255, 255, 0.18);
-      border-radius: 16px;
-      padding: 13px 11px;
+      border: 1.6px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 10px 7px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 9px;
       color: #ffffff;
       cursor: pointer;
-      text-align: right;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
       animation: catItemReveal 0.42s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-      transition: 0.22s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
     }
 
     @keyframes catItemReveal {
-      from { opacity: 0; transform: translateY(16px) scale(0.93); }
+      from { opacity: 0; transform: translateY(16px) scale(0.9); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .cat-card:hover {
+    .square-cat-card:hover {
       background: rgba(0, 240, 255, 0.16);
       border-color: #00f0ff;
-      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0, 240, 255, 0.28);
+      transform: translateY(-3px);
     }
-    .cat-icon-box {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
+
+    .square-cat-card:active {
+      transform: scale(0.95);
+    }
+
+    .sq-cat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
       background: rgba(0, 240, 255, 0.16);
-      border: 1px solid rgba(0, 240, 255, 0.45);
+      border: 1.2px solid rgba(0, 240, 255, 0.48);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 19px;
       color: #00f0ff;
       flex-shrink: 0;
     }
-    .cat-title {
-      font-size: 12.8px;
+
+    .sq-cat-title {
+      font-size: 12px;
       font-weight: 800;
-      line-height: 1.4;
+      line-height: 1.35;
+      color: #ffffff;
     }
 
     /* ================= مرحله ۳: صفحه آماده‌ای؟ / بزن بریم! ================= */
@@ -442,18 +418,8 @@
       font-weight: 800;
     }
 
-    .ready-big-title {
-      font-size: 26px;
-      font-weight: 950;
-      color: #ffffff;
-    }
-
-    .ready-desc {
-      font-size: 13px;
-      font-weight: 600;
-      color: #e0aaff;
-      line-height: 1.7;
-    }
+    .ready-big-title { font-size: 26px; font-weight: 950; color: #ffffff; }
+    .ready-desc { font-size: 13px; font-weight: 600; color: #e0aaff; line-height: 1.7; }
 
     .lets-go-green-btn {
       width: 100%;
@@ -472,17 +438,12 @@
       box-shadow: 0 10px 28px rgba(6, 214, 160, 0.5);
       transition: transform 0.2s ease, filter 0.2s ease;
     }
-    .lets-go-green-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.07);
-    }
-    .lets-go-green-btn:active {
-      transform: scale(0.97);
-    }
+    .lets-go-green-btn:hover { transform: translateY(-2px); filter: brightness(1.07); }
+    .lets-go-green-btn:active { transform: scale(0.97); }
 
-    /* ================= مرحله ۴: صفحه اجرای مسابقه ================= */
+    /* ================= مرحله ۴: محیط اجرای مسابقه ================= */
     .quiz-arena {
-      width: 100%; display: none; flex-direction: column; gap: 13px;
+      width: 100%; display: none; flex-direction: column; gap: 14px;
     }
     .quiz-arena.active { display: flex; }
 
@@ -502,67 +463,7 @@
     .heart-ic { color: #ff2a5f; transition: 0.3s ease; filter: drop-shadow(0 0 6px rgba(255,42,95,0.6)); }
     .heart-ic.lost { color: rgba(255,255,255,0.2); filter: none; transform: scale(0.82); }
 
-    /* نوار وضعیت و فشار جدید با طراحی سه‌تکه و مدرن */
-    .new-status-bar {
-      width: 100%;
-      background: rgba(14, 3, 28, 0.82);
-      border: 1.5px solid rgba(255, 255, 255, 0.16);
-      border-radius: 16px;
-      padding: 11px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-
-    .status-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .status-badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 11px;
-      border-radius: 99px;
-      font-size: 11.5px;
-      font-weight: 900;
-      transition: 0.3s ease;
-    }
-
-    .segmented-progress-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      width: 100%;
-    }
-
-    .seg-box {
-      height: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .seg-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 99px;
-      transition: width 0.35s ease;
-    }
-
-    #segFill1 { background: linear-gradient(90deg, #059669, #06d6a0); box-shadow: 0 0 10px rgba(6, 214, 160, 0.6); }
-    #segFill2 { background: linear-gradient(90deg, #f59e0b, #ff9f1c); box-shadow: 0 0 10px rgba(255, 159, 28, 0.6); }
-    #segFill3 { background: linear-gradient(90deg, #dc2626, #ff2a5f); box-shadow: 0 0 12px rgba(255, 42, 95, 0.7); }
-
-    .stage-easy .status-badge-pill { background: rgba(6, 214, 160, 0.18); color: #06d6a0; border: 1px solid rgba(6, 214, 160, 0.5); }
-    .stage-medium .status-badge-pill { background: rgba(255, 159, 28, 0.18); color: #ff9f1c; border: 1px solid rgba(255, 159, 28, 0.5); }
-    .stage-hard .status-badge-pill { background: rgba(255, 42, 95, 0.22); color: #ff4d79; border: 1px solid rgba(255, 42, 95, 0.6); }
-
-    /* نوار تایمر ۵ ثانیه‌ای جدید و شیک با اعداد فارسی */
+    /* نوار تایمر ۵ ثانیه‌ای */
     .modern-timer-card {
       width: 100%;
       display: flex;
@@ -582,7 +483,7 @@
       border-radius: 9px;
       font-size: 13px;
       font-weight: 900;
-      min-width: 68px;
+      min-width: 72px;
       text-align: center;
       transition: 0.2s ease;
     }
@@ -613,12 +514,12 @@
       transition: width 0.06s linear;
     }
 
-    /* باکس سوال و گزینه‌ها با انیمیشن کشویی جذاب */
+    /* باکس سوال بزرگ‌تر و گزینه‌های ۲×۲ با انیمیشن کشویی */
     .question-slide-wrapper {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
 
     .slide-in-question {
@@ -626,74 +527,121 @@
     }
 
     .slide-out-question {
-      animation: slideQuestionOut 0.28s ease forwards;
+      animation: slideQuestionOut 0.26s ease forwards;
     }
 
     @keyframes slideQuestionIn {
-      from {
-        opacity: 0;
-        transform: translateX(-45px) scale(0.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
+      from { opacity: 0; transform: translateX(-48px) scale(0.97); }
+      to { opacity: 1; transform: translateX(0) scale(1); }
     }
 
     @keyframes slideQuestionOut {
-      from {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
-      to {
-        opacity: 0;
-        transform: translateX(45px) scale(0.97);
-      }
+      from { opacity: 1; transform: translateX(0) scale(1); }
+      to { opacity: 0; transform: translateX(48px) scale(0.97); }
     }
 
+    /* کارت سوال بزرگ‌تر و شاخص‌تر */
     .question-card {
-      width: 100%; background: linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
-      backdrop-filter: blur(16px); border: 1.8px solid rgba(0, 240, 255, 0.52);
-      border-radius: 22px; padding: 22px 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.4);
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
-    .q-cat-tag {
-      font-size: 11px; font-weight: 800; color: #ffd166;
-      background: rgba(255, 209, 102, 0.15); border: 1px solid rgba(255, 209, 102, 0.4);
-      padding: 3px 11px; border-radius: 99px;
-    }
-    .question-text {
-      font-size: 16.5px; font-weight: 800; color: #ffffff; line-height: 1.75;
+      width: 100%;
+      min-height: 165px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+      backdrop-filter: blur(18px);
+      border: 2px solid rgba(0, 240, 255, 0.58);
+      border-radius: 26px;
+      padding: 26px 20px;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.45), 0 0 22px rgba(0, 240, 255, 0.16);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
     }
 
-    .options-grid {
-      width: 100%; display: flex; flex-direction: column; gap: 10px;
+    .q-cat-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.16);
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      padding: 4px 13px;
+      border-radius: 99px;
     }
+
+    .question-text {
+      font-size: 18.5px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.85;
+    }
+
+    /* گزینه‌های دوتایی در دو ردیف (شبکه ۲×۲) و بزرگ */
+    .options-grid-2x2 {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
     .option-btn {
-      width: 100%; min-height: 52px; padding: 12px 14px; border-radius: 15px;
-      background: rgba(255, 255, 255, 0.09); border: 1.6px solid rgba(255, 255, 255, 0.2);
-      color: #ffffff; font-size: 14px; font-weight: 800; text-align: right;
-      display: flex; align-items: center; gap: 11px; cursor: pointer; transition: 0.2s ease;
+      width: 100%;
+      min-height: 78px;
+      padding: 14px 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1.8px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-size: 14.5px;
+      font-weight: 800;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      line-height: 1.45;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
+
     .option-btn:hover:not(:disabled) {
-      background: rgba(0, 240, 255, 0.16); border-color: #00f0ff; transform: translateX(-3px);
+      background: rgba(0, 240, 255, 0.18);
+      border-color: #00f0ff;
+      transform: translateY(-2px);
+    }
+    .option-btn:active:not(:disabled) {
+      transform: scale(0.97);
     }
     .option-btn:disabled { cursor: default; }
+
     .opt-letter {
-      width: 30px; height: 30px; border-radius: 9px; background: rgba(255,255,255,0.14);
-      display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #ffd166; flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: rgba(255, 209, 102, 0.2);
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #ffd166;
+      flex-shrink: 0;
     }
+
     .option-btn.correct {
       background: linear-gradient(135deg, #059669, #10b981) !important;
-      border-color: #a7f3d0 !important; box-shadow: 0 0 20px rgba(16, 185, 129, 0.65);
+      border-color: #a7f3d0 !important;
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.7);
     }
-    .option-btn.correct .opt-letter { background: #ffffff; color: #059669; }
+    .option-btn.correct .opt-letter { background: #ffffff; color: #059669; border-color: #fff; }
+
     .option-btn.wrong {
       background: linear-gradient(135deg, #dc2626, #ef4444) !important;
-      border-color: #fecaca !important; box-shadow: 0 0 20px rgba(239, 68, 68, 0.65);
+      border-color: #fecaca !important;
+      box-shadow: 0 0 22px rgba(239, 68, 68, 0.7);
     }
-    .option-btn.wrong .opt-letter { background: #ffffff; color: #dc2626; }
+    .option-btn.wrong .opt-letter { background: #ffffff; color: #dc2626; border-color: #fff; }
 
     /* پاپ‌آپ فان پایان بازی */
     .fun-popup-overlay {
@@ -713,9 +661,7 @@
       transform: scale(0.65) rotate(-4deg);
       transition: transform 0.48s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .fun-popup-overlay.show .fun-popup-card {
-      transform: scale(1) rotate(0deg);
-    }
+    .fun-popup-overlay.show .fun-popup-card { transform: scale(1) rotate(0deg); }
 
     .fun-emoji-stage {
       width: 84px; height: 84px; border-radius: 24px;
@@ -762,10 +708,16 @@
     .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
 
     @media (max-width: 480px) {
-      .categories-grid { grid-template-columns: 1fr; }
       .welcome-hi { font-size: 19px; }
       .big-mode-title { font-size: 17px; }
-      .question-text { font-size: 15px; }
+      .categories-grid-three { gap: 8px; }
+      .square-cat-card { border-radius: 16px; padding: 8px 4px; gap: 6px; }
+      .sq-cat-icon { width: 38px; height: 38px; font-size: 16px; border-radius: 11px; }
+      .sq-cat-title { font-size: 10.8px; }
+      .question-card { min-height: 150px; padding: 22px 15px; }
+      .question-text { font-size: 16.5px; }
+      .options-grid-2x2 { gap: 9px; }
+      .option-btn { min-height: 74px; font-size: 13.5px; padding: 11px 8px; }
     }
   </style>
 </head>
@@ -811,7 +763,6 @@
       </button>
     </div>
 
-    <!-- هشدار در صورت نبود سوال در questions.json -->
     <div id="emptyJsonAlert" class="empty-json-alert">
       <div class="alert-sq-ic"><i class="fa-solid fa-triangle-exclamation"></i></div>
       <div id="emptyJsonText">فایل questions.json یافت نشد یا سوالی در این بخش ثبت نشده است.</div>
@@ -850,9 +801,8 @@
       </div>
     </section>
 
-    <!-- مرحله ۲: انتخاب دسته‌بندی (در حالت نرمال) -->
+    <!-- مرحله ۲: دسته‌بندی‌های مربعی ۳ تایی -->
     <section id="categoriesStage" class="categories-stage">
-      <!-- گزینه کشیده عقل کل در بالاترین بخش -->
       <div class="aghlekol-top-banner-card" onclick="prepareGame('عقل کل')">
         <div class="aghlekol-crown-box"><i class="fa-solid fa-crown"></i></div>
         <div class="aghlekol-texts">
@@ -862,7 +812,7 @@
         <i class="fa-solid fa-chevron-left" style="font-size: 18px; color: #160426;"></i>
       </div>
 
-      <div class="categories-grid" id="categoriesGrid"></div>
+      <div class="categories-grid-three" id="categoriesGrid"></div>
     </section>
 
     <!-- مرحله ۳: کارت آماده‌ای؟ / بزن بریم! -->
@@ -879,7 +829,7 @@
       </button>
     </section>
 
-    <!-- مرحله ۴: محیط اجرای مسابقه -->
+    <!-- مرحله ۴: محیط اجرای مسابقه (بدون نوار درجه سختی) -->
     <section id="quizArena" class="quiz-arena">
       <div class="quiz-hud">
         <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۳۰</div>
@@ -891,22 +841,7 @@
         <div class="hud-chip score-chip" id="hudScoreCounter">صحیح: ۰</div>
       </div>
 
-      <!-- نوار اعلام وضعیت جدید (فقط در سبک نرمال) -->
-      <div id="newStatusBar" class="new-status-bar stage-easy">
-        <div class="status-top-row">
-          <span class="status-badge-pill" id="pressureStageText">
-            <i class="fa-solid fa-feather"></i> مرحله ۱: دست‌گرمی (آسان)
-          </span>
-          <span style="color: #ffd166;" id="pressureStepText">سوال ۱ از ۳۰</span>
-        </div>
-        <div class="segmented-progress-grid">
-          <div class="seg-box"><div class="seg-fill" id="segFill1"></div></div>
-          <div class="seg-box"><div class="seg-fill" id="segFill2"></div></div>
-          <div class="seg-box"><div class="seg-fill" id="segFill3"></div></div>
-        </div>
-      </div>
-
-      <!-- نوار تایمر ۵ ثانیه‌ای جدید با اعداد فارسی -->
+      <!-- نوار تایمر ۵ ثانیه‌ای با اعداد فارسی -->
       <div class="modern-timer-card">
         <div class="timer-pill-counter" id="timerSecText">۵.۰ ثانیه</div>
         <div class="modern-timer-track">
@@ -914,14 +849,14 @@
         </div>
       </div>
 
-      <!-- باکس سوال و گزینه‌ها با انیمیشن کشویی -->
+      <!-- کارت سوال بزرگ و گزینه‌های دوتایی در دو ردیف با انیمیشن کشویی -->
       <div id="questionSlideWrapper" class="question-slide-wrapper">
         <div class="question-card">
           <span class="q-cat-tag" id="qCategoryTag">دسته‌بندی</span>
           <div class="question-text" id="questionText">...</div>
         </div>
 
-        <div class="options-grid" id="optionsGrid"></div>
+        <div class="options-grid-2x2" id="optionsGrid"></div>
       </div>
     </section>
   </main>
@@ -974,8 +909,8 @@
     ];
 
     let allQuestions = [];
-    let currentScreen = 'welcome'; // 'welcome' | 'categories' | 'ready' | 'quiz'
-    let gameStyle = 'normal'; // 'normal' | 'record'
+    let currentScreen = 'welcome';
+    let gameStyle = 'normal';
     let activeCategory = 'عقل کل';
     let sessionQuestions = [];
     let currentIndex = 0;
@@ -1003,11 +938,11 @@
       SUB_CATEGORIES.forEach((cat, idx) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'cat-card';
+        btn.className = 'square-cat-card';
         btn.style.animationDelay = `${(idx + 1) * 0.04}s`;
         btn.innerHTML = `
-          <div class="cat-icon-box"><i class="fa-solid ${cat.icon}"></i></div>
-          <div class="cat-title">${cat.name}</div>
+          <div class="sq-cat-icon"><i class="fa-solid ${cat.icon}"></i></div>
+          <div class="sq-cat-title">${cat.name}</div>
         `;
         btn.onclick = () => prepareGame(cat.name);
         grid.appendChild(btn);
@@ -1161,45 +1096,12 @@
 
       const isRecord = gameStyle === 'record';
       document.getElementById('heartsHud').style.display = isRecord ? 'flex' : 'none';
-      document.getElementById('newStatusBar').style.display = isRecord ? 'none' : 'flex';
 
       if (isRecord) {
         [1, 2, 3].forEach(n => document.getElementById('heart' + n).classList.remove('lost'));
       }
 
       renderNextQuestion(false);
-    }
-
-    function updateSegmentedStatusBar(qNumber) {
-      const box = document.getElementById('newStatusBar');
-      const label = document.getElementById('pressureStageText');
-      const step = document.getElementById('pressureStepText');
-      const f1 = document.getElementById('segFill1');
-      const f2 = document.getElementById('segFill2');
-      const f3 = document.getElementById('segFill3');
-
-      step.textContent = `سوال ${toFa(qNumber)} از ۳۰`;
-      box.classList.remove('stage-easy', 'stage-medium', 'stage-hard');
-
-      if (qNumber <= 10) {
-        box.classList.add('stage-easy');
-        label.innerHTML = '<i class="fa-solid fa-feather"></i> سطح فعلی: ملایم (ساده)';
-        f1.style.width = `${(qNumber / 10) * 100}%`;
-        f2.style.width = '0%';
-        f3.style.width = '0%';
-      } else if (qNumber <= 20) {
-        box.classList.add('stage-medium');
-        label.innerHTML = '<i class="fa-solid fa-bolt"></i> سطح فعلی: داغ شد! (متوسط)';
-        f1.style.width = '100%';
-        f2.style.width = `${((qNumber - 10) / 10) * 100}%`;
-        f3.style.width = '0%';
-      } else {
-        box.classList.add('stage-hard');
-        label.innerHTML = '<i class="fa-solid fa-fire-flame-curved"></i> سطح فعلی: بحرانی! (سخت)';
-        f1.style.width = '100%';
-        f2.style.width = '100%';
-        f3.style.width = `${((qNumber - 20) / 10) * 100}%`;
-      }
     }
 
     function renderNextQuestion(withSlideTransition = true) {
@@ -1228,7 +1130,6 @@
 
         if (gameStyle === 'normal') {
           document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)} از ۳۰`;
-          updateSegmentedStatusBar(qNum);
         } else {
           document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)}`;
         }

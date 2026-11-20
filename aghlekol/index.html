@@ -23,13 +23,6 @@
     @font-face { font-family: 'AppFont'; src: url('../fonts/m-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: block; }
     @font-face { font-family: 'AppFont'; src: url('../fonts/m-Black.ttf') format('truetype'); font-weight: 900; font-display: block; }
 
-    :root {
-      --gold: #ffd166;
-      --cyan: #00f0ff;
-      --green: #06d6a0;
-      --red: #ff2a5f;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -49,7 +42,7 @@
       overflow-x: hidden;
     }
 
-    /* نوار سفید بالای صفحه هماهنگ با کل سایت */
+    /* نوار سفید بالای صفحه */
     .gold-top-nav {
       position: relative; width: 100%; height: 46px; background-color: #ffffff;
       display: flex; align-items: center; justify-content: space-between; padding: 0 14px; z-index: 100; flex-shrink: 0;
@@ -267,51 +260,86 @@
     .rule-item { display: flex; align-items: flex-start; gap: 9px; }
     .rule-item i { color: #ffd166; margin-top: 4px; flex-shrink: 0; }
 
-    /* ================= مرحله ۲: دسته‌بندی‌های مربعی ۳ تایی ================= */
+    /* ================= مرحله ۲: کارت طلایی عقل کل + کارت‌های سفید خالص ۳ تایی ================= */
     .categories-stage {
       width: 100%; display: none; flex-direction: column; gap: 13px;
     }
     .categories-stage.show { display: flex; }
 
+    /* کارت طلایی براق عقل کل با متن مشکی و کپسول مشکی زیرش */
     .aghlekol-top-banner-card {
+      position: relative;
+      overflow: hidden;
       width: 100%;
-      background: linear-gradient(135deg, #ffe066 0%, #ffd166 50%, #f5b700 100%);
-      border: 2px solid #ffffff;
+      background: linear-gradient(135deg, #ffe680 0%, #ffd166 45%, #f5b700 100%);
+      border: 2px solid #fff8d6;
       border-radius: 22px;
-      padding: 16px 15px;
+      padding: 18px 16px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      text-align: right;
-      color: #1a0333;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
       cursor: pointer;
-      box-shadow: 0 10px 28px rgba(245, 183, 0, 0.42);
+      box-shadow: 0 10px 30px rgba(245, 183, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.8);
       animation: catItemReveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
       transition: transform 0.22s ease;
     }
+
+    /* افکت درخشش و برق زدن روی کارت عقل کل */
+    .aghlekol-top-banner-card::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      right: -85%;
+      width: 45%;
+      height: 220%;
+      background: linear-gradient(
+        -115deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.75) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(-24deg);
+      pointer-events: none;
+      animation: goldCardShine 2.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes goldCardShine {
+      0% { right: -85%; opacity: 0; }
+      15% { opacity: 1; }
+      48% { right: 145%; opacity: 1; }
+      55%, 100% { right: 145%; opacity: 0; }
+    }
+
     .aghlekol-top-banner-card:hover { transform: translateY(-3px) scale(1.01); }
     .aghlekol-top-banner-card:active { transform: scale(0.98); }
 
-    .aghlekol-crown-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 15px;
-      background: #1a0333;
-      color: #ffd166;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    .aghlekol-main-lbl {
+      font-size: 21px;
+      font-weight: 950;
+      color: #0f031c;
+      position: relative;
+      z-index: 1;
     }
 
-    .aghlekol-texts { display: flex; flex-direction: column; gap: 3px; flex: 1; }
-    .aghlekol-main-lbl { font-size: 17px; font-weight: 950; color: #160426; }
-    .aghlekol-sub-lbl { font-size: 11.8px; font-weight: 800; color: #4a157a; }
+    .aghlekol-black-capsule {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #110321;
+      color: #ffd166;
+      padding: 4px 16px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 600;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
 
-    /* شبکه ۳ تایی مربعی کنار هم */
+    /* شبکه ۳ تایی مربعی سفید خالص بدون لوگو و متن اضافی */
     .categories-grid-three {
       width: 100%;
       display: grid;
@@ -319,25 +347,21 @@
       gap: 11px;
     }
 
-    .square-cat-card {
+    .pure-white-cat-card {
       width: 100%;
       aspect-ratio: 1 / 1;
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
-      backdrop-filter: blur(12px);
-      border: 1.6px solid rgba(255, 255, 255, 0.2);
+      background: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.9);
       border-radius: 20px;
-      padding: 10px 7px;
+      padding: 12px 8px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      color: #ffffff;
-      cursor: pointer;
       text-align: center;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
       animation: catItemReveal 0.42s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
     }
 
     @keyframes catItemReveal {
@@ -345,36 +369,20 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .square-cat-card:hover {
-      background: rgba(0, 240, 255, 0.16);
-      border-color: #00f0ff;
-      box-shadow: 0 8px 22px rgba(0, 240, 255, 0.28);
-      transform: translateY(-3px);
+    .pure-white-cat-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(0, 240, 255, 0.35);
     }
 
-    .square-cat-card:active {
+    .pure-white-cat-card:active {
       transform: scale(0.95);
     }
 
-    .sq-cat-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: rgba(0, 240, 255, 0.16);
-      border: 1.2px solid rgba(0, 240, 255, 0.48);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 19px;
-      color: #00f0ff;
-      flex-shrink: 0;
-    }
-
-    .sq-cat-title {
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.35;
-      color: #ffffff;
+    .pure-cat-title {
+      font-size: 14.5px;
+      font-weight: 900;
+      line-height: 1.5;
+      color: #240546;
     }
 
     /* ================= مرحله ۳: صفحه آماده‌ای؟ / بزن بریم! ================= */
@@ -463,58 +471,94 @@
     .heart-ic { color: #ff2a5f; transition: 0.3s ease; filter: drop-shadow(0 0 6px rgba(255,42,95,0.6)); }
     .heart-ic.lost { color: rgba(255,255,255,0.2); filter: none; transform: scale(0.82); }
 
-    /* نوار تایمر ۵ ثانیه‌ای */
-    .modern-timer-card {
+    /* نوار ابزار کمکی بخش رکوردی (حذف دو گزینه) */
+    .record-lifeline-bar {
       width: 100%;
+      display: none;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .record-lifeline-bar.show { display: flex; }
+
+    .lifeline-btn {
+      width: 100%;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.2), rgba(245, 183, 0, 0.12));
+      border: 1.6px solid #ffd166;
+      color: #ffd166;
+      font-size: 13.5px;
+      font-weight: 900;
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(14, 3, 28, 0.75);
-      border: 1.5px solid rgba(0, 240, 255, 0.38);
-      border-radius: 15px;
-      padding: 8px 12px;
-    }
-
-    .timer-pill-counter {
-      background: rgba(0, 240, 255, 0.16);
-      border: 1px solid rgba(0, 240, 255, 0.5);
-      color: #00f0ff;
-      padding: 3px 10px;
-      border-radius: 9px;
-      font-size: 13px;
-      font-weight: 900;
-      min-width: 72px;
-      text-align: center;
+      justify-content: center;
+      gap: 9px;
+      cursor: pointer;
       transition: 0.2s ease;
     }
-
-    .timer-pill-counter.urgent {
-      background: rgba(255, 42, 95, 0.24);
-      border-color: #ff2a5f;
-      color: #ff6b8b;
-      animation: pulseUrgent 0.4s infinite alternate;
+    .lifeline-btn:hover:not(:disabled) {
+      background: rgba(255, 209, 102, 0.3);
+      transform: translateY(-1px);
+    }
+    .lifeline-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
-    @keyframes pulseUrgent { from { transform: scale(1); } to { transform: scale(1.08); } }
-
-    .modern-timer-track {
-      flex: 1;
-      height: 11px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 99px;
-      overflow: hidden;
-      padding: 2px;
+    .lifeline-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+    .life-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #06d6a0;
+      box-shadow: 0 0 8px #06d6a0;
+    }
+    .life-dot.used {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
     }
 
-    .modern-timer-fill {
-      height: 100%;
-      width: 100%;
-      border-radius: 99px;
-      background: linear-gradient(90deg, #ff2a5f 0%, #ffd166 50%, #00f0ff 100%);
-      transition: width 0.06s linear;
+    /* باکس پیشنهاد خرید گزینه کمکی اضافه با کسر ۲۰ امتیاز */
+    .buy-lifeline-offer {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(247, 37, 133, 0.26), rgba(114, 9, 183, 0.35));
+      border: 1.5px solid #ff4d8d;
+      border-radius: 14px;
+      padding: 9px 12px;
+      text-align: right;
+      animation: stagePopIn 0.25s ease;
+    }
+    .buy-lifeline-offer.show { display: flex; }
+    .buy-offer-text {
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffe4e8;
+      line-height: 1.5;
+    }
+    .buy-offer-btn {
+      padding: 8px 13px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #ffe066, #f5b700);
+      color: #160426;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .buy-offer-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
-    /* باکس سوال بزرگ‌تر و گزینه‌های ۲×۲ با انیمیشن کشویی */
+    /* باکس سوال بزرگ و گزینه‌های ۲×۲ با انیمیشن کشویی */
     .question-slide-wrapper {
       width: 100%;
       display: flex;
@@ -540,16 +584,27 @@
       to { opacity: 0; transform: translateX(48px) scale(0.97); }
     }
 
-    /* کارت سوال بزرگ‌تر و شاخص‌تر */
+    /* تایمر نواری دور تا دور باکس سوال (سبز -> زرد -> قرمز) */
+    .question-timer-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 28px;
+      padding: 5px;
+      background: conic-gradient(
+        from 0deg,
+        var(--timer-color, #06d6a0) var(--timer-deg, 360deg),
+        rgba(255, 255, 255, 0.12) var(--timer-deg, 360deg)
+      );
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.48), 0 0 22px var(--timer-glow, rgba(6, 214, 160, 0.35));
+      transition: box-shadow 0.2s ease;
+    }
+
     .question-card {
       width: 100%;
-      min-height: 165px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-      backdrop-filter: blur(18px);
-      border: 2px solid rgba(0, 240, 255, 0.58);
-      border-radius: 26px;
+      min-height: 175px;
+      background: linear-gradient(155deg, #240744 0%, #17032e 100%);
+      border-radius: 23px;
       padding: 26px 20px;
-      box-shadow: 0 12px 34px rgba(0,0,0,0.45), 0 0 22px rgba(0, 240, 255, 0.16);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -561,8 +616,8 @@
       font-size: 11.5px;
       font-weight: 800;
       color: #ffd166;
-      background: rgba(255, 209, 102, 0.16);
-      border: 1px solid rgba(255, 209, 102, 0.45);
+      background: rgba(255, 209, 102, 0.14);
+      border: 1px solid rgba(255, 209, 102, 0.42);
       padding: 4px 13px;
       border-radius: 99px;
     }
@@ -584,13 +639,13 @@
 
     .option-btn {
       width: 100%;
-      min-height: 78px;
+      min-height: 82px;
       padding: 14px 12px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.1);
       border: 1.8px solid rgba(255, 255, 255, 0.22);
       color: #ffffff;
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
       text-align: center;
       display: flex;
@@ -601,7 +656,7 @@
       cursor: pointer;
       line-height: 1.45;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.25s ease;
     }
 
     .option-btn:hover:not(:disabled) {
@@ -613,6 +668,12 @@
       transform: scale(0.97);
     }
     .option-btn:disabled { cursor: default; }
+
+    .option-btn.eliminated {
+      opacity: 0.18;
+      transform: scale(0.94);
+      pointer-events: none;
+    }
 
     .opt-letter {
       width: 28px;
@@ -711,13 +772,12 @@
       .welcome-hi { font-size: 19px; }
       .big-mode-title { font-size: 17px; }
       .categories-grid-three { gap: 8px; }
-      .square-cat-card { border-radius: 16px; padding: 8px 4px; gap: 6px; }
-      .sq-cat-icon { width: 38px; height: 38px; font-size: 16px; border-radius: 11px; }
-      .sq-cat-title { font-size: 10.8px; }
-      .question-card { min-height: 150px; padding: 22px 15px; }
+      .pure-white-cat-card { border-radius: 16px; padding: 8px 5px; }
+      .pure-cat-title { font-size: 12.5px; }
+      .question-card { min-height: 155px; padding: 22px 15px; }
       .question-text { font-size: 16.5px; }
       .options-grid-2x2 { gap: 9px; }
-      .option-btn { min-height: 74px; font-size: 13.5px; padding: 11px 8px; }
+      .option-btn { min-height: 76px; font-size: 13.8px; padding: 11px 8px; }
     }
   </style>
 </head>
@@ -765,7 +825,7 @@
 
     <div id="emptyJsonAlert" class="empty-json-alert">
       <div class="alert-sq-ic"><i class="fa-solid fa-triangle-exclamation"></i></div>
-      <div id="emptyJsonText">فایل questions.json یافت نشد یا سوالی در این بخش ثبت نشده است.</div>
+      <div id="emptyJsonText">فایل‌های سوالات (q1.json تا q5.json) یافت نشدند.</div>
     </div>
 
     <!-- مرحله ۱: خوش‌آمدگویی و انتخاب سبک بازی -->
@@ -795,21 +855,17 @@
       </button>
 
       <div id="rulesBox" class="rules-accordion">
-        <div class="rule-item"><i class="fa-solid fa-stopwatch"></i><span><b>مهلت ۵ ثانیه‌ای:</b> برای هر سوال فقط ۵ ثانیه فرصت دارید؛ اتمام زمان به منزله پاسخ غلط است.</span></div>
+        <div class="rule-item"><i class="fa-solid fa-stopwatch"></i><span><b>تایمر نواری دور سوال:</b> نوار دور باکس سوال از سبز شروع می‌شود و با اتمام ۵ ثانیه به زرد و قرمز می‌رسد.</span></div>
         <div class="rule-item"><i class="fa-solid fa-layer-group"></i><span><b>سبک نرمال (۳۰ سوالی):</b> ۱۰ سوال اول ساده، ۱۰ سوال دوم متوسط و ۱۰ سوال پایانی سخت هستند. بالای ۲۰ پاسخ صحیح لقب ویژه می‌گیرد!</span></div>
-        <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> ترکیبی از همه موضوعات با ۳ جان (❤️). تا وقتی جان دارید می‌توانید بازی کنید و رکورد بزنید!</span></div>
+        <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> هر پاسخ صحیح ۱۰ امتیاز دارد! ۳ جان (❤️) و ۳ راهنمای حذف دو گزینه دارید؛ با اتمام راهنماها می‌توانید با کسر ۲۰ امتیاز راهنمای جدید بگیرید.</span></div>
       </div>
     </section>
 
-    <!-- مرحله ۲: دسته‌بندی‌های مربعی ۳ تایی -->
+    <!-- مرحله ۲: دسته‌بندی‌ها با کارت طلایی عقل کل و کارت‌های سفید خالص -->
     <section id="categoriesStage" class="categories-stage">
       <div class="aghlekol-top-banner-card" onclick="prepareGame('عقل کل')">
-        <div class="aghlekol-crown-box"><i class="fa-solid fa-crown"></i></div>
-        <div class="aghlekol-texts">
-          <div class="aghlekol-main-lbl">عقل کل (ترکیبی از همه موضوعات)</div>
-          <div class="aghlekol-sub-lbl">اگه فکر می‌کنی خیلی می‌دونی انتخابش کن!</div>
-        </div>
-        <i class="fa-solid fa-chevron-left" style="font-size: 18px; color: #160426;"></i>
+        <div class="aghlekol-main-lbl">عقل کل</div>
+        <div class="aghlekol-black-capsule">ترکیبی از همه دسته بندی ها</div>
       </div>
 
       <div class="categories-grid-three" id="categoriesGrid"></div>
@@ -821,7 +877,7 @@
       <div class="ready-selected-badge" id="readyCategoryBadge">سبک نرمال • عقل کل</div>
       <div class="ready-big-title">آماده‌ای؟</div>
       <p class="ready-desc" id="readyDescriptionText">
-        برای هر سوال فقط ۵ ثانیه فرصت داری! تمرکز کن و با سرعت جواب بده.
+        حواست به نوار رنگی دور سوال باشه! سبز یعنی وقت داری، قرمز یعنی ثانیه‌های آخره.
       </p>
       <button type="button" class="lets-go-green-btn" onclick="launchQuizNow()">
         <span>بزن بریم!</span>
@@ -829,7 +885,7 @@
       </button>
     </section>
 
-    <!-- مرحله ۴: محیط اجرای مسابقه (بدون نوار درجه سختی) -->
+    <!-- مرحله ۴: محیط اجرای مسابقه -->
     <section id="quizArena" class="quiz-arena">
       <div class="quiz-hud">
         <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۳۰</div>
@@ -841,19 +897,29 @@
         <div class="hud-chip score-chip" id="hudScoreCounter">صحیح: ۰</div>
       </div>
 
-      <!-- نوار تایمر ۵ ثانیه‌ای با اعداد فارسی -->
-      <div class="modern-timer-card">
-        <div class="timer-pill-counter" id="timerSecText">۵.۰ ثانیه</div>
-        <div class="modern-timer-track">
-          <div class="modern-timer-fill" id="timerFill"></div>
+      <!-- بخش گزینه کمکی حذف دو گزینه (فقط در بخش رکوردی) -->
+      <div id="recordLifelineBar" class="record-lifeline-bar">
+        <button type="button" class="lifeline-btn" id="useLifelineBtn" onclick="useFiftyFiftyLifeline()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>حذف ۲ گزینه غلط</span>
+          <div class="lifeline-dots" id="lifelineDots"></div>
+        </button>
+
+        <div id="buyLifelineOffer" class="buy-lifeline-offer">
+          <span class="buy-offer-text">کمکی‌هات تموم شد! با کسر ۲۰ امتیاز یه کمکی جدید بگیر:</span>
+          <button type="button" class="buy-offer-btn" id="buyLifelineBtn" onclick="buyExtraLifeline()">
+            +۱ کمکی (۲۰ امتیاز)
+          </button>
         </div>
       </div>
 
-      <!-- کارت سوال بزرگ و گزینه‌های دوتایی در دو ردیف با انیمیشن کشویی -->
+      <!-- باکس سوال با نوار تایمر رنگی دور تا دور کادر + گزینه‌های ۲×۲ -->
       <div id="questionSlideWrapper" class="question-slide-wrapper">
-        <div class="question-card">
-          <span class="q-cat-tag" id="qCategoryTag">دسته‌بندی</span>
-          <div class="question-text" id="questionText">...</div>
+        <div class="question-timer-frame" id="questionTimerFrame">
+          <div class="question-card">
+            <span class="q-cat-tag" id="qCategoryTag">دسته‌بندی</span>
+            <div class="question-text" id="questionText">...</div>
+          </div>
         </div>
 
         <div class="options-grid-2x2" id="optionsGrid"></div>
@@ -896,55 +962,66 @@
     const toFa = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 
     const SUB_CATEGORIES = [
-      { name: 'فیلم و سریال ایرانی', icon: 'fa-film' },
-      { name: 'فیلم و سریال خارجی', icon: 'fa-clapperboard' },
-      { name: 'ورزشی', icon: 'fa-medal' },
-      { name: 'فوتبال', icon: 'fa-futbol' },
-      { name: 'جغرافیا', icon: 'fa-earth-asia' },
-      { name: 'تاریخ', icon: 'fa-landmark' },
-      { name: 'مذهبی', icon: 'fa-mosque' },
-      { name: 'علمی', icon: 'fa-atom' },
-      { name: 'زبان انگلیسی', icon: 'fa-language' },
-      { name: 'گیم و تکنولوژی', icon: 'fa-gamepad' }
+      'فیلم و سریال ایرانی',
+      'فیلم و سریال خارجی',
+      'ورزشی',
+      'فوتبال',
+      'جغرافیا',
+      'تاریخ',
+      'مذهبی',
+      'علمی',
+      'زبان انگلیسی',
+      'ادبیات'
     ];
+
+    const JSON_FILES = ['q1.json', 'q2.json', 'q3.json', 'q4.json', 'q5.json'];
 
     let allQuestions = [];
     let currentScreen = 'welcome';
-    let gameStyle = 'normal';
+    let gameStyle = 'normal'; // 'normal' | 'record'
     let activeCategory = 'عقل کل';
     let sessionQuestions = [];
     let currentIndex = 0;
     let correctCount = 0;
+    let recordScore = 0;
     let lives = 3;
+    let lifelinesLeft = 3;
+    let lifelineUsedThisQuestion = false;
+    let currentCorrectShuffledIndex = 0;
     let timerInterval = null;
     let isAnswered = false;
 
-    async function loadQuestionsJson() {
-      try {
-        const res = await fetch('questions.json?v=' + Date.now());
-        if (!res.ok) throw new Error('not found');
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          allQuestions = data;
-        }
-      } catch (e) {
-        allQuestions = [];
-      }
+    // بارگذاری هم‌زمان تمام ۵ فایل q1.json تا q5.json
+    async function loadAllJsonFiles() {
+      const merged = [];
+      const ts = Date.now();
+      await Promise.all(
+        JSON_FILES.map(async fileName => {
+          try {
+            const res = await fetch(`${fileName}?v=${ts}`);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (Array.isArray(data)) {
+              merged.push(...data);
+            }
+          } catch (e) {
+            // اگر یکی از فایل‌ها نبود بقیه لود شوند
+          }
+        })
+      );
+      allQuestions = merged;
     }
 
     function renderSubCategories() {
       const grid = document.getElementById('categoriesGrid');
       grid.innerHTML = '';
-      SUB_CATEGORIES.forEach((cat, idx) => {
+      SUB_CATEGORIES.forEach((catName, idx) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'square-cat-card';
+        btn.className = 'pure-white-cat-card';
         btn.style.animationDelay = `${(idx + 1) * 0.04}s`;
-        btn.innerHTML = `
-          <div class="sq-cat-icon"><i class="fa-solid ${cat.icon}"></i></div>
-          <div class="sq-cat-title">${cat.name}</div>
-        `;
-        btn.onclick = () => prepareGame(cat.name);
+        btn.innerHTML = `<div class="pure-cat-title">${catName}</div>`;
+        btn.onclick = () => prepareGame(catName);
         grid.appendChild(btn);
       });
     }
@@ -1003,10 +1080,10 @@
     function enterRecordMode() {
       gameStyle = 'record';
       activeCategory = 'عقل کل';
-      const best = toFa(localStorage.getItem('ostadyab_aghlekol_best') || 0);
+      const best = toFa(localStorage.getItem('ostadyab_aghlekol_best_pts') || 0);
       document.getElementById('readyCategoryBadge').textContent = `سبک رکوردی • بهترین رکورد: ${best} امتیاز`;
       document.getElementById('readyDescriptionText').textContent =
-        'سوالات بی‌نهایت از تمام موضوعات! فقط ۳ قلب ❤️ داری و برای هر سوال ۵ ثانیه فرصت!';
+        'هر پاسخ صحیح ۱۰ امتیاز داره! ۳ قلب ❤️ و ۳ کمکی حذف ۲ گزینه در اختیارت هست.';
       setScreen('ready');
     }
 
@@ -1014,7 +1091,7 @@
       activeCategory = categoryName;
       document.getElementById('readyCategoryBadge').textContent = `سبک نرمال • ${categoryName}`;
       document.getElementById('readyDescriptionText').textContent =
-        '۳۰ سوال از ساده تا سخت در انتظارته! برای هر سوال فقط ۵ ثانیه فرصت داری.';
+        '۳۰ سوال از ساده تا سخت! نوار دور کادر سوال زمانت رو نشون میده (سبز تا قرمز).';
       setScreen('ready');
     }
 
@@ -1072,33 +1149,92 @@
       ];
     }
 
+    function updateLifelineUI() {
+      const dotsWrap = document.getElementById('lifelineDots');
+      const useBtn = document.getElementById('useLifelineBtn');
+      const offerBox = document.getElementById('buyLifelineOffer');
+      const buyBtn = document.getElementById('buyLifelineBtn');
+
+      dotsWrap.innerHTML = '';
+      const totalDots = Math.max(3, lifelinesLeft);
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'life-dot' + (i >= lifelinesLeft ? ' used' : '');
+        dotsWrap.appendChild(dot);
+      }
+
+      useBtn.disabled = lifelinesLeft <= 0 || lifelineUsedThisQuestion || isAnswered;
+
+      if (lifelinesLeft <= 0) {
+        offerBox.classList.add('show');
+        buyBtn.disabled = recordScore < 20;
+      } else {
+        offerBox.classList.remove('show');
+      }
+    }
+
+    function useFiftyFiftyLifeline() {
+      if (gameStyle !== 'record' || lifelinesLeft <= 0 || lifelineUsedThisQuestion || isAnswered) return;
+
+      lifelinesLeft--;
+      lifelineUsedThisQuestion = true;
+
+      const buttons = Array.from(document.querySelectorAll('#optionsGrid .option-btn'));
+      const wrongIndices = buttons
+        .map((_, idx) => idx)
+        .filter(idx => idx !== currentCorrectShuffledIndex);
+
+      const shuffledWrongs = shuffleArray(wrongIndices).slice(0, 2);
+      shuffledWrongs.forEach(idx => {
+        if (buttons[idx]) {
+          buttons[idx].classList.add('eliminated');
+          buttons[idx].disabled = true;
+        }
+      });
+
+      updateLifelineUI();
+    }
+
+    function buyExtraLifeline() {
+      if (gameStyle !== 'record' || lifelinesLeft > 0 || recordScore < 20) return;
+
+      recordScore -= 20;
+      lifelinesLeft = 1;
+      document.getElementById('hudScoreCounter').textContent = `امتیاز: ${toFa(recordScore)}`;
+      updateLifelineUI();
+    }
+
     function launchQuizNow() {
       hideJsonAlert();
 
       if (!allQuestions || allQuestions.length === 0) {
-        showJsonAlert('فایل questions.json در پوشه aghlekol قرار نگرفته یا خالی است!');
+        showJsonAlert('فایل‌های سوالات (q1.json تا q5.json) در پوشه aghlekol یافت نشدند یا خالی هستند.');
         return;
       }
 
       const builtPool = buildQuestionPool(activeCategory);
       if (builtPool.length === 0) {
-        showJsonAlert(`هنوز سوالی برای دسته‌بندی «${activeCategory}» در فایل questions.json ثبت نشده است.`);
+        showJsonAlert(`هنوز سوالی برای دسته‌بندی «${activeCategory}» در فایل‌های JSON ثبت نشده است.`);
         return;
       }
 
       sessionQuestions = builtPool;
       currentIndex = 0;
       correctCount = 0;
+      recordScore = 0;
       lives = 3;
+      lifelinesLeft = 3;
 
       document.getElementById('funPopupOverlay').classList.remove('show');
       setScreen('quiz');
 
       const isRecord = gameStyle === 'record';
       document.getElementById('heartsHud').style.display = isRecord ? 'flex' : 'none';
+      document.getElementById('recordLifelineBar').classList.toggle('show', isRecord);
 
       if (isRecord) {
         [1, 2, 3].forEach(n => document.getElementById('heart' + n).classList.remove('lost'));
+        updateLifelineUI();
       }
 
       renderNextQuestion(false);
@@ -1107,6 +1243,7 @@
     function renderNextQuestion(withSlideTransition = true) {
       clearInterval(timerInterval);
       isAnswered = false;
+      lifelineUsedThisQuestion = false;
 
       if (gameStyle === 'normal' && currentIndex >= 30) {
         finishGame();
@@ -1130,25 +1267,35 @@
 
         if (gameStyle === 'normal') {
           document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)} از ۳۰`;
+          document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
         } else {
           document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)}`;
+          document.getElementById('hudScoreCounter').textContent = `امتیاز: ${toFa(recordScore)}`;
+          updateLifelineUI();
         }
 
-        document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
         document.getElementById('qCategoryTag').textContent = qObj.category || activeCategory;
         document.getElementById('questionText').textContent = qObj.question;
+
+        // بُر زدن تصادفی جایگاه ۴ گزینه تا پاسخ همیشه در یک جای ثابت نباشد
+        const indexedOptions = qObj.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === qObj.answer
+        }));
+        const shuffledOptions = shuffleArray(indexedOptions);
+        currentCorrectShuffledIndex = shuffledOptions.findIndex(item => item.isCorrect);
 
         const letters = ['الف', 'ب', 'ج', 'د'];
         const grid = document.getElementById('optionsGrid');
         grid.innerHTML = '';
 
-        qObj.options.forEach((optText, idx) => {
+        shuffledOptions.forEach((optItem, idx) => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'option-btn';
           btn.innerHTML = `
             <span class="opt-letter">${letters[idx]}</span>
-            <span>${optText}</span>
+            <span>${optItem.text}</span>
           `;
           btn.onclick = () => handleAnswer(idx, btn);
           grid.appendChild(btn);
@@ -1158,7 +1305,7 @@
         void wrapper.offsetWidth;
         wrapper.classList.add('slide-in-question');
 
-        startQuestionTimer();
+        startBorderTimer();
       };
 
       if (withSlideTransition) {
@@ -1170,42 +1317,48 @@
       }
     }
 
-    function startQuestionTimer() {
+    // تایمر نواری دور باکس سوال (سبز -> زرد -> قرمز) بدون عدد
+    function startBorderTimer() {
       const duration = 5000;
       const start = performance.now();
-      const fill = document.getElementById('timerFill');
-      const secText = document.getElementById('timerSecText');
-      secText.classList.remove('urgent');
+      const frame = document.getElementById('questionTimerFrame');
 
       timerInterval = setInterval(() => {
         const elapsed = performance.now() - start;
-        const remaining = Math.max(0, duration - elapsed);
-        const pct = (remaining / duration) * 100;
+        const ratio = Math.max(0, 1 - elapsed / duration);
+        const deg = ratio * 360;
 
-        fill.style.width = pct + '%';
-        const formattedSec = toFa((remaining / 1000).toFixed(1));
-        secText.textContent = `${formattedSec} ثانیه`;
+        let color = '#06d6a0'; // سبز
+        let glow = 'rgba(6, 214, 160, 0.45)';
 
-        if (remaining <= 1800) {
-          secText.classList.add('urgent');
+        if (ratio <= 0.32) {
+          color = '#ff2a5f'; // قرمز
+          glow = 'rgba(255, 42, 95, 0.65)';
+        } else if (ratio <= 0.65) {
+          color = '#ffd166'; // زرد
+          glow = 'rgba(255, 209, 102, 0.52)';
         }
 
-        if (remaining <= 0) {
+        frame.style.setProperty('--timer-deg', `${deg}deg`);
+        frame.style.setProperty('--timer-color', color);
+        frame.style.setProperty('--timer-glow', glow);
+
+        if (ratio <= 0) {
           clearInterval(timerInterval);
           handleTimeout();
         }
-      }, 50);
+      }, 30);
     }
 
     function handleTimeout() {
       if (isAnswered) return;
       isAnswered = true;
+      if (gameStyle === 'record') updateLifelineUI();
 
-      const qObj = sessionQuestions[currentIndex];
       const buttons = document.querySelectorAll('#optionsGrid .option-btn');
       buttons.forEach((b, idx) => {
         b.disabled = true;
-        if (idx === qObj.answer) b.classList.add('correct');
+        if (idx === currentCorrectShuffledIndex) b.classList.add('correct');
       });
 
       if (gameStyle === 'record') {
@@ -1222,18 +1375,26 @@
       if (isAnswered) return;
       isAnswered = true;
       clearInterval(timerInterval);
+      if (gameStyle === 'record') updateLifelineUI();
 
-      const qObj = sessionQuestions[currentIndex];
       const buttons = document.querySelectorAll('#optionsGrid .option-btn');
       buttons.forEach(b => b.disabled = true);
 
-      if (selectedIdx === qObj.answer) {
+      if (selectedIdx === currentCorrectShuffledIndex) {
         clickedBtn.classList.add('correct');
         correctCount++;
-        document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
+        if (gameStyle === 'record') {
+          recordScore += 10;
+          document.getElementById('hudScoreCounter').textContent = `امتیاز: ${toFa(recordScore)}`;
+          updateLifelineUI();
+        } else {
+          document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
+        }
       } else {
         clickedBtn.classList.add('wrong');
-        if (buttons[qObj.answer]) buttons[qObj.answer].classList.add('correct');
+        if (buttons[currentCorrectShuffledIndex]) {
+          buttons[currentCorrectShuffledIndex].classList.add('correct');
+        }
         if (gameStyle === 'record') {
           loseOneHeart();
         }
@@ -1259,17 +1420,17 @@
       const msgEl = document.getElementById('funRoastMsg');
 
       if (gameStyle === 'record') {
-        const prevBest = Number(localStorage.getItem('ostadyab_aghlekol_best') || 0);
-        const isNewRecord = correctCount > prevBest;
+        const prevBest = Number(localStorage.getItem('ostadyab_aghlekol_best_pts') || 0);
+        const isNewRecord = recordScore > prevBest;
         if (isNewRecord) {
-          localStorage.setItem('ostadyab_aghlekol_best', correctCount);
+          localStorage.setItem('ostadyab_aghlekol_best_pts', recordScore);
         }
         emojiEl.textContent = isNewRecord ? '🔥' : '❤️‍🩹';
         rankEl.textContent = isNewRecord ? 'رکورد جدید ثبت شد!' : 'پایان جان‌های شما!';
-        scoreEl.textContent = `رکورد این دست: ${toFa(correctCount)} پاسخ صحیح`;
+        scoreEl.textContent = `امتیاز نهایی: ${toFa(recordScore)} (${toFa(correctCount)} پاسخ صحیح)`;
         msgEl.textContent = isNewRecord
-          ? `ایول! رکورد قبلی رو شکستی و نشون دادی تو شرایط سخت هم کم نمیاری!`
-          : `تا سوال ${toFa(currentIndex)} دووم آوردی! بهترین رکوردت تا الان ${toFa(Math.max(prevBest, correctCount))} بوده.`;
+          ? `فوق‌العاده بود! رکورد قبلی رو شکستی و امتیاز ${toFa(recordScore)} رو به نام خودت زدی!`
+          : `تا سوال ${toFa(currentIndex)} دووم آوردی! بهترین رکوردت تا الان ${toFa(Math.max(prevBest, recordScore))} امتیاز بوده.`;
       } else {
         scoreEl.textContent = `${toFa(correctCount)} پاسخ صحیح از ۳۰ سوال`;
 
@@ -1301,7 +1462,7 @@
       launchQuizNow();
     }
 
-    loadQuestionsJson();
+    loadAllJsonFiles();
   </script>
 </body>
 </html>

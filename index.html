@@ -324,7 +324,7 @@
       transform: translateX(0);
     }
 
-    /* بخش بالایی منو: تصویر 4:3 با نام banner.webp + دکمه نارنجی عضویت در گوشه پایین سمت چپ */
+    /* بخش بالایی منو: تصویر 4:3 با نام banner.webp + دکمه کشیده و سفید عضویت بدون لوگو */
     .drawer-banner-box {
       position: relative;
       width: 100%;
@@ -370,31 +370,35 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
-      height: 30px;
-      padding: 0 13px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, #e65100, #ff6d00);
-      border: 1px solid rgba(255, 224, 178, 0.55);
-      color: #ffffff;
+      right: 10px;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      color: #1f043d;
       text-decoration: none;
-      font-size: 11.5px;
+      font-size: 10.8px;
       font-weight: 900;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       z-index: 3;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-      transition: transform 0.2s ease, filter 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .drawer-banner-join-btn:hover {
-      filter: brightness(1.08);
+      background: #f8f5ff;
       transform: translateY(-1px);
     }
 
     .drawer-banner-join-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.97);
     }
 
     .drawer-nav-list {
@@ -690,6 +694,38 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(0, 240, 255, 0.68), inset 0 0 10px rgba(0, 240, 255, 0.25);
     }
 
+    /* فریم نارنجی دور باکس s1 */
+    .frame-orange-banner {
+      border: 1.5px solid rgba(255, 138, 0, 0.9);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(255, 123, 0, 0.45);
+    }
+    .frame-orange-banner:hover {
+      border-color: #ff9f1c;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 159, 28, 0.7);
+    }
+
+    /* فریم قرمز دور باکس video */
+    .frame-red-banner {
+      border: 1.5px solid rgba(255, 42, 81, 0.9);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(255, 42, 81, 0.45);
+    }
+    .frame-red-banner:hover {
+      border-color: #ff4d6d;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 42, 81, 0.7);
+    }
+
+    /* فریم سبز و زرد ترکیبی دور باکس عقل کل */
+    .frame-green-gold-combo {
+      border: 1.8px solid transparent;
+      background-image: url('images/aghlekol.webp'), linear-gradient(135deg, #06d6a0 0%, #ffd166 50%, #06d6a0 100%);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 14px rgba(6, 214, 160, 0.42), 0 0 14px rgba(255, 209, 102, 0.35);
+    }
+    .frame-green-gold-combo:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(6, 214, 160, 0.65), 0 0 18px rgba(255, 209, 102, 0.55);
+    }
+
     /* فریم‌های نازک جذاب دور سه ردیف جعبه ابزار */
     .tb-thin-purple-frame {
       border: 1.3px solid rgba(199, 125, 255, 0.85);
@@ -718,7 +754,6 @@
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38), 0 0 14px rgba(45, 212, 191, 0.6);
     }
 
-    /* دکمه کوچک مرکز پایین باکس‌های جعبه ابزار */
     .tb-bottom-pill {
       position: absolute;
       bottom: 9px;
@@ -742,28 +777,24 @@
       transform: translateX(-50%) scale(1.06);
     }
 
-    /* ردیف اول: دکمه کوچک بنفش با متن سفید */
     .pill-purple-white {
       background: linear-gradient(135deg, #6a11cb, #8e2de2);
       color: #ffffff;
       border: 1px solid rgba(224, 170, 255, 0.55);
     }
 
-    /* ردیف دوم: دکمه سفید با متن قرمز */
     .pill-white-red {
       background: #ffffff;
       color: #e11d48;
       border: 1px solid rgba(255, 255, 255, 0.9);
     }
 
-    /* ردیف سوم: دکمه سفید با متن سبز */
     .pill-white-green {
       background: #ffffff;
       color: #0d9488;
       border: 1px solid rgba(255, 255, 255, 0.9);
     }
 
-    /* دکمه قرمز با متن سفید گوشه پایین سمت چپ اسلاید video */
     .video-corner-btn {
       position: absolute;
       bottom: 10px;
@@ -818,7 +849,7 @@
     .card-s12 { background-image: url('images/s12.webp'); }
     .card-s13 { background-image: url('images/s13.webp'); }
 
-    /* باکس روزشمار هم‌اندازه s1 با عکس timer.webp */
+    /* باکس روزشمار هم‌اندازه s1 با عکس timer.webp و فریم بنفش */
     .countdown-banner-card {
       position: relative;
       width: 100%;
@@ -830,8 +861,8 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border: none;
-      box-shadow: none;
+      border: 1.5px solid rgba(199, 125, 255, 0.9);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 14px rgba(157, 78, 221, 0.45);
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -1291,6 +1322,14 @@
       .nav-social-icon-img { width: 11px; height: 11px; }
       .nav-social-btn i { font-size: 11px; }
       
+      .drawer-banner-join-btn {
+        height: 30px;
+        font-size: 9.5px;
+        bottom: 8px;
+        left: 8px;
+        right: 8px;
+      }
+
       .main-container { padding-top: 22px; }
       .brand-hero { margin-top: 4px; margin-bottom: 0px; }
       .hero-logo-img { width: 58%; max-width: 190px; }
@@ -1387,15 +1426,14 @@
   <!-- منوی کشویی راست به چپ -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
-    <!-- بخش بالایی منو با تصویر 4:3 banner.webp و دکمه نارنجی عضویت در گوشه پایین سمت چپ -->
+    <!-- بخش بالایی منو با تصویر 4:3 banner.webp و دکمه کشیده و سفید عضویت بدون لوگو -->
     <div class="drawer-banner-box">
       <img src="images/banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
       <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-banner-join-btn">
-        <img src="images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا">
-        <span>عضویت</span>
+        عضویت در گروه «دانشجویان پیام نور قزوین»
       </a>
     </div>
 
@@ -1484,10 +1522,10 @@
     </div>
 
     <div class="home-actions-wrapper" id="homeActionsWrapper">
-      <!-- باکس بالایی عضویت با تصویر گیف s1.gif -->
-      <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
+      <!-- باکس بالایی عضویت با تصویر گیف s1.gif و فریم نارنجی -->
+      <div class="ratio-48-7-card card-ozviat frame-orange-banner" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
 
-      <!-- باکس روزشمار با تصویر timer.webp -->
+      <!-- باکس روزشمار با تصویر timer.webp و فریم بنفش -->
       <div class="countdown-banner-card" id="countdownBanner">
         <div class="countdown-units-group">
           <div class="countdown-box-item">
@@ -1509,8 +1547,8 @@
         </div>
       </div>
 
-      <!-- باکس 24:7 برای بخش aghlekol -->
-      <div class="ratio-24-7-card card-aghlekol" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
+      <!-- باکس 24:7 برای بخش aghlekol با فریم ترکیبی سبز و زرد -->
+      <div class="ratio-24-7-card card-aghlekol frame-green-gold-combo" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
 
       <div class="quick-actions-row-three">
         <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
@@ -1561,8 +1599,8 @@
         </div>
       </div>
 
-      <!-- اسلاید 24:7 پایین با دکمه قرمز و متن سفید «مشاهده» در گوشه پایین سمت چپ -->
-      <div class="ratio-24-7-card card-video" id="cardVideo" onclick="window.location.href='video/'">
+      <!-- اسلاید 24:7 پایین با فریم قرمز و دکمه قرمز با متن سفید «مشاهده» در گوشه پایین سمت چپ -->
+      <div class="ratio-24-7-card card-video frame-red-banner" id="cardVideo" onclick="window.location.href='video/'">
         <span class="video-corner-btn">مشاهده</span>
       </div>
     </div>

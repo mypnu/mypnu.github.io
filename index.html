@@ -324,15 +324,21 @@
       transform: translateX(0);
     }
 
-    /* بخش بالایی منو: تصویر 4:3 با نام banner.webp + دکمه کشیده و سفید عضویت بدون لوگو */
+    /* بخش بالایی منو: تصویر 4:3 با نام banner.webp + نوار نارنجی عضویت در پایین بنر */
+    .drawer-banner-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-shrink: 0;
+      border-bottom: 1.5px solid rgba(255, 209, 102, 0.35);
+    }
+
     .drawer-banner-box {
       position: relative;
       width: 100%;
       aspect-ratio: 4 / 3;
       background: linear-gradient(145deg, #3c096c, #240046);
       overflow: hidden;
-      flex-shrink: 0;
-      border-bottom: 1.5px solid rgba(255, 209, 102, 0.3);
     }
 
     .drawer-banner-box img {
@@ -366,39 +372,40 @@
       transform: scale(0.92);
     }
 
-    .drawer-banner-join-btn {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
-      height: 34px;
-      padding: 0 10px;
-      border-radius: 10px;
-      background: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      color: #1f043d;
+    /* نوار نارنجی تمام‌عرض پایین بنر با آیکون ایتا و متن خوانا و بزرگ‌تر */
+    .drawer-banner-join-strip {
+      width: 100%;
+      min-height: 40px;
+      padding: 7px 10px;
+      background: linear-gradient(135deg, #e65100 0%, #ff6d00 100%);
+      color: #ffffff;
       text-decoration: none;
-      font-size: 10.8px;
-      font-weight: 900;
+      font-size: 12.2px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 7px;
       text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      z-index: 3;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
-      transition: transform 0.2s ease, background 0.2s ease;
+      line-height: 1.4;
+      box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35);
+      transition: filter 0.2s ease;
     }
 
-    .drawer-banner-join-btn:hover {
-      background: #f8f5ff;
-      transform: translateY(-1px);
+    .drawer-banner-join-strip:hover {
+      filter: brightness(1.07);
     }
 
-    .drawer-banner-join-btn:active {
-      transform: scale(0.97);
+    .drawer-banner-join-strip:active {
+      filter: brightness(0.96);
+    }
+
+    .drawer-strip-eitaa-icon {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      display: inline-block;
+      flex-shrink: 0;
     }
 
     .drawer-nav-list {
@@ -714,16 +721,14 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 42, 81, 0.7);
     }
 
-    /* فریم سبز و زرد ترکیبی دور باکس عقل کل */
-    .frame-green-gold-combo {
-      border: 1.8px solid transparent;
-      background-image: url('images/aghlekol.webp'), linear-gradient(135deg, #06d6a0 0%, #ffd166 50%, #06d6a0 100%);
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 14px rgba(6, 214, 160, 0.42), 0 0 14px rgba(255, 209, 102, 0.35);
+    /* فریم زرد دور باکس عقل کل */
+    .frame-yellow-banner {
+      border: 1.6px solid rgba(255, 209, 102, 0.92);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 14px rgba(255, 209, 102, 0.48);
     }
-    .frame-green-gold-combo:hover {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(6, 214, 160, 0.65), 0 0 18px rgba(255, 209, 102, 0.55);
+    .frame-yellow-banner:hover {
+      border-color: #ffe066;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 209, 102, 0.72);
     }
 
     /* فریم‌های نازک جذاب دور سه ردیف جعبه ابزار */
@@ -894,9 +899,10 @@
       overflow: hidden;
     }
 
+    /* فونت اعداد تایمر نازک‌تر و ظریف‌تر */
     .countdown-num {
       font-size: 20px;
-      font-weight: 950;
+      font-weight: 700;
       line-height: 1.1;
       background: linear-gradient(180deg, #1a0336 0%, #3c096c 52%, #6b1fb1 100%);
       -webkit-background-clip: text;
@@ -918,7 +924,7 @@
 
     .countdown-label {
       font-size: 9.5px;
-      font-weight: 800;
+      font-weight: 700;
       color: #4a157a;
       line-height: 1;
     }
@@ -1322,12 +1328,15 @@
       .nav-social-icon-img { width: 11px; height: 11px; }
       .nav-social-btn i { font-size: 11px; }
       
-      .drawer-banner-join-btn {
-        height: 30px;
-        font-size: 9.5px;
-        bottom: 8px;
-        left: 8px;
-        right: 8px;
+      .drawer-banner-join-strip {
+        min-height: 36px;
+        font-size: 11px;
+        padding: 6px 8px;
+        gap: 6px;
+      }
+      .drawer-strip-eitaa-icon {
+        width: 14px;
+        height: 14px;
       }
 
       .main-container { padding-top: 22px; }
@@ -1426,14 +1435,17 @@
   <!-- منوی کشویی راست به چپ -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
-    <!-- بخش بالایی منو با تصویر 4:3 banner.webp و دکمه کشیده و سفید عضویت بدون لوگو -->
-    <div class="drawer-banner-box">
-      <img src="images/banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
-      <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-banner-join-btn">
-        عضویت در گروه «دانشجویان پیام نور قزوین»
+    <!-- بخش بالایی منو با تصویر 4:3 banner.webp و نوار نارنجی عضویت در پایین بنر -->
+    <div class="drawer-banner-wrapper">
+      <div class="drawer-banner-box">
+        <img src="images/banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+        <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-banner-join-strip">
+        <img src="images/eitaa-white.webp" class="drawer-strip-eitaa-icon" alt="ایتا">
+        <span>عضویت در گروه «دانشجویان پیام نور قزوین»</span>
       </a>
     </div>
 
@@ -1547,8 +1559,8 @@
         </div>
       </div>
 
-      <!-- باکس 24:7 برای بخش aghlekol با فریم ترکیبی سبز و زرد -->
-      <div class="ratio-24-7-card card-aghlekol frame-green-gold-combo" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
+      <!-- باکس 24:7 برای بخش aghlekol با فریم زرد -->
+      <div class="ratio-24-7-card card-aghlekol frame-yellow-banner" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
 
       <div class="quick-actions-row-three">
         <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>

@@ -14,7 +14,6 @@
   <link rel="preload" as="image" href="images/banner.webp">
   <link rel="preload" as="image" href="images/eitaa-white.webp">
   <link rel="preload" as="image" href="images/timer.webp">
-  <link rel="preload" as="image" href="images/aghlekol.webp">
   <link rel="preload" as="image" href="images/video.webp">
   <link rel="preload" as="image" href="images/s1.gif">
   <link rel="preload" as="image" href="images/s2.webp">
@@ -199,7 +198,7 @@
     .drawer-close-btn:active { transform: scale(0.92); }
 
     .drawer-nav-list {
-      display: flex; flex-direction: column; gap: 8px; padding: 12px; flex: 1 0 auto;
+      display: flex; flex-direction: column; gap: 8px; padding: 12px;
     }
 
     .drawer-nav-link, .drawer-accordion-toggle {
@@ -234,9 +233,9 @@
     .drawer-sub-link:hover { background: rgba(255, 255, 255, 0.12); color: #ffd166; }
     .drawer-sub-link i { font-size: 12px; color: #00f0ff; width: 15px; text-align: center; flex-shrink: 0; }
 
-    /* گزینه متمایز نارنجی رنگ در انتهای لیست منو */
+    /* دکمه نارنجی عضویت در ایتا درست زیر گزینه‌ها */
     .drawer-orange-join-item {
-      margin-top: auto;
+      margin-top: 2px;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       padding: 12px 12px; border-radius: 13px;
       background: linear-gradient(135deg, #e65100 0%, #ff6d00 100%);
@@ -334,8 +333,6 @@
     .frame-orange-banner:hover { border-color: #ff9f1c; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 159, 28, 0.7); }
     .frame-red-banner { border: 1.5px solid rgba(255, 42, 81, 0.9); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 12px rgba(255, 42, 81, 0.45); }
     .frame-red-banner:hover { border-color: #ff4d6d; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 42, 81, 0.7); }
-    .frame-yellow-banner { border: 1.6px solid rgba(255, 209, 102, 0.92); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.32), 0 0 14px rgba(255, 209, 102, 0.48); }
-    .frame-yellow-banner:hover { border-color: #ffe066; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 209, 102, 0.72); }
 
     .tb-thin-purple-frame { border: 1.3px solid rgba(199, 125, 255, 0.85); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 10px rgba(157, 78, 221, 0.35); }
     .tb-thin-purple-frame:hover { border-color: #e0aaff; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38), 0 0 14px rgba(199, 125, 255, 0.6); }
@@ -365,7 +362,6 @@
     .ratio-48-7-card { width: 100%; aspect-ratio: 48 / 7; border-radius: 16px; }
     .ratio-24-7-card { width: 100%; aspect-ratio: 24 / 7; border-radius: 18px; background-color: rgba(255, 255, 255, 0.08); }
 
-    .card-aghlekol { background-image: url('images/aghlekol.webp'); }
     .card-video { background-image: url('images/video.webp'); }
     .card-ozviat { background-image: url('images/s1.gif'); }
     .card-marakez { background-image: url('images/s4.webp'); }
@@ -596,18 +592,10 @@
         <a href="ai/" class="drawer-sub-link"><i class="fa-solid fa-robot"></i><span>سرویس های هوش مصنوعی</span></a>
         <a href="channel/" class="drawer-sub-link"><i class="fa-solid fa-bullhorn"></i><span>کانال های دانلود منابع پیام نور</span></a>
         <a href="site/" class="drawer-sub-link"><i class="fa-solid fa-globe"></i><span>سایت های ضروری دانشجویی</span></a>
-        <a href="video/" class="drawer-sub-link"><i class="fa-solid fa-circle-play"></i><span>آموزش ویدیویی</span></a>
+        <a href="video/" class="drawer-sub-link"><i class="fa-solid fa-circle-play"></i><span>آموزش ویدیویی سامانه گلستان و ریلاین</span></a>
       </div>
 
-      <!-- بخش ۳: بازی عقلِ کُل «محک اطلاعات عمومی» -->
-      <a href="aghlekol/" class="drawer-nav-link">
-        <span class="drawer-item-right">
-          <i class="fa-solid fa-brain"></i>
-          <span>بازی عقلِ کُل «محک اطلاعات عمومی»</span>
-        </span>
-      </a>
-
-      <!-- گزینه متمایز نارنجی رنگ عضویت در انتهای لیست -->
+      <!-- دکمه نارنجی رنگ عضویت درست زیر بخش‌ها -->
       <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-orange-join-item">
         <img src="images/eitaa-white.webp" alt="ایتا">
         <span>عضویت در گروه «دانشجویان پیام نور قزوین»</span>
@@ -658,8 +646,6 @@
           </div>
         </div>
       </div>
-
-      <div class="ratio-24-7-card card-aghlekol frame-yellow-banner" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
 
       <div class="quick-actions-row-three">
         <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>

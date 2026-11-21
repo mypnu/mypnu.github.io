@@ -11,9 +11,10 @@
   <link rel="preload" href="fonts/ch.ttf" as="font" type="font/ttf" crossorigin>
 
   <link rel="preload" as="image" href="images/logo.webp">
-  <link rel="preload" as="image" href="images/logo-black.webp">
+  <link rel="preload" as="image" href="images/eitaa-white.webp">
   <link rel="preload" as="image" href="images/timer.webp">
   <link rel="preload" as="image" href="images/aghlekol.webp">
+  <link rel="preload" as="image" href="images/video.webp">
   <link rel="preload" as="image" href="images/s1.gif">
   <link rel="preload" as="image" href="images/s2.webp">
   <link rel="preload" as="image" href="images/s3.webp">
@@ -33,7 +34,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Orbitron:wght@800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -126,17 +127,18 @@
       font-weight: 400;
     }
 
+    /* نوار سفید باریک و یکدست بالای صفحه */
     .gold-top-nav {
       position: relative;
       width: 100%;
-      height: 46px;
-      background-color: #ffd166;
-      box-shadow: none;
+      height: 40px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
       border: none;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 14px;
+      padding: 0 12px;
       z-index: 100;
       flex-shrink: 0;
     }
@@ -144,22 +146,25 @@
     .nav-right-group {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 9px;
+      min-width: 0;
     }
 
+    /* آیکون همبرگری با گرادینت بنفش */
     .hamburger-btn {
       display: inline-flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      gap: 4.5px;
-      width: 28px;
-      height: 28px;
+      gap: 4px;
+      width: 24px;
+      height: 24px;
       padding: 2px;
       border: none;
       background: transparent;
       box-shadow: none;
       cursor: pointer;
+      flex-shrink: 0;
       transition: transform 0.2s ease;
     }
 
@@ -169,19 +174,19 @@
 
     .hb-line {
       display: block;
-      height: 2.6px;
-      background-color: #000000;
+      height: 2.5px;
+      background: linear-gradient(135deg, #3c096c 0%, #6a11cb 55%, #9d4edd 100%);
       border-radius: 3px;
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s ease, opacity 0.25s ease;
     }
 
-    .hb-line.line-1 { width: 22px; }
-    .hb-line.line-2 { width: 16px; }
-    .hb-line.line-3 { width: 22px; }
+    .hb-line.line-1 { width: 20px; }
+    .hb-line.line-2 { width: 14px; }
+    .hb-line.line-3 { width: 20px; }
 
     .hamburger-btn.is-active .hb-line.line-1 {
-      width: 22px;
-      transform: translateY(7.1px) rotate(45deg);
+      width: 20px;
+      transform: translateY(6.5px) rotate(45deg);
     }
 
     .hamburger-btn.is-active .hb-line.line-2 {
@@ -190,42 +195,94 @@
     }
 
     .hamburger-btn.is-active .hb-line.line-3 {
-      width: 22px;
-      transform: translateY(-7.1px) rotate(-45deg);
+      width: 20px;
+      transform: translateY(-6.5px) rotate(-45deg);
     }
 
-    .nav-mini-logo {
-      height: 25px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-      filter: none;
-    }
-
+    /* متن طراحی شده توسط (بنفش گرادینت) + ARMOON (فونت بولد و اسپرت) */
     .nav-designed-text {
       display: inline-flex;
-      align-items: baseline;
-      gap: 4px;
-      direction: ltr;
+      align-items: center;
+      gap: 5px;
       white-space: nowrap;
     }
 
     .nav-designed-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      color: #000000;
+      font-size: 11px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3c096c 0%, #7b2cbf 55%, #9d4edd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #5a189a;
     }
 
     .nav-designed-author {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12.5px;
+      font-family: 'Orbitron', 'Montserrat', sans-serif;
+      font-size: 12px;
       font-weight: 900;
-      letter-spacing: 1.1px;
-      color: #000000;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #240046 0%, #6a11cb 60%, #9d4edd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #3c096c;
     }
 
+    /* دکمه‌های هم‌اندازه ایتا و تلگرام در سمت چپ نوار */
+    .nav-social-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .nav-social-btn {
+      width: 72px;
+      height: 26px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    .nav-social-btn:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+    }
+
+    .nav-social-btn:active {
+      transform: scale(0.95);
+    }
+
+    .nav-btn-eitaa {
+      background: linear-gradient(135deg, #e65100, #ff6d00);
+    }
+
+    .nav-btn-telegram {
+      background: linear-gradient(135deg, #005bb5, #0077e6);
+    }
+
+    .nav-social-icon-img {
+      width: 13px;
+      height: 13px;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .nav-social-btn i {
+      font-size: 13px;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    /* منوی کشویی از راست به چپ */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -620,14 +677,15 @@
       border-radius: 16px;
     }
 
-    /* باکس ۲۴ به ۷ بدون فریم برای بخش عقل کل */
     .ratio-24-7-card {
       width: 100%;
       aspect-ratio: 24 / 7;
       border-radius: 18px;
       background-color: rgba(255, 255, 255, 0.08);
-      background-image: url('images/aghlekol.webp');
     }
+
+    .card-aghlekol { background-image: url('images/aghlekol.webp'); }
+    .card-video { background-image: url('images/video.webp'); }
 
     .card-ozviat { background-image: url('images/s1.gif'); }
     .card-marakez { background-image: url('images/s4.webp'); }
@@ -1101,16 +1159,20 @@
     }
 
     @media (max-width: 600px) {
-      .gold-top-nav { height: 42px; padding: 0 12px; }
-      .nav-right-group { gap: 10px; }
-      .hamburger-btn { width: 26px; height: 26px; gap: 4px; }
-      .hb-line.line-1, .hb-line.line-3 { width: 20px; }
-      .hb-line.line-2 { width: 14px; }
-      .hamburger-btn.is-active .hb-line.line-1 { width: 20px; transform: translateY(6.6px) rotate(45deg); }
-      .hamburger-btn.is-active .hb-line.line-3 { width: 20px; transform: translateY(-6.6px) rotate(-45deg); }
-      .nav-mini-logo { height: 21px; }
-      .nav-designed-label { font-size: 9px; }
-      .nav-designed-author { font-size: 11px; letter-spacing: 0.9px; }
+      .gold-top-nav { height: 36px; padding: 0 8px; }
+      .nav-right-group { gap: 6px; }
+      .hamburger-btn { width: 22px; height: 22px; gap: 3.5px; }
+      .hb-line.line-1, .hb-line.line-3 { width: 18px; }
+      .hb-line.line-2 { width: 13px; }
+      .hamburger-btn.is-active .hb-line.line-1 { width: 18px; transform: translateY(6px) rotate(45deg); }
+      .hamburger-btn.is-active .hb-line.line-3 { width: 18px; transform: translateY(-6px) rotate(-45deg); }
+      .nav-designed-text { gap: 4px; }
+      .nav-designed-label { font-size: 9.5px; }
+      .nav-designed-author { font-size: 10.5px; letter-spacing: 0.6px; }
+      .nav-social-group { gap: 4px; }
+      .nav-social-btn { width: 62px; height: 23px; font-size: 10px; gap: 4px; border-radius: 7px; }
+      .nav-social-icon-img { width: 11px; height: 11px; }
+      .nav-social-btn i { font-size: 11px; }
       
       .main-container { padding-top: 22px; }
       .brand-hero { margin-top: 4px; margin-bottom: 0px; }
@@ -1163,7 +1225,7 @@
 </head>
 <body>
 
-  <!-- نوار طلایی ساده و یکدست بالای صفحه -->
+  <!-- نوار سفید باریک بالای صفحه -->
   <header class="gold-top-nav">
     <div class="nav-right-group">
       <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
@@ -1171,11 +1233,21 @@
         <span class="hb-line line-2"></span>
         <span class="hb-line line-3"></span>
       </button>
-      <img src="images/logo-black.webp" alt="استادیاب" class="nav-mini-logo">
+      <div class="nav-designed-text">
+        <span class="nav-designed-label">طراحی شده توسط</span>
+        <span class="nav-designed-author">ARMOON</span>
+      </div>
     </div>
-    <div class="nav-designed-text">
-      <span class="nav-designed-label">Designed by</span>
-      <span class="nav-designed-author">ARMOON</span>
+
+    <div class="nav-social-group">
+      <a href="https://eitaa.com/ARM00N" target="_blank" class="nav-social-btn nav-btn-eitaa">
+        <img src="images/eitaa-white.webp" alt="ایتا" class="nav-social-icon-img">
+        <span>ایتا</span>
+      </a>
+      <a href="https://t.me/iarmoon" target="_blank" class="nav-social-btn nav-btn-telegram">
+        <i class="fa-brands fa-telegram"></i>
+        <span>تلگرام</span>
+      </a>
     </div>
   </header>
 
@@ -1234,6 +1306,22 @@
         <i class="fa-solid fa-images"></i>
         <span>تبدیل عکس و PDF</span>
       </a>
+      <a href="ai/" class="drawer-nav-link">
+        <i class="fa-solid fa-robot"></i>
+        <span>هوش مصنوعی (AI)</span>
+      </a>
+      <a href="site/" class="drawer-nav-link">
+        <i class="fa-solid fa-globe"></i>
+        <span>سایت‌های کاربردی</span>
+      </a>
+      <a href="channel/" class="drawer-nav-link">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span>کانال‌های دانشجویی</span>
+      </a>
+      <a href="video/" class="drawer-nav-link">
+        <i class="fa-solid fa-circle-play"></i>
+        <span>ویدیوهای آموزشی</span>
+      </a>
       <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-nav-link">
         <i class="fa-solid fa-users"></i>
         <span>گروه دانشجویان پیام نور قزوین</span>
@@ -1287,7 +1375,7 @@
       </div>
 
       <!-- باکس 24:7 بدون فریم برای بخش aghlekol زیر تایمر -->
-      <div class="ratio-24-7-card" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
+      <div class="ratio-24-7-card card-aghlekol" id="cardAghlekol" onclick="window.location.href='aghlekol/'"></div>
 
       <div class="quick-actions-row-three">
         <div class="ratio-1-1-card card-marakez neon-green-frame" id="cardMarakez" onclick="window.location.href='marakez/'"></div>
@@ -1312,10 +1400,13 @@
       </div>
 
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s11" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s12" onclick="window.location.href='#'"></div>
-        <div class="ratio-1-1-card card-s13" onclick="window.location.href='#'"></div>
+        <div class="ratio-1-1-card card-s11" onclick="window.location.href='ai/'"></div>
+        <div class="ratio-1-1-card card-s12" onclick="window.location.href='site/'"></div>
+        <div class="ratio-1-1-card card-s13" onclick="window.location.href='channel/'"></div>
       </div>
+
+      <!-- اسلاید 24:7 پایین سه باکس آخری با عنوان video -->
+      <div class="ratio-24-7-card card-video" id="cardVideo" onclick="window.location.href='video/'"></div>
     </div>
 
     <div id="resultsList" class="results-container"></div>

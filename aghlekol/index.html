@@ -34,12 +34,25 @@
 
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       background: linear-gradient(155deg, #130226 0%, #260747 45%, #16032b 100%);
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+    }
+
+    /* حالت تمام‌صفحه هنگام ورود به بخش سوالات: حذف نوار بالایی و فوتر */
+    body.in-quiz-fullscreen .gold-top-nav,
+    body.in-quiz-fullscreen .site-footer {
+      display: none !important;
+    }
+
+    body.in-quiz-fullscreen .main-container {
+      padding-top: 14px;
+      padding-bottom: 18px;
+      justify-content: center;
     }
 
     /* نوار سفید بالای صفحه */
@@ -90,11 +103,12 @@
     /* کانتینر اصلی */
     .main-container {
       width: 94%; max-width: 630px; display: flex; flex-direction: column; align-items: center;
-      text-align: center; flex: 1 0 auto; padding-top: 16px; padding-bottom: 35px; gap: 15px;
+      text-align: center; flex: 1 0 auto; padding-top: 16px; padding-bottom: 30px; gap: 15px;
     }
 
     .top-nav-row {
       width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      flex-shrink: 0;
     }
 
     .back-btn {
@@ -140,9 +154,16 @@
       display: inline-flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
     }
 
-    /* ================= مرحله ۱: خوش‌آمدگویی نارنجی، کارت‌های آبی و قرمز، راهنمای بنفش ================= */
+    /* ================= مرحله ۱: صفحه خوش‌آمدگویی وسط‌چین با باکس‌های بزرگ‌تر ================= */
     .welcome-stage {
-      width: 100%; display: flex; flex-direction: column; gap: 16px;
+      width: 100%;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 0;
       animation: stagePopIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -151,30 +172,31 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    /* باکس نارنجی خوش‌آمدگویی بزرگ‌تر و بدون ایموجی */
     .welcome-hero-box {
       width: 100%;
-      min-height: 145px;
+      min-height: 185px;
       background: linear-gradient(135deg, #ff7b00 0%, #f95700 100%);
-      border: 2px solid #ffc380;
-      box-shadow: 0 14px 36px rgba(249, 87, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.45);
-      border-radius: 28px;
-      padding: 34px 20px;
+      border: 2.5px solid #ffd099;
+      box-shadow: 0 16px 40px rgba(249, 87, 0, 0.48), inset 0 2px 3px rgba(255, 255, 255, 0.45);
+      border-radius: 30px;
+      padding: 42px 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 11px;
+      gap: 13px;
     }
 
     .welcome-hi {
-      font-size: 27px;
+      font-size: 30px;
       font-weight: 950;
       color: #ffffff;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
     }
 
     .welcome-prompt {
-      font-size: 17.5px;
+      font-size: 18.5px;
       font-weight: 800;
       color: #fff3e6;
     }
@@ -183,20 +205,20 @@
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 15px;
     }
 
     .big-mode-card {
       position: relative;
       overflow: hidden;
-      min-height: 185px;
-      border-radius: 26px;
-      padding: 28px 14px;
+      min-height: 195px;
+      border-radius: 28px;
+      padding: 30px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 15px;
       cursor: pointer;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
       animation: cardFloatUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
@@ -246,15 +268,15 @@
     }
 
     .big-mode-icon {
-      width: 72px;
-      height: 72px;
+      width: 74px;
+      height: 74px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.2);
       border: 1.5px solid rgba(255, 255, 255, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 34px;
+      font-size: 35px;
       color: #ffffff;
       animation: iconPulse 2.2s ease-in-out infinite alternate;
     }
@@ -265,31 +287,32 @@
     }
 
     .big-mode-title {
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 950;
       color: #ffffff;
       letter-spacing: 0.2px;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
     }
 
+    /* باکس راهنمای بازی بنفش با ابعاد بزرگ‌تر */
     .wide-guide-btn {
       width: 100%;
-      height: 68px;
-      border-radius: 22px;
+      height: 82px;
+      border-radius: 24px;
       background: #7b2cbf;
-      border: 2px solid #c77dff;
+      border: 2.2px solid #d49bff;
       color: #ffffff;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 950;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 11px;
+      gap: 12px;
       cursor: pointer;
-      box-shadow: 0 10px 28px rgba(123, 44, 191, 0.48);
+      box-shadow: 0 12px 32px rgba(123, 44, 191, 0.52);
       transition: 0.22s ease;
     }
-    .wide-guide-btn i { font-size: 21px; }
+    .wide-guide-btn i { font-size: 23px; }
     .wide-guide-btn:hover { background: #8a36d1; transform: translateY(-2px); }
     .wide-guide-btn:active { transform: scale(0.98); }
 
@@ -513,9 +536,9 @@
       100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
-    /* ================= مرحله ۴: محیط اجرای مسابقه ================= */
+    /* ================= مرحله ۴: محیط اجرای مسابقه (تمام‌صفحه بدون نوار بالایی) ================= */
     .quiz-arena {
-      width: 100%; display: none; flex-direction: column; gap: 15px;
+      width: 100%; display: none; flex-direction: column; gap: 14px;
     }
     .quiz-arena.active { display: flex; }
 
@@ -602,7 +625,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 15px;
     }
 
     .slide-in-question {
@@ -653,7 +676,6 @@
       overflow: hidden;
     }
 
-    /* دسته‌بندی چسبیده به بالای باکس سوال */
     .q-cat-tag {
       position: absolute;
       top: 0;
@@ -678,7 +700,6 @@
       text-align: center;
     }
 
-    /* باکس گزینه‌های ۲×۲ بازطراحی‌شده: کمی کوچک‌تر + نشانگر چسبیده به بالا + متن وسط‌چین */
     .options-grid-2x2 {
       width: 100%;
       display: grid;
@@ -726,7 +747,6 @@
       pointer-events: none;
     }
 
-    /* نشانگر گزینه (الف، ب، ج، د) چسبیده به بالای باکس پاسخ */
     .opt-letter {
       position: absolute;
       top: 0;
@@ -777,9 +797,9 @@
       border-color: #ffffff;
     }
 
-    /* پاپ‌آپ فان پایان بازی */
+    /* پاپ‌آپ پایان بازی بدون ایموجی (با آیکون‌های برداری جذاب) */
     .fun-popup-overlay {
-      position: fixed; inset: 0; background: rgba(8, 1, 18, 0.82); backdrop-filter: blur(14px);
+      position: fixed; inset: 0; background: rgba(8, 1, 18, 0.85); backdrop-filter: blur(14px);
       display: flex; align-items: center; justify-content: center; padding: 18px;
       z-index: 999; opacity: 0; visibility: hidden; transition: 0.35s ease;
     }
@@ -789,7 +809,7 @@
       width: 100%; max-width: 410px;
       background: linear-gradient(160deg, #32095e 0%, #1c0436 100%);
       border: 2.5px solid #ffd166; border-radius: 30px;
-      padding: 26px 20px 22px; text-align: center;
+      padding: 28px 20px 22px; text-align: center;
       display: flex; flex-direction: column; align-items: center; gap: 14px;
       box-shadow: 0 24px 60px rgba(0,0,0,0.75), 0 0 38px rgba(255, 209, 102, 0.35);
       transform: scale(0.65) rotate(-4deg);
@@ -797,10 +817,13 @@
     }
     .fun-popup-overlay.show .fun-popup-card { transform: scale(1) rotate(0deg); }
 
-    .fun-emoji-stage {
+    .fun-icon-stage {
       width: 84px; height: 84px; border-radius: 24px;
-      background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 209, 102, 0.6);
-      display: flex; align-items: center; justify-content: center; font-size: 46px;
+      background: linear-gradient(135deg, rgba(255, 209, 102, 0.25), rgba(245, 183, 0, 0.12));
+      border: 2px solid #ffd166;
+      color: #ffd166;
+      display: flex; align-items: center; justify-content: center; font-size: 38px;
+      box-shadow: 0 0 24px rgba(255, 209, 102, 0.35);
       animation: bounceTrophy 1.2s ease-in-out infinite alternate;
     }
     @keyframes bounceTrophy {
@@ -837,17 +860,18 @@
     .site-footer {
       width: 100%; padding: 16px 15px; display: flex; align-items: center; justify-content: center;
       background: rgba(22, 5, 45, 0.85); border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: auto;
+      flex-shrink: 0;
     }
     .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
     .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
 
     @media (max-width: 480px) {
-      .welcome-hero-box { min-height: 130px; padding: 28px 16px; }
-      .welcome-hi { font-size: 23px; }
-      .welcome-prompt { font-size: 15.5px; }
-      .big-mode-card { min-height: 165px; }
-      .big-mode-title { font-size: 20px; }
-      .wide-guide-btn { height: 62px; font-size: 16.5px; }
+      .welcome-hero-box { min-height: 165px; padding: 34px 16px; }
+      .welcome-hi { font-size: 26px; }
+      .welcome-prompt { font-size: 16.5px; }
+      .big-mode-card { min-height: 175px; }
+      .big-mode-title { font-size: 21px; }
+      .wide-guide-btn { height: 74px; font-size: 18.5px; }
       .categories-grid-three { gap: 8px; }
       .pure-white-cat-card { border-radius: 16px; padding: 8px 5px; }
       .pure-cat-title { font-size: 12.5px; }
@@ -910,10 +934,10 @@
       <div id="emptyJsonText">فایل‌های سوالات (q1.json تا q5.json) یافت نشدند.</div>
     </div>
 
-    <!-- مرحله ۱: خوش‌آمدگویی نارنجی، کارت‌های آبی و قرمز، راهنمای بنفش -->
+    <!-- مرحله ۱: صفحه خوش‌آمدگویی وسط‌چین با باکس‌های بزرگ‌تر و بدون ایموجی -->
     <section id="welcomeStage" class="welcome-stage">
       <div class="welcome-hero-box">
-        <div class="welcome-hi">خوش اومدی رفیق! 👋</div>
+        <div class="welcome-hi">خوش اومدی رفیق!</div>
         <div class="welcome-prompt">سبک بازی خودت رو انتخاب کن!</div>
       </div>
 
@@ -937,7 +961,7 @@
       <div id="rulesBox" class="rules-accordion">
         <div class="rule-item"><i class="fa-solid fa-stopwatch"></i><span><b>تایمر ۷ ثانیه‌ای دور سوال:</b> نوار دور باکس سوال از سبز شروع می‌شود و با اتمام ۷ ثانیه به زرد و قرمز می‌رسد.</span></div>
         <div class="rule-item"><i class="fa-solid fa-layer-group"></i><span><b>سبک نرمال:</b> در بخش «عقل کل» ۳۰ سوال و در هر دسته‌بندی ۲۰ سوال مرحله‌ای از ساده به سخت پرسیده می‌شود.</span></div>
-        <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> ترکیبی متوازن از همه بخش‌ها با ۳ جان (❤️) و ۳ کمکی حذف ۲ گزینه؛ هر پاسخ صحیح ۱۰ امتیاز دارد و با پیشرفت در بازی سوالات چالشی‌تر می‌شوند.</span></div>
+        <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> ترکیبی متوازن از همه بخش‌ها با ۳ جان و ۳ کمکی حذف ۲ گزینه؛ هر پاسخ صحیح ۱۰ امتیاز دارد و با پیشرفت در بازی سوالات چالشی‌تر می‌شوند.</span></div>
       </div>
     </section>
 
@@ -962,7 +986,7 @@
       </div>
     </section>
 
-    <!-- مرحله ۴: محیط اجرای مسابقه -->
+    <!-- مرحله ۴: محیط اجرای مسابقه (تمام‌صفحه) -->
     <section id="quizArena" class="quiz-arena">
       <div class="quiz-hud">
         <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۲۰</div>
@@ -1004,10 +1028,10 @@
     </section>
   </main>
 
-  <!-- پاپ‌آپ فان پایان بازی -->
+  <!-- پاپ‌آپ پایان بازی (کاملاً بدون ایموجی و با آیکون‌های برداری) -->
   <div class="fun-popup-overlay" id="funPopupOverlay">
     <div class="fun-popup-card">
-      <div class="fun-emoji-stage" id="funEmoji">🧠</div>
+      <div class="fun-icon-stage" id="funIconBox"><i class="fa-solid fa-crown"></i></div>
       <div class="fun-rank-title" id="funRankTitle">لقب: عقل کل!</div>
       <div class="fun-score-pill" id="funScorePill">۲۵ پاسخ صحیح از ۳۰</div>
       <p class="fun-roast-msg" id="funRoastMsg"></p>
@@ -1163,6 +1187,7 @@
       document.getElementById('quizArena').classList.toggle('active', screenName === 'quiz');
 
       const isQuiz = screenName === 'quiz';
+      document.body.classList.toggle('in-quiz-fullscreen', isQuiz);
       document.getElementById('mainBackBtn').style.display = isQuiz ? 'none' : 'inline-flex';
       document.getElementById('stepBackBtn').style.display = (!isQuiz && screenName !== 'welcome') ? 'inline-flex' : 'none';
       document.getElementById('exitGameBtn').style.display = isQuiz ? 'inline-flex' : 'none';
@@ -1623,7 +1648,7 @@
 
     function finishGame() {
       clearInterval(timerInterval);
-      const emojiEl = document.getElementById('funEmoji');
+      const iconBox = document.getElementById('funIconBox');
       const rankEl = document.getElementById('funRankTitle');
       const scoreEl = document.getElementById('funScorePill');
       const msgEl = document.getElementById('funRoastMsg');
@@ -1634,7 +1659,7 @@
         if (isNewRecord) {
           localStorage.setItem('ostadyab_aghlekol_best_pts', recordScore);
         }
-        emojiEl.textContent = isNewRecord ? '🔥' : '❤️‍🩹';
+        iconBox.innerHTML = isNewRecord ? '<i class="fa-solid fa-fire"></i>' : '<i class="fa-solid fa-heart-crack"></i>';
         rankEl.textContent = isNewRecord ? 'رکورد جدید ثبت شد!' : 'پایان جان‌های شما!';
         scoreEl.textContent = `امتیاز نهایی: ${toFa(recordScore)} (${toFa(correctCount)} پاسخ صحیح)`;
         msgEl.textContent = isNewRecord
@@ -1648,20 +1673,20 @@
         const highLimit = total === 30 ? 20 : 14;
 
         if (correctCount < lowLimit) {
-          emojiEl.textContent = '🫠';
+          iconBox.innerHTML = '<i class="fa-solid fa-compass"></i>';
           rankEl.textContent = 'لقب: رهگذر کنجکاو!';
           msgEl.textContent = 'مثل اینکه دکمه‌ها رو شانسی می‌زدی! یه دور دیگه با تمرکز بیشتر بیا ببینیم چند مرده حلاجی.';
         } else if (correctCount <= highLimit) {
-          emojiEl.textContent = '😎';
+          iconBox.innerHTML = '<i class="fa-solid fa-medal"></i>';
           rankEl.textContent = 'لقب: دانشجوی همه‌فن‌حریف!';
           msgEl.textContent = 'دمت گرم! اطلاعات عمومی‌ات از میانگین خیلی بالاتره، ولی برای رسیدن به قله هنوز جا داری.';
         } else {
           if (activeCategory === 'عقل کل') {
-            emojiEl.textContent = '👑';
+            iconBox.innerHTML = '<i class="fa-solid fa-crown"></i>';
             rankEl.textContent = 'لقب: عقل کل!';
             msgEl.textContent = 'تبریک! تو تمام زمینه‌ها استادی و رسماً تاج «عقل کل» استادیاب برازنده خودته!';
           } else {
-            emojiEl.textContent = '🏆';
+            iconBox.innerHTML = '<i class="fa-solid fa-trophy"></i>';
             rankEl.textContent = `لقب: استادِ ${activeCategory}!`;
             msgEl.textContent = `فوق‌العاده بود! تو بخش «${activeCategory}» بی‌رقیبی؛ حالا وقتشه خودتو تو بخش «عقل کل» محک بزنی!`;
           }

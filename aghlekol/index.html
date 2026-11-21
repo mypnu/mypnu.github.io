@@ -140,7 +140,7 @@
       display: inline-flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
     }
 
-    /* ================= مرحله ۱: خوش‌آمدگویی بزرگ، کارت‌های آبی و قرمز، راهنمای بزرگ بنفش ================= */
+    /* ================= مرحله ۱: خوش‌آمدگویی نارنجی، کارت‌های آبی و قرمز، راهنمای بنفش ================= */
     .welcome-stage {
       width: 100%; display: flex; flex-direction: column; gap: 16px;
       animation: stagePopIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
@@ -151,7 +151,6 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* باکس نارنجی خوش‌آمدگویی با ابعاد بزرگ‌تر */
     .welcome-hero-box {
       width: 100%;
       min-height: 145px;
@@ -273,7 +272,6 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
     }
 
-    /* باکس راهنمای بازی بنفش با ابعاد بزرگ‌تر */
     .wide-guide-btn {
       width: 100%;
       height: 68px;
@@ -489,7 +487,6 @@
       transform: scale(0.96);
     }
 
-    /* شماره معکوس ۳ تا ۱ وسط مربع سبز */
     .countdown-321-box {
       display: none;
       align-items: center;
@@ -516,7 +513,7 @@
       100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
-    /* ================= مرحله ۴: محیط اجرای مسابقه (گزینه‌های مربعی بزرگ ۲×۲) ================= */
+    /* ================= مرحله ۴: محیط اجرای مسابقه ================= */
     .quiz-arena {
       width: 100%; display: none; flex-direction: column; gap: 15px;
     }
@@ -600,7 +597,7 @@
     }
     .buy-offer-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-    /* باکس سوال بزرگ و گزینه‌های مربعی ۲×۲ */
+    /* باکس سوال و گزینه‌های بازطراحی‌شده با انیمیشن کشویی */
     .question-slide-wrapper {
       width: 100%;
       display: flex;
@@ -626,10 +623,11 @@
       to { opacity: 0; transform: translateX(48px) scale(0.97); }
     }
 
+    /* تایمر نواری دور باکس سوال */
     .question-timer-frame {
       position: relative;
       width: 100%;
-      border-radius: 30px;
+      border-radius: 28px;
       padding: 6px;
       background: conic-gradient(
         from 0deg,
@@ -641,67 +639,79 @@
     }
 
     .question-card {
+      position: relative;
       width: 100%;
       min-height: 205px;
       background: linear-gradient(155deg, #240744 0%, #17032e 100%);
-      border-radius: 24px;
-      padding: 28px 20px;
+      border-radius: 22px;
+      padding: 46px 22px 28px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      text-align: center;
+      overflow: hidden;
     }
 
+    /* دسته‌بندی چسبیده به بالای باکس سوال */
     .q-cat-tag {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ffe066, #f5b700);
+      color: #160426;
       font-size: 12px;
-      font-weight: 800;
-      color: #ffd166;
-      background: rgba(255, 209, 102, 0.14);
-      border: 1px solid rgba(255, 209, 102, 0.42);
-      padding: 5px 15px;
-      border-radius: 99px;
+      font-weight: 900;
+      padding: 5px 22px 6px;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 14px rgba(245, 183, 0, 0.35);
+      white-space: nowrap;
     }
 
     .question-text {
+      width: 100%;
       font-size: 20px;
       font-weight: 900;
       color: #ffffff;
       line-height: 1.85;
+      text-align: center;
     }
 
-    /* باکس گزینه‌های مربعی بزرگ (شبکه ۲×۲) */
+    /* باکس گزینه‌های ۲×۲ بازطراحی‌شده: کمی کوچک‌تر + نشانگر چسبیده به بالا + متن وسط‌چین */
     .options-grid-2x2 {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 13px;
+      gap: 12px;
     }
 
     .option-btn {
+      position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1;
-      padding: 16px 12px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.11);
-      border: 2px solid rgba(255, 255, 255, 0.25);
+      aspect-ratio: 4 / 3;
+      min-height: 118px;
+      padding: 36px 12px 14px;
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(12px);
+      border: 1.8px solid rgba(255, 255, 255, 0.24);
       color: #ffffff;
-      font-size: 16.5px;
+      font-size: 16px;
       font-weight: 900;
       text-align: center;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 11px;
       cursor: pointer;
       line-height: 1.5;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.18);
       transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.25s ease;
     }
 
     .option-btn:hover:not(:disabled) {
-      background: rgba(0, 240, 255, 0.18);
+      background: linear-gradient(160deg, rgba(0, 240, 255, 0.22) 0%, rgba(0, 180, 216, 0.12) 100%);
       border-color: #00f0ff;
       transform: translateY(-2px);
     }
@@ -716,19 +726,33 @@
       pointer-events: none;
     }
 
+    /* نشانگر گزینه (الف، ب، ج، د) چسبیده به بالای باکس پاسخ */
     .opt-letter {
-      width: 34px;
-      height: 34px;
-      border-radius: 11px;
-      background: rgba(255, 209, 102, 0.22);
-      border: 1.5px solid rgba(255, 209, 102, 0.5);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 44px;
+      height: 26px;
+      padding: 0 14px;
+      border-radius: 0 0 13px 13px;
+      background: rgba(255, 209, 102, 0.24);
+      border-bottom: 1.5px solid rgba(255, 209, 102, 0.65);
+      border-left: 1.5px solid rgba(255, 209, 102, 0.45);
+      border-right: 1.5px solid rgba(255, 209, 102, 0.45);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 950;
       color: #ffd166;
-      flex-shrink: 0;
+      transition: 0.2s ease;
+    }
+
+    .opt-text-center {
+      width: 100%;
+      text-align: center;
+      word-break: break-word;
     }
 
     .option-btn.correct {
@@ -736,14 +760,22 @@
       border-color: #a7f3d0 !important;
       box-shadow: 0 0 24px rgba(16, 185, 129, 0.75);
     }
-    .option-btn.correct .opt-letter { background: #ffffff; color: #059669; border-color: #fff; }
+    .option-btn.correct .opt-letter {
+      background: #ffffff;
+      color: #059669;
+      border-color: #ffffff;
+    }
 
     .option-btn.wrong {
       background: linear-gradient(135deg, #dc2626, #ef4444) !important;
       border-color: #fecaca !important;
       box-shadow: 0 0 24px rgba(239, 68, 68, 0.75);
     }
-    .option-btn.wrong .opt-letter { background: #ffffff; color: #dc2626; border-color: #fff; }
+    .option-btn.wrong .opt-letter {
+      background: #ffffff;
+      color: #dc2626;
+      border-color: #ffffff;
+    }
 
     /* پاپ‌آپ فان پایان بازی */
     .fun-popup-overlay {
@@ -820,10 +852,11 @@
       .pure-white-cat-card { border-radius: 16px; padding: 8px 5px; }
       .pure-cat-title { font-size: 12.5px; }
       .ready-square-box { max-width: 275px; }
-      .question-card { min-height: 185px; padding: 24px 16px; }
+      .question-card { min-height: 185px; padding: 42px 16px 24px; }
       .question-text { font-size: 18px; }
       .options-grid-2x2 { gap: 10px; }
-      .option-btn { font-size: 15px; padding: 12px 9px; border-radius: 20px; }
+      .option-btn { min-height: 105px; font-size: 14.5px; padding: 32px 9px 12px; border-radius: 18px; }
+      .opt-letter { min-width: 38px; height: 24px; font-size: 12px; }
     }
   </style>
 </head>
@@ -877,7 +910,7 @@
       <div id="emptyJsonText">فایل‌های سوالات (q1.json تا q5.json) یافت نشدند.</div>
     </div>
 
-    <!-- مرحله ۱: خوش‌آمدگویی نارنجی بزرگ، کارت‌های آبی و قرمز، راهنمای بنفش بزرگ -->
+    <!-- مرحله ۱: خوش‌آمدگویی نارنجی، کارت‌های آبی و قرمز، راهنمای بنفش -->
     <section id="welcomeStage" class="welcome-stage">
       <div class="welcome-hero-box">
         <div class="welcome-hi">خوش اومدی رفیق! 👋</div>
@@ -957,7 +990,7 @@
         </div>
       </div>
 
-      <!-- باکس سوال بزرگ با تایمر ۷ ثانیه‌ای + گزینه‌های مربعی ۲×۲ -->
+      <!-- باکس سوال با تگ دسته‌بندی چسبیده به بالا + گزینه‌های بازطراحی‌شده -->
       <div id="questionSlideWrapper" class="question-slide-wrapper">
         <div class="question-timer-frame" id="questionTimerFrame">
           <div class="question-card">
@@ -1232,11 +1265,9 @@
       return copy;
     }
 
-    // ساخت استخر سوالات رکوردی: ترکیب مساوی از همه دسته‌بندی‌ها + بیشتر از easy و medium و سخت‌تر شدن تدریجی
     function buildBalancedProgressiveRecordPool() {
       if (allQuestions.length === 0) return [];
 
-      // گروه‌بندی متوازن بر اساس دسته‌بندی و سطح سختی
       const byCatEasy = {};
       const byCatMedium = {};
       const byCatHard = {};
@@ -1263,19 +1294,15 @@
         return shuffleArray(batch);
       };
 
-      // موج اول (سوالات ابتدایی): عمدتاً آسان با ترکیب مساوی از همه بخش‌ها
       const wave1Easy = pickBalancedBatch(byCatEasy, 2);
-      // موج دوم (میانه بازی): عمدتاً متوسط + مقداری آسان با ترکیب مساوی از همه بخش‌ها
       const wave2Med = shuffleArray([
         ...pickBalancedBatch(byCatMedium, 2),
         ...pickBalancedBatch(byCatEasy, 1)
       ]);
-      // موج سوم (ادامه بازی): ترکیب متوسط و سخت با ترکیب مساوی از همه بخش‌ها
       const wave3Higher = shuffleArray([
         ...pickBalancedBatch(byCatMedium, 2),
         ...pickBalancedBatch(byCatHard, 1)
       ]);
-      // موج چهارم (مراحل بالا): چالشی‌تر
       const wave4Hard = shuffleArray([
         ...pickBalancedBatch(byCatHard, 2),
         ...pickBalancedBatch(byCatMedium, 1)
@@ -1324,14 +1351,12 @@
       };
 
       if (categoryName === 'عقل کل') {
-        // عقل کل: ۳۰ سوال (۱۰ ساده، ۱۰ متوسط، ۱۰ سخت)
         return [
           ...pickWithFallback(easy, 10),
           ...pickWithFallback(medium, 10),
           ...pickWithFallback(hard, 10)
         ];
       } else {
-        // دسته‌بندی‌های موضوعی: ۲۰ سوال (۷ ساده، ۷ متوسط، ۶ سخت)
         return [
           ...pickWithFallback(easy, 7),
           ...pickWithFallback(medium, 7),
@@ -1441,7 +1466,6 @@
         return;
       }
 
-      // در حالت رکوردی اگر بازیکن تمام موج‌های اولیه را رد کرد، موج سخت‌تر بعدی را بساز
       if (gameStyle === 'record' && currentIndex >= sessionQuestions.length) {
         sessionQuestions = sessionQuestions.concat(buildBalancedProgressiveRecordPool());
       }
@@ -1481,7 +1505,7 @@
           btn.className = 'option-btn';
           btn.innerHTML = `
             <span class="opt-letter">${letters[idx]}</span>
-            <span>${optItem.text}</span>
+            <span class="opt-text-center">${optItem.text}</span>
           `;
           btn.onclick = () => handleAnswer(idx, btn);
           grid.appendChild(btn);
@@ -1620,7 +1644,6 @@
         const total = normalTotalQuestions;
         scoreEl.textContent = `${toFa(correctCount)} پاسخ صحیح از ${toFa(total)} سوال`;
 
-        // آستانه‌های متناسب برای آزمون‌های ۲۰ سوالی و ۳۰ سوالی
         const lowLimit = total === 30 ? 10 : 7;
         const highLimit = total === 30 ? 20 : 14;
 

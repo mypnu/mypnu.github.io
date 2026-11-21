@@ -14,690 +14,150 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    html {
-      scroll-behavior: smooth;
-      touch-action: pan-x pan-y;
-    }
-
-    @font-face {
-      font-family: 'AppFont';
-      src: url('../fonts/m-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'AppFont';
-      src: url('../fonts/m-SemiBold.ttf') format('truetype');
-      font-weight: 600;
-      font-style: normal;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'AppFont';
-      src: url('../fonts/m-Bold.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'AppFont';
-      src: url('../fonts/m-ExtraBold.ttf') format('truetype');
-      font-weight: 800;
-      font-style: normal;
-      font-display: block;
-    }
-    @font-face {
-      font-family: 'AppFont';
-      src: url('../fonts/m-Black.ttf') format('truetype');
-      font-weight: 900;
-      font-style: normal;
-      font-display: block;
-    }
+    html { scroll-behavior: smooth; touch-action: pan-x pan-y; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Bold.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Black.ttf') format('truetype'); font-weight: 900; font-display: block; }
 
     :root {
-      --bg-dark-1: #1e053a;
-      --bg-dark-2: #2e0854;
-      --bg-dark-3: #4a157a;
-      --bg-dark-4: #22033d;
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-border: rgba(255, 255, 255, 0.18);
+      --bg-dark-1: #1e053a; --bg-dark-2: #2e0854; --bg-dark-3: #4a157a; --bg-dark-4: #22033d;
+      --glass-bg: rgba(255, 255, 255, 0.08); --glass-border: rgba(255, 255, 255, 0.18);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'AppFont', sans-serif;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: pan-x pan-y;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'AppFont', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: pan-x pan-y; }
 
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
-      background-size: 240% 240%;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      overflow-x: hidden;
+      color: #fff; display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
     }
 
-    /* نوار سفید باریک بالای صفحه */
     .gold-top-nav {
-      position: relative;
-      width: 100%;
-      height: 40px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 12px;
-      z-index: 100;
-      flex-shrink: 0;
+      position: relative; width: 100%; height: 40px; background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16); display: flex; align-items: center; justify-content: space-between;
+      padding: 0 12px; z-index: 100; flex-shrink: 0;
     }
-
-    .nav-right-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      min-width: 0;
-    }
-
-    .hamburger-btn {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 4px;
-      width: 24px;
-      height: 24px;
-      padding: 2px;
-      border: none;
-      background: transparent;
-      box-shadow: none;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: transform 0.2s ease;
-    }
-
-    .hamburger-btn:active {
-      transform: scale(0.9);
-    }
-
-    .hb-line {
-      display: block;
-      height: 2.5px;
-      background: linear-gradient(135deg, #3c096c 0%, #6a11cb 55%, #9d4edd 100%);
-      border-radius: 3px;
-      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.3s ease, opacity 0.25s ease;
-    }
-
-    .hb-line.line-1 { width: 20px; }
+    .nav-right-group { display: inline-flex; align-items: center; gap: 9px; min-width: 0; }
+    .hamburger-btn { display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; width: 24px; height: 24px; padding: 2px; border: none; background: transparent; cursor: pointer; flex-shrink: 0; }
+    .hb-line { display: block; height: 2.5px; background: linear-gradient(135deg, #3c096c 0%, #6a11cb 55%, #9d4edd 100%); border-radius: 3px; transition: 0.3s ease; }
+    .hb-line.line-1, .hb-line.line-3 { width: 20px; }
     .hb-line.line-2 { width: 14px; }
-    .hb-line.line-3 { width: 20px; }
+    .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger-btn.is-active .hb-line.line-2 { opacity: 0; width: 0; }
+    .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-6.5px) rotate(-45deg); }
 
-    .hamburger-btn.is-active .hb-line.line-1 {
-      width: 20px;
-      transform: translateY(6.5px) rotate(45deg);
-    }
+    .nav-designed-text { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .nav-designed-label { font-size: 11px; font-weight: 800; background: linear-gradient(135deg, #3c096c 0%, #7b2cbf 55%, #9d4edd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-designed-author { font-family: 'Orbitron', 'Montserrat', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 1px; background: linear-gradient(135deg, #240046 0%, #6a11cb 60%, #9d4edd 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    .hamburger-btn.is-active .hb-line.line-2 {
-      opacity: 0;
-      width: 0;
-    }
+    .nav-social-group { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .nav-social-btn { width: 72px; height: 26px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; color: #ffffff; font-size: 11px; font-weight: 800; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16); }
+    .nav-btn-eitaa { background: linear-gradient(135deg, #e65100, #ff6d00); }
+    .nav-btn-telegram { background: linear-gradient(135deg, #005bb5, #0077e6); }
+    .nav-social-icon-img { width: 13px; height: 13px; object-fit: contain; }
+    .nav-social-btn i { font-size: 13px; color: #ffffff; }
 
-    .hamburger-btn.is-active .hb-line.line-3 {
-      width: 20px;
-      transform: translateY(-6.5px) rotate(-45deg);
-    }
-
-    .nav-designed-text {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-    }
-
-    .nav-designed-label {
-      font-size: 11px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #3c096c 0%, #7b2cbf 55%, #9d4edd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: #5a189a;
-    }
-
-    .nav-designed-author {
-      font-family: 'Orbitron', 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      background: linear-gradient(135deg, #240046 0%, #6a11cb 60%, #9d4edd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: #3c096c;
-    }
-
-    .nav-social-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .nav-social-btn {
-      width: 72px;
-      height: 26px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 11px;
-      font-weight: 800;
-      transition: transform 0.2s ease, filter 0.2s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
-    }
-
-    .nav-social-btn:hover {
-      filter: brightness(1.07);
-      transform: translateY(-1px);
-    }
-
-    .nav-social-btn:active {
-      transform: scale(0.95);
-    }
-
-    .nav-btn-eitaa {
-      background: linear-gradient(135deg, #e65100, #ff6d00);
-    }
-
-    .nav-btn-telegram {
-      background: linear-gradient(135deg, #005bb5, #0077e6);
-    }
-
-    .nav-social-icon-img {
-      width: 13px;
-      height: 13px;
-      object-fit: contain;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .nav-social-btn i {
-      font-size: 13px;
-      color: #ffffff;
-      flex-shrink: 0;
-    }
-
-    /* منوی کشویی راست به چپ */
-    .drawer-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 2, 22, 0.72);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
-      z-index: 998;
-    }
-
-    .drawer-backdrop.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
+    /* منوی کشویی */
+    .drawer-backdrop { position: fixed; inset: 0; background: rgba(10, 2, 22, 0.72); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: 0.35s ease; z-index: 998; }
+    .drawer-backdrop.open { opacity: 1; visibility: visible; }
     .side-drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 285px;
-      max-width: 82vw;
-      height: 100vh;
+      position: fixed; top: 0; right: 0; width: 295px; max-width: 85vw; height: 100vh;
       background: linear-gradient(165deg, #2b0750 0%, #190330 60%, #110122 100%);
-      border-left: none;
-      box-shadow: none;
-      visibility: hidden;
-      transform: translateX(100%);
-      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.38s ease, box-shadow 0.38s ease;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
+      visibility: hidden; transform: translateX(100%); transition: 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 999; display: flex; flex-direction: column; overflow-y: auto;
     }
+    .side-drawer.open { visibility: visible; border-left: 1.8px solid rgba(255, 209, 102, 0.45); box-shadow: -10px 0 36px rgba(0, 0, 0, 0.65); transform: translateX(0); }
+    .drawer-banner-box { position: relative; width: 100%; aspect-ratio: 4 / 3; background: linear-gradient(145deg, #3c096c, #240046); overflow: hidden; flex-shrink: 0; border-bottom: 1.5px solid rgba(255, 209, 102, 0.3); }
+    .drawer-banner-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .drawer-close-btn { position: absolute; top: 10px; left: 10px; width: 30px; height: 30px; border-radius: 9px; border: 1px solid rgba(255, 255, 255, 0.32); background: rgba(15, 3, 30, 0.65); color: #ffffff; cursor: pointer; z-index: 3; }
 
-    .side-drawer.open {
-      visibility: visible;
-      border-left: 1.8px solid rgba(255, 209, 102, 0.45);
-      box-shadow: -10px 0 36px rgba(0, 0, 0, 0.65);
-      transform: translateX(0);
+    .drawer-nav-list { display: flex; flex-direction: column; gap: 8px; padding: 12px; flex: 1 0 auto; }
+    .drawer-nav-link, .drawer-accordion-toggle {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 11px 13px; border-radius: 12px; background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.11); color: #ffffff; text-decoration: none;
+      font-size: 13px; font-weight: 800; cursor: pointer; text-align: right; transition: 0.2s ease;
     }
+    .drawer-nav-link:hover, .drawer-accordion-toggle:hover { background: rgba(255, 255, 255, 0.13); border-color: rgba(255, 209, 102, 0.45); }
+    .drawer-item-right { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+    .drawer-item-right i { width: 19px; text-align: center; color: #ffd166; font-size: 14.5px; flex-shrink: 0; }
+    .drawer-chevron { font-size: 11px; color: #d8b4fe; transition: transform 0.3s ease; }
+    .drawer-accordion-toggle.is-open { background: rgba(255, 209, 102, 0.14); border-color: rgba(255, 209, 102, 0.5); }
+    .drawer-accordion-toggle.is-open .drawer-chevron { transform: rotate(180deg); color: #ffd166; }
 
-    .drawer-banner-wrapper {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      flex-shrink: 0;
-      border-bottom: 1.5px solid rgba(255, 209, 102, 0.35);
+    .drawer-submenu { display: none; flex-direction: column; gap: 6px; padding: 6px 10px 6px 4px; margin-top: -2px; border-right: 2px solid rgba(255, 209, 102, 0.45); margin-right: 12px; }
+    .drawer-submenu.open { display: flex; }
+    .drawer-sub-link { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-radius: 10px; background: rgba(0, 0, 0, 0.28); border: 1px solid rgba(255, 255, 255, 0.08); color: #f3e8ff; text-decoration: none; font-size: 12px; font-weight: 700; line-height: 1.45; }
+    .drawer-sub-link:hover { background: rgba(255, 255, 255, 0.12); color: #ffd166; }
+    .drawer-sub-link i { font-size: 12px; color: #00f0ff; width: 15px; text-align: center; flex-shrink: 0; }
+
+    .drawer-orange-join-item {
+      margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 12px; border-radius: 13px; background: linear-gradient(135deg, #e65100 0%, #ff6d00 100%);
+      border: 1.5px solid rgba(255, 224, 178, 0.65); color: #ffffff; text-decoration: none;
+      font-size: 12.2px; font-weight: 900; text-align: center; line-height: 1.45; box-shadow: 0 6px 18px rgba(230, 81, 0, 0.45);
     }
+    .drawer-orange-join-item img { width: 16px; height: 16px; object-fit: contain; flex-shrink: 0; }
 
-    .drawer-banner-box {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      background: linear-gradient(145deg, #3c096c, #240046);
-      overflow: hidden;
-    }
+    .main-container { width: 92%; max-width: 600px; display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1 0 auto; padding-top: 16px; padding-bottom: 35px; }
 
-    .drawer-banner-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .drawer-close-btn {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      background: rgba(15, 3, 30, 0.65);
-      backdrop-filter: blur(6px);
-      color: #ffffff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      cursor: pointer;
-      z-index: 3;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .drawer-close-btn:active {
-      transform: scale(0.92);
-    }
-
-    .drawer-banner-join-strip {
-      width: 100%;
-      min-height: 40px;
-      padding: 7px 10px;
-      background: linear-gradient(135deg, #e65100 0%, #ff6d00 100%);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 12.2px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      text-align: center;
-      line-height: 1.4;
-      box-shadow: 0 4px 14px rgba(230, 81, 0, 0.35);
-      transition: filter 0.2s ease;
-    }
-
-    .drawer-banner-join-strip:hover {
-      filter: brightness(1.07);
-    }
-
-    .drawer-strip-eitaa-icon {
-      width: 16px;
-      height: 16px;
-      object-fit: contain;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .drawer-nav-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 12px;
-    }
-
-    .drawer-nav-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 14px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 700;
-      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .drawer-nav-link i {
-      width: 20px;
-      text-align: center;
-      color: #ffd166;
-      font-size: 15px;
-    }
-
-    .drawer-nav-link:hover {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(255, 209, 102, 0.45);
-    }
-
-    .drawer-nav-link:active {
-      transform: scale(0.98);
-    }
-
-    .main-container {
-      width: 92%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      flex: 1 0 auto;
-      padding-top: 16px;
-      padding-bottom: 35px;
-      position: relative;
-    }
-
-    .top-nav-row {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-bottom: 14px;
-    }
-
+    .top-nav-row { width: 100%; display: flex; align-items: center; justify-content: flex-start; margin-bottom: 14px; }
     .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(255,255,255,0.09);
-      border: 1.5px solid rgba(255,255,255,0.2);
-      color: #fff;
-      padding: 8px 15px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 12.5px;
-      font-weight: 800;
-      backdrop-filter: blur(10px);
-      transition: 0.2s ease;
+      display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.09);
+      border: 1.5px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 15px; border-radius: 12px;
+      text-decoration: none; font-size: 12.5px; font-weight: 800; backdrop-filter: blur(10px); transition: 0.2s ease;
     }
     .back-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
 
-    /* باکس سفید جذاب عنوان صفحه بدون فریم و با متن هم‌رنگ بکگراند */
     .white-page-title-box {
-      width: 100%;
-      background: #ffffff;
-      border: none;
-      border-radius: 20px;
-      padding: 16px 18px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      width: 100%; background: #ffffff; border: none; border-radius: 20px; padding: 16px 18px;
+      margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 10px;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
     }
+    .white-page-title-box i { font-size: 20px; color: #2e0854; flex-shrink: 0; }
+    .white-page-title-text { font-size: 17.5px; font-weight: 900; color: #2e0854; line-height: 1.5; }
 
-    .white-page-title-box i {
-      font-size: 20px;
-      color: #2e0854;
-      flex-shrink: 0;
-    }
-
-    .white-page-title-text {
-      font-size: 17.5px;
-      font-weight: 900;
-      color: #2e0854;
-      line-height: 1.5;
-    }
-
-    .campus-cards-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
+    .campus-cards-container { width: 100%; display: flex; flex-direction: column; gap: 16px; }
     .campus-box-card {
-      position: relative;
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 2px solid var(--glass-border);
-      border-radius: 22px;
-      padding: 22px 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      width: 100%;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      background: var(--glass-bg); backdrop-filter: blur(16px); border: 2px solid var(--glass-border);
+      border-radius: 22px; padding: 22px 18px; display: flex; flex-direction: column; align-items: center; text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); width: 100%;
     }
-
-    .campus-box-card.glow-green, .qazvin-dept-row.glow-green {
-      border-color: #06d6a0 !important;
-      box-shadow: 0 0 24px rgba(6, 214, 160, 0.7) !important;
-    }
-
-    .campus-box-name {
-      font-size: 19px;
-      font-weight: 800;
-      color: #ffd166;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      margin-bottom: 12px;
-      transition: color 0.3s ease;
-    }
-
-    .campus-box-name.glow-text-green, .qazvin-dept-title.glow-text-green {
-      color: #06d6a0 !important;
-      text-shadow: 0 0 10px rgba(6, 214, 160, 0.8) !important;
-    }
+    .campus-box-card.glow-green, .qazvin-dept-row.glow-green { border-color: #06d6a0 !important; box-shadow: 0 0 24px rgba(6, 214, 160, 0.7) !important; }
+    .campus-box-name { font-size: 19px; font-weight: 800; color: #ffd166; margin-bottom: 12px; }
+    .campus-box-name.glow-text-green, .qazvin-dept-title.glow-text-green { color: #06d6a0 !important; }
 
     .city-accordion-btn {
-      position: relative;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 214, 160, 0.09));
-      border: 1.8px dashed #10b981;
-      border-radius: 14px;
-      color: #34d399;
-      padding: 11px 40px;
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: all 0.25s ease;
+      position: relative; width: 100%; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 214, 160, 0.09));
+      border: 1.8px dashed #10b981; border-radius: 14px; color: #34d399; padding: 11px 40px; font-size: 14.5px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
+    .city-accordion-btn .chevron-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); transition: transform 0.35s ease; }
+    .city-accordion-btn.expanded .chevron-icon { transform: translateY(-50%) rotate(180deg); }
 
-    .city-accordion-btn:hover {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(6, 214, 160, 0.18));
-      border-color: #34d399;
-    }
+    .accordion-content-list { width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 14px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.45s ease, opacity 0.35s ease; }
+    .accordion-content-list.open { max-height: 4500px; opacity: 1; }
+    .qazvin-dept-row { background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+    .qazvin-dept-title { font-size: 14px; font-weight: 700; color: #e0aaff; }
 
-    .city-accordion-btn:active {
-      transform: scale(0.98);
-    }
+    .contact-glass-pill { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: rgba(0, 0, 0, 0.42); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 14px; padding: 8px 20px; direction: ltr; max-width: 95%; }
+    .contact-glass-pill.glow-pill-green { border-color: #06d6a0 !important; background: rgba(6, 214, 160, 0.08) !important; }
+    .contact-glass-pill i { font-size: 18px; color: #e0aaff; }
+    .contact-glass-pill.glow-pill-green i { color: #06d6a0 !important; }
+    .contact-digits { font-size: 19.5px; font-weight: 600; letter-spacing: 1.2px; color: #00f0ff; line-height: 1; }
+    .contact-digits.copied-glow { color: #06d6a0 !important; }
 
-    .city-accordion-btn .chevron-icon {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: transform 0.35s ease;
-      font-size: 14px;
-    }
-
-    .city-accordion-btn.expanded .chevron-icon {
-      transform: translateY(-50%) rotate(180deg);
-    }
-
-    .accordion-content-list {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 14px;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
-    }
-
-    .accordion-content-list.open {
-      max-height: 4500px;
-      opacity: 1;
-    }
-
-    .qazvin-dept-row {
-      background: rgba(0, 0, 0, 0.32);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 16px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .qazvin-dept-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #e0aaff;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-      transition: color 0.3s ease;
-    }
-
-    .contact-glass-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-      border-radius: 14px;
-      padding: 8px 20px;
-      direction: ltr;
-      max-width: 95%;
-      transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .contact-glass-pill.glow-pill-green {
-      border-color: #06d6a0 !important;
-      box-shadow: 0 0 14px rgba(6, 214, 160, 0.5), inset 0 0 6px rgba(6, 214, 160, 0.2) !important;
-      background: rgba(6, 214, 160, 0.08) !important;
-    }
-
-    .contact-glass-pill i {
-      font-size: 18px;
-      color: #e0aaff;
-    }
-
-    .contact-glass-pill.glow-pill-green i {
-      color: #06d6a0 !important;
-      transition: none !important;
-    }
-
-    .contact-digits {
-      font-size: 19.5px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      color: #00f0ff;
-      line-height: 1;
-      text-shadow: 0 0 6px rgba(0, 240, 255, 0.35);
-    }
-
-    .contact-digits.copied-glow {
-      color: #06d6a0 !important;
-      text-shadow: 0 0 10px rgba(6, 214, 160, 0.8) !important;
-      transition: none !important;
-    }
-
-    .card-actions {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 290px;
-    }
-
-    .action-btn {
-      position: relative;
-      flex: 1 1 0;
-      min-width: 0;
-      padding: 10px 8px;
-      border: none;
-      border-radius: 12px;
-      color: #fff;
-      font-size: 13.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
-      white-space: nowrap;
-      transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.2s ease;
-    }
-
-    .action-btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.08);
-    }
-
-    .action-btn:active {
-      transform: translateY(1px) scale(0.96);
-    }
-
+    .card-actions { display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: center; width: 100%; max-width: 290px; }
+    .action-btn { position: relative; flex: 1 1 0; min-width: 0; padding: 10px 8px; border: none; border-radius: 12px; color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; white-space: nowrap; }
     .btn-call { background: linear-gradient(135deg, #1e90ff, #0056b3); }
-
     .btn-copy { background: linear-gradient(135deg, #e63946, #b5179e); overflow: hidden; }
-    .btn-copy::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #059669, #10b981, #06d6a0);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      border-radius: inherit;
-    }
+    .btn-copy::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, #059669, #10b981, #06d6a0); opacity: 0; transition: opacity 0.35s ease; border-radius: inherit; }
     .btn-copy span, .btn-copy i { position: relative; z-index: 2; }
     .btn-copy.copied::before { opacity: 1; }
 
-    .site-footer {
-      width: 100%;
-      padding: 16px 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(22, 5, 45, 0.85);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      margin-top: auto;
-    }
-
+    .site-footer { width: 100%; padding: 16px 15px; display: flex; align-items: center; justify-content: center; background: rgba(22, 5, 45, 0.85); border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: auto; }
     .footer-text { font-size: 12.5px; font-weight: 600; color: #d8b4fe; }
     .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
 
@@ -709,38 +169,22 @@
       .hb-line.line-2 { width: 13px; }
       .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(6px) rotate(45deg); }
       .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-6px) rotate(-45deg); }
-      .nav-designed-text { gap: 4px; }
       .nav-designed-label { font-size: 9.5px; }
       .nav-designed-author { font-size: 10.5px; letter-spacing: 0.6px; }
       .nav-social-group { gap: 4px; }
       .nav-social-btn { width: 62px; height: 23px; font-size: 10px; gap: 4px; border-radius: 7px; }
       .nav-social-icon-img { width: 11px; height: 11px; }
       .nav-social-btn i { font-size: 11px; }
-
-      .drawer-banner-join-strip {
-        min-height: 36px;
-        font-size: 11px;
-        padding: 6px 8px;
-        gap: 6px;
-      }
-      .drawer-strip-eitaa-icon {
-        width: 14px;
-        height: 14px;
-      }
-
       .white-page-title-box { padding: 13px 14px; border-radius: 17px; }
       .white-page-title-box i { font-size: 17px; }
       .white-page-title-text { font-size: 15px; }
-
       .campus-box-name { font-size: 17px; }
       .contact-digits { font-size: 17.5px; }
-      .action-btn { font-size: 12px; padding: 8px 4px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- نوار سفید بالای صفحه -->
   <header class="gold-top-nav">
     <div class="nav-right-group">
       <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
@@ -766,37 +210,55 @@
     </div>
   </header>
 
-  <!-- منوی کشویی -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
-    <div class="drawer-banner-wrapper">
-      <div class="drawer-banner-box">
-        <img src="../images/banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
-        <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-banner-join-strip">
-        <img src="../images/eitaa-white.webp" class="drawer-strip-eitaa-icon" alt="ایتا">
-        <span>عضویت در گروه «دانشجویان پیام نور قزوین»</span>
-      </a>
+    <div class="drawer-banner-box">
+      <img src="../images/banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+      <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
 
     <nav class="drawer-nav-list">
-      <a href="../" class="drawer-nav-link"><i class="fa-solid fa-house"></i><span>صفحه اصلی استادیاب</span></a>
-      <a href="../poshtiban/" class="drawer-nav-link"><i class="fa-solid fa-headset"></i><span>پشتیبانان مراکز</span></a>
-      <a href="../karshenas/" class="drawer-nav-link"><i class="fa-solid fa-user-tie"></i><span>کارشناسان رشته‌ها</span></a>
-      <a href="../aghlekol/" class="drawer-nav-link"><i class="fa-solid fa-brain"></i><span>مسابقه بزرگ عقل کل</span></a>
-      <a href="../saghfmojaz/" class="drawer-nav-link"><i class="fa-solid fa-calculator"></i><span>محاسبه سقف مجاز واحد</span></a>
-      <a href="../testdorost/" class="drawer-nav-link"><i class="fa-solid fa-check-double"></i><span>محاسبه حداقل تست صحیح</span></a>
-      <a href="../moadel/" class="drawer-nav-link"><i class="fa-solid fa-graduation-cap"></i><span>محاسبه هوشمند معدل ترمی</span></a>
-      <a href="../pdfm&s/" class="drawer-nav-link"><i class="fa-solid fa-object-group"></i><span>ترکیب و جداسازی PDF</span></a>
-      <a href="../pdfcompressor/" class="drawer-nav-link"><i class="fa-solid fa-file-zipper"></i><span>کاهش حجم فایل PDF</span></a>
-      <a href="../imagetopdf/" class="drawer-nav-link"><i class="fa-solid fa-images"></i><span>تبدیل عکس به فایل PDF</span></a>
-      <a href="../ai/" class="drawer-nav-link"><i class="fa-solid fa-robot"></i><span>سرویس های هوش مصنوعی</span></a>
-      <a href="../channel/" class="drawer-nav-link"><i class="fa-solid fa-bullhorn"></i><span>کانال های دانلود منابع پیام نور</span></a>
-      <a href="../site/" class="drawer-nav-link"><i class="fa-solid fa-globe"></i><span>سایت های ضروری دانشجویی</span></a>
-      <a href="../video/" class="drawer-nav-link"><i class="fa-solid fa-circle-play"></i><span>ویدیوهای آموزشی</span></a>
+      <a href="../" class="drawer-nav-link">
+        <span class="drawer-item-right"><i class="fa-solid fa-house"></i><span>صفحه اصلی</span></span>
+      </a>
+
+      <button type="button" class="drawer-accordion-toggle" onclick="toggleDrawerSection(this, 'subUniContact')">
+        <span class="drawer-item-right"><i class="fa-solid fa-phone-volume"></i><span>تماس با دانشگاه</span></span>
+        <i class="fa-solid fa-chevron-down drawer-chevron"></i>
+      </button>
+      <div class="drawer-submenu" id="subUniContact">
+        <a href="../marakez/" class="drawer-sub-link"><i class="fa-solid fa-building-columns"></i><span>تماس با مراکز دانشگاهی</span></a>
+        <a href="../poshtiban/" class="drawer-sub-link"><i class="fa-solid fa-headset"></i><span>تماس با پشتیبانان مراکز دانشگاهی</span></a>
+        <a href="../karshenas/" class="drawer-sub-link"><i class="fa-solid fa-user-tie"></i><span>تماس با کارشناسان رشته های تحصیلی</span></a>
+      </div>
+
+      <button type="button" class="drawer-accordion-toggle" onclick="toggleDrawerSection(this, 'subStudentToolbox')">
+        <span class="drawer-item-right"><i class="fa-solid fa-toolbox"></i><span>جعبه ابزار دانشجویی</span></span>
+        <i class="fa-solid fa-chevron-down drawer-chevron"></i>
+      </button>
+      <div class="drawer-submenu" id="subStudentToolbox">
+        <a href="../saghfmojaz/" class="drawer-sub-link"><i class="fa-solid fa-calculator"></i><span>چند واحد میتونم بردارم؟</span></a>
+        <a href="../testdorost/" class="drawer-sub-link"><i class="fa-solid fa-check-double"></i><span>چندتا تست درست بزنم قبولم؟</span></a>
+        <a href="../moadel/" class="drawer-sub-link"><i class="fa-solid fa-graduation-cap"></i><span>محاسبه هوشمند معدل</span></a>
+        <a href="../pdfm&s/" class="drawer-sub-link"><i class="fa-solid fa-object-group"></i><span>ترکیب و جداسازی فایل PDF</span></a>
+        <a href="../pdfcompressor/" class="drawer-sub-link"><i class="fa-solid fa-file-zipper"></i><span>کاهش حجم فایل PDF</span></a>
+        <a href="../imagetopdf/" class="drawer-sub-link"><i class="fa-solid fa-images"></i><span>تبدیل عکس به فایل PDF</span></a>
+        <a href="../ai/" class="drawer-sub-link"><i class="fa-solid fa-robot"></i><span>سرویس های هوش مصنوعی</span></a>
+        <a href="../channel/" class="drawer-sub-link"><i class="fa-solid fa-bullhorn"></i><span>کانال های دانلود منابع پیام نور</span></a>
+        <a href="../site/" class="drawer-sub-link"><i class="fa-solid fa-globe"></i><span>سایت های ضروری دانشجویی</span></a>
+        <a href="../video/" class="drawer-sub-link"><i class="fa-solid fa-circle-play"></i><span>آموزش ویدیویی</span></a>
+      </div>
+
+      <a href="../aghlekol/" class="drawer-nav-link">
+        <span class="drawer-item-right"><i class="fa-solid fa-brain"></i><span>بازی عقلِ کُل «محک اطلاعات عمومی»</span></span>
+      </a>
+
+      <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-orange-join-item">
+        <img src="../images/eitaa-white.webp" alt="ایتا">
+        <span>عضویت در گروه «دانشجویان پیام نور قزوین»</span>
+      </a>
     </nav>
   </aside>
 
@@ -805,7 +267,6 @@
       <a href="../" class="back-btn"><i class="fa-solid fa-arrow-right"></i><span>بازگشت به صفحه اصلی</span></a>
     </div>
 
-    <!-- باکس سفید عنوان با متن هم‌رنگ بکگراند و بدون فریم -->
     <div class="white-page-title-box">
       <i class="fa-solid fa-building-columns"></i>
       <h1 class="white-page-title-text">تماس با مراکز دانشگاهی استان</h1>
@@ -820,159 +281,38 @@
         </button>
 
         <div class="accordion-content-list" id="qazvinNumbersList">
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">حراست</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۱۶۹۳</span></div>
-            <div class="card-actions">
-              <a href="tel:02833371693" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833371693', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">آموزش (خط ۱)</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۷۵۸۱</span></div>
-            <div class="card-actions">
-              <a href="tel:02833377581" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833377581', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">آموزش (خط ۲)</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۶۰۱۰</span></div>
-            <div class="card-actions">
-              <a href="tel:02833376010" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833376010', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">امتحانات</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۵۳۸۵</span></div>
-            <div class="card-actions">
-              <a href="tel:02833375385" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833375385', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">خدمات دانشجویی - وام</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۳۱۰۱</span></div>
-            <div class="card-actions">
-              <a href="tel:02833373101" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833373101', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">امور شهریه</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۳۱۰۲</span></div>
-            <div class="card-actions">
-              <a href="tel:02833373102" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833373102', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">فرهنگی و فوق برنامه</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۱۶۷۸</span></div>
-            <div class="card-actions">
-              <a href="tel:02833371678" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833371678', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">تحصیلات تکمیلی</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۸۹۳۹</span></div>
-            <div class="card-actions">
-              <a href="tel:02833378939" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833378939', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">فناوری و رایانه</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۳۸۴۳</span></div>
-            <div class="card-actions">
-              <a href="tel:02833373843" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833373843', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">برنامه ریزی درسی (خط ۱)</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۸۹۳۰</span></div>
-            <div class="card-actions">
-              <a href="tel:02833378930" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833378930', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">برنامه ریزی درسی (خط ۲)</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۴۰۸۲</span></div>
-            <div class="card-actions">
-              <a href="tel:02833374082" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833374082', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">انتظامات</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۴۱۲۰</span></div>
-            <div class="card-actions">
-              <a href="tel:02833374120" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833374120', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
-
-          <div class="qazvin-dept-row">
-            <span class="qazvin-dept-title">انتشارات</span>
-            <div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۸۹۳۲</span></div>
-            <div class="card-actions">
-              <a href="tel:02833378932" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-              <button class="action-btn btn-copy" onclick="handleCopyAction('02833378932', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-            </div>
-          </div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">حراست</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۱۶۹۳</span></div><div class="card-actions"><a href="tel:02833371693" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833371693', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">آموزش (خط ۱)</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۷۵۸۱</span></div><div class="card-actions"><a href="tel:02833377581" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833377581', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">آموزش (خط ۲)</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۶۰۱۰</span></div><div class="card-actions"><a href="tel:02833376010" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833376010', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">امتحانات</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۵۳۸۵</span></div><div class="card-actions"><a href="tel:02833375385" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833375385', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">خدمات دانشجویی - وام</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۳۱۰۱</span></div><div class="card-actions"><a href="tel:02833373101" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833373101', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">امور شهریه</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۳۱۰۲</span></div><div class="card-actions"><a href="tel:02833373102" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833373102', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">فرهنگی و فوق برنامه</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۱۶۷۸</span></div><div class="card-actions"><a href="tel:02833371678" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833371678', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">تحصیلات تکمیلی</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۸۹۳۹</span></div><div class="card-actions"><a href="tel:02833378939" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833378939', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">فناوری و رایانه</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۳۸۴۳</span></div><div class="card-actions"><a href="tel:02833373843" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833373843', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">برنامه ریزی درسی (خط ۱)</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۸۹۳۰</span></div><div class="card-actions"><a href="tel:02833378930" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833378930', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">برنامه ریزی درسی (خط ۲)</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۴۰۸۲</span></div><div class="card-actions"><a href="tel:02833374082" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833374082', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">انتظامات</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۴۱۲۰</span></div><div class="card-actions"><a href="tel:02833374120" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833374120', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
+          <div class="qazvin-dept-row"><span class="qazvin-dept-title">انتشارات</span><div class="contact-glass-pill"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۳۳۷۸۹۳۲</span></div><div class="card-actions"><a href="tel:02833378932" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02833378932', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div></div>
         </div>
       </div>
 
       <div class="campus-box-card">
         <div class="campus-box-name">مرکز بوئین زهرا</div>
-        <div class="contact-glass-pill" style="margin-bottom: 14px;">
-          <i class="fa-solid fa-phone-flip"></i>
-          <span class="contact-digits">۰۲۸۳۴۲۲۲۵۹۸</span>
-        </div>
-        <div class="card-actions">
-          <a href="tel:02834222598" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-          <button class="action-btn btn-copy" onclick="handleCopyAction('02834222598', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-        </div>
+        <div class="contact-glass-pill" style="margin-bottom: 14px;"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۴۲۲۲۵۹۸</span></div>
+        <div class="card-actions"><a href="tel:02834222598" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02834222598', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div>
       </div>
 
       <div class="campus-box-card">
         <div class="campus-box-name">مرکز الوند</div>
-        <div class="contact-glass-pill" style="margin-bottom: 14px;">
-          <i class="fa-solid fa-phone-flip"></i>
-          <span class="contact-digits">۰۲۸۳۲۲۴۶۲۹۳</span>
-        </div>
-        <div class="card-actions">
-          <a href="tel:02832246293" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-          <button class="action-btn btn-copy" onclick="handleCopyAction('02832246293', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-        </div>
+        <div class="contact-glass-pill" style="margin-bottom: 14px;"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۲۲۴۶۲۹۳</span></div>
+        <div class="card-actions"><a href="tel:02832246293" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02832246293', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div>
       </div>
 
       <div class="campus-box-card">
         <div class="campus-box-name">مرکز تاکستان</div>
-        <div class="contact-glass-pill" style="margin-bottom: 14px;">
-          <i class="fa-solid fa-phone-flip"></i>
-          <span class="contact-digits">۰۲۸۳۵۲۳۹۰۶۱</span>
-        </div>
-        <div class="card-actions">
-          <a href="tel:02835239061" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a>
-          <button class="action-btn btn-copy" onclick="handleCopyAction('02835239061', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button>
-        </div>
+        <div class="contact-glass-pill" style="margin-bottom: 14px;"><i class="fa-solid fa-phone-flip"></i><span class="contact-digits">۰۲۸۳۵۲۳۹۰۶۱</span></div>
+        <div class="card-actions"><a href="tel:02835239061" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> تماس</a><button class="action-btn btn-copy" onclick="handleCopyAction('02835239061', this)"><i class="fa-regular fa-copy"></i> <span>کپی کردن</span></button></div>
       </div>
     </div>
   </main>
@@ -995,6 +335,13 @@
       backdrop.addEventListener('click', closeMenu);
     })();
 
+    function toggleDrawerSection(btnEl, submenuId) {
+      const targetSub = document.getElementById(submenuId);
+      if (!targetSub) return;
+      btnEl.classList.toggle('is-open');
+      targetSub.classList.toggle('open');
+    }
+
     const toggleQazvinBtn = document.getElementById('toggleQazvinBtn');
     const qazvinNumbersList = document.getElementById('qazvinNumbersList');
     toggleQazvinBtn.addEventListener('click', function() {
@@ -1008,7 +355,6 @@
         const pillElement = cardParent ? cardParent.querySelector('.contact-glass-pill') : null;
         const titleElement = cardParent ? cardParent.querySelector('.campus-box-name, .qazvin-dept-title') : null;
         const digitsElement = pillElement ? pillElement.querySelector('.contact-digits') : null;
-
         const span = btnElement.querySelector('span');
         const icon = btnElement.querySelector('i');
         const originalText = span.innerText;
@@ -1027,7 +373,6 @@
           if (pillElement) pillElement.classList.remove('glow-pill-green');
           if (titleElement) titleElement.classList.remove('glow-text-green');
           if (digitsElement) digitsElement.classList.remove('copied-glow');
-
           btnElement.classList.remove('copied');
           span.innerText = originalText;
           icon.className = 'fa-regular fa-copy';

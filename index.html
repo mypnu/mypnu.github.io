@@ -14,7 +14,6 @@
   <link rel="preload" as="image" href="images/eitaa-white.webp">
   <link rel="preload" as="image" href="images/aghlekol.webp">
   <link rel="preload" as="image" href="images/video.webp">
-  <link rel="preload" as="image" href="images/s1.gif">
   <link rel="preload" as="image" href="images/s2.webp">
   <link rel="preload" as="image" href="images/s3.webp">
   <link rel="preload" as="image" href="images/s4.webp">
@@ -674,7 +673,104 @@
     .card-aghlekol { background-image: url('images/aghlekol.webp'); }
     .card-video { background-image: url('images/video.webp'); }
 
-    .card-ozviat { background-image: url('images/s1.gif'); }
+    /* باکس بالایی عضویت در گروه: حذف گیف و جایگزینی با گرادینت بنفش + انیمیشن متن دو مرحله‌ای */
+    .card-ozviat {
+      background: linear-gradient(135deg, #3c096c 0%, #6a11cb 50%, #4c1d95 100%);
+      border: 1.5px solid rgba(216, 180, 254, 0.5);
+      box-shadow: 0 8px 22px rgba(60, 9, 108, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ozviat-anim-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 14px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* متن اول: سفید رنگ و بولد، از بالا به پایین وارد باکس می‌شود */
+    .ozviat-title-primary {
+      font-size: 16.5px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      animation: ozviatPrimaryCycle 7.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    /* متن دوم: زرد رنگ و جذاب با انیمیشن چشمک‌زن برای تحریک کاربر */
+    .ozviat-title-cta {
+      font-size: 16.5px;
+      font-weight: 950;
+      color: #ffd166;
+      text-shadow: 0 0 12px rgba(255, 209, 102, 0.8), 0 2px 8px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      animation: ozviatCtaCycle 7.2s ease-in-out infinite;
+    }
+
+    @keyframes ozviatPrimaryCycle {
+      0% {
+        opacity: 0;
+        transform: translateY(-130%);
+      }
+      9% {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+      43% {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+      50% {
+        opacity: 0;
+        transform: translateY(115%);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-130%);
+      }
+    }
+
+    @keyframes ozviatCtaCycle {
+      0%, 46% {
+        opacity: 0;
+        transform: scale(0.88);
+      }
+      53% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+      61% {
+        opacity: 0.25;
+        transform: scale(0.98);
+      }
+      69% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      77% {
+        opacity: 0.25;
+        transform: scale(0.98);
+      }
+      85% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+      93% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.88);
+      }
+    }
+
     .card-marakez { background-image: url('images/s4.webp'); }
     .card-poshtibanan { background-image: url('images/s3.webp'); }
     .card-ertebat { background-image: url('images/s2.webp'); }
@@ -730,7 +826,6 @@
       padding: 2px 3px;
     }
 
-    /* متن بزرگ‌تر و خواناتر داخل باکس‌ها */
     .tb-card-title {
       font-size: 16.5px;
       font-weight: 900;
@@ -740,7 +835,6 @@
       text-shadow: 0 1px 6px rgba(0, 0, 0, 0.28);
     }
 
-    /* دکمه سفید کوچک‌تر با گوشه‌های گرد و متن مشکی */
     .tb-white-pill-btn {
       width: 74%;
       height: 30px;
@@ -762,16 +856,16 @@
       transform: scale(1.03);
     }
 
-    /* باکس روزشمار با بکگراند گرادینت بنفش */
+    /* باکس روزشمار قرمز رنگ با متن بزرگ‌تر */
     .countdown-banner-card {
       position: relative;
       width: 100%;
       aspect-ratio: 48 / 7;
       border-radius: 16px;
       overflow: hidden;
-      background: linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #4c1d95 100%);
-      border: 1.5px solid rgba(216, 180, 254, 0.45);
-      box-shadow: 0 8px 22px rgba(59, 7, 100, 0.45);
+      background: linear-gradient(135deg, #e11d48 0%, #be123c 50%, #9f1239 100%);
+      border: 1.5px solid rgba(254, 205, 211, 0.55);
+      box-shadow: 0 8px 24px rgba(190, 18, 60, 0.45);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -780,8 +874,8 @@
     }
 
     .countdown-banner-title {
-      font-size: 14px;
-      font-weight: 900;
+      font-size: 16.5px;
+      font-weight: 950;
       color: #ffffff;
       text-align: center;
       line-height: 1.4;
@@ -809,7 +903,7 @@
       align-items: center;
       justify-content: center;
       gap: 1px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32), inset 0 -2px 4px rgba(90, 24, 154, 0.14);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.32), inset 0 -2px 4px rgba(190, 18, 60, 0.14);
       overflow: hidden;
     }
 
@@ -817,10 +911,10 @@
       font-size: 20px;
       font-weight: 950;
       line-height: 1.1;
-      background: linear-gradient(180deg, #1a0336 0%, #3c096c 52%, #6b1fb1 100%);
+      background: linear-gradient(180deg, #4c0519 0%, #9f1239 52%, #e11d48 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      color: #2b004a;
+      color: #881337;
       display: inline-block;
       will-change: transform, opacity;
     }
@@ -838,7 +932,7 @@
     .countdown-label {
       font-size: 9.5px;
       font-weight: 800;
-      color: #4a157a;
+      color: #881337;
       line-height: 1;
     }
 
@@ -1259,7 +1353,11 @@
       .ratio-48-7-card, .countdown-banner-card { border-radius: 13px; }
       .ratio-24-7-card { border-radius: 14px; }
 
-      /* تنظیمات کارت‌های رنگی جعبه ابزار در موبایل: متن بزرگ‌تر و دکمه کوچک‌تر */
+      .ozviat-title-primary,
+      .ozviat-title-cta {
+        font-size: 12.8px;
+      }
+
       .toolbox-text-card {
         border-radius: 16px;
         padding: 8px 5px;
@@ -1275,9 +1373,9 @@
         font-size: 10px;
       }
 
-      /* تنظیمات اسلاید تایمر بنفش در موبایل */
+      /* تنظیمات اسلاید تایمر قرمز با متن بزرگ‌تر در موبایل */
       .countdown-banner-card { padding: 0 9px; gap: 6px; }
-      .countdown-banner-title { font-size: 10px; line-height: 1.35; }
+      .countdown-banner-title { font-size: 11.8px; line-height: 1.35; }
       .countdown-units-group { gap: 3.5px; }
       .countdown-box-item {
         min-width: 31px;
@@ -1435,9 +1533,13 @@
     </div>
 
     <div class="home-actions-wrapper" id="homeActionsWrapper">
-      <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
+      <!-- باکس بالایی عضویت در گروه با بکگراند گرادینت بنفش و انیمیشن متنی دو مرحله‌ای -->
+      <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')">
+        <span class="ozviat-anim-text ozviat-title-primary">گروه دانشجویان پیام نور قزوین</span>
+        <span class="ozviat-anim-text ozviat-title-cta">برای عضویت کلیک کنید</span>
+      </div>
 
-      <!-- باکس روزشمار با بکگراند گرادینت بنفش و عنوان زمان باقیمانده تا آغاز امتحانات -->
+      <!-- باکس روزشمار قرمز رنگ با متن بزرگ‌تر -->
       <div class="countdown-banner-card" id="countdownBanner">
         <span class="countdown-banner-title">زمان باقیمانده تا آغاز امتحانات</span>
         <div class="countdown-units-group">

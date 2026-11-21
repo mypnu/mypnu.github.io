@@ -11,6 +11,7 @@
   <link rel="preload" href="fonts/ch.ttf" as="font" type="font/ttf" crossorigin>
 
   <link rel="preload" as="image" href="images/logo.webp">
+  <link rel="preload" as="image" href="images/banner.webp">
   <link rel="preload" as="image" href="images/eitaa-white.webp">
   <link rel="preload" as="image" href="images/timer.webp">
   <link rel="preload" as="image" href="images/aghlekol.webp">
@@ -279,7 +280,7 @@
       flex-shrink: 0;
     }
 
-    /* منوی کشویی */
+    /* منوی کشویی راست به چپ */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -323,32 +324,41 @@
       transform: translateX(0);
     }
 
-    .drawer-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    /* بخش بالایی منو: تصویر 4:3 با نام banner.webp + دکمه نارنجی عضویت در گوشه پایین سمت چپ */
+    .drawer-banner-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(145deg, #3c096c, #240046);
+      overflow: hidden;
+      flex-shrink: 0;
+      border-bottom: 1.5px solid rgba(255, 209, 102, 0.3);
     }
 
-    .drawer-title-text {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #ffd166;
+    .drawer-banner-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .drawer-close-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
       width: 30px;
       height: 30px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      background: rgba(15, 3, 30, 0.65);
+      backdrop-filter: blur(6px);
       color: #ffffff;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
       cursor: pointer;
+      z-index: 3;
       transition: background 0.2s ease, transform 0.2s ease;
     }
 
@@ -356,23 +366,35 @@
       transform: scale(0.92);
     }
 
-    .drawer-image-slot {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      border-radius: 0;
-      border: none;
-      box-shadow: none;
-      background: transparent;
-      overflow: hidden;
-      display: block;
+    .drawer-banner-join-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      height: 30px;
+      padding: 0 13px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #e65100, #ff6d00);
+      border: 1px solid rgba(255, 224, 178, 0.55);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      z-index: 3;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
 
-    .drawer-image-slot img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
+    .drawer-banner-join-btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .drawer-banner-join-btn:active {
+      transform: scale(0.95);
     }
 
     .drawer-nav-list {
@@ -666,6 +688,104 @@
     .neon-blue-frame:hover {
       border-color: #00f0ff;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(0, 240, 255, 0.68), inset 0 0 10px rgba(0, 240, 255, 0.25);
+    }
+
+    /* فریم‌های نازک جذاب دور سه ردیف جعبه ابزار */
+    .tb-thin-purple-frame {
+      border: 1.3px solid rgba(199, 125, 255, 0.85);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 10px rgba(157, 78, 221, 0.35);
+    }
+    .tb-thin-purple-frame:hover {
+      border-color: #e0aaff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38), 0 0 14px rgba(199, 125, 255, 0.6);
+    }
+
+    .tb-thin-red-frame {
+      border: 1.3px solid rgba(255, 77, 109, 0.85);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 10px rgba(230, 25, 75, 0.35);
+    }
+    .tb-thin-red-frame:hover {
+      border-color: #ff8fa3;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38), 0 0 14px rgba(255, 77, 109, 0.6);
+    }
+
+    .tb-thin-turquoise-frame {
+      border: 1.3px solid rgba(45, 212, 191, 0.85);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 10px rgba(20, 184, 166, 0.35);
+    }
+    .tb-thin-turquoise-frame:hover {
+      border-color: #99f6e4;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38), 0 0 14px rgba(45, 212, 191, 0.6);
+    }
+
+    /* دکمه کوچک مرکز پایین باکس‌های جعبه ابزار */
+    .tb-bottom-pill {
+      position: absolute;
+      bottom: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 24px;
+      padding: 0 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+
+    .ratio-1-1-card:hover .tb-bottom-pill {
+      transform: translateX(-50%) scale(1.06);
+    }
+
+    /* ردیف اول: دکمه کوچک بنفش با متن سفید */
+    .pill-purple-white {
+      background: linear-gradient(135deg, #6a11cb, #8e2de2);
+      color: #ffffff;
+      border: 1px solid rgba(224, 170, 255, 0.55);
+    }
+
+    /* ردیف دوم: دکمه سفید با متن قرمز */
+    .pill-white-red {
+      background: #ffffff;
+      color: #e11d48;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    /* ردیف سوم: دکمه سفید با متن سبز */
+    .pill-white-green {
+      background: #ffffff;
+      color: #0d9488;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    /* دکمه قرمز با متن سفید گوشه پایین سمت چپ اسلاید video */
+    .video-corner-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      height: 28px;
+      padding: 0 14px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #e11d48, #ff2a5f);
+      border: 1px solid rgba(255, 205, 210, 0.55);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.48);
+      pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+
+    .card-video:hover .video-corner-btn {
+      transform: scale(1.05);
     }
 
     .ratio-48-7-card {
@@ -1161,8 +1281,8 @@
       .hamburger-btn { width: 22px; height: 22px; gap: 3.5px; }
       .hb-line.line-1, .hb-line.line-3 { width: 18px; }
       .hb-line.line-2 { width: 13px; }
-      .hamburger-btn.is-active .hb-line.line-1 { width: 18px; transform: translateY(6px) rotate(45deg); }
-      .hamburger-btn.is-active .hb-line.line-3 { width: 18px; transform: translateY(-6px) rotate(-45deg); }
+      .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(6px) rotate(45deg); }
+      .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-6px) rotate(-45deg); }
       .nav-designed-text { gap: 4px; }
       .nav-designed-label { font-size: 9.5px; }
       .nav-designed-author { font-size: 10.5px; letter-spacing: 0.6px; }
@@ -1188,6 +1308,22 @@
       .ratio-1-1-card { border-radius: 16px; }
       .ratio-48-7-card, .countdown-banner-card { border-radius: 13px; }
       .ratio-24-7-card { border-radius: 14px; }
+
+      .tb-bottom-pill {
+        bottom: 6px;
+        height: 20px;
+        padding: 0 10px;
+        font-size: 9.5px;
+      }
+
+      .video-corner-btn {
+        bottom: 7px;
+        left: 9px;
+        height: 23px;
+        padding: 0 11px;
+        font-size: 10px;
+        border-radius: 7px;
+      }
 
       .countdown-banner-card { padding: 0 8px; }
       .countdown-units-group { gap: 4px; }
@@ -1251,15 +1387,16 @@
   <!-- منوی کشویی راست به چپ -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
-    <div class="drawer-top-bar">
-      <span class="drawer-title-text">منوی دسترسی سریع</span>
+    <!-- بخش بالایی منو با تصویر 4:3 banner.webp و دکمه نارنجی عضویت در گوشه پایین سمت چپ -->
+    <div class="drawer-banner-box">
+      <img src="images/banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
       <button type="button" class="drawer-close-btn" id="closeDrawerBtn" aria-label="بستن منو">
         <i class="fa-solid fa-xmark"></i>
       </button>
-    </div>
-
-    <div class="drawer-image-slot">
-      <img src="images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+      <a href="https://eitaa.com/joinchat/137627106Ccda4d2e78d" target="_blank" class="drawer-banner-join-btn">
+        <img src="images/eitaa-white.webp" class="custom-nav-icon" alt="ایتا">
+        <span>عضویت</span>
+      </a>
     </div>
 
     <nav class="drawer-nav-list">
@@ -1385,29 +1522,49 @@
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
 
-      <!-- ردیف اول جعبه ابزار با تصاویر s5 تا s7 -->
+      <!-- ردیف اول جعبه ابزار: فریم نازک بنفش + دکمه کوچک بنفش با متن سفید «محاسبه» -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s5" onclick="window.location.href='saghfmojaz/'"></div>
-        <div class="ratio-1-1-card card-s6" onclick="window.location.href='testdorost/'"></div>
-        <div class="ratio-1-1-card card-s7" onclick="window.location.href='moadel/'"></div>
+        <div class="ratio-1-1-card card-s5 tb-thin-purple-frame" onclick="window.location.href='saghfmojaz/'">
+          <span class="tb-bottom-pill pill-purple-white">محاسبه</span>
+        </div>
+        <div class="ratio-1-1-card card-s6 tb-thin-purple-frame" onclick="window.location.href='testdorost/'">
+          <span class="tb-bottom-pill pill-purple-white">محاسبه</span>
+        </div>
+        <div class="ratio-1-1-card card-s7 tb-thin-purple-frame" onclick="window.location.href='moadel/'">
+          <span class="tb-bottom-pill pill-purple-white">محاسبه</span>
+        </div>
       </div>
 
-      <!-- ردیف دوم جعبه ابزار با تصاویر s8 تا s10 -->
+      <!-- ردیف دوم جعبه ابزار: فریم نازک قرمز + دکمه سفید با متن قرمز «استفاده» -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s8" onclick="window.location.href='pdfm&s/'"></div>
-        <div class="ratio-1-1-card card-s9" onclick="window.location.href='pdfcompressor/'"></div>
-        <div class="ratio-1-1-card card-s10" onclick="window.location.href='imagetopdf/'"></div>
+        <div class="ratio-1-1-card card-s8 tb-thin-red-frame" onclick="window.location.href='pdfm&s/'">
+          <span class="tb-bottom-pill pill-white-red">استفاده</span>
+        </div>
+        <div class="ratio-1-1-card card-s9 tb-thin-red-frame" onclick="window.location.href='pdfcompressor/'">
+          <span class="tb-bottom-pill pill-white-red">استفاده</span>
+        </div>
+        <div class="ratio-1-1-card card-s10 tb-thin-red-frame" onclick="window.location.href='imagetopdf/'">
+          <span class="tb-bottom-pill pill-white-red">استفاده</span>
+        </div>
       </div>
 
-      <!-- ردیف سوم جعبه ابزار با تصاویر s11 تا s13 -->
+      <!-- ردیف سوم جعبه ابزار: فریم نازک سبز فیروزه‌ای + دکمه سفید با متن سبز «مشاهده» -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s11" onclick="window.location.href='ai/'"></div>
-        <div class="ratio-1-1-card card-s12" onclick="window.location.href='channel/'"></div>
-        <div class="ratio-1-1-card card-s13" onclick="window.location.href='site/'"></div>
+        <div class="ratio-1-1-card card-s11 tb-thin-turquoise-frame" onclick="window.location.href='ai/'">
+          <span class="tb-bottom-pill pill-white-green">مشاهده</span>
+        </div>
+        <div class="ratio-1-1-card card-s12 tb-thin-turquoise-frame" onclick="window.location.href='channel/'">
+          <span class="tb-bottom-pill pill-white-green">مشاهده</span>
+        </div>
+        <div class="ratio-1-1-card card-s13 tb-thin-turquoise-frame" onclick="window.location.href='site/'">
+          <span class="tb-bottom-pill pill-white-green">مشاهده</span>
+        </div>
       </div>
 
-      <!-- اسلاید 24:7 پایین سه باکس آخری با تصویر video.webp -->
-      <div class="ratio-24-7-card card-video" id="cardVideo" onclick="window.location.href='video/'"></div>
+      <!-- اسلاید 24:7 پایین با دکمه قرمز و متن سفید «مشاهده» در گوشه پایین سمت چپ -->
+      <div class="ratio-24-7-card card-video" id="cardVideo" onclick="window.location.href='video/'">
+        <span class="video-corner-btn">مشاهده</span>
+      </div>
     </div>
 
     <div id="resultsList" class="results-container"></div>

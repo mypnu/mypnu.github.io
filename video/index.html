@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>استادیاب | آموزش ویدیویی سامانه گلستان و ریلاین «LMS»</title>
+
+  <link rel="preload" href="../fonts/m-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../fonts/m-Black.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="../images/eitaa-white.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Orbitron:wght@800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Regular.ttf') format('truetype'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Bold.ttf') format('truetype'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-ExtraBold.ttf') format('truetype'); font-weight: 800; font-display: block; }
+    @font-face { font-family: 'AppFont'; src: url('../fonts/m-Black.ttf') format('truetype'); font-weight: 900; font-display: block; }
+
+    :root {
+      --bg-dark-1: #1e053a;
+      --bg-dark-2: #2e0854;
+      --bg-dark-3: #4a157a;
+      --bg-dark-4: #22033d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'AppFont', sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 35%, var(--bg-dark-3) 70%, var(--bg-dark-4) 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* نوار سفید باریک بالای صفحه */
+    .gold-top-nav {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+
+    .nav-right-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .hamburger-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 4px;
+      width: 24px;
+      height: 24px;
+      padding: 2px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .hamburger-btn:active { transform: scale(0.9); }
+
+    .hb-line {
+      display: block;
+      height: 2.5px;
+      background: linear-gradient(135deg, #3c096c 0%, #6a11cb 55%, #9d4edd 100%);
+      border-radius: 3px;
+      transition: transform 0.3s ease, width 0.3s ease, opacity 0.25s ease;
+    }
+
+    .hb-line.line-1, .hb-line.line-3 { width: 20px; }
+    .hb-line.line-2 { width: 14px; }
+    .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger-btn.is-active .hb-line.line-2 { opacity: 0; width: 0; }
+    .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .nav-designed-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .nav-designed-label {
+      font-size: 11px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3c096c 0%, #7b2cbf 55%, #9d4edd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-designed-author {
+      font-family: 'Orbitron', 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #240046 0%, #6a11cb 60%, #9d4edd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-social-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .nav-social-btn {
+      width: 72px;
+      height: 26px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    .nav-social-btn:hover { filter: brightness(1.07); transform: translateY(-1px); }
+    .nav-btn-eitaa { background: linear-gradient(135deg, #e65100, #ff6d00); }
+    .nav-btn-telegram { background: linear-gradient(135deg, #005bb5, #0077e6); }
+    .nav-social-icon-img { width: 13px; height: 13px; object-fit: contain; display: block; }
+    .nav-social-btn i { font-size: 13px; color: #ffffff; }
+
+    /* منوی کشویی */
+    .drawer-backdrop {
+      position: fixed; inset: 0; background: rgba(10, 2, 22, 0.72); backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden; transition: 0.35s ease; z-index: 998;
+    }
+    .drawer-backdrop.open { opacity: 1; visibility: visible; }
+    .side-drawer {
+      position: fixed; top: 0; right: 0; width: 285px; max-width: 82vw; height: 100vh;
+      background: linear-gradient(165deg, #2b0750 0%, #190330 60%, #110122 100%);
+      visibility: hidden; transform: translateX(100%); transition: 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 999; display: flex; flex-direction: column; overflow-y: auto;
+    }
+    .side-drawer.open { visibility: visible; border-left: 1.8px solid rgba(255, 209, 102, 0.45); box-shadow: -10px 0 36px rgba(0,0,0,0.65); transform: translateX(0); }
+    .drawer-top-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .drawer-title-text { font-size: 13.5px; font-weight: 800; color: #ffd166; }
+    .drawer-close-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; cursor: pointer; }
+    .drawer-image-slot img { width: 100%; height: auto; display: block; }
+    .drawer-nav-list { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+    .drawer-nav-link {
+      display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 700;
+    }
+    .drawer-nav-link i { width: 20px; text-align: center; color: #ffd166; font-size: 15px; }
+
+    /* کانتینر اصلی */
+    .main-container {
+      width: 92%;
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1 0 auto;
+      padding-top: 18px;
+      padding-bottom: 38px;
+      gap: 16px;
+    }
+
+    .top-nav-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.09);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 800;
+      backdrop-filter: blur(10px);
+      transition: 0.2s ease;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+
+    /* باکس عنوان بولد بالایی */
+    .page-header-box {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(16px);
+      border: 1.8px solid rgba(255, 209, 102, 0.72);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 209, 102, 0.2);
+      border-radius: 24px;
+      padding: 22px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .page-header-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffe066, #f5b700);
+      color: #1a0333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(245, 183, 0, 0.4);
+    }
+
+    .page-header-title {
+      font-size: 20.5px;
+      font-weight: 950;
+      color: #ffffff;
+      line-height: 1.5;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* باکس اصلی حاوی زبانه‌ها و ویدیوها */
+    .video-tabs-wrapper {
+      width: 100%;
+      background: rgba(16, 4, 34, 0.68);
+      backdrop-filter: blur(16px);
+      border: 1.8px solid rgba(255, 255, 255, 0.18);
+      border-radius: 26px;
+      padding: 16px 14px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+    }
+
+    /* نوار دو زبانه گلستان و ریلاین LMS */
+    .tabs-bar {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 6px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .tab-switch-btn {
+      height: 46px;
+      border: none;
+      border-radius: 13px;
+      background: transparent;
+      color: #d8b4fe;
+      font-size: 14.5px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .tab-switch-btn:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .tab-switch-btn.active {
+      background: linear-gradient(135deg, #ffe066 0%, #f5b700 100%);
+      color: #160426;
+      box-shadow: 0 6px 18px rgba(245, 183, 0, 0.4);
+    }
+
+    /* پنل‌های زبانه */
+    .tab-panel {
+      display: none;
+      flex-direction: column;
+      gap: 13px;
+      width: 100%;
+      animation: fadePanel 0.3s ease;
+    }
+
+    .tab-panel.active {
+      display: flex;
+    }
+
+    @keyframes fadePanel {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* کارت هر آموزش ویدیویی */
+    .video-item-card {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .video-item-card.is-playing {
+      border-color: #00f0ff;
+      box-shadow: 0 10px 28px rgba(0, 240, 255, 0.25);
+    }
+
+    .video-card-header {
+      width: 100%;
+      padding: 14px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      text-align: right;
+    }
+
+    .video-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .video-num-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: rgba(255, 209, 102, 0.18);
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      color: #ffd166;
+      font-size: 13px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .video-item-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.55;
+    }
+
+    .watch-toggle-btn {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 11px;
+      border: none;
+      background: linear-gradient(135deg, #e6194b, #ff2a5f);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-shrink: 0;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(230, 25, 75, 0.38);
+      transition: transform 0.18s ease, background 0.2s ease;
+    }
+
+    .video-item-card.is-playing .watch-toggle-btn {
+      background: rgba(255, 255, 255, 0.16);
+      box-shadow: none;
+    }
+
+    .watch-toggle-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* کانتینر پخش‌کننده تمام‌صفحه آپارات */
+    .video-player-box {
+      display: none;
+      width: 100%;
+      padding: 0 14px 14px;
+    }
+
+    .video-item-card.is-playing .video-player-box {
+      display: block;
+    }
+
+    .aparat-responsive-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000000;
+      border: 1.5px solid rgba(0, 240, 255, 0.45);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .aparat-responsive-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .player-bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .player-hint-text {
+      font-size: 11px;
+      font-weight: 600;
+      color: #d8b4fe;
+    }
+
+    .aparat-direct-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ffd166;
+      text-decoration: none;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .site-footer {
+      width: 100%;
+      padding: 16px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 5, 45, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin-top: auto;
+    }
+
+    .footer-text { font-size: 12px; font-weight: 600; color: #d8b4fe; }
+    .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
+
+    @media (max-width: 600px) {
+      .gold-top-nav { height: 36px; padding: 0 8px; }
+      .nav-right-group { gap: 6px; }
+      .hamburger-btn { width: 22px; height: 22px; gap: 3.5px; }
+      .hb-line.line-1, .hb-line.line-3 { width: 18px; }
+      .hb-line.line-2 { width: 13px; }
+      .hamburger-btn.is-active .hb-line.line-1 { transform: translateY(6px) rotate(45deg); }
+      .hamburger-btn.is-active .hb-line.line-3 { transform: translateY(-6px) rotate(-45deg); }
+      .nav-designed-label { font-size: 9.5px; }
+      .nav-designed-author { font-size: 10.5px; letter-spacing: 0.6px; }
+      .nav-social-group { gap: 4px; }
+      .nav-social-btn { width: 62px; height: 23px; font-size: 10px; gap: 4px; border-radius: 7px; }
+      .nav-social-icon-img { width: 11px; height: 11px; }
+      .nav-social-btn i { font-size: 11px; }
+
+      .page-header-box { padding: 16px 13px; border-radius: 20px; gap: 10px; }
+      .page-header-icon { width: 38px; height: 38px; font-size: 18px; }
+      .page-header-title { font-size: 16.5px; }
+      .tab-switch-btn { height: 42px; font-size: 13px; gap: 6px; }
+      .video-card-header { padding: 12px; gap: 9px; }
+      .video-item-title { font-size: 12.8px; }
+      .watch-toggle-btn { height: 33px; padding: 0 11px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- نوار سفید باریک بالای صفحه -->
+  <header class="gold-top-nav">
+    <div class="nav-right-group">
+      <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
+        <span class="hb-line line-1"></span>
+        <span class="hb-line line-2"></span>
+        <span class="hb-line line-3"></span>
+      </button>
+      <div class="nav-designed-text">
+        <span class="nav-designed-label">طراحی شده توسط</span>
+        <span class="nav-designed-author">ARMOON</span>
+      </div>
+    </div>
+
+    <div class="nav-social-group">
+      <a href="https://eitaa.com/ARM00N" target="_blank" class="nav-social-btn nav-btn-eitaa">
+        <img src="../images/eitaa-white.webp" alt="ایتا" class="nav-social-icon-img">
+        <span>ایتا</span>
+      </a>
+      <a href="https://t.me/iarmoon" target="_blank" class="nav-social-btn nav-btn-telegram">
+        <i class="fa-brands fa-telegram"></i>
+        <span>تلگرام</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- منوی کشویی -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="side-drawer" id="sideDrawer" aria-hidden="true">
+    <div class="drawer-top-bar">
+      <span class="drawer-title-text">منوی دسترسی سریع</span>
+      <button type="button" class="drawer-close-btn" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-image-slot">
+      <img src="../images/menu-banner.webp" alt="بنر استادیاب" onerror="this.style.display='none'">
+    </div>
+    <nav class="drawer-nav-list">
+      <a href="../" class="drawer-nav-link"><i class="fa-solid fa-house"></i><span>صفحه اصلی استادیاب</span></a>
+      <a href="../aghlekol/" class="drawer-nav-link"><i class="fa-solid fa-brain"></i><span>مسابقه بزرگ عقل کل</span></a>
+      <a href="../saghfmojaz/" class="drawer-nav-link"><i class="fa-solid fa-calculator"></i><span>محاسبه سقف مجاز واحد</span></a>
+      <a href="../testdorost/" class="drawer-nav-link"><i class="fa-solid fa-check-double"></i><span>محاسبه حداقل تست صحیح</span></a>
+      <a href="../moadel/" class="drawer-nav-link"><i class="fa-solid fa-graduation-cap"></i><span>محاسبه هوشمند معدل ترمی</span></a>
+      <a href="../ai/" class="drawer-nav-link"><i class="fa-solid fa-robot"></i><span>سرویس های هوش مصنوعی</span></a>
+      <a href="../channel/" class="drawer-nav-link"><i class="fa-solid fa-bullhorn"></i><span>دانلود منابع پیام نور</span></a>
+      <a href="../site/" class="drawer-nav-link"><i class="fa-solid fa-globe"></i><span>سایت های ضروری دانشجویی</span></a>
+    </nav>
+  </aside>
+
+  <main class="main-container">
+    <div class="top-nav-row">
+      <a href="../" class="back-btn"><i class="fa-solid fa-arrow-right"></i><span>بازگشت به صفحه اصلی</span></a>
+    </div>
+
+    <!-- باکس عنوان بولد بالایی -->
+    <div class="page-header-box">
+      <div class="page-header-icon"><i class="fa-solid fa-circle-play"></i></div>
+      <h1 class="page-header-title">آموزش ویدیویی سامانه گلستان و ریلاین «LMS»</h1>
+    </div>
+
+    <!-- باکس دو زبانه‌ای گلستان و ریلاین LMS -->
+    <section class="video-tabs-wrapper">
+      <div class="tabs-bar">
+        <button type="button" class="tab-switch-btn active" id="tabBtnGolestan" onclick="switchVideoTab('golestan')">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>سامانه گلستان</span>
+        </button>
+        <button type="button" class="tab-switch-btn" id="tabBtnRelayn" onclick="switchVideoTab('relayn')">
+          <i class="fa-solid fa-laptop-file"></i>
+          <span>سامانه ریلاین «LMS»</span>
+        </button>
+      </div>
+
+      <!-- زبانه اول: سامانه گلستان -->
+      <div class="tab-panel active" id="panelGolestan"></div>
+
+      <!-- زبانه دوم: سامانه ریلاین LMS -->
+      <div class="tab-panel" id="panelRelayn"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-text">
+      تمامی حقوق مادی و معنوی این سامانه متعلق به <span class="brand-hl">استادیاب</span> می‌باشد.
+    </div>
+  </footer>
+
+  <script>
+    (function initSideDrawer() {
+      const openBtn = document.getElementById('openDrawerBtn');
+      const closeBtn = document.getElementById('closeDrawerBtn');
+      const drawer = document.getElementById('sideDrawer');
+      const backdrop = document.getElementById('drawerBackdrop');
+      openBtn.addEventListener('click', () => { drawer.classList.add('open'); backdrop.classList.add('open'); openBtn.classList.add('is-active'); });
+      const closeMenu = () => { drawer.classList.remove('open'); backdrop.classList.remove('open'); openBtn.classList.remove('is-active'); };
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
+    })();
+
+    const toFa = n => n.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+    const GOLESTAN_VIDEOS = [
+      { title: 'پرداخت شهریه و انتخاب واحد', slug: 'tzib4u9', url: 'https://www.aparat.com/v/tzib4u9' },
+      { title: 'اخذ گزارش ۱۰۱ (مشاهده گزارش انتخاب واحد و برنامه کلاسی)', slug: 'urts496', url: 'https://www.aparat.com/v/urts496' },
+      { title: 'اخذ گزارش ۴۲۳ (مشاهده برنامه امتحانات)', slug: 'fmiasly', url: 'https://www.aparat.com/v/fmiasly' },
+      { title: 'اخذ گزارش ۲۷۲ (مشاهده واحدهای پاس شده و باقیمانده)', slug: 'myr719f', url: 'https://www.aparat.com/v/myr719f' },
+      { title: 'مشاهده نمرات میان ترم و پایان ترم', slug: 'j75gyuc', url: 'https://www.aparat.com/v/j75gyuc' },
+      { title: 'ثبت درخواست درس معرفی به استاد', slug: 'srjLJ', url: 'https://www.aparat.com/v/srjLJ' },
+      { title: 'ثبت درخواست دروس معادلسازی «تطبیق واحد»', slug: 'h2541t4', url: 'https://www.aparat.com/v/h2541t4' },
+      { title: 'ثبت درخواست تغییر محل آزمون', slug: 'ilts46q', url: 'https://www.aparat.com/v/ilts46q' },
+      { title: 'ثبت درخواست تغییر رشته', slug: 'u49n7q2', url: 'https://www.aparat.com/v/u49n7q2' },
+      { title: 'درخواست انتقال مهمان', slug: 'ozz5ild', url: 'https://www.aparat.com/v/ozz5ild' },
+      { title: 'ثبت مرخصی و حذف ترم', slug: 'xdct68s', url: 'https://www.aparat.com/v/xdct68s' },
+      { title: 'ثبت درخواست فارغ التحصیلی', slug: 'o31cj77', url: 'https://www.aparat.com/v/o31cj77' },
+      { title: 'تغییر رمز ورود به سامانه گلستان', slug: 't50v7ff', url: 'https://www.aparat.com/v/t50v7ff' }
+    ];
+
+    const RELAYN_VIDEOS = [
+      { title: 'شرکت در کلاس آنلاین در سامانه LMS', slug: 'gnze2w7', url: 'https://www.aparat.com/v/gnze2w7' },
+      { title: 'مشاهده نمرات در سامانه LMS', slug: 'klz056y', url: 'https://www.aparat.com/v/klz056y' },
+      { title: 'شرکت در آزمون در سامانه LMS', slug: 'xha403c', url: 'https://www.aparat.com/v/xha403c' }
+    ];
+
+    function buildVideoCards(list, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      list.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'video-item-card';
+        card.innerHTML = `
+          <div class="video-card-header" onclick="toggleVideoPlayer(this.parentElement, '${item.slug}')">
+            <div class="video-title-group">
+              <span class="video-num-badge">${toFa(idx + 1)}</span>
+              <span class="video-item-title">${item.title}</span>
+            </div>
+            <button type="button" class="watch-toggle-btn">
+              <i class="fa-solid fa-play"></i>
+              <span>پخش ویدیو</span>
+            </button>
+          </div>
+          <div class="video-player-box">
+            <div class="aparat-responsive-frame"></div>
+            <div class="player-bottom-bar">
+              <span class="player-hint-text">برای بزرگ‌نمایی روی آیکون تمام‌صفحه داخل ویدیو بزنید</span>
+              <a href="${item.url}" target="_blank" class="aparat-direct-link">
+                <i class="fa-solid fa-up-right-from-square"></i>
+                <span>مشاهده در آپارات</span>
+              </a>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function stopAllActiveVideos() {
+      document.querySelectorAll('.video-item-card.is-playing').forEach(card => {
+        card.classList.remove('is-playing');
+        const frameBox = card.querySelector('.aparat-responsive-frame');
+        if (frameBox) frameBox.innerHTML = '';
+        const btn = card.querySelector('.watch-toggle-btn');
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-play"></i><span>پخش ویدیو</span>';
+      });
+    }
+
+    function toggleVideoPlayer(cardEl, slug) {
+      const wasPlaying = cardEl.classList.contains('is-playing');
+      stopAllActiveVideos();
+
+      if (!wasPlaying) {
+        cardEl.classList.add('is-playing');
+        const btn = cardEl.querySelector('.watch-toggle-btn');
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-xmark"></i><span>بستن</span>';
+
+        const frameBox = cardEl.querySelector('.aparat-responsive-frame');
+        frameBox.innerHTML = `
+          <iframe
+            src="https://www.aparat.com/video/video/embed/videohash/${slug}/vt/frame"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen="true"
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true">
+          </iframe>
+        `;
+      }
+    }
+
+    function switchVideoTab(tabName) {
+      stopAllActiveVideos();
+
+      const isGolestan = tabName === 'golestan';
+      document.getElementById('tabBtnGolestan').classList.toggle('active', isGolestan);
+      document.getElementById('tabBtnRelayn').classList.toggle('active', !isGolestan);
+
+      document.getElementById('panelGolestan').classList.toggle('active', isGolestan);
+      document.getElementById('panelRelayn').classList.toggle('active', !isGolestan);
+    }
+
+    buildVideoCards(GOLESTAN_VIDEOS, 'panelGolestan');
+    buildVideoCards(RELAYN_VIDEOS, 'panelRelayn');
+  </script>
+</body>
+</html>

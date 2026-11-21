@@ -12,22 +12,12 @@
 
   <link rel="preload" as="image" href="images/logo.webp">
   <link rel="preload" as="image" href="images/eitaa-white.webp">
-  <link rel="preload" as="image" href="images/timer.webp">
   <link rel="preload" as="image" href="images/aghlekol.webp">
   <link rel="preload" as="image" href="images/video.webp">
   <link rel="preload" as="image" href="images/s1.gif">
   <link rel="preload" as="image" href="images/s2.webp">
   <link rel="preload" as="image" href="images/s3.webp">
   <link rel="preload" as="image" href="images/s4.webp">
-  <link rel="preload" as="image" href="images/s5.webp">
-  <link rel="preload" as="image" href="images/s6.webp">
-  <link rel="preload" as="image" href="images/s7.webp">
-  <link rel="preload" as="image" href="images/s8.webp">
-  <link rel="preload" as="image" href="images/s9.webp">
-  <link rel="preload" as="image" href="images/s10.webp">
-  <link rel="preload" as="image" href="images/s11.webp">
-  <link rel="preload" as="image" href="images/s12.webp">
-  <link rel="preload" as="image" href="images/s13.webp">
   <link rel="preload" as="image" href="images/cat1.webp">
   <link rel="preload" as="image" href="images/cat2.webp">
   <link rel="preload" as="image" href="images/cat00.webp">
@@ -150,7 +140,6 @@
       min-width: 0;
     }
 
-    /* آیکون همبرگری با گرادینت بنفش */
     .hamburger-btn {
       display: inline-flex;
       flex-direction: column;
@@ -199,7 +188,6 @@
       transform: translateY(-6.5px) rotate(-45deg);
     }
 
-    /* متن طراحی شده توسط (بنفش گرادینت) + ARMOON (فونت بولد و اسپرت) */
     .nav-designed-text {
       display: inline-flex;
       align-items: center;
@@ -227,7 +215,6 @@
       color: #3c096c;
     }
 
-    /* دکمه‌های هم‌اندازه ایتا و تلگرام در سمت چپ نوار */
     .nav-social-group {
       display: inline-flex;
       align-items: center;
@@ -282,7 +269,7 @@
       flex-shrink: 0;
     }
 
-    /* منوی کشویی از راست به چپ */
+    /* منوی کشویی */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -691,35 +678,116 @@
     .card-marakez { background-image: url('images/s4.webp'); }
     .card-poshtibanan { background-image: url('images/s3.webp'); }
     .card-ertebat { background-image: url('images/s2.webp'); }
-    .card-s5 { background-image: url('images/s5.webp'); }
-    .card-s6 { background-image: url('images/s6.webp'); }
-    .card-s7 { background-image: url('images/s7.webp'); }
-    .card-s8 { background-image: url('images/s8.webp'); }
-    .card-s9 { background-image: url('images/s9.webp'); }
-    .card-s10 { background-image: url('images/s10.webp'); }
-    .card-s11 { background-image: url('images/s11.webp'); }
-    .card-s12 { background-image: url('images/s12.webp'); }
-    .card-s13 { background-image: url('images/s13.webp'); }
 
-    /* باکس روزشمار هم‌اندازه s1 بدون فریم */
+    /* کارت‌های متنی رنگی جعبه ابزار دانشجویی (۳ ردیف ۳ تایی) */
+    .toolbox-text-card {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 22px;
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.25s ease;
+    }
+
+    .toolbox-text-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .toolbox-text-card:active {
+      transform: scale(0.97);
+    }
+
+    /* ردیف اول: نارنجی ساده و شیک */
+    .tb-card-orange {
+      background: linear-gradient(155deg, #ff7b00 0%, #f55d00 100%);
+      border: 1.5px solid rgba(255, 214, 170, 0.65);
+      box-shadow: 0 8px 22px rgba(245, 93, 0, 0.35);
+    }
+
+    /* ردیف دوم: قرمز کمی تیره */
+    .tb-card-crimson {
+      background: linear-gradient(155deg, #b91c1c 0%, #881337 100%);
+      border: 1.5px solid rgba(254, 202, 202, 0.5);
+      box-shadow: 0 8px 22px rgba(136, 19, 55, 0.4);
+    }
+
+    /* ردیف سوم: سبز فیروزه‌ای ساده و جذاب */
+    .tb-card-turquoise {
+      background: linear-gradient(155deg, #0d9488 0%, #0f766e 100%);
+      border: 1.5px solid rgba(153, 246, 228, 0.55);
+      box-shadow: 0 8px 22px rgba(13, 148, 136, 0.38);
+    }
+
+    .tb-card-title-wrap {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2px 4px;
+    }
+
+    .tb-card-title {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.55;
+      text-align: center;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    /* دکمه سفید هم‌اندازه با گوشه‌های گرد و متن مشکی */
+    .tb-white-pill-btn {
+      width: 88%;
+      height: 36px;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #111111;
+      font-size: 13px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .toolbox-text-card:hover .tb-white-pill-btn {
+      transform: scale(1.03);
+    }
+
+    /* باکس روزشمار با بکگراند گرادینت بنفش و عنوان زمان باقیمانده تا آغاز امتحانات */
     .countdown-banner-card {
       position: relative;
       width: 100%;
       aspect-ratio: 48 / 7;
       border-radius: 16px;
       overflow: hidden;
-      background-color: rgba(255, 255, 255, 0.08);
-      background-image: url('images/timer.webp');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border: none;
-      box-shadow: none;
+      background: linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #4c1d95 100%);
+      border: 1.5px solid rgba(216, 180, 254, 0.45);
+      box-shadow: 0 8px 22px rgba(59, 7, 100, 0.45);
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      padding: 0 14px;
+      justify-content: space-between;
+      padding: 0 16px;
       cursor: default;
+    }
+
+    .countdown-banner-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffffff;
+      text-align: center;
+      line-height: 1.4;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
 
     .countdown-units-group {
@@ -729,6 +797,7 @@
       gap: 6px;
       direction: rtl;
       z-index: 2;
+      flex-shrink: 0;
     }
 
     .countdown-box-item {
@@ -1192,16 +1261,34 @@
       .ratio-48-7-card, .countdown-banner-card { border-radius: 13px; }
       .ratio-24-7-card { border-radius: 14px; }
 
-      .countdown-banner-card { padding: 0 8px; }
-      .countdown-units-group { gap: 4px; }
-      .countdown-box-item {
-        min-width: 32px;
-        height: 37px;
-        border-radius: 7px;
-        padding: 2px 4px;
+      /* تنظیمات کارت‌های رنگی جعبه ابزار در موبایل */
+      .toolbox-text-card {
+        border-radius: 16px;
+        padding: 9px 6px;
       }
-      .countdown-num { font-size: 13.5px; }
-      .countdown-label { font-size: 7.5px; }
+      .tb-card-title {
+        font-size: 11.2px;
+        line-height: 1.45;
+      }
+      .tb-white-pill-btn {
+        width: 92%;
+        height: 28px;
+        border-radius: 9px;
+        font-size: 11px;
+      }
+
+      /* تنظیمات اسلاید تایمر بنفش در موبایل */
+      .countdown-banner-card { padding: 0 9px; gap: 6px; }
+      .countdown-banner-title { font-size: 10px; line-height: 1.35; }
+      .countdown-units-group { gap: 3.5px; }
+      .countdown-box-item {
+        min-width: 31px;
+        height: 36px;
+        border-radius: 7px;
+        padding: 2px 3px;
+      }
+      .countdown-num { font-size: 13px; }
+      .countdown-label { font-size: 7px; }
 
       .toolbox-divider { gap: 10px; margin: 6px 0 2px 0; }
       .toolbox-divider-text { font-size: 14.5px; }
@@ -1304,19 +1391,19 @@
       </a>
       <a href="imagetopdf/" class="drawer-nav-link">
         <i class="fa-solid fa-images"></i>
-        <span>تبدیل عکس و PDF</span>
+        <span>تبدیل عکس به فایل PDF</span>
       </a>
       <a href="ai/" class="drawer-nav-link">
         <i class="fa-solid fa-robot"></i>
-        <span>هوش مصنوعی (AI)</span>
-      </a>
-      <a href="site/" class="drawer-nav-link">
-        <i class="fa-solid fa-globe"></i>
-        <span>سایت‌های کاربردی</span>
+        <span>سرویس های هوش مصنوعی</span>
       </a>
       <a href="channel/" class="drawer-nav-link">
         <i class="fa-solid fa-bullhorn"></i>
-        <span>کانال‌های دانشجویی</span>
+        <span>کانال های دانلود منابع پیام نور</span>
+      </a>
+      <a href="site/" class="drawer-nav-link">
+        <i class="fa-solid fa-globe"></i>
+        <span>سایت های ضروری دانشجویی</span>
       </a>
       <a href="video/" class="drawer-nav-link">
         <i class="fa-solid fa-circle-play"></i>
@@ -1352,8 +1439,9 @@
     <div class="home-actions-wrapper" id="homeActionsWrapper">
       <div class="ratio-48-7-card card-ozviat" id="cardOzviat" onclick="window.open('https://eitaa.com/joinchat/137627106Ccda4d2e78d', '_blank')"></div>
 
-      <!-- باکس روزشمار تا ۲۱ دی ۱۴۰۵ شمسی -->
+      <!-- باکس روزشمار با بکگراند گرادینت بنفش و عنوان زمان باقیمانده تا آغاز امتحانات -->
       <div class="countdown-banner-card" id="countdownBanner">
+        <span class="countdown-banner-title">زمان باقیمانده تا آغاز امتحانات</span>
         <div class="countdown-units-group">
           <div class="countdown-box-item">
             <span class="countdown-num" id="cdSeconds">۰۰</span>
@@ -1387,22 +1475,76 @@
         <span class="toolbox-divider-text">جعبه ابزار دانشجویی</span>
       </div>
 
+      <!-- ردیف اول جعبه ابزار: نارنجی ساده و شیک -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s5" onclick="window.location.href='saghfmojaz/'"></div>
-        <div class="ratio-1-1-card card-s6" onclick="window.location.href='testdorost/'"></div>
-        <div class="ratio-1-1-card card-s7" onclick="window.location.href='moadel/'"></div>
+        <div class="toolbox-text-card tb-card-orange" onclick="window.location.href='saghfmojaz/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">چند واحد میتونم بردارم؟</span>
+          </div>
+          <div class="tb-white-pill-btn">محاسبه</div>
+        </div>
+
+        <div class="toolbox-text-card tb-card-orange" onclick="window.location.href='testdorost/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">چندتا تست درست بزنم قبولم؟</span>
+          </div>
+          <div class="tb-white-pill-btn">محاسبه</div>
+        </div>
+
+        <div class="toolbox-text-card tb-card-orange" onclick="window.location.href='moadel/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">محاسبه هوشمند معدل</span>
+          </div>
+          <div class="tb-white-pill-btn">محاسبه</div>
+        </div>
       </div>
 
+      <!-- ردیف دوم جعبه ابزار: قرمز کمی تیره -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s8" onclick="window.location.href='pdfm&s/'"></div>
-        <div class="ratio-1-1-card card-s9" onclick="window.location.href='pdfcompressor/'"></div>
-        <div class="ratio-1-1-card card-s10" onclick="window.location.href='imagetopdf/'"></div>
+        <div class="toolbox-text-card tb-card-crimson" onclick="window.location.href='pdfm&s/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">ترکیب و جداسازی فایل PDF</span>
+          </div>
+          <div class="tb-white-pill-btn">استفاده</div>
+        </div>
+
+        <div class="toolbox-text-card tb-card-crimson" onclick="window.location.href='pdfcompressor/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">کاهش حجم فایل PDF</span>
+          </div>
+          <div class="tb-white-pill-btn">استفاده</div>
+        </div>
+
+        <div class="toolbox-text-card tb-card-crimson" onclick="window.location.href='imagetopdf/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">تبدیل عکس به فایل PDF</span>
+          </div>
+          <div class="tb-white-pill-btn">استفاده</div>
+        </div>
       </div>
 
+      <!-- ردیف سوم جعبه ابزار: سبز فیروزه‌ای ساده و جذاب -->
       <div class="quick-actions-row-three">
-        <div class="ratio-1-1-card card-s11" onclick="window.location.href='ai/'"></div>
-        <div class="ratio-1-1-card card-s12" onclick="window.location.href='site/'"></div>
-        <div class="ratio-1-1-card card-s13" onclick="window.location.href='channel/'"></div>
+        <div class="toolbox-text-card tb-card-turquoise" onclick="window.location.href='ai/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">سرویس های هوش مصنوعی</span>
+          </div>
+          <div class="tb-white-pill-btn">مشاهده</div>
+        </div>
+
+        <div class="toolbox-text-card tb-card-turquoise" onclick="window.location.href='channel/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">کانال های دانلود منابع پیام نور</span>
+          </div>
+          <div class="tb-white-pill-btn">مشاهده</div>
+        </div>
+
+        <div class="toolbox-text-card tb-card-turquoise" onclick="window.location.href='site/'">
+          <div class="tb-card-title-wrap">
+            <span class="tb-card-title">سایت های ضروری دانشجویی</span>
+          </div>
+          <div class="tb-white-pill-btn">مشاهده</div>
+        </div>
       </div>
 
       <!-- اسلاید 24:7 پایین سه باکس آخری با عنوان video -->

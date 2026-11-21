@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>استادیاب | تماس با کارشناسان رشته های تحصیلی</title>
+  <title>تماس با کارشناسان رشته های تحصیلی</title>
   
-  <link rel="preload" as="image" href="../images/karh1.webp">
-  <link rel="preload" as="image" href="../images/karh2.webp">
   <link rel="preload" as="image" href="../images/banner.webp">
   <link rel="preload" as="image" href="../images/eitaa-white.webp">
 
@@ -89,7 +87,7 @@
       overflow-x: hidden;
     }
 
-    /* نوار سفید باریک بالای صفحه اصلی */
+    /* نوار سفید باریک بالای صفحه */
     .gold-top-nav {
       position: relative;
       width: 100%;
@@ -414,19 +412,19 @@
       position: relative;
     }
 
-    /* باکس سفید جذاب عنوان صفحه با رنگ متن هم‌رنگ بکگراند */
+    /* باکس سفید جذاب عنوان صفحه بدون فریم آبی و با متن هم‌رنگ بکگراند */
     .white-page-title-box {
       width: 100%;
       background: #ffffff;
-      border: 2px solid rgba(0, 240, 255, 0.85);
+      border: none;
       border-radius: 20px;
       padding: 16px 18px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(0, 240, 255, 0.28);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
     }
 
     .white-page-title-box i {
@@ -440,31 +438,6 @@
       font-weight: 900;
       color: #2e0854;
       line-height: 1.5;
-    }
-
-    .page-hero-banner-slider {
-      width: 100%;
-      aspect-ratio: 8 / 3;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 22px;
-      position: relative;
-      border: 1.8px solid rgba(0, 240, 255, 0.9);
-      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 12px rgba(0, 240, 255, 0.2);
-    }
-
-    .slide-item {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transition: opacity 0.55s ease-in-out;
-    }
-
-    .slide-item.active {
-      opacity: 1;
     }
 
     .ivr-instruction-box {
@@ -684,7 +657,7 @@
 </head>
 <body>
 
-  <!-- نوار سفید بالای صفحه اصلی -->
+  <!-- نوار سفید بالای صفحه -->
   <header class="gold-top-nav">
     <div class="nav-right-group">
       <button type="button" class="hamburger-btn" id="openDrawerBtn" aria-label="باز کردن منو">
@@ -745,15 +718,10 @@
   </aside>
 
   <main class="main-container">
-    <!-- باکس سفید عنوان با متن هم‌رنگ بکگراند -->
+    <!-- باکس سفید عنوان با متن هم‌رنگ بکگراند و بدون فریم آبی -->
     <div class="white-page-title-box">
       <i class="fa-solid fa-user-tie"></i>
       <h1 class="white-page-title-text">تماس با کارشناسان رشته های تحصیلی</h1>
-    </div>
-
-    <div class="page-hero-banner-slider" id="bannerSlider">
-      <div class="slide-item active" style="background-image: url('../images/karh1.webp');"></div>
-      <div class="slide-item" style="background-image: url('../images/karh2.webp');"></div>
     </div>
 
     <div class="ivr-instruction-box">
@@ -854,14 +822,6 @@
       backdrop.addEventListener('click', closeMenu);
     })();
 
-    const slides = document.querySelectorAll('#bannerSlider .slide-item');
-    let currentSlide = 0;
-    setInterval(() => {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }, 1000);
-
     function handleCopyAction(text, btnElement) {
       navigator.clipboard.writeText(text).then(() => {
         const parentBox = btnElement.closest('.ivr-instruction-box');
@@ -894,4 +854,3 @@
   </script>
 </body>
 </html>
-

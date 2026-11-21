@@ -99,10 +99,32 @@
 
     .back-btn {
       display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.09);
-      border: 1.5px solid rgba(255,255,255,0.2); color: #fff; padding: 7px 14px; border-radius: 12px;
+      border: 1.5px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 15px; border-radius: 12px;
       text-decoration: none; font-size: 12.5px; font-weight: 800; backdrop-filter: blur(10px); cursor: pointer; transition: 0.2s ease;
     }
     .back-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+
+    /* دکمه خروج از بازی در بالا سمت راست حین مسابقه */
+    .exit-game-btn {
+      display: none;
+      align-items: center;
+      gap: 7px;
+      background: rgba(230, 25, 75, 0.24);
+      border: 1.6px solid #ff4d8d;
+      color: #ffd6e0;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(230, 25, 75, 0.28);
+      transition: 0.2s ease;
+    }
+    .exit-game-btn:hover {
+      background: #e6194b;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
 
     /* هشدار نبود فایل JSON */
     .empty-json-alert {
@@ -118,9 +140,9 @@
       display: inline-flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
     }
 
-    /* ================= مرحله ۱: خوش‌آمدگویی نارنجی، کارت‌های یکدست آبی و قرمز، راهنمای بنفش ================= */
+    /* ================= مرحله ۱: خوش‌آمدگویی بزرگ، کارت‌های آبی و قرمز، راهنمای بزرگ بنفش ================= */
     .welcome-stage {
-      width: 100%; display: flex; flex-direction: column; gap: 15px;
+      width: 100%; display: flex; flex-direction: column; gap: 16px;
       animation: stagePopIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -129,34 +151,35 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* باکس نارنجی خوش‌آمدگویی */
+    /* باکس نارنجی خوش‌آمدگویی با ابعاد بزرگ‌تر */
     .welcome-hero-box {
       width: 100%;
+      min-height: 145px;
       background: linear-gradient(135deg, #ff7b00 0%, #f95700 100%);
       border: 2px solid #ffc380;
-      box-shadow: 0 12px 32px rgba(249, 87, 0, 0.42), inset 0 1px 2px rgba(255, 255, 255, 0.45);
-      border-radius: 26px;
-      padding: 24px 18px;
+      box-shadow: 0 14px 36px rgba(249, 87, 0, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.45);
+      border-radius: 28px;
+      padding: 34px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
+      justify-content: center;
+      gap: 11px;
     }
 
     .welcome-hi {
-      font-size: 23px;
+      font-size: 27px;
       font-weight: 950;
       color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
     }
 
     .welcome-prompt {
-      font-size: 15.5px;
+      font-size: 17.5px;
       font-weight: 800;
       color: #fff3e6;
     }
 
-    /* دو کارت بزرگ یکدست آبی و قرمز بدون متن اضافه */
     .big-modes-grid {
       width: 100%;
       display: grid;
@@ -167,9 +190,9 @@
     .big-mode-card {
       position: relative;
       overflow: hidden;
-      min-height: 175px;
+      min-height: 185px;
       border-radius: 26px;
-      padding: 26px 14px;
+      padding: 28px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -188,7 +211,6 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* درخشش ظریف روی کارت‌های آبی و قرمز */
     .big-mode-card::after {
       content: '';
       position: absolute;
@@ -212,14 +234,12 @@
     .big-mode-card:hover { transform: translateY(-5px) scale(1.02); }
     .big-mode-card:active { transform: scale(0.96); }
 
-    /* کارت نرمال: آبی یکدست */
     .big-mode-card.normal-card {
       background: #0077ff;
       border: 2px solid #80bdff;
       box-shadow: 0 12px 30px rgba(0, 119, 255, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.35);
     }
 
-    /* کارت رکوردی: قرمز یکدست */
     .big-mode-card.record-card {
       background: #e6194b;
       border: 2px solid #ff85a2;
@@ -227,15 +247,15 @@
     }
 
     .big-mode-icon {
-      width: 68px;
-      height: 68px;
+      width: 72px;
+      height: 72px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.2);
       border: 1.5px solid rgba(255, 255, 255, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 34px;
       color: #ffffff;
       animation: iconPulse 2.2s ease-in-out infinite alternate;
     }
@@ -246,38 +266,39 @@
     }
 
     .big-mode-title {
-      font-size: 22px;
+      font-size: 23px;
       font-weight: 950;
       color: #ffffff;
       letter-spacing: 0.2px;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
     }
 
-    /* باکس راهنمای بازی بنفش یکدست */
+    /* باکس راهنمای بازی بنفش با ابعاد بزرگ‌تر */
     .wide-guide-btn {
       width: 100%;
-      height: 54px;
-      border-radius: 18px;
+      height: 68px;
+      border-radius: 22px;
       background: #7b2cbf;
       border: 2px solid #c77dff;
       color: #ffffff;
-      font-size: 15.5px;
-      font-weight: 900;
+      font-size: 18px;
+      font-weight: 950;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
+      gap: 11px;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(123, 44, 191, 0.45);
+      box-shadow: 0 10px 28px rgba(123, 44, 191, 0.48);
       transition: 0.22s ease;
     }
+    .wide-guide-btn i { font-size: 21px; }
     .wide-guide-btn:hover { background: #8a36d1; transform: translateY(-2px); }
     .wide-guide-btn:active { transform: scale(0.98); }
 
     .rules-accordion {
-      width: 100%; display: none; flex-direction: column; gap: 9px; text-align: right;
+      width: 100%; display: none; flex-direction: column; gap: 10px; text-align: right;
       background: rgba(24, 6, 48, 0.92); border: 1.5px solid #c77dff;
-      border-radius: 18px; padding: 15px; font-size: 12.5px; line-height: 1.8; color: #f3e8ff;
+      border-radius: 20px; padding: 17px; font-size: 13px; line-height: 1.85; color: #f3e8ff;
       animation: stagePopIn 0.28s ease;
     }
     .rules-accordion.show { display: flex; }
@@ -406,40 +427,52 @@
       color: #240546;
     }
 
-    /* ================= مرحله ۳: باکس سبز خالص «آماده‌ای؟» + دکمه سفید «بزن بریم!» + شمارش معکوس ۳ تا ۱ ================= */
-    .ready-stage {
+    /* ================= مرحله ۳: باکس مربعی سبز خالص «آماده‌ای؟» دقیقاً وسط صفحه ================= */
+    .ready-stage-wrapper {
       width: 100%;
-      min-height: 250px;
+      flex: 1 0 auto;
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    .ready-stage-wrapper.show {
+      display: flex;
+    }
+
+    .ready-square-box {
+      width: 100%;
+      max-width: 310px;
+      aspect-ratio: 1 / 1;
+      background: #06b67a;
+      border: 3px solid #99ffda;
+      box-shadow: 0 18px 46px rgba(6, 182, 122, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.35);
+      border-radius: 34px;
+      padding: 26px;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
-      background: #06b67a;
-      border: 2.5px solid #80ffce;
-      box-shadow: 0 14px 38px rgba(6, 182, 122, 0.45);
-      border-radius: 28px;
-      padding: 36px 22px;
+      gap: 28px;
       animation: stagePopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .ready-stage.show { display: flex; }
 
     .ready-big-title {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 950;
       color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
     }
 
     .lets-go-white-btn {
       width: 100%;
-      max-width: 300px;
-      height: 58px;
+      max-width: 230px;
+      height: 60px;
       border: none;
       border-radius: 18px;
       background: #ffffff;
       color: #059669;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 950;
       display: flex;
       align-items: center;
@@ -449,26 +482,26 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .lets-go-white-btn:hover {
-      transform: translateY(-2px) scale(1.02);
+      transform: translateY(-2px) scale(1.03);
       box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
     }
     .lets-go-white-btn:active {
       transform: scale(0.96);
     }
 
-    /* شماره معکوس ۳ تا ۱ */
+    /* شماره معکوس ۳ تا ۱ وسط مربع سبز */
     .countdown-321-box {
       display: none;
       align-items: center;
       justify-content: center;
-      width: 110px;
-      height: 110px;
-      border-radius: 30px;
+      width: 130px;
+      height: 130px;
+      border-radius: 34px;
       background: #ffffff;
       color: #059669;
-      font-size: 62px;
+      font-size: 74px;
       font-weight: 950;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
     }
     .countdown-321-box.show {
       display: flex;
@@ -483,7 +516,7 @@
       100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
-    /* ================= مرحله ۴: محیط اجرای مسابقه (باکس سوال و گزینه‌های بزرگ‌تر + تایمر ۷ ثانیه) ================= */
+    /* ================= مرحله ۴: محیط اجرای مسابقه (گزینه‌های مربعی بزرگ ۲×۲) ================= */
     .quiz-arena {
       width: 100%; display: none; flex-direction: column; gap: 15px;
     }
@@ -567,7 +600,7 @@
     }
     .buy-offer-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-    /* باکس سوال بزرگ‌تر و گزینه‌های ۲×۲ بزرگ‌تر با انیمیشن کشویی */
+    /* باکس سوال بزرگ و گزینه‌های مربعی ۲×۲ */
     .question-slide-wrapper {
       width: 100%;
       display: flex;
@@ -593,7 +626,6 @@
       to { opacity: 0; transform: translateX(48px) scale(0.97); }
     }
 
-    /* تایمر نواری دور تا دور باکس سوال (۷ ثانیه: سبز -> زرد -> قرمز) */
     .question-timer-frame {
       position: relative;
       width: 100%;
@@ -610,15 +642,15 @@
 
     .question-card {
       width: 100%;
-      min-height: 215px;
+      min-height: 205px;
       background: linear-gradient(155deg, #240744 0%, #17032e 100%);
       border-radius: 24px;
-      padding: 32px 22px;
+      padding: 28px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .q-cat-tag {
@@ -632,13 +664,13 @@
     }
 
     .question-text {
-      font-size: 20.5px;
+      font-size: 20px;
       font-weight: 900;
       color: #ffffff;
       line-height: 1.85;
     }
 
-    /* گزینه‌های دوتایی در دو ردیف با ارتفاع و فونت بزرگ‌تر */
+    /* باکس گزینه‌های مربعی بزرگ (شبکه ۲×۲) */
     .options-grid-2x2 {
       width: 100%;
       display: grid;
@@ -648,23 +680,23 @@
 
     .option-btn {
       width: 100%;
-      min-height: 104px;
-      padding: 16px 14px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.24);
+      aspect-ratio: 1 / 1;
+      padding: 16px 12px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.11);
+      border: 2px solid rgba(255, 255, 255, 0.25);
       color: #ffffff;
-      font-size: 16px;
-      font-weight: 800;
+      font-size: 16.5px;
+      font-weight: 900;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 9px;
+      gap: 11px;
       cursor: pointer;
       line-height: 1.5;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
       transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.25s ease;
     }
 
@@ -674,27 +706,27 @@
       transform: translateY(-2px);
     }
     .option-btn:active:not(:disabled) {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
     .option-btn:disabled { cursor: default; }
 
     .option-btn.eliminated {
-      opacity: 0.18;
-      transform: scale(0.94);
+      opacity: 0.16;
+      transform: scale(0.93);
       pointer-events: none;
     }
 
     .opt-letter {
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
-      background: rgba(255, 209, 102, 0.2);
-      border: 1px solid rgba(255, 209, 102, 0.45);
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: rgba(255, 209, 102, 0.22);
+      border: 1.5px solid rgba(255, 209, 102, 0.5);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      font-weight: 900;
+      font-size: 14px;
+      font-weight: 950;
       color: #ffd166;
       flex-shrink: 0;
     }
@@ -702,14 +734,14 @@
     .option-btn.correct {
       background: linear-gradient(135deg, #059669, #10b981) !important;
       border-color: #a7f3d0 !important;
-      box-shadow: 0 0 24px rgba(16, 185, 129, 0.72);
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.75);
     }
     .option-btn.correct .opt-letter { background: #ffffff; color: #059669; border-color: #fff; }
 
     .option-btn.wrong {
       background: linear-gradient(135deg, #dc2626, #ef4444) !important;
       border-color: #fecaca !important;
-      box-shadow: 0 0 24px rgba(239, 68, 68, 0.72);
+      box-shadow: 0 0 24px rgba(239, 68, 68, 0.75);
     }
     .option-btn.wrong .opt-letter { background: #ffffff; color: #dc2626; border-color: #fff; }
 
@@ -778,16 +810,20 @@
     .footer-text span.brand-hl { color: #ffd166; font-weight: 800; }
 
     @media (max-width: 480px) {
-      .welcome-hi { font-size: 20px; }
-      .big-mode-card { min-height: 158px; }
-      .big-mode-title { font-size: 19px; }
+      .welcome-hero-box { min-height: 130px; padding: 28px 16px; }
+      .welcome-hi { font-size: 23px; }
+      .welcome-prompt { font-size: 15.5px; }
+      .big-mode-card { min-height: 165px; }
+      .big-mode-title { font-size: 20px; }
+      .wide-guide-btn { height: 62px; font-size: 16.5px; }
       .categories-grid-three { gap: 8px; }
       .pure-white-cat-card { border-radius: 16px; padding: 8px 5px; }
       .pure-cat-title { font-size: 12.5px; }
-      .question-card { min-height: 195px; padding: 26px 16px; }
+      .ready-square-box { max-width: 275px; }
+      .question-card { min-height: 185px; padding: 24px 16px; }
       .question-text { font-size: 18px; }
       .options-grid-2x2 { gap: 10px; }
-      .option-btn { min-height: 94px; font-size: 14.5px; padding: 13px 9px; }
+      .option-btn { font-size: 15px; padding: 12px 9px; border-radius: 20px; }
     }
   </style>
 </head>
@@ -826,10 +862,13 @@
   </aside>
 
   <main class="main-container">
-    <div class="top-nav-row">
+    <div class="top-nav-row" id="topNavRow">
       <a href="../" class="back-btn" id="mainBackBtn"><i class="fa-solid fa-house"></i><span>صفحه اصلی</span></a>
       <button type="button" class="back-btn" id="stepBackBtn" style="display: none;" onclick="handleStepBack()">
         <i class="fa-solid fa-arrow-right"></i><span>مرحله قبل</span>
+      </button>
+      <button type="button" class="exit-game-btn" id="exitGameBtn" onclick="exitActiveGame()">
+        <i class="fa-solid fa-right-from-bracket"></i><span>خروج از بازی</span>
       </button>
     </div>
 
@@ -838,7 +877,7 @@
       <div id="emptyJsonText">فایل‌های سوالات (q1.json تا q5.json) یافت نشدند.</div>
     </div>
 
-    <!-- مرحله ۱: خوش‌آمدگویی نارنجی، کارت‌های یکدست آبی و قرمز، راهنمای بنفش -->
+    <!-- مرحله ۱: خوش‌آمدگویی نارنجی بزرگ، کارت‌های آبی و قرمز، راهنمای بنفش بزرگ -->
     <section id="welcomeStage" class="welcome-stage">
       <div class="welcome-hero-box">
         <div class="welcome-hi">خوش اومدی رفیق! 👋</div>
@@ -864,8 +903,8 @@
 
       <div id="rulesBox" class="rules-accordion">
         <div class="rule-item"><i class="fa-solid fa-stopwatch"></i><span><b>تایمر ۷ ثانیه‌ای دور سوال:</b> نوار دور باکس سوال از سبز شروع می‌شود و با اتمام ۷ ثانیه به زرد و قرمز می‌رسد.</span></div>
-        <div class="rule-item"><i class="fa-solid fa-layer-group"></i><span><b>سبک نرمال (۳۰ سوالی):</b> ۱۰ سوال اول ساده، ۱۰ سوال دوم متوسط و ۱۰ سوال پایانی سخت هستند. بالای ۲۰ پاسخ صحیح لقب ویژه می‌گیرد!</span></div>
-        <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> هر پاسخ صحیح ۱۰ امتیاز دارد! ۳ جان (❤️) و ۳ راهنمای حذف دو گزینه دارید؛ با اتمام راهنماها می‌توانید با کسر ۲۰ امتیاز راهنمای جدید بگیرید.</span></div>
+        <div class="rule-item"><i class="fa-solid fa-layer-group"></i><span><b>سبک نرمال:</b> در بخش «عقل کل» ۳۰ سوال و در هر دسته‌بندی ۲۰ سوال مرحله‌ای از ساده به سخت پرسیده می‌شود.</span></div>
+        <div class="rule-item"><i class="fa-solid fa-heart"></i><span><b>سبک رکوردی (بی‌نهایت):</b> ترکیبی متوازن از همه بخش‌ها با ۳ جان (❤️) و ۳ کمکی حذف ۲ گزینه؛ هر پاسخ صحیح ۱۰ امتیاز دارد و با پیشرفت در بازی سوالات چالشی‌تر می‌شوند.</span></div>
       </div>
     </section>
 
@@ -879,19 +918,21 @@
       <div class="categories-grid-three" id="categoriesGrid"></div>
     </section>
 
-    <!-- مرحله ۳: باکس سبز خالص آماده‌ای؟ + دکمه سفید بزن بریم + شمارش معکوس ۳ تا ۱ -->
-    <section id="readyStage" class="ready-stage">
-      <div class="ready-big-title" id="readyTitleText">آماده‌ای؟</div>
-      <button type="button" class="lets-go-white-btn" id="letsGoBtn" onclick="startCountdownToQuiz()">
-        بزن بریم!
-      </button>
-      <div class="countdown-321-box" id="countdown321Box">۳</div>
+    <!-- مرحله ۳: باکس مربعی سبز خالص «آماده‌ای؟» دقیقاً وسط صفحه -->
+    <section id="readyStageWrapper" class="ready-stage-wrapper">
+      <div class="ready-square-box">
+        <div class="ready-big-title" id="readyTitleText">آماده‌ای؟</div>
+        <button type="button" class="lets-go-white-btn" id="letsGoBtn" onclick="startCountdownToQuiz()">
+          بزن بریم!
+        </button>
+        <div class="countdown-321-box" id="countdown321Box">۳</div>
+      </div>
     </section>
 
     <!-- مرحله ۴: محیط اجرای مسابقه -->
     <section id="quizArena" class="quiz-arena">
       <div class="quiz-hud">
-        <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۳۰</div>
+        <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۲۰</div>
         <div id="heartsHud" class="hearts-hud" style="display: none;">
           <i class="fa-solid fa-heart heart-ic" id="heart1"></i>
           <i class="fa-solid fa-heart heart-ic" id="heart2"></i>
@@ -916,7 +957,7 @@
         </div>
       </div>
 
-      <!-- باکس سوال بزرگ‌تر با تایمر ۷ ثانیه‌ای دور تا دور کادر + گزینه‌های ۲×۲ بزرگ‌تر -->
+      <!-- باکس سوال بزرگ با تایمر ۷ ثانیه‌ای + گزینه‌های مربعی ۲×۲ -->
       <div id="questionSlideWrapper" class="question-slide-wrapper">
         <div class="question-timer-frame" id="questionTimerFrame">
           <div class="question-card">
@@ -983,6 +1024,7 @@
     let currentScreen = 'welcome';
     let gameStyle = 'normal'; // 'normal' | 'record'
     let activeCategory = 'عقل کل';
+    let normalTotalQuestions = 20;
     let sessionQuestions = [];
     let currentIndex = 0;
     let correctCount = 0;
@@ -1081,18 +1123,30 @@
       currentScreen = screenName;
       hideJsonAlert();
       resetReadyStageUI();
+
       document.getElementById('welcomeStage').style.display = screenName === 'welcome' ? 'flex' : 'none';
       document.getElementById('categoriesStage').classList.toggle('show', screenName === 'categories');
-      document.getElementById('readyStage').classList.toggle('show', screenName === 'ready');
+      document.getElementById('readyStageWrapper').classList.toggle('show', screenName === 'ready');
       document.getElementById('quizArena').classList.toggle('active', screenName === 'quiz');
-      document.getElementById('stepBackBtn').style.display = screenName === 'welcome' ? 'none' : 'inline-flex';
+
+      const isQuiz = screenName === 'quiz';
+      document.getElementById('mainBackBtn').style.display = isQuiz ? 'none' : 'inline-flex';
+      document.getElementById('stepBackBtn').style.display = (!isQuiz && screenName !== 'welcome') ? 'inline-flex' : 'none';
+      document.getElementById('exitGameBtn').style.display = isQuiz ? 'inline-flex' : 'none';
+    }
+
+    function exitActiveGame() {
+      clearInterval(timerInterval);
+      if (preStartTimer) {
+        clearInterval(preStartTimer);
+        preStartTimer = null;
+      }
+      setScreen('welcome');
     }
 
     function handleStepBack() {
       clearInterval(timerInterval);
-      if (currentScreen === 'quiz') {
-        setScreen('ready');
-      } else if (currentScreen === 'ready') {
+      if (currentScreen === 'ready') {
         if (gameStyle === 'normal') {
           setScreen('categories');
         } else {
@@ -1123,10 +1177,10 @@
 
     function prepareGame(categoryName) {
       activeCategory = categoryName;
+      normalTotalQuestions = categoryName === 'عقل کل' ? 30 : 20;
       setScreen('ready');
     }
 
-    // شمارش معکوس ۳ تا ۱ هنگام کلیک روی «بزن بریم!»
     function startCountdownToQuiz() {
       hideJsonAlert();
 
@@ -1178,16 +1232,69 @@
       return copy;
     }
 
+    // ساخت استخر سوالات رکوردی: ترکیب مساوی از همه دسته‌بندی‌ها + بیشتر از easy و medium و سخت‌تر شدن تدریجی
+    function buildBalancedProgressiveRecordPool() {
+      if (allQuestions.length === 0) return [];
+
+      // گروه‌بندی متوازن بر اساس دسته‌بندی و سطح سختی
+      const byCatEasy = {};
+      const byCatMedium = {};
+      const byCatHard = {};
+
+      SUB_CATEGORIES.forEach(cat => {
+        const catQs = allQuestions.filter(q => q.category === cat);
+        byCatEasy[cat] = shuffleArray(catQs.filter(q => q.difficulty === 'easy'));
+        byCatMedium[cat] = shuffleArray(catQs.filter(q => q.difficulty === 'medium'));
+        byCatHard[cat] = shuffleArray(catQs.filter(q => q.difficulty === 'hard'));
+      });
+
+      const pickBalancedBatch = (diffMap, perCatCount) => {
+        const batch = [];
+        for (let round = 0; round < perCatCount; round++) {
+          const catsShuffled = shuffleArray(SUB_CATEGORIES);
+          for (const cat of catsShuffled) {
+            const list = diffMap[cat];
+            if (list && list.length > 0) {
+              const item = list[round % list.length];
+              batch.push(item);
+            }
+          }
+        }
+        return shuffleArray(batch);
+      };
+
+      // موج اول (سوالات ابتدایی): عمدتاً آسان با ترکیب مساوی از همه بخش‌ها
+      const wave1Easy = pickBalancedBatch(byCatEasy, 2);
+      // موج دوم (میانه بازی): عمدتاً متوسط + مقداری آسان با ترکیب مساوی از همه بخش‌ها
+      const wave2Med = shuffleArray([
+        ...pickBalancedBatch(byCatMedium, 2),
+        ...pickBalancedBatch(byCatEasy, 1)
+      ]);
+      // موج سوم (ادامه بازی): ترکیب متوسط و سخت با ترکیب مساوی از همه بخش‌ها
+      const wave3Higher = shuffleArray([
+        ...pickBalancedBatch(byCatMedium, 2),
+        ...pickBalancedBatch(byCatHard, 1)
+      ]);
+      // موج چهارم (مراحل بالا): چالشی‌تر
+      const wave4Hard = shuffleArray([
+        ...pickBalancedBatch(byCatHard, 2),
+        ...pickBalancedBatch(byCatMedium, 1)
+      ]);
+
+      const combined = [...wave1Easy, ...wave2Med, ...wave3Higher, ...wave4Hard];
+      return combined.length > 0 ? combined : shuffleArray([...allQuestions]);
+    }
+
     function buildQuestionPool(categoryName) {
+      if (gameStyle === 'record') {
+        return buildBalancedProgressiveRecordPool();
+      }
+
       const pool = categoryName === 'عقل کل'
         ? [...allQuestions]
         : allQuestions.filter(q => q.category === categoryName);
 
       if (pool.length === 0) return [];
-
-      if (gameStyle === 'record') {
-        return shuffleArray(pool);
-      }
 
       const easy = shuffleArray(pool.filter(q => q.difficulty === 'easy'));
       const medium = shuffleArray(pool.filter(q => q.difficulty === 'medium'));
@@ -1216,11 +1323,21 @@
         return res;
       };
 
-      return [
-        ...pickWithFallback(easy, 10),
-        ...pickWithFallback(medium, 10),
-        ...pickWithFallback(hard, 10)
-      ];
+      if (categoryName === 'عقل کل') {
+        // عقل کل: ۳۰ سوال (۱۰ ساده، ۱۰ متوسط، ۱۰ سخت)
+        return [
+          ...pickWithFallback(easy, 10),
+          ...pickWithFallback(medium, 10),
+          ...pickWithFallback(hard, 10)
+        ];
+      } else {
+        // دسته‌بندی‌های موضوعی: ۲۰ سوال (۷ ساده، ۷ متوسط، ۶ سخت)
+        return [
+          ...pickWithFallback(easy, 7),
+          ...pickWithFallback(medium, 7),
+          ...pickWithFallback(hard, 6)
+        ];
+      }
     }
 
     function updateLifelineUI() {
@@ -1314,7 +1431,7 @@
       isAnswered = false;
       lifelineUsedThisQuestion = false;
 
-      if (gameStyle === 'normal' && currentIndex >= 30) {
+      if (gameStyle === 'normal' && currentIndex >= normalTotalQuestions) {
         finishGame();
         return;
       }
@@ -1324,8 +1441,9 @@
         return;
       }
 
+      // در حالت رکوردی اگر بازیکن تمام موج‌های اولیه را رد کرد، موج سخت‌تر بعدی را بساز
       if (gameStyle === 'record' && currentIndex >= sessionQuestions.length) {
-        sessionQuestions = sessionQuestions.concat(shuffleArray(allQuestions));
+        sessionQuestions = sessionQuestions.concat(buildBalancedProgressiveRecordPool());
       }
 
       const wrapper = document.getElementById('questionSlideWrapper');
@@ -1335,7 +1453,7 @@
         const qNum = currentIndex + 1;
 
         if (gameStyle === 'normal') {
-          document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)} از ۳۰`;
+          document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)} از ${toFa(normalTotalQuestions)}`;
           document.getElementById('hudScoreCounter').textContent = `صحیح: ${toFa(correctCount)}`;
         } else {
           document.getElementById('hudQuestionCounter').textContent = `سوال ${toFa(qNum)}`;
@@ -1385,7 +1503,6 @@
       }
     }
 
-    // تایمر نواری ۷ ثانیه‌ای دور باکس سوال (سبز -> زرد -> قرمز)
     function startBorderTimer() {
       const duration = 7000;
       const start = performance.now();
@@ -1500,13 +1617,18 @@
           ? `فوق‌العاده بود! رکورد قبلی رو شکستی و امتیاز ${toFa(recordScore)} رو به نام خودت زدی!`
           : `تا سوال ${toFa(currentIndex)} دووم آوردی! بهترین رکوردت تا الان ${toFa(Math.max(prevBest, recordScore))} امتیاز بوده.`;
       } else {
-        scoreEl.textContent = `${toFa(correctCount)} پاسخ صحیح از ۳۰ سوال`;
+        const total = normalTotalQuestions;
+        scoreEl.textContent = `${toFa(correctCount)} پاسخ صحیح از ${toFa(total)} سوال`;
 
-        if (correctCount < 10) {
+        // آستانه‌های متناسب برای آزمون‌های ۲۰ سوالی و ۳۰ سوالی
+        const lowLimit = total === 30 ? 10 : 7;
+        const highLimit = total === 30 ? 20 : 14;
+
+        if (correctCount < lowLimit) {
           emojiEl.textContent = '🫠';
           rankEl.textContent = 'لقب: رهگذر کنجکاو!';
           msgEl.textContent = 'مثل اینکه دکمه‌ها رو شانسی می‌زدی! یه دور دیگه با تمرکز بیشتر بیا ببینیم چند مرده حلاجی.';
-        } else if (correctCount <= 20) {
+        } else if (correctCount <= highLimit) {
           emojiEl.textContent = '😎';
           rankEl.textContent = 'لقب: دانشجوی همه‌فن‌حریف!';
           msgEl.textContent = 'دمت گرم! اطلاعات عمومی‌ات از میانگین خیلی بالاتره، ولی برای رسیدن به قله هنوز جا داری.';

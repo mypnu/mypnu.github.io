@@ -43,16 +43,23 @@
       overflow-x: hidden;
     }
 
-    /* حالت تمام‌صفحه هنگام ورود به بخش سوالات: حذف نوار بالایی و فوتر */
+    /* حالت تمام‌صفحه هنگام ورود به بخش سوالات: حذف نوار بالایی و فوتر و پر کردن کامل صفحه */
+    body.in-quiz-fullscreen {
+      height: 100dvh;
+      overflow: hidden;
+    }
+
     body.in-quiz-fullscreen .gold-top-nav,
     body.in-quiz-fullscreen .site-footer {
       display: none !important;
     }
 
     body.in-quiz-fullscreen .main-container {
-      padding-top: 14px;
-      padding-bottom: 18px;
-      justify-content: center;
+      height: 100dvh;
+      padding-top: 12px;
+      padding-bottom: 14px;
+      gap: 12px;
+      justify-content: stretch;
     }
 
     /* نوار سفید بالای صفحه */
@@ -172,7 +179,6 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* باکس نارنجی خوش‌آمدگویی بزرگ‌تر و بدون ایموجی */
     .welcome-hero-box {
       width: 100%;
       min-height: 185px;
@@ -294,7 +300,6 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
     }
 
-    /* باکس راهنمای بازی بنفش با ابعاد بزرگ‌تر */
     .wide-guide-btn {
       width: 100%;
       height: 82px;
@@ -448,7 +453,7 @@
       color: #240546;
     }
 
-    /* ================= مرحله ۳: باکس مربعی سبز خالص «آماده‌ای؟» دقیقاً وسط صفحه ================= */
+    /* ================= مرحله ۳: باکس مربعی سبز خالص «آماده‌ای؟» بزرگ‌تر و وسط صفحه ================= */
     .ready-stage-wrapper {
       width: 100%;
       flex: 1 0 auto;
@@ -463,48 +468,48 @@
 
     .ready-square-box {
       width: 100%;
-      max-width: 310px;
+      max-width: 365px;
       aspect-ratio: 1 / 1;
       background: #06b67a;
-      border: 3px solid #99ffda;
-      box-shadow: 0 18px 46px rgba(6, 182, 122, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.35);
-      border-radius: 34px;
-      padding: 26px;
+      border: 3.5px solid #99ffda;
+      box-shadow: 0 20px 52px rgba(6, 182, 122, 0.55), inset 0 2px 8px rgba(255, 255, 255, 0.38);
+      border-radius: 38px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 28px;
+      gap: 34px;
       animation: stagePopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .ready-big-title {
-      font-size: 36px;
+      font-size: 42px;
       font-weight: 950;
       color: #ffffff;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+      text-shadow: 0 3px 14px rgba(0, 0, 0, 0.24);
     }
 
     .lets-go-white-btn {
       width: 100%;
-      max-width: 230px;
-      height: 60px;
+      max-width: 265px;
+      height: 68px;
       border: none;
-      border-radius: 18px;
+      border-radius: 20px;
       background: #ffffff;
       color: #059669;
-      font-size: 21px;
+      font-size: 23px;
       font-weight: 950;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .lets-go-white-btn:hover {
       transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
     }
     .lets-go-white-btn:active {
       transform: scale(0.96);
@@ -514,14 +519,14 @@
       display: none;
       align-items: center;
       justify-content: center;
-      width: 130px;
-      height: 130px;
-      border-radius: 34px;
+      width: 155px;
+      height: 155px;
+      border-radius: 38px;
       background: #ffffff;
       color: #059669;
-      font-size: 74px;
+      font-size: 86px;
       font-weight: 950;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.3);
     }
     .countdown-321-box.show {
       display: flex;
@@ -536,40 +541,49 @@
       100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
 
-    /* ================= مرحله ۴: محیط اجرای مسابقه (تمام‌صفحه بدون نوار بالایی) ================= */
+    /* ================= مرحله ۴: محیط اجرای مسابقه (کشیده و فیت کل صفحه گوشی) ================= */
     .quiz-arena {
-      width: 100%; display: none; flex-direction: column; gap: 14px;
+      width: 100%;
+      flex: 1 1 auto;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 0;
     }
     .quiz-arena.active { display: flex; }
 
     .quiz-hud {
-      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      width: 100%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
       background: rgba(15, 3, 30, 0.78); border: 1.5px solid rgba(255,255,255,0.16);
       border-radius: 16px; padding: 10px 14px;
     }
     .hud-chip {
-      display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800;
-      background: rgba(255,255,255,0.09); padding: 6px 12px; border-radius: 10px;
+      display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 800;
+      background: rgba(255,255,255,0.09); padding: 6px 13px; border-radius: 10px;
     }
     .hud-chip.score-chip { color: #06d6a0; border: 1px solid rgba(6, 214, 160, 0.4); }
     .hud-chip.qcount-chip { color: #ffd166; border: 1px solid rgba(255, 209, 102, 0.4); }
 
-    .hearts-hud { display: flex; align-items: center; gap: 6px; font-size: 19px; }
+    .hearts-hud { display: flex; align-items: center; gap: 6px; font-size: 20px; }
     .heart-ic { color: #ff2a5f; transition: 0.3s ease; filter: drop-shadow(0 0 6px rgba(255,42,95,0.6)); }
     .heart-ic.lost { color: rgba(255,255,255,0.2); filter: none; transform: scale(0.82); }
 
     /* نوار ابزار کمکی بخش رکوردی */
     .record-lifeline-bar {
       width: 100%;
+      flex-shrink: 0;
       display: none;
       flex-direction: column;
-      gap: 9px;
+      gap: 8px;
     }
     .record-lifeline-bar.show { display: flex; }
 
     .lifeline-btn {
       width: 100%;
-      height: 48px;
+      height: 46px;
       border-radius: 14px;
       background: linear-gradient(135deg, rgba(255, 209, 102, 0.2), rgba(245, 183, 0, 0.12));
       border: 1.6px solid #ffd166;
@@ -607,25 +621,27 @@
       background: linear-gradient(135deg, rgba(247, 37, 133, 0.26), rgba(114, 9, 183, 0.35));
       border: 1.5px solid #ff4d8d;
       border-radius: 14px;
-      padding: 9px 12px;
+      padding: 8px 12px;
       text-align: right;
       animation: stagePopIn 0.25s ease;
     }
     .buy-lifeline-offer.show { display: flex; }
     .buy-offer-text { font-size: 12px; font-weight: 800; color: #ffe4e8; line-height: 1.5; }
     .buy-offer-btn {
-      padding: 8px 13px; border-radius: 10px; border: none;
+      padding: 7px 12px; border-radius: 10px; border: none;
       background: linear-gradient(135deg, #ffe066, #f5b700);
       color: #160426; font-size: 12px; font-weight: 900; white-space: nowrap; cursor: pointer; flex-shrink: 0;
     }
     .buy-offer-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-    /* باکس سوال و گزینه‌های بازطراحی‌شده با انیمیشن کشویی */
+    /* بخش سوال و گزینه‌ها طوری تنظیم شده که تمام ارتفاع باقی‌مانده صفحه را پر کند */
     .question-slide-wrapper {
       width: 100%;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 14px;
+      min-height: 0;
     }
 
     .slide-in-question {
@@ -646,10 +662,12 @@
       to { opacity: 0; transform: translateX(48px) scale(0.97); }
     }
 
-    /* تایمر نواری دور باکس سوال */
+    /* تایمر نواری دور باکس سوال که کشیده و بزرگ می‌شود */
     .question-timer-frame {
       position: relative;
       width: 100%;
+      flex: 1.15 1 0;
+      display: flex;
       border-radius: 28px;
       padding: 6px;
       background: conic-gradient(
@@ -664,10 +682,10 @@
     .question-card {
       position: relative;
       width: 100%;
-      min-height: 205px;
+      height: 100%;
       background: linear-gradient(155deg, #240744 0%, #17032e 100%);
       border-radius: 22px;
-      padding: 46px 22px 28px;
+      padding: 46px 22px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -683,7 +701,7 @@
       transform: translateX(-50%);
       background: linear-gradient(135deg, #ffe066, #f5b700);
       color: #160426;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 900;
       padding: 5px 22px 6px;
       border-radius: 0 0 16px 16px;
@@ -693,32 +711,35 @@
 
     .question-text {
       width: 100%;
-      font-size: 20px;
+      font-size: 21.5px;
       font-weight: 900;
       color: #ffffff;
-      line-height: 1.85;
+      line-height: 1.8;
       text-align: center;
     }
 
+    /* شبکه گزینه‌های ۲×۲ که فضای پایین صفحه را کاملاً پر می‌کند و متن بزرگ‌تری دارد */
     .options-grid-2x2 {
       width: 100%;
+      flex: 1.25 1 0;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
       gap: 12px;
     }
 
     .option-btn {
       position: relative;
       width: 100%;
-      aspect-ratio: 4 / 3;
-      min-height: 118px;
+      height: 100%;
+      min-height: 112px;
       padding: 36px 12px 14px;
       border-radius: 22px;
       background: linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
       backdrop-filter: blur(12px);
       border: 1.8px solid rgba(255, 255, 255, 0.24);
       color: #ffffff;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 900;
       text-align: center;
       display: flex;
@@ -797,7 +818,7 @@
       border-color: #ffffff;
     }
 
-    /* پاپ‌آپ پایان بازی بدون ایموجی (با آیکون‌های برداری جذاب) */
+    /* پاپ‌آپ پایان بازی بدون ایموجی */
     .fun-popup-overlay {
       position: fixed; inset: 0; background: rgba(8, 1, 18, 0.85); backdrop-filter: blur(14px);
       display: flex; align-items: center; justify-content: center; padding: 18px;
@@ -875,11 +896,14 @@
       .categories-grid-three { gap: 8px; }
       .pure-white-cat-card { border-radius: 16px; padding: 8px 5px; }
       .pure-cat-title { font-size: 12.5px; }
-      .ready-square-box { max-width: 275px; }
-      .question-card { min-height: 185px; padding: 42px 16px 24px; }
-      .question-text { font-size: 18px; }
+      .ready-square-box { max-width: 325px; border-radius: 32px; gap: 28px; }
+      .ready-big-title { font-size: 38px; }
+      .lets-go-white-btn { max-width: 240px; height: 64px; font-size: 21px; }
+      .countdown-321-box { width: 138px; height: 138px; font-size: 76px; }
+      .question-card { padding: 42px 16px 20px; }
+      .question-text { font-size: 19px; }
       .options-grid-2x2 { gap: 10px; }
-      .option-btn { min-height: 105px; font-size: 14.5px; padding: 32px 9px 12px; border-radius: 18px; }
+      .option-btn { min-height: 100px; font-size: 17px; padding: 32px 9px 12px; border-radius: 18px; }
       .opt-letter { min-width: 38px; height: 24px; font-size: 12px; }
     }
   </style>
@@ -975,7 +999,7 @@
       <div class="categories-grid-three" id="categoriesGrid"></div>
     </section>
 
-    <!-- مرحله ۳: باکس مربعی سبز خالص «آماده‌ای؟» دقیقاً وسط صفحه -->
+    <!-- مرحله ۳: باکس مربعی سبز خالص «آماده‌ای؟» بزرگ‌تر و دقیقاً وسط صفحه -->
     <section id="readyStageWrapper" class="ready-stage-wrapper">
       <div class="ready-square-box">
         <div class="ready-big-title" id="readyTitleText">آماده‌ای؟</div>
@@ -986,7 +1010,7 @@
       </div>
     </section>
 
-    <!-- مرحله ۴: محیط اجرای مسابقه (تمام‌صفحه) -->
+    <!-- مرحله ۴: محیط اجرای مسابقه (تمام‌صفحه و فیت کل صفحه موبایل) -->
     <section id="quizArena" class="quiz-arena">
       <div class="quiz-hud">
         <div class="hud-chip qcount-chip" id="hudQuestionCounter">سوال ۱ از ۲۰</div>
@@ -1014,7 +1038,7 @@
         </div>
       </div>
 
-      <!-- باکس سوال با تگ دسته‌بندی چسبیده به بالا + گزینه‌های بازطراحی‌شده -->
+      <!-- باکس سوال کشیده + گزینه‌های ۲×۲ فیت صفحه -->
       <div id="questionSlideWrapper" class="question-slide-wrapper">
         <div class="question-timer-frame" id="questionTimerFrame">
           <div class="question-card">
@@ -1028,7 +1052,7 @@
     </section>
   </main>
 
-  <!-- پاپ‌آپ پایان بازی (کاملاً بدون ایموجی و با آیکون‌های برداری) -->
+  <!-- پاپ‌آپ پایان بازی (بدون ایموجی) -->
   <div class="fun-popup-overlay" id="funPopupOverlay">
     <div class="fun-popup-card">
       <div class="fun-icon-stage" id="funIconBox"><i class="fa-solid fa-crown"></i></div>
